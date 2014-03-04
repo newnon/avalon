@@ -3,6 +3,7 @@
 #include <avalon/GameCenter.h>
 
 #include <jni.h>
+#include <string>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
 
@@ -60,6 +61,21 @@ void callStaticVoidMethodWithStringAndInt(const char* name, const char* idName, 
     }
 }
 
+std::string callStaticStringMethod(const char *name)
+{
+	cocos2d::JniMethodInfo t;
+	if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "()Ljava/lang/String;")) {
+		jstring rv = (jstring) t.env->CallObjectMethod(t.classID, t.methodID);
+		t.env->DeleteLocalRef(t.classID);
+		const char *js = t.env->GetStringUTFChars(rv, NULL);
+		std::string cs(js);
+		t.env->ReleaseStringUTFChars(rv, js);
+		return cs;
+	}
+	else
+		return "";
+}
+
 } // namespace gamecenter
 } // namespace helper
 
@@ -77,7 +93,7 @@ bool GameCenter::showAchievements()
     return helper::gamecenter::callStaticBoolMethod("showAchievements");
 }
 
-void GameCenter::postAchievement(const char* idName, int percentComplete)
+void GameCenter::postAchievement(const char* idName, int percentComplete, bool showBanner)
 {
     helper::gamecenter::callStaticVoidMethodWithStringAndInt("postAchievement", idName, percentComplete);
 }
@@ -100,6 +116,11 @@ void GameCenter::postScore(const char* idName, int score)
 void GameCenter::clearAllScores()
 {
     helper::gamecenter::callStaticVoidMethod("clearAllScores");
+}
+
+std::string GameCenter::getPlayerId()
+{
+	return helper::gamecenter::callStaticStringMethod("getPlayerId");
 }
 
 void GameCenter::signIn()

@@ -22,6 +22,11 @@ public abstract class GameCenter
      
     public static void login()
     {
+    	activity.runOnUiThread(new Runnable() {
+            public void run() {
+                getGameHelper().beginUserInitiatedSignIn();
+            }
+        });
     }
 
     public static void signIn()
@@ -31,6 +36,14 @@ public abstract class GameCenter
                 getGameHelper().beginUserInitiatedSignIn();
             }
         });
+    }
+
+    public static java.lang.String getPlayerId() {
+    	if (getGameHelper().isSignedIn()) {
+    		return getGameHelper().getGamesClient().getCurrentPlayerId();
+    	}
+    	
+    	return "";
     }
 
     public static void signOut()

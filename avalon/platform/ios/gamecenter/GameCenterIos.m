@@ -67,18 +67,18 @@ static GameCenterIos* instance = nil;
     AppController* appController = (AppController*) [UIApplication sharedApplication].delegate;
 
     GKAchievementViewController* gkController = [[[GKAchievementViewController alloc] init] autorelease];
-    gkController.achievementDelegate = appController->viewController;
+    gkController.achievementDelegate = self;
 
-    [appController->viewController presentModalViewController:gkController animated:YES];
+    [appController.viewController presentModalViewController:gkController animated:YES];
     return YES;
 }
 
-- (void)postAchievement:(const char*)idName percent:(NSNumber*)percentComplete
+- (void)postAchievement:(const char*)idName percent:(NSNumber*)percentComplete showBanner:(BOOL)show
 {
     GKAchievement* achievement = [[[GKAchievement alloc] init] autorelease];
     achievement.identifier = [NSString stringWithUTF8String:idName];
     achievement.percentComplete = [percentComplete doubleValue];
-    achievement.showsCompletionBanner = YES;
+    achievement.showsCompletionBanner = show;
 
     if (![GKLocalPlayer localPlayer].isAuthenticated) {
         [self saveAchievementToDevice:achievement];
@@ -107,6 +107,21 @@ static GameCenterIos* instance = nil;
     }];
 }
 
+- (NSString *)getPlayerId
+{
+    if (![GKLocalPlayer localPlayer].isAuthenticated)
+        return @"";
+    else {
+        return [GKLocalPlayer localPlayer].playerID;
+    }
+}
+
+-(void)achievementViewControllerDidFinish:(GKAchievementViewController *)view
+{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app.viewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark -
 #pragma mark Leaderboard
 
@@ -120,9 +135,9 @@ static GameCenterIos* instance = nil;
 
     GKLeaderboardViewController* gkController = [[[GKLeaderboardViewController alloc] init] autorelease];
     gkController.timeScope = GKLeaderboardTimeScopeAllTime;
-    gkController.leaderboardDelegate = appController->viewController;
+    gkController.leaderboardDelegate = self;
 
-    [appController->viewController presentModalViewController:gkController animated:YES];
+    [appController.viewController presentModalViewController:gkController animated:YES];
     return YES;
 }
 
@@ -154,6 +169,12 @@ static GameCenterIos* instance = nil;
 
     // clear remote scores
     NSLog(@"[GameCenter] WARNING! clearAllScores is not supported on this platform");
+}
+
+-(void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)view
+{
+    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [app.viewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -

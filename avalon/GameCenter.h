@@ -1,5 +1,4 @@
 #ifdef AVALON_CONFIG_GAMECENTER_ENABLED
-
 #ifndef AVALON_GAMECENTER_H
 #define AVALON_GAMECENTER_H
 
@@ -13,8 +12,10 @@ public:
     void login();
 
     bool showAchievements();
-    void postAchievement(const char* idName, int percentComplete);
+    void postAchievement(const char* idName, int percentComplete, bool showBanner);
     void clearAllAchievements();
+
+    std::string getPlayerId();
 
     bool showScores();
     void postScore(const char* idName, int score);

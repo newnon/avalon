@@ -19,9 +19,9 @@ bool GameCenter::showAchievements()
     return [[GameCenterIos shared] showAchievements];
 }
 
-void GameCenter::postAchievement(const char* idName, int percentComplete)
+void GameCenter::postAchievement(const char* idName, int percentComplete, bool showBanner)
 {
-    [[GameCenterIos shared] postAchievement:idName percent:[NSNumber numberWithInt:percentComplete]];
+    [[GameCenterIos shared] postAchievement:idName percent:[NSNumber numberWithInt:percentComplete] showBanner:showBanner];
 }
 
 void GameCenter::clearAllAchievements()
@@ -29,6 +29,13 @@ void GameCenter::clearAllAchievements()
     [[GameCenterIos shared] clearAllAchivements];
 }
 
+std::string GameCenter::getPlayerId()
+{
+    NSString *playerId = [[GameCenterIos shared] getPlayerId];
+    std::string rv = [playerId cStringUsingEncoding:NSUTF8StringEncoding];
+    return rv;
+}
+    
 #pragma mark -
 #pragma mark Leaderboard
 
