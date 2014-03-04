@@ -1,7 +1,7 @@
 #ifndef AVALON_PHYSICS_JSONLOADER_H
 #define AVALON_PHYSICS_JSONLOADER_H
 
-#include <boost/noncopyable.hpp>
+#include <avalon/utils/utility.hpp>
 #include <avalon/physics/Box2dContainer.h>
 #include <avalon/physics/vendors/b2dJson/b2dJson.h>
 
@@ -15,7 +15,7 @@ namespace avalon { namespace physics { class Node; } }
 namespace avalon {
 namespace physics {
 
-class JsonLoader : public boost::noncopyable
+class JsonLoader : public avalon::noncopyable
 {
 public:
     using SpriteList = std::vector<Sprite*>;

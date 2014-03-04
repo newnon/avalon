@@ -1,6 +1,3 @@
-[submodule "vendors/boost"]
-	path = vendors/boost
-	url = https://github.com/michaelcontento/boost-mirror.git
 [submodule "vendors/google/playgameservices/android-samples"]
 	path = vendors/google/playgameservices/android-samples
 	url = https://github.com/playgameservices/android-samples.git

@@ -3,7 +3,6 @@
 #include <avalon/GameCenter.h>
 
 #include <string>
-#include <boost/algorithm/string/replace.hpp>
 
 #include <jni.h>
 #include "cocos2d.h"
@@ -19,6 +18,19 @@ namespace gamecenter {
  */
 
 const char* const CLASS_NAME = "com/avalon/GameCenter";
+    
+static std::string& replaceAll(std::string& context, std::string const& from, std::string const& to)
+{
+    std::size_t lookHere = 0;
+    std::size_t foundHere;
+    while((foundHere = context.find(from, lookHere)) != std::string::npos)
+    {
+        context.replace(foundHere, from.size(), to);
+        lookHere = foundHere + to.size();
+    }
+    return context;
+}
+
 
 void callStaticVoidMethod(const char* name)
 {
@@ -83,7 +95,7 @@ bool GameCenter::showAchievements()
 void GameCenter::postAchievement(const char* idName, int percentComplete)
 {
     std::string idNameStr(idName);
-    boost::replace_all(idNameStr, ".", "_");
+    replaceAll(idNameStr, ".", "_");
     helper::gamecenter::callStaticVoidMethodWithStringAndInt("postAchievement", idNameStr.c_str(), percentComplete);
 }
 
@@ -100,7 +112,7 @@ bool GameCenter::showScores()
 void GameCenter::postScore(const char* idName, int score)
 {
     std::string idNameStr(idName);
-    boost::replace_all(idNameStr, ".", "_");
+    replaceAll(idNameStr, ".", "_");
     helper::gamecenter::callStaticVoidMethodWithStringAndInt("postScore", idNameStr.c_str(), score);
 }
 

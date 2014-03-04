@@ -1,7 +1,7 @@
 #include <avalon/payment/Product.h>
 
 #include <avalon/payment/Manager.h>
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 
 namespace avalon {
 namespace payment {
@@ -38,7 +38,7 @@ bool Product::canBePurchased() const
 void Product::purchase()
 {
     if (!manager) {
-        BOOST_ASSERT_MSG(false, "service has to be set");
+        AVALON_ASSERT_MSG(false, "service has to be set");
         return;
     }
 

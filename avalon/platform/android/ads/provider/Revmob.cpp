@@ -5,7 +5,7 @@
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 
 namespace avalon {
 namespace ads {
@@ -54,7 +54,7 @@ Revmob::Revmob()
 
 void Revmob::init()
 {
-    BOOST_ASSERT_MSG(appId != "", "appId must be set first");
+    AVALON_ASSERT_MSG(appId != "", "appId must be set first");
     revmob::helper::callStaticVoidMethodWithString("init", appId.c_str());
 }
 

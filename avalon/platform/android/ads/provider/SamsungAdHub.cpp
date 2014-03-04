@@ -5,7 +5,7 @@
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 
 namespace avalon {
 namespace ads {
@@ -54,7 +54,7 @@ SamsungAdHub::SamsungAdHub()
 
 void SamsungAdHub::init()
 {
-    BOOST_ASSERT_MSG(inventoryId != "", "inventoryId must be set first");
+    AVALON_ASSERT_MSG(inventoryId != "", "inventoryId must be set first");
     samsungadhub::helper::callStaticVoidMethodWithString("init", inventoryId.c_str());
 }
 

@@ -1,6 +1,8 @@
+#ifdef AVALON_CONFIG_ADS_PROVIDER_SAMSUNGADHUB_ENABLED
+
 #include <avalon/ads/provider/SamsungAdHub.h>
 
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 #include <avalon/platform/ios/ads/provider/samsungadhub/AdHubInterstitial.h>
 #include <avalon/platform/ios/ads/provider/samsungadhub/AdHubInterstitialDelegate.h>
 #include <avalon/platform/ios/ads/provider/samsungadhub/AdHubRequestError.h>
@@ -41,7 +43,7 @@ SamsungAdHub::SamsungAdHub()
 
 void SamsungAdHub::init()
 {
-    BOOST_ASSERT_MSG(inventoryId != "", "inventoryId must be set first");
+    AVALON_ASSERT_MSG(inventoryId != "", "inventoryId must be set first");
 }
 
 void SamsungAdHub::hideAds()
@@ -62,3 +64,5 @@ void SamsungAdHub::showFullscreenAd()
 } // namespace provider
 } // namespace ads
 } // namespace avalon
+
+#endif //AVALON_CONFIG_ADS_PROVIDER_SAMSUNGADHUB_ENABLED

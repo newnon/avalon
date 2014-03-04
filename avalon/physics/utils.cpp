@@ -1,6 +1,5 @@
 #include <avalon/physics/utils.h>
 
-#include <boost/any.hpp>
 #include <avalon/physics/Box2dContainer.h>
 
 namespace {

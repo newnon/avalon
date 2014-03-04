@@ -2,7 +2,7 @@
 #define AVALON_PHYSICS_BODY_H
 
 #include "cocos2d.h"
-#include <boost/noncopyable.hpp>
+#include <avalon/utils/utility.hpp>
 
 class b2Body;
 namespace avalon { namespace physics { class Box2dContainer; } }
@@ -10,7 +10,7 @@ namespace avalon { namespace physics { class Box2dContainer; } }
 namespace avalon {
 namespace physics {
 
-class Body : boost::noncopyable
+class Body : avalon::noncopyable
 {
 private:
     Box2dContainer& box2dContainer;

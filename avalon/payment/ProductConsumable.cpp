@@ -1,6 +1,6 @@
 #include <avalon/payment/ProductConsumable.h>
 
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 
 namespace avalon {
 namespace payment {
@@ -13,7 +13,7 @@ ProductConsumable::ProductConsumable(const char* const productId, const float qu
 
 ProductConsumable::~ProductConsumable()
 {
-    BOOST_ASSERT_MSG(getQuantity() == 0, "unused consumable quantity detected!");
+    AVALON_ASSERT_MSG(getQuantity() == 0, "unused consumable quantity detected!");
 }
 
 void ProductConsumable::consume()

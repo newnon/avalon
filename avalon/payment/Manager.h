@@ -3,7 +3,7 @@
 
 #include <string>
 #include <map>
-#include <boost/utility.hpp>
+#include <avalon/utils/utility.hpp>
 #include <avalon/payment/Backend.h>
 
 namespace avalon {
@@ -25,7 +25,7 @@ typedef std::map<const std::string, Product* const> ProductList;
  * @warning It's a good idea to use payment::Loader to instaniate and configure
  *          this class!
  */
-class Manager : boost::noncopyable
+class Manager : avalon::noncopyable
 {
 public:
     /**

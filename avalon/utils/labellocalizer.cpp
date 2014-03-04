@@ -1,12 +1,20 @@
 #include <avalon/utils/labellocalizer.h>
 
-#include <boost/algorithm/string.hpp>
 #include <avalon/i18n/Localization.h>
 #include <avalon/i18n/LanguageKey.h>
 
 namespace avalon {
 namespace utils {
 namespace labellocalizer {
+    
+static std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
 
 void localize(const cocos2d::Node& node)
 {
@@ -20,7 +28,7 @@ void localize(const cocos2d::Node& node)
         if (ttfLabel) {
             auto label = ttfLabel->getString();
             vector<string> elements;
-            boost::split(elements, label, boost::is_any_of("/"));
+            split(label, '/', elements);
             if (elements.size() == 2) {
                 ttfLabel->setString(_(elements[0].c_str(), elements[1].c_str()).get());
             }

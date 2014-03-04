@@ -5,14 +5,14 @@
 #include "cocos2d.h"
 #include <avalon/physics/Box2dContainer.h>
 #include <avalon/physics/ContactContainer.h>
-#include <boost/noncopyable.hpp>
+#include <avalon/utils/utility.hpp>
 
 namespace avalon { namespace physics { class CollisionManagerFallback; } }
 
 namespace avalon {
 namespace physics {
 
-class CollisionManager : public b2ContactListener, public boost::noncopyable
+class CollisionManager : public b2ContactListener, public avalon::noncopyable
 {
 private:
     using ContactType = std::function<bool(ContactContainer&)>;

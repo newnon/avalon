@@ -2,7 +2,7 @@
 
 #include <avalon/ads/provider/Chartboost.h>
 
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 #include <avalon/platform/ios/ads/provider/Chartboost/Chartboost.h>
 
 namespace avalon {
@@ -17,8 +17,8 @@ Chartboost::Chartboost()
 
 void Chartboost::init()
 {
-    BOOST_ASSERT_MSG(!appId.empty(), "appId must be set first");
-    BOOST_ASSERT_MSG(!appSignature.empty(), "appSignature must be set first");
+    AVALON_ASSERT_MSG(!appId.empty(), "appId must be set first");
+    AVALON_ASSERT_MSG(!appSignature.empty(), "appSignature must be set first");
 
     auto cb = [::Chartboost sharedChartboost];
     cb.appId = [NSString stringWithUTF8String:appId.c_str()];

@@ -1,13 +1,13 @@
 #ifndef AVALON_UTILS_SINGLETON_H
 #define AVALON_UTILS_SINGLETON_H
 
-#include <boost/noncopyable.hpp>
+#include <avalon/utils/utility.hpp>
 
 namespace avalon {
 namespace utils {
 
 template <typename T>
-class Singleton : private boost::noncopyable
+class Singleton : private avalon::noncopyable
 {
 public:
     static T& getInstance()

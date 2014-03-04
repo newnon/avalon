@@ -2,7 +2,7 @@
 #define AVALON_PHYSICS_CONTACTCONTAINER_H
 
 #include "Box2D/Box2D.h"
-#include <boost/noncopyable.hpp>
+#include <avalon/utils/utility.hpp>
 
 namespace avalon { namespace physics { class Box2dContainer; } }
 namespace avalon { namespace physics { class CollisionManager; } }
@@ -10,7 +10,7 @@ namespace avalon { namespace physics { class CollisionManager; } }
 namespace avalon {
 namespace physics {
 
-class ContactContainer : public boost::noncopyable
+class ContactContainer : public avalon::noncopyable
 {
 private:
     friend CollisionManager;

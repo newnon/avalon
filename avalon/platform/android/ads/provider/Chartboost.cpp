@@ -5,7 +5,7 @@
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 
 using namespace cocos2d;
 
@@ -57,8 +57,8 @@ Chartboost::Chartboost()
 
 void Chartboost::init()
 {
-    BOOST_ASSERT_MSG(!appId.empty(), "appId is empty!");
-    BOOST_ASSERT_MSG(!appSignature.empty(), "appSignature is empty!");
+    AVALON_ASSERT_MSG(!appId.empty(), "appId is empty!");
+    AVALON_ASSERT_MSG(!appSignature.empty(), "appSignature is empty!");
 
     chartboost::helper::callStaticVoidMethodWithString("init", appId.c_str(), appSignature.c_str());
 }

@@ -1,12 +1,10 @@
 #include <avalon/payment/Manager.h>
 
 #include <typeinfo>
-#include <boost/assert.hpp>
-#include <boost/cast.hpp>
+#include <avalon/utils/assert.hpp>
 #include <avalon/payment/Product.h>
 #include <avalon/payment/ProductConsumable.h>
 
-using boost::polymorphic_downcast;
 using std::string;
 using std::make_pair;
 
@@ -45,15 +43,15 @@ Manager::~Manager()
 void Manager::addProduct(Product* const product)
 {
     if (backend.isInitialized()) {
-        BOOST_ASSERT_MSG(false, "backend already initialized");
+        AVALON_ASSERT_MSG(false, "backend already initialized");
         return;
     }
 
     if (!product) {
-        BOOST_ASSERT_MSG(false, "product must be given");
+        AVALON_ASSERT_MSG(false, "product must be given");
         return;
     }
-    BOOST_ASSERT_MSG(!hasProduct(product->getProductId().c_str()), "productId already in use");
+    AVALON_ASSERT_MSG(!hasProduct(product->getProductId().c_str()), "productId already in use");
 
     products.insert(make_pair(
         product->getProductId(),
@@ -64,7 +62,7 @@ void Manager::addProduct(Product* const product)
 
 void Manager::addProduct(Product* const product, const char* const alias)
 {
-    BOOST_ASSERT_MSG(!hasProduct(alias), "given alias already in use");
+    AVALON_ASSERT_MSG(!hasProduct(alias), "given alias already in use");
 
     addProduct(product);
     productIdAliases.insert(make_pair(
@@ -94,13 +92,13 @@ Product* Manager::getProduct(const char* const productIdOrAlias) const
         }
     }
 
-    BOOST_ASSERT_MSG(false, "invalid productId or alias given");
+    AVALON_ASSERT_MSG(false, "invalid productId or alias given");
     return NULL;
 }
 
 ProductConsumable* Manager::getProductConsumable(const char* const productIdOrAlias) const
 {
-    return polymorphic_downcast<ProductConsumable* const>(getProduct(productIdOrAlias));
+    return dynamic_cast<ProductConsumable* const>(getProduct(productIdOrAlias));
 }
 
 bool Manager::hasProduct(const char* const productIdOrAlias) const
@@ -122,7 +120,7 @@ bool Manager::hasProduct(const char* const productIdOrAlias) const
 void Manager::purchase(const char* const productIdOrAlias)
 {
     if (!isPurchaseReady()) {
-        BOOST_ASSERT_MSG(false, "backend service not started yet");
+        AVALON_ASSERT_MSG(false, "backend service not started yet");
         return;
     }
 
@@ -135,7 +133,7 @@ void Manager::purchase(const char* const productIdOrAlias)
 void Manager::startService()
 {
     if (isStarted()) {
-        BOOST_ASSERT_MSG(false, "service already started");
+        AVALON_ASSERT_MSG(false, "service already started");
         return;
     }
 
@@ -166,7 +164,7 @@ bool Manager::isPurchaseReady() const
 void Manager::restorePurchases() const
 {
     if (!isPurchaseReady()) {
-        BOOST_ASSERT_MSG(false, "backend service not started yet");
+        AVALON_ASSERT_MSG(false, "backend service not started yet");
         return;
     }
 

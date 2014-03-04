@@ -2,7 +2,7 @@
 
 #include <avalon/ads/provider/IAd.h>
 
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 #include <list>
 #import <iAd/iAd.h>
 #import "AppController.h"

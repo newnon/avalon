@@ -2,14 +2,14 @@
 #define AVALON_PAYMENT_PRODUCT_H
 
 #include <string>
-#include <boost/utility.hpp>
+#include <avalon/utils/utility.hpp>
 
 namespace avalon {
 namespace payment {
 
 class Manager;
 
-class Product : boost::noncopyable
+class Product : avalon::noncopyable
 {
     friend class Manager;
 

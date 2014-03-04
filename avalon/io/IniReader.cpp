@@ -2,12 +2,39 @@
 
 #include <string>
 #include <iostream>
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/replace.hpp>
 #include "cocos2d.h"
 
 namespace avalon {
 namespace io {
+    
+static inline std::string &ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+    return s;
+}
+
+// trim from end
+static inline std::string &rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+    return s;
+}
+
+// trim from both ends
+static inline std::string &trim(std::string &s) {
+    return ltrim(rtrim(s));
+}
+    
+static std::string& replaceAll(std::string& context, std::string const& from, std::string const& to)
+{
+    std::size_t lookHere = 0;
+    std::size_t foundHere;
+    while((foundHere = context.find(from, lookHere)) != std::string::npos)
+    {
+        context.replace(foundHere, from.size(), to);
+        lookHere = foundHere + to.size();
+    }
+    return context;
+}
+    
 
 void IniReader::loadFile(const char* iniFile)
 {
@@ -47,7 +74,7 @@ void IniReader::loadFile(const char* iniFile)
             {
                 line.erase(0, pos + 1);
                 line.erase(sectionEnd - 1, line.length());
-                boost::trim(line);
+                trim(line);
                 currentSection = line;
                 continue;
             }
@@ -64,9 +91,9 @@ void IniReader::loadFile(const char* iniFile)
             std::string value(line);
             value.erase(0, pos + 1);
 
-            boost::trim(key);
-            boost::trim(value);
-            boost::replace_all(value, "\\n", "\n");
+            trim(key);
+            trim(value);
+            replaceAll(value, "\\n", "\n");
 
             sections[currentSection][key] = value;
         }

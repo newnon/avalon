@@ -2,7 +2,6 @@
 #define AVALON_IO_TILEDMAPLOADER_H
 
 #include "cocos2d.h"
-#include <boost/any.hpp>
 #include "avalon/io/CCBLoader.h"
 
 namespace avalon { namespace physics { class Box2dContainer; } }

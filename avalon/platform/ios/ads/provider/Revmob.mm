@@ -2,7 +2,7 @@
 
 #include <avalon/ads/provider/Revmob.h>
 
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 #import <CoreLocation/CoreLocation.h>
 #import <RevMobAds/RevMobAds.h>
 
@@ -19,7 +19,7 @@ Revmob::Revmob()
 
 void Revmob::init()
 {
-    BOOST_ASSERT_MSG(!appId.empty(), "appId must be set first");
+    AVALON_ASSERT_MSG(!appId.empty(), "appId must be set first");
     [RevMobAds startSessionWithAppID:[NSString stringWithUTF8String:appId.c_str()]];
 
 #ifdef AVALON_PLATFORM_IOS_USE_CORELOCATION

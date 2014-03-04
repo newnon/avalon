@@ -1,6 +1,6 @@
 #include <avalon/ui/Alert.h>
 
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 #include "cocos2d.h"
 
 namespace avalon {

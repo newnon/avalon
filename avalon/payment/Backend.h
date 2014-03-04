@@ -1,7 +1,7 @@
 #ifndef AVALON_PAYMENT_BACKEND_H
 #define AVALON_PAYMENT_BACKEND_H
 
-#include <boost/utility.hpp>
+#include <avalon/utils/utility.hpp>
 
 namespace avalon {
 namespace payment {
@@ -16,7 +16,7 @@ class Product;
  * @warning This is _not_ an interface and the use hast to choose the right
  *          implementation from avalon/platform!
  */
-class Backend : boost::noncopyable
+class Backend : avalon::noncopyable
 {
 public:
     explicit Backend(Manager& manager);

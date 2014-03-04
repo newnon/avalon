@@ -7,7 +7,7 @@
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 
 namespace avalon {
 namespace payment {
@@ -77,7 +77,7 @@ extern "C" {
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnServiceStarted(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
-    BOOST_ASSERT_MSG(globalManager, "globalManager should be already set");
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
     if (globalManager && globalManager->delegate) {
         globalManager->delegate->onServiceStarted(globalManager);
@@ -87,7 +87,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnServiceStarted(
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed(JNIEnv* env, jclass clazz, jstring jProductId)
 {
     using backend::helper::globalManager;
-    BOOST_ASSERT_MSG(globalManager, "globalManager should be already set");
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
     if (!globalManager) {
         return;
@@ -109,7 +109,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseFail(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
-    BOOST_ASSERT_MSG(globalManager, "globalManager should be already set");
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
     if (globalManager && globalManager->delegate) {
         globalManager->delegate->onPurchaseFail(globalManager);
@@ -119,7 +119,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseFail(JN
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnTransactionStart(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
-    BOOST_ASSERT_MSG(globalManager, "globalManager should be already set");
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
     if (globalManager && globalManager->delegate) {
         globalManager->delegate->onTransactionStart(globalManager);
@@ -129,7 +129,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnTransactionStar
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnTransactionEnd(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
-    BOOST_ASSERT_MSG(globalManager, "globalManager should be already set");
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
     if (globalManager && globalManager->delegate) {
         globalManager->delegate->onTransactionEnd(globalManager);
@@ -139,7 +139,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnTransactionEnd(
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onInitialized(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
-    BOOST_ASSERT_MSG(globalManager, "globalManager should be already set");
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
     if (globalManager) {
         for (auto& row : globalManager->getProducts()) {
@@ -157,7 +157,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onInitialized(JNIEnv* env
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onItemData(JNIEnv* env, jclass clazz, jstring jProductId, jstring jName, jstring jDesc, jstring jPriceStr, jfloat jprice)
 {
     using backend::helper::globalManager;
-    BOOST_ASSERT_MSG(globalManager, "globalManager should be already set");
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
     
     if (!globalManager) {
         return;

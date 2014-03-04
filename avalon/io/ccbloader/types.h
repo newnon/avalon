@@ -3,7 +3,6 @@
 
 #include <string>
 #include <map>
-#include <boost/any.hpp>
 #include "cocosbuilder/CocosBuilder.h"
 
 namespace avalon { namespace physics { class Box2dContainer; } }

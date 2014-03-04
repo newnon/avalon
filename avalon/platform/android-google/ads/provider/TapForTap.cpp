@@ -5,7 +5,7 @@
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
-#include <boost/assert.hpp>
+#include <avalon/utils/assert.hpp>
 
 namespace avalon {
 namespace ads {
@@ -54,7 +54,7 @@ TapForTap::TapForTap()
 
 void TapForTap::init()
 {
-    BOOST_ASSERT_MSG(apiKey != "", "apiKey must be set first");
+    AVALON_ASSERT_MSG(apiKey != "", "apiKey must be set first");
     helper::tapfortap::callStaticVoidMethodWithString("init", apiKey.c_str());
 }
 
