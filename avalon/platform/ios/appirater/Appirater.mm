@@ -12,43 +12,87 @@ Appirater* Appirater::getInstance()
     return instance;
 }
 
-void Appirater::setInitialDaysUntilPrompt(const int days)
+void Appirater::setAppId(const char *appName)
 {
-    [::Appirater setDaysUntilPrompt:days];
+    [::Appirater setAppId:[NSString stringWithUTF8String:appName]];
 }
 
-void Appirater::setReminderDaysUntilPrompt(const int days)
+void Appirater::appLaunched(bool canPromptForRating)
 {
-    [::Appirater setTimeBeforeReminding:days];
+    [::Appirater appLaunched:canPromptForRating];
 }
 
-void Appirater::setSignificantEventsUntilPrompt(const int events)
+void Appirater::appEnteredForeground(bool canPromptForRating)
 {
-    [::Appirater setSignificantEventsUntilPrompt:events];
+    [::Appirater appEnteredForeground:canPromptForRating];
 }
 
-void Appirater::setDebug(const bool flag)
+void Appirater::userDidSignificantEvent(bool canPromptForRating)
 {
-    [::Appirater setDebug:flag];
+    [::Appirater userDidSignificantEvent:canPromptForRating];
 }
 
-void Appirater::init()
+void Appirater::showPrompt()
 {
-    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    [::Appirater setAppId:appID];
-
-    // we don't use this aspect and only rely on significant events!
-    [::Appirater setUsesUntilPrompt:0];
+    [::Appirater showPrompt];
+}
+    
+void Appirater::rateApp()
+{
+    [::Appirater rateApp];
 }
 
-void Appirater::userDidSignificantEvent()
+void Appirater::closeModal()
 {
-    [::Appirater userDidSignificantEvent:NO];
+    [::Appirater closeModal];
 }
 
-void Appirater::showIfNeeded()
+void Appirater::setDaysUntilPrompt(double value)
 {
-    [::Appirater appLaunched:YES];
+    [::Appirater setDaysUntilPrompt:value];
+}
+void Appirater::setUsesUntilPrompt(int value)
+{
+    [::Appirater setUsesUntilPrompt:value];
+}
+
+void Appirater::setSignificantEventsUntilPrompt(int value)
+{
+    [::Appirater setSignificantEventsUntilPrompt:value];
+}
+
+void Appirater::setTimeBeforeReminding(double value)
+{
+    [::Appirater setTimeBeforeReminding:value];
+}
+
+void Appirater::setDebug(bool debug)
+{
+    [::Appirater setDebug:false];
+}
+
+void Appirater::setDelegate(AppiraterDelegate *delegate)
+{
+    
+}
+
+void Appirater::setUsesAnimation(bool animation)
+{
+    [::Appirater setUsesAnimation:animation];
+}
+
+void Appirater::setOpenInAppStore(bool openInAppStore)
+{
+    [::Appirater setOpenInAppStore:openInAppStore];
+}
+
+void Appirater::setAlwaysUseMainBundle(bool useMainBundle)
+{
+    [::Appirater setAlwaysUseMainBundle:useMainBundle];
+}
+
+Appirater::Appirater()
+{
 }
 
 } // namespace avalon

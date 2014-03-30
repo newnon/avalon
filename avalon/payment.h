@@ -1,3 +1,4 @@
+#ifdef AVALON_CONFIG_PAIMENT_ENABLED
 #ifndef AVALON_PAYMENT_H
 #define AVALON_PAYMENT_H
 
@@ -10,3 +11,4 @@
 #include <avalon/payment/Loader.h>
 
 #endif /* AVALON_PAYMENT_H */
+#endif //AVALON_CONFIG_PAIMENT_ENABLED

@@ -6,6 +6,12 @@
 
 namespace avalon {
 
+GameCenter* GameCenter::getInstance()
+{
+    static GameCenter* instance = new GameCenter();
+    return instance;
+}
+
 void GameCenter::login()
 {
     [[GameCenterIos shared] login];

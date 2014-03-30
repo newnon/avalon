@@ -1,3 +1,4 @@
+#ifdef AVALON_CONFIG_PAIMENT_ENABLED
 #import <avalon/platform/ios/payment/BackendIos.h>
 
 #include <avalon/payment/Product.h>
@@ -230,3 +231,4 @@
 }
 
 @end
+#endif //AVALON_CONFIG_PAIMENT_ENABLED

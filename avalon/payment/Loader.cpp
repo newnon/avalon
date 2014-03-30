@@ -1,3 +1,4 @@
+#ifdef AVALON_CONFIG_PAIMENT_ENABLED
 #include <avalon/payment/Loader.h>
 
 #include <avalon/utils/assert.hpp>
@@ -78,3 +79,4 @@ std::shared_ptr<Manager> Loader::getManager() const
 
 } // namespace payment
 } // namespace avalon
+#endif //AVALON_CONFIG_PAIMENT_ENABLED

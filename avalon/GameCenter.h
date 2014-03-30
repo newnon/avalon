@@ -1,4 +1,5 @@
 #ifdef AVALON_CONFIG_GAMECENTER_ENABLED
+
 #ifndef AVALON_GAMECENTER_H
 #define AVALON_GAMECENTER_H
 
@@ -9,6 +10,8 @@ namespace avalon {
 class GameCenter
 {
 public:
+    static GameCenter* getInstance();
+    
     void login();
 
     bool showAchievements();

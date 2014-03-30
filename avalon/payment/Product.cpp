@@ -1,3 +1,4 @@
+#ifdef AVALON_CONFIG_PAIMENT_ENABLED
 #include <avalon/payment/Product.h>
 
 #include <avalon/payment/Manager.h>
@@ -61,3 +62,4 @@ void Product::consume()
 
 } // namespace payment
 } // namespace avalon
+#endif //AVALON_CONFIG_PAIMENT_ENABLED

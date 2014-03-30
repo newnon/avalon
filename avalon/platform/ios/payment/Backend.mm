@@ -1,3 +1,4 @@
+#ifdef AVALON_CONFIG_PAIMENT_ENABLED
 #include <avalon/payment/Backend.h>
 
 #include <StoreKit/StoreKit.h>
@@ -102,3 +103,4 @@ void Backend::restorePurchases() const
 
 } // namespace payment
 } // namespace avalon
+#endif //AVALON_CONFIG_PAIMENT_ENABLED
