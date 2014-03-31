@@ -1,0 +1,1108 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		A50BC24618E99DA500F1F979 /* Build all libs */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A50BC24718E99DA500F1F979 /* Build configuration list for PBXAggregateTarget "Build all libs" */;
+			buildPhases = (
+			);
+			dependencies = (
+				A50BC28218E9A5D200F1F979 /* PBXTargetDependency */,
+				A50BC28418E9A5D200F1F979 /* PBXTargetDependency */,
+				A50BC24B18E99DAE00F1F979 /* PBXTargetDependency */,
+				A50BC24D18E99DAE00F1F979 /* PBXTargetDependency */,
+				A50BC24F18E99DAE00F1F979 /* PBXTargetDependency */,
+				A50BC25118E99DAE00F1F979 /* PBXTargetDependency */,
+			);
+			name = "Build all libs";
+			productName = "Build all libs";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		A50BC17D18E962DE00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A50BC1A518E9634600F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A50BC1AE18E9635400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A50BC1BA18E963A300F1F979 /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1B718E963A300F1F979 /* GameCenter.mm */; };
+		A50BC1BB18E963A300F1F979 /* GameCenterIos.m in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1B918E963A300F1F979 /* GameCenterIos.m */; };
+		A50BC1CC18E9699B00F1F979 /* Backend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1BF18E9699B00F1F979 /* Backend.cpp */; };
+		A50BC1CD18E9699B00F1F979 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C118E9699B00F1F979 /* Loader.cpp */; };
+		A50BC1CE18E9699B00F1F979 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C318E9699B00F1F979 /* Manager.cpp */; };
+		A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C618E9699B00F1F979 /* Product.cpp */; };
+		A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */; };
+		A50BC1D518E969B700F1F979 /* Backend.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1D218E969B700F1F979 /* Backend.mm */; };
+		A50BC1D618E969B700F1F979 /* BackendIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1D418E969B700F1F979 /* BackendIos.mm */; };
+		A50BC1FC18E96E0000F1F979 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1DC18E96E0000F1F979 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A50BC1FD18E96E0000F1F979 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1FB18E96E0000F1F979 /* Appirater.mm */; };
+		A50BC23118E9842F00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A50BC23918E9848400F1F979 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23718E9848400F1F979 /* Alert.cpp */; };
+		A50BC23C18E984B100F1F979 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23B18E984B100F1F979 /* url.mm */; };
+		A50BC24318E9933E00F1F979 /* ZYWebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24118E9933E00F1F979 /* ZYWebView_iOS.mm */; };
+		A50BC24418E9933E00F1F979 /* ZYWebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24218E9933E00F1F979 /* ZYWebView.mm */; };
+		A50BC25418E99F5400F1F979 /* ZYWebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24218E9933E00F1F979 /* ZYWebView.mm */; };
+		A50BC25518E99F5400F1F979 /* ZYWebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24118E9933E00F1F979 /* ZYWebView_iOS.mm */; };
+		A50BC25618E99F5400F1F979 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23718E9848400F1F979 /* Alert.cpp */; };
+		A50BC25718E99F5400F1F979 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23B18E984B100F1F979 /* url.mm */; };
+		A50BC25918E99F5400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A50BC26118E9A14800F1F979 /* ZYWebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24218E9933E00F1F979 /* ZYWebView.mm */; };
+		A50BC26218E9A14800F1F979 /* ZYWebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24118E9933E00F1F979 /* ZYWebView_iOS.mm */; };
+		A50BC26318E9A14800F1F979 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23718E9848400F1F979 /* Alert.cpp */; };
+		A50BC26418E9A14800F1F979 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23B18E984B100F1F979 /* url.mm */; };
+		A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */; };
+		A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC27718E9A5A500F1F979 /* FlurryAd.mm */; };
+		A50BC28A18E9B2B400F1F979 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */; };
+		A50BC28B18E9B2B400F1F979 /* Flurry.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC28918E9B2B400F1F979 /* Flurry.mm */; };
+		A5BB768918E9DD4D0096422D /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC25E18E99F5400F1F979 /* libFlurry.a */; };
+		A5BB771418E9F4950096422D /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A50BC24A18E99DAE00F1F979 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50BC17818E962DE00F1F979;
+			remoteInfo = GameCenter;
+		};
+		A50BC24C18E99DAE00F1F979 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50BC1A218E9634600F1F979;
+			remoteInfo = Appirater;
+		};
+		A50BC24E18E99DAE00F1F979 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50BC1AB18E9635400F1F979;
+			remoteInfo = Paiment;
+		};
+		A50BC25018E99DAE00F1F979 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50BC22C18E9842F00F1F979;
+			remoteInfo = Misc;
+		};
+		A50BC28118E9A5D200F1F979 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50BC25218E99F5400F1F979;
+			remoteInfo = Flurry;
+		};
+		A50BC28318E9A5D200F1F979 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50BC25F18E9A14800F1F979;
+			remoteInfo = FlurryAds;
+		};
+		A5BB768718E9DD440096422D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A50BC25218E99F5400F1F979;
+			remoteInfo = Flurry;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A50BC17918E962DE00F1F979 /* libGameCenter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGameCenter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC17C18E962DE00F1F979 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A50BC1AA18E9634600F1F979 /* libAppirater.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppirater.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC1B318E9635400F1F979 /* libPaiment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPaiment.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC1B518E9638C00F1F979 /* GameCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCenter.h; path = avalon/GameCenter.h; sourceTree = "<group>"; };
+		A50BC1B718E963A300F1F979 /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameCenter.mm; sourceTree = "<group>"; };
+		A50BC1B818E963A300F1F979 /* GameCenterIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterIos.h; sourceTree = "<group>"; };
+		A50BC1B918E963A300F1F979 /* GameCenterIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterIos.m; sourceTree = "<group>"; };
+		A50BC1BF18E9699B00F1F979 /* Backend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Backend.cpp; sourceTree = "<group>"; };
+		A50BC1C018E9699B00F1F979 /* Backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Backend.h; sourceTree = "<group>"; };
+		A50BC1C118E9699B00F1F979 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loader.cpp; sourceTree = "<group>"; };
+		A50BC1C218E9699B00F1F979 /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
+		A50BC1C318E9699B00F1F979 /* Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Manager.cpp; sourceTree = "<group>"; };
+		A50BC1C418E9699B00F1F979 /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
+		A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerDelegate.h; sourceTree = "<group>"; };
+		A50BC1C618E9699B00F1F979 /* Product.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Product.cpp; sourceTree = "<group>"; };
+		A50BC1C718E9699B00F1F979 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProductConsumable.cpp; sourceTree = "<group>"; };
+		A50BC1C918E9699B00F1F979 /* ProductConsumable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductConsumable.h; sourceTree = "<group>"; };
+		A50BC1CA18E9699B00F1F979 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mdown; sourceTree = "<group>"; };
+		A50BC1CB18E9699B00F1F979 /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = avalon/payment.h; sourceTree = "<group>"; };
+		A50BC1D218E969B700F1F979 /* Backend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Backend.mm; sourceTree = "<group>"; };
+		A50BC1D318E969B700F1F979 /* BackendIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackendIos.h; sourceTree = "<group>"; };
+		A50BC1D418E969B700F1F979 /* BackendIos.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BackendIos.mm; sourceTree = "<group>"; };
+		A50BC1DA18E96E0000F1F979 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A50BC1DB18E96E0000F1F979 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		A50BC1DC18E96E0000F1F979 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		A50BC1DD18E96E0000F1F979 /* Appirater.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appirater.podspec; sourceTree = "<group>"; };
+		A50BC1DE18E96E0000F1F979 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		A50BC1E018E96E0000F1F979 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E118E96E0000F1F979 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E218E96E0000F1F979 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E318E96E0000F1F979 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E418E96E0000F1F979 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E518E96E0000F1F979 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E618E96E0000F1F979 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E718E96E0000F1F979 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E818E96E0000F1F979 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1E918E96E0000F1F979 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1EA18E96E0000F1F979 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1EB18E96E0000F1F979 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1EC18E96E0000F1F979 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1ED18E96E0000F1F979 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1EE18E96E0000F1F979 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1EF18E96E0000F1F979 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F018E96E0000F1F979 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F118E96E0000F1F979 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F218E96E0000F1F979 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F318E96E0000F1F979 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		A50BC1F418E96E0000F1F979 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F518E96E0000F1F979 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F618E96E0000F1F979 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F718E96E0000F1F979 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F818E96E0000F1F979 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		A50BC1F918E96E0000F1F979 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
+		A50BC1FA18E96E0000F1F979 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
+		A50BC1FB18E96E0000F1F979 /* Appirater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Appirater.mm; sourceTree = "<group>"; };
+		A50BC1FE18E96E2800F1F979 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = avalon/Appirater.h; sourceTree = "<group>"; };
+		A50BC23618E9842F00F1F979 /* libweb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libweb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC23718E9848400F1F979 /* Alert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Alert.cpp; path = avalon/ui/Alert.cpp; sourceTree = "<group>"; };
+		A50BC23818E9848400F1F979 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = avalon/ui/Alert.h; sourceTree = "<group>"; };
+		A50BC23A18E984A100F1F979 /* url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = url.h; path = avalon/utils/url.h; sourceTree = "<group>"; };
+		A50BC23B18E984B100F1F979 /* url.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = url.mm; path = avalon/platform/ios/utils/url.mm; sourceTree = "<group>"; };
+		A50BC24018E9933E00F1F979 /* ZYWebView_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZYWebView_iOS.h; path = avalon/platform/ios/webview/ZYWebView_iOS.h; sourceTree = "<group>"; };
+		A50BC24118E9933E00F1F979 /* ZYWebView_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ZYWebView_iOS.mm; path = avalon/platform/ios/webview/ZYWebView_iOS.mm; sourceTree = "<group>"; };
+		A50BC24218E9933E00F1F979 /* ZYWebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ZYWebView.mm; path = avalon/platform/ios/webview/ZYWebView.mm; sourceTree = "<group>"; };
+		A50BC24518E99A9D00F1F979 /* WebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebView.h; path = avalon/WebView.h; sourceTree = "<group>"; };
+		A50BC25E18E99F5400F1F979 /* libFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC26B18E9A14800F1F979 /* libFlurryAds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFlurryAds.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC27118E9A29800F1F979 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlurryAds.h; path = avalon/FlurryAds.h; sourceTree = "<group>"; };
+		A50BC27418E9A5A500F1F979 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
+		A50BC27518E9A5A500F1F979 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAds.h; sourceTree = "<group>"; };
+		A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAds_4.3.2.a; sourceTree = "<group>"; };
+		A50BC27718E9A5A500F1F979 /* FlurryAd.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FlurryAd.mm; path = avalon/platform/ios/FlurryAds/FlurryAd.mm; sourceTree = "<group>"; };
+		A50BC28718E9B2B400F1F979 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
+		A50BC28918E9B2B400F1F979 /* Flurry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Flurry.mm; sourceTree = "<group>"; };
+		A50BC28C18E9B2C200F1F979 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = avalon/Flurry.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A50BC17618E962DE00F1F979 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC17D18E962DE00F1F979 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC1A418E9634600F1F979 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC1A518E9634600F1F979 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC1AD18E9635400F1F979 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC1AE18E9635400F1F979 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC23018E9842F00F1F979 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC23118E9842F00F1F979 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC25818E99F5400F1F979 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC25918E99F5400F1F979 /* Foundation.framework in Frameworks */,
+				A50BC28A18E9B2B400F1F979 /* libFlurry_4.3.2.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC26518E9A14800F1F979 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5BB768918E9DD4D0096422D /* libFlurry.a in Frameworks */,
+				A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */,
+				A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A50BC17018E962DD00F1F979 = {
+			isa = PBXGroup;
+			children = (
+				A50BC28518E9B2B400F1F979 /* Flurry */,
+				A50BC26D18E9A1C100F1F979 /* FlurryAds */,
+				A50BC22B18E96F7600F1F979 /* Web */,
+				A50BC1D718E96DEB00F1F979 /* Appirater */,
+				A50BC1BD18E9695B00F1F979 /* Paiment */,
+				A50BC1B418E9638100F1F979 /* GameCenter */,
+				A50BC17B18E962DE00F1F979 /* Frameworks */,
+				A50BC17A18E962DE00F1F979 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A50BC17A18E962DE00F1F979 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC17918E962DE00F1F979 /* libGameCenter.a */,
+				A50BC1AA18E9634600F1F979 /* libAppirater.a */,
+				A50BC1B318E9635400F1F979 /* libPaiment.a */,
+				A50BC23618E9842F00F1F979 /* libweb.a */,
+				A50BC25E18E99F5400F1F979 /* libFlurry.a */,
+				A50BC26B18E9A14800F1F979 /* libFlurryAds.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A50BC17B18E962DE00F1F979 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC17C18E962DE00F1F979 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A50BC1B418E9638100F1F979 /* GameCenter */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1B618E963A300F1F979 /* gamecenter-ios */,
+				A50BC1B518E9638C00F1F979 /* GameCenter.h */,
+			);
+			name = GameCenter;
+			sourceTree = "<group>";
+		};
+		A50BC1B618E963A300F1F979 /* gamecenter-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1B718E963A300F1F979 /* GameCenter.mm */,
+				A50BC1B818E963A300F1F979 /* GameCenterIos.h */,
+				A50BC1B918E963A300F1F979 /* GameCenterIos.m */,
+			);
+			name = "gamecenter-ios";
+			path = avalon/platform/ios/gamecenter;
+			sourceTree = "<group>";
+		};
+		A50BC1BD18E9695B00F1F979 /* Paiment */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1D118E969B700F1F979 /* payment-ios */,
+				A50BC1BE18E9699B00F1F979 /* payment */,
+				A50BC1CB18E9699B00F1F979 /* payment.h */,
+			);
+			name = Paiment;
+			sourceTree = "<group>";
+		};
+		A50BC1BE18E9699B00F1F979 /* payment */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1BF18E9699B00F1F979 /* Backend.cpp */,
+				A50BC1C018E9699B00F1F979 /* Backend.h */,
+				A50BC1C118E9699B00F1F979 /* Loader.cpp */,
+				A50BC1C218E9699B00F1F979 /* Loader.h */,
+				A50BC1C318E9699B00F1F979 /* Manager.cpp */,
+				A50BC1C418E9699B00F1F979 /* Manager.h */,
+				A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */,
+				A50BC1C618E9699B00F1F979 /* Product.cpp */,
+				A50BC1C718E9699B00F1F979 /* Product.h */,
+				A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */,
+				A50BC1C918E9699B00F1F979 /* ProductConsumable.h */,
+				A50BC1CA18E9699B00F1F979 /* README.mdown */,
+			);
+			name = payment;
+			path = avalon/payment;
+			sourceTree = "<group>";
+		};
+		A50BC1D118E969B700F1F979 /* payment-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1D218E969B700F1F979 /* Backend.mm */,
+				A50BC1D318E969B700F1F979 /* BackendIos.h */,
+				A50BC1D418E969B700F1F979 /* BackendIos.mm */,
+			);
+			name = "payment-ios";
+			path = avalon/platform/ios/payment;
+			sourceTree = "<group>";
+		};
+		A50BC1D718E96DEB00F1F979 /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1FE18E96E2800F1F979 /* Appirater.h */,
+				A50BC1D818E96E0000F1F979 /* appirater-ios */,
+			);
+			name = Appirater;
+			sourceTree = "<group>";
+		};
+		A50BC1D818E96E0000F1F979 /* appirater-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1D918E96E0000F1F979 /* Appirater */,
+				A50BC1FB18E96E0000F1F979 /* Appirater.mm */,
+			);
+			name = "appirater-ios";
+			path = avalon/platform/ios/appirater;
+			sourceTree = "<group>";
+		};
+		A50BC1D918E96E0000F1F979 /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC1DA18E96E0000F1F979 /* .gitignore */,
+				A50BC1DB18E96E0000F1F979 /* Appirater.h */,
+				A50BC1DC18E96E0000F1F979 /* Appirater.m */,
+				A50BC1DD18E96E0000F1F979 /* Appirater.podspec */,
+				A50BC1DE18E96E0000F1F979 /* AppiraterDelegate.h */,
+				A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */,
+				A50BC1F318E96E0000F1F979 /* README.md */,
+			);
+			path = Appirater;
+			sourceTree = "<group>";
+		};
+		A50BC22B18E96F7600F1F979 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC24518E99A9D00F1F979 /* WebView.h */,
+				A50BC23F18E9933000F1F979 /* WebView-ios */,
+				A50BC23B18E984B100F1F979 /* url.mm */,
+				A50BC23A18E984A100F1F979 /* url.h */,
+				A50BC23718E9848400F1F979 /* Alert.cpp */,
+				A50BC23818E9848400F1F979 /* Alert.h */,
+			);
+			name = Web;
+			sourceTree = "<group>";
+		};
+		A50BC23F18E9933000F1F979 /* WebView-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC24018E9933E00F1F979 /* ZYWebView_iOS.h */,
+				A50BC24118E9933E00F1F979 /* ZYWebView_iOS.mm */,
+				A50BC24218E9933E00F1F979 /* ZYWebView.mm */,
+			);
+			name = "WebView-ios";
+			sourceTree = "<group>";
+		};
+		A50BC26D18E9A1C100F1F979 /* FlurryAds */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC27318E9A5A500F1F979 /* FlurryAds-ios */,
+				A50BC27718E9A5A500F1F979 /* FlurryAd.mm */,
+				A50BC27118E9A29800F1F979 /* FlurryAds.h */,
+			);
+			name = FlurryAds;
+			sourceTree = "<group>";
+		};
+		A50BC27318E9A5A500F1F979 /* FlurryAds-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC27418E9A5A500F1F979 /* FlurryAdDelegate.h */,
+				A50BC27518E9A5A500F1F979 /* FlurryAds.h */,
+				A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */,
+			);
+			name = "FlurryAds-ios";
+			path = "avalon/platform/ios/FlurryAds/FlurryAds-ios";
+			sourceTree = "<group>";
+		};
+		A50BC28518E9B2B400F1F979 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC28618E9B2B400F1F979 /* Flurry-ios */,
+				A50BC28918E9B2B400F1F979 /* Flurry.mm */,
+				A50BC28C18E9B2C200F1F979 /* Flurry.h */,
+			);
+			name = Flurry;
+			path = avalon/platform/ios/Flurry;
+			sourceTree = "<group>";
+		};
+		A50BC28618E9B2B400F1F979 /* Flurry-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A50BC28718E9B2B400F1F979 /* Flurry.h */,
+				A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */,
+			);
+			path = "Flurry-ios";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A50BC17818E962DE00F1F979 /* GameCenter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50BC19C18E962DE00F1F979 /* Build configuration list for PBXNativeTarget "GameCenter" */;
+			buildPhases = (
+				A50BC17518E962DE00F1F979 /* Sources */,
+				A50BC17618E962DE00F1F979 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GameCenter;
+			productName = Avalon;
+			productReference = A50BC17918E962DE00F1F979 /* libGameCenter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A50BC1A218E9634600F1F979 /* Appirater */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50BC1A718E9634600F1F979 /* Build configuration list for PBXNativeTarget "Appirater" */;
+			buildPhases = (
+				A50BC1A318E9634600F1F979 /* Sources */,
+				A50BC1A418E9634600F1F979 /* Frameworks */,
+				A5BB76B518E9F0480096422D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Appirater;
+			productName = Avalon;
+			productReference = A50BC1AA18E9634600F1F979 /* libAppirater.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A50BC1AB18E9635400F1F979 /* Paiment */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50BC1B018E9635400F1F979 /* Build configuration list for PBXNativeTarget "Paiment" */;
+			buildPhases = (
+				A50BC1AC18E9635400F1F979 /* Sources */,
+				A50BC1AD18E9635400F1F979 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Paiment;
+			productName = Avalon;
+			productReference = A50BC1B318E9635400F1F979 /* libPaiment.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A50BC22C18E9842F00F1F979 /* Web */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50BC23318E9842F00F1F979 /* Build configuration list for PBXNativeTarget "Web" */;
+			buildPhases = (
+				A50BC22D18E9842F00F1F979 /* Sources */,
+				A50BC23018E9842F00F1F979 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Web;
+			productName = Avalon;
+			productReference = A50BC23618E9842F00F1F979 /* libweb.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A50BC25218E99F5400F1F979 /* Flurry */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50BC25B18E99F5400F1F979 /* Build configuration list for PBXNativeTarget "Flurry" */;
+			buildPhases = (
+				A50BC25318E99F5400F1F979 /* Sources */,
+				A50BC25818E99F5400F1F979 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Flurry;
+			productName = Avalon;
+			productReference = A50BC25E18E99F5400F1F979 /* libFlurry.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A50BC25F18E9A14800F1F979 /* FlurryAds */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A50BC26818E9A14800F1F979 /* Build configuration list for PBXNativeTarget "FlurryAds" */;
+			buildPhases = (
+				A50BC26018E9A14800F1F979 /* Sources */,
+				A50BC26518E9A14800F1F979 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5BB768818E9DD440096422D /* PBXTargetDependency */,
+			);
+			name = FlurryAds;
+			productName = Avalon;
+			productReference = A50BC26B18E9A14800F1F979 /* libFlurryAds.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A50BC17118E962DD00F1F979 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = A50BC17418E962DD00F1F979 /* Build configuration list for PBXProject "Avalon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ca,
+				cs,
+				da,
+				de,
+				el,
+				es,
+				fi,
+				fr,
+				he,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				nb,
+				nl,
+				pl,
+				pt,
+				ro,
+				ru,
+				sk,
+				sv,
+				tr,
+				"zh-Hans",
+				"zh-Hant",
+			);
+			mainGroup = A50BC17018E962DD00F1F979;
+			productRefGroup = A50BC17A18E962DE00F1F979 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A50BC17818E962DE00F1F979 /* GameCenter */,
+				A50BC1A218E9634600F1F979 /* Appirater */,
+				A50BC1AB18E9635400F1F979 /* Paiment */,
+				A50BC22C18E9842F00F1F979 /* Web */,
+				A50BC25218E99F5400F1F979 /* Flurry */,
+				A50BC25F18E9A14800F1F979 /* FlurryAds */,
+				A50BC24618E99DA500F1F979 /* Build all libs */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A5BB76B518E9F0480096422D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5BB771418E9F4950096422D /* AppiraterLocalizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A50BC17518E962DE00F1F979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC1BB18E963A300F1F979 /* GameCenterIos.m in Sources */,
+				A50BC1BA18E963A300F1F979 /* GameCenter.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC1A318E9634600F1F979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC1FD18E96E0000F1F979 /* Appirater.mm in Sources */,
+				A50BC1FC18E96E0000F1F979 /* Appirater.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC1AC18E9635400F1F979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC1CD18E9699B00F1F979 /* Loader.cpp in Sources */,
+				A50BC1D618E969B700F1F979 /* BackendIos.mm in Sources */,
+				A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */,
+				A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */,
+				A50BC1CE18E9699B00F1F979 /* Manager.cpp in Sources */,
+				A50BC1D518E969B700F1F979 /* Backend.mm in Sources */,
+				A50BC1CC18E9699B00F1F979 /* Backend.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC22D18E9842F00F1F979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC24418E9933E00F1F979 /* ZYWebView.mm in Sources */,
+				A50BC24318E9933E00F1F979 /* ZYWebView_iOS.mm in Sources */,
+				A50BC23918E9848400F1F979 /* Alert.cpp in Sources */,
+				A50BC23C18E984B100F1F979 /* url.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC25318E99F5400F1F979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC28B18E9B2B400F1F979 /* Flurry.mm in Sources */,
+				A50BC25418E99F5400F1F979 /* ZYWebView.mm in Sources */,
+				A50BC25518E99F5400F1F979 /* ZYWebView_iOS.mm in Sources */,
+				A50BC25618E99F5400F1F979 /* Alert.cpp in Sources */,
+				A50BC25718E99F5400F1F979 /* url.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50BC26018E9A14800F1F979 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A50BC26118E9A14800F1F979 /* ZYWebView.mm in Sources */,
+				A50BC26218E9A14800F1F979 /* ZYWebView_iOS.mm in Sources */,
+				A50BC26318E9A14800F1F979 /* Alert.cpp in Sources */,
+				A50BC26418E9A14800F1F979 /* url.mm in Sources */,
+				A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A50BC24B18E99DAE00F1F979 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50BC17818E962DE00F1F979 /* GameCenter */;
+			targetProxy = A50BC24A18E99DAE00F1F979 /* PBXContainerItemProxy */;
+		};
+		A50BC24D18E99DAE00F1F979 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50BC1A218E9634600F1F979 /* Appirater */;
+			targetProxy = A50BC24C18E99DAE00F1F979 /* PBXContainerItemProxy */;
+		};
+		A50BC24F18E99DAE00F1F979 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50BC1AB18E9635400F1F979 /* Paiment */;
+			targetProxy = A50BC24E18E99DAE00F1F979 /* PBXContainerItemProxy */;
+		};
+		A50BC25118E99DAE00F1F979 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50BC22C18E9842F00F1F979 /* Web */;
+			targetProxy = A50BC25018E99DAE00F1F979 /* PBXContainerItemProxy */;
+		};
+		A50BC28218E9A5D200F1F979 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50BC25218E99F5400F1F979 /* Flurry */;
+			targetProxy = A50BC28118E9A5D200F1F979 /* PBXContainerItemProxy */;
+		};
+		A50BC28418E9A5D200F1F979 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50BC25F18E9A14800F1F979 /* FlurryAds */;
+			targetProxy = A50BC28318E9A5D200F1F979 /* PBXContainerItemProxy */;
+		};
+		A5BB768818E9DD440096422D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A50BC25218E99F5400F1F979 /* Flurry */;
+			targetProxy = A5BB768718E9DD440096422D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A50BC1E018E96E0000F1F979 /* ca */,
+				A50BC1E118E96E0000F1F979 /* cs */,
+				A50BC1E218E96E0000F1F979 /* da */,
+				A50BC1E318E96E0000F1F979 /* de */,
+				A50BC1E418E96E0000F1F979 /* el */,
+				A50BC1E518E96E0000F1F979 /* en */,
+				A50BC1E618E96E0000F1F979 /* es */,
+				A50BC1E718E96E0000F1F979 /* fi */,
+				A50BC1E818E96E0000F1F979 /* fr */,
+				A50BC1E918E96E0000F1F979 /* he */,
+				A50BC1EA18E96E0000F1F979 /* hu */,
+				A50BC1EB18E96E0000F1F979 /* id */,
+				A50BC1EC18E96E0000F1F979 /* it */,
+				A50BC1ED18E96E0000F1F979 /* ja */,
+				A50BC1EE18E96E0000F1F979 /* ko */,
+				A50BC1EF18E96E0000F1F979 /* nb */,
+				A50BC1F018E96E0000F1F979 /* nl */,
+				A50BC1F118E96E0000F1F979 /* pl */,
+				A50BC1F218E96E0000F1F979 /* pt */,
+				A50BC1F418E96E0000F1F979 /* ro */,
+				A50BC1F518E96E0000F1F979 /* ru */,
+				A50BC1F618E96E0000F1F979 /* sk */,
+				A50BC1F718E96E0000F1F979 /* sv */,
+				A50BC1F818E96E0000F1F979 /* tr */,
+				A50BC1F918E96E0000F1F979 /* zh-Hans */,
+				A50BC1FA18E96E0000F1F979 /* zh-Hant */,
+			);
+			name = AppiraterLocalizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A50BC19A18E962DE00F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/";
+			};
+			name = Debug;
+		};
+		A50BC19B18E962DE00F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A50BC19D18E962DE00F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_GAMECENTER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A50BC19E18E962DE00F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_GAMECENTER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A50BC1A818E9634600F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_APPIRATER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Appirater;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A50BC1A918E9634600F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_APPIRATER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Appirater;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A50BC1B118E9635400F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_PAIMENT_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Paiment;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A50BC1B218E9635400F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_PAIMENT_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Paiment;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A50BC23418E9842F00F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = web;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A50BC23518E9842F00F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = web;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A50BC24818E99DA500F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A50BC24918E99DA500F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A50BC25C18E99F5400F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/Flurry/Flurry-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Flurry;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A50BC25D18E99F5400F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/Flurry/Flurry-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = Flurry;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A50BC26918E9A14800F1F979 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/FlurryAds/FlurryAds-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = FlurryAds;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A50BC26A18E9A14800F1F979 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/FlurryAds/FlurryAds-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = FlurryAds;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A50BC17418E962DD00F1F979 /* Build configuration list for PBXProject "Avalon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC19A18E962DE00F1F979 /* Debug */,
+				A50BC19B18E962DE00F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50BC19C18E962DE00F1F979 /* Build configuration list for PBXNativeTarget "GameCenter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC19D18E962DE00F1F979 /* Debug */,
+				A50BC19E18E962DE00F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50BC1A718E9634600F1F979 /* Build configuration list for PBXNativeTarget "Appirater" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC1A818E9634600F1F979 /* Debug */,
+				A50BC1A918E9634600F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50BC1B018E9635400F1F979 /* Build configuration list for PBXNativeTarget "Paiment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC1B118E9635400F1F979 /* Debug */,
+				A50BC1B218E9635400F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50BC23318E9842F00F1F979 /* Build configuration list for PBXNativeTarget "Web" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC23418E9842F00F1F979 /* Debug */,
+				A50BC23518E9842F00F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50BC24718E99DA500F1F979 /* Build configuration list for PBXAggregateTarget "Build all libs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC24818E99DA500F1F979 /* Debug */,
+				A50BC24918E99DA500F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50BC25B18E99F5400F1F979 /* Build configuration list for PBXNativeTarget "Flurry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC25C18E99F5400F1F979 /* Debug */,
+				A50BC25D18E99F5400F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A50BC26818E9A14800F1F979 /* Build configuration list for PBXNativeTarget "FlurryAds" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A50BC26918E9A14800F1F979 /* Debug */,
+				A50BC26A18E9A14800F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A50BC17118E962DD00F1F979 /* Project object */;
+}

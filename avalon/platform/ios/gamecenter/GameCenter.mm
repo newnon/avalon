@@ -1,8 +1,6 @@
-#ifdef AVALON_CONFIG_GAMECENTER_ENABLED
+#include "avalon/GameCenter.h"
 
-#include <avalon/GameCenter.h>
-
-#include <avalon/platform/ios/gamecenter/GameCenterIos.h>
+#include "avalon/platform/ios/gamecenter/GameCenterIos.h"
 
 namespace avalon {
 
@@ -25,9 +23,9 @@ bool GameCenter::showAchievements()
     return [[GameCenterIos shared] showAchievements];
 }
 
-void GameCenter::postAchievement(const char* idName, int percentComplete, bool showBanner)
+void GameCenter::postAchievement(const std::string &idName, int percentComplete, bool showBanner)
 {
-    [[GameCenterIos shared] postAchievement:idName percent:[NSNumber numberWithInt:percentComplete] showBanner:showBanner];
+    [[GameCenterIos shared] postAchievement:idName.c_str() percent:[NSNumber numberWithInt:percentComplete] showBanner:showBanner];
 }
 
 void GameCenter::clearAllAchievements()
@@ -50,9 +48,9 @@ bool GameCenter::showScores()
     return [[GameCenterIos shared] showScores];
 }
 
-void GameCenter::postScore(const char* idName, int score)
+void GameCenter::postScore(const std::string &idName, int score)
 {
-    [[GameCenterIos shared] postScore:idName score:[NSNumber numberWithInt:score]];
+    [[GameCenterIos shared] postScore:idName.c_str() score:[NSNumber numberWithInt:score]];
 }
 
 void GameCenter::clearAllScores()
@@ -61,5 +59,3 @@ void GameCenter::clearAllScores()
 }
 
 } // namespace avalon
-
-#endif /* AVALON_CONFIG_GAMECENTER_ENABLED */

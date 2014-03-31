@@ -1,14 +1,14 @@
 #ifndef AVALON_UTILS_URL_H
 #define AVALON_UTILS_URL_H
 
+#include <string>
+
 namespace avalon {
-namespace utils {
-namespace url {
+namespace web {
 
-void open(const char* pszUrl);
+void openUrl(const std::string &url);
 
-} // namespace url
-} // namespace utils
+} // namespace web
 } // namespace avalon
 
 #endif /* AVALON_UTILS_URL_H */

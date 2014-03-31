@@ -3,7 +3,7 @@
 #ifndef AVALON_GAMECENTER_H
 #define AVALON_GAMECENTER_H
 
-#include <avalon/utils/platform.h>
+#include <string>
 
 namespace avalon {
 
@@ -13,22 +13,19 @@ public:
     static GameCenter* getInstance();
     
     void login();
+    void logout();
+    
+    bool isLoggedIn();
 
     bool showAchievements();
-    void postAchievement(const char* idName, int percentComplete, bool showBanner);
+    void postAchievement(const std::string &idName, int percentComplete, bool showBanner);
     void clearAllAchievements();
 
     std::string getPlayerId();
 
     bool showScores();
-    void postScore(const char* idName, int score);
+    void postScore(const std::string &idName, int score);
     void clearAllScores();
-
-#if AVALON_PLATFORM_IS_ANDROID_GOOGLE
-    void signIn();
-    void signOut();
-    bool isSignedIn();
-#endif
 };
 
 } // namespace avalon

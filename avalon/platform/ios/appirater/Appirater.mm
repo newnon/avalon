@@ -1,8 +1,6 @@
-#ifdef AVALON_CONFIG_APPIRATER_ENABLED
+#include "avalon/Appirater.h"
 
-#include <avalon/Appirater.h>
-
-#import <avalon/platform/ios/appirater/Appirater/Appirater.h>
+#import "avalon/platform/ios/appirater/Appirater/Appirater.h"
 
 namespace avalon {
 
@@ -96,5 +94,3 @@ Appirater::Appirater()
 }
 
 } // namespace avalon
-
-#endif /* AVALON_CONFIG_APPIRATER_ENABLED */

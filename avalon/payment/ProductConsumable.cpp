@@ -1,7 +1,7 @@
 #ifdef AVALON_CONFIG_PAIMENT_ENABLED
-#include <avalon/payment/ProductConsumable.h>
+#include "avalon/payment/ProductConsumable.h"
 
-#include <avalon/utils/assert.hpp>
+#include "avalon/utils/assert.hpp"
 
 namespace avalon {
 namespace payment {

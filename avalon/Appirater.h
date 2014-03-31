@@ -1,5 +1,3 @@
-#ifdef AVALON_CONFIG_APPIRATER_ENABLED
-
 #ifndef AVALON_APPIRATER_H
 #define AVALON_APPIRATER_H
 
@@ -174,5 +172,3 @@ private:
 } // namespace avalon
 
 #endif /* AVALON_APPIRATER_H */
-
-#endif /* AVALON_CONFIG_APPIRATER_ENABLED */

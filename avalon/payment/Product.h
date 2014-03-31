@@ -2,7 +2,7 @@
 #define AVALON_PAYMENT_PRODUCT_H
 
 #include <string>
-#include <avalon/utils/utility.hpp>
+#include "avalon/utils/utility.hpp"
 
 namespace avalon {
 namespace payment {

@@ -16,47 +16,44 @@ else
     $(error ERROR: variable AVALON_PLATFORM_FLAVOR not set)
 endif
 
+LOCAL_MODULE := avalon_static
+LOCAL_MODULE_FILENAME := libavalon
+
+#LOCAL_SRC_FILES := avalon/io/IniReader.cpp
+
 ifneq (,$(findstring ads,$(AVALON_FEATURES)))
-    $(error ERROR: variable AVALON_FEATURES ads)
     LOCAL_CFLAGS += -DAVALON_CONFIG_ADS_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_ADS_ENABLED
+    LOCAL_SRC_FILES += avalon/ads/Manager.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/ads/provider/Chartboost.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/ads/provider/Revmob.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/ads/provider/SamsungAdHub.cpp
 endif
 
 ifneq (,$(findstring payment,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_PAIMENT_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_PAIMENT_ENABLED
+    LOCAL_SRC_FILES += avalon/payment/Loader.cpp
+    LOCAL_SRC_FILES += avalon/payment/Manager.cpp
+    LOCAL_SRC_FILES += avalon/payment/Product.cpp
+    LOCAL_SRC_FILES += avalon/payment/ProductConsumable.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/payment/Backend.cpp
+    LOCAL_SRC_FILES += avalon/io/IniReader.cpp
 endif
 
 ifneq (,$(findstring gamecenter,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_GAMECENTER_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_GAMECENTER_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/gamecenter_switch.cpp
 endif
 
 ifneq (,$(findstring appirater,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/appirater/Appirater.cpp
 endif
 
-LOCAL_MODULE := avalon_static
-LOCAL_MODULE_FILENAME := libavalon
-
 LOCAL_SRC_FILES := \
-    avalon/ads/Manager.cpp \
-    avalon/payment/Loader.cpp \
-    avalon/payment/Manager.cpp \
-    avalon/payment/Product.cpp \
-    avalon/payment/ProductConsumable.cpp \
-    avalon/platform/android/ads/provider/Chartboost.cpp \
-    avalon/platform/android/ads/provider/Revmob.cpp \
-    avalon/platform/android/ads/provider/SamsungAdHub.cpp \
-    avalon/platform/android/gamecenter_switch.cpp \
-    avalon/platform/android/payment/Backend.cpp \
-    avalon/i18n/Language.cpp \
-    avalon/i18n/LanguageKey.cpp \
-    avalon/i18n/Localization.cpp \
-    avalon/io/IniReader.cpp \
-    avalon/platform/android/appirater/Appirater.cpp \
-    avalon/platform/android/gnustl_string_fixes.cpp \
     avalon/platform/android/ui/AlertNative.cpp \
     avalon/platform/android/utils/url.cpp \
     avalon/ui/Alert.cpp \

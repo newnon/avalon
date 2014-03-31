@@ -2,13 +2,29 @@
 #define AVALON_UTILS_PLATFORM_H
 
 #include <string>
-#include "cocos2d.h"
+//#include "cocos2d.h"
 
 #define AVALON_PLATFORM_FLAVOR_AMAZON 1
 #define AVALON_PLATFORM_FLAVOR_GOOGLE 2
 #define AVALON_PLATFORM_FLAVOR_SAMSUNG 3
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#ifdef __APPLE__
+    #include "TargetConditionals.h"
+    #if TARGET_IPHONE_SIMULATOR
+        #define AVALON_PLATFORM_IS_IOS
+    #elif TARGET_OS_IPHONE
+        #define AVALON_PLATFORM_IS_IOS
+    #elif TARGET_OS_MAC
+        #define AVALON_PLATFORM_IS_MAC
+    #else
+        // Unsupported platform
+    #endif
+#elif __ANDROID__
+    #define AVALON_PLATFORM_IS_ANDROID
+#endif //__APPLE__
+
+
+#ifdef AVALON_PLATFORM_IS_ANDROID
     #ifndef AVALON_PLATFORM_FLAVOR
         #error "You have to define AVALON_PLATFORM_FLAVOR first"
     #elif (AVALON_PLATFORM_FLAVOR != AVALON_PLATFORM_FLAVOR_AMAZON) \
@@ -20,6 +36,7 @@
     #define AVALON_PLATFORM_FLAVOR 0
 #endif
 
+/*
 // such preprocessor stuff is always ugly to use and should be avoided at
 // all. but sometimes it's a good and/or the only way to go and then it should
 // be at least easy to use, easy to read and easy to maintain. this bunch
@@ -39,6 +56,7 @@
 #define AVALON_PLATFORM_IS_EMSCRIPTEN      (CC_TARGET_PLATFORM == CC_PLATFORM_EMSCRIPTEN)
 #define AVALON_PLATFORM_IS_TIZEN           (CC_TARGET_PLATFORM == CC_PLATFORM_TIZEN)
 #define AVALON_PLATFORM_IS_QT5             (CC_TARGET_PLATFORM == CC_PLATFORM_QT5)
+*/
 
 namespace avalon {
 namespace utils {

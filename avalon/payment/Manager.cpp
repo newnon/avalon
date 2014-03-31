@@ -1,10 +1,10 @@
 #ifdef AVALON_CONFIG_PAIMENT_ENABLED
-#include <avalon/payment/Manager.h>
+#include "avalon/payment/Manager.h"
 
 #include <typeinfo>
-#include <avalon/utils/assert.hpp>
-#include <avalon/payment/Product.h>
-#include <avalon/payment/ProductConsumable.h>
+#include "avalon/utils/assert.hpp"
+#include "avalon/payment/Product.h"
+#include "avalon/payment/ProductConsumable.h"
 
 using std::string;
 using std::make_pair;

@@ -1,6 +1,6 @@
 #ifndef AVALON_CONFIG_PAYMENT_ENABLED
 
-#include <avalon/payment/Backend.h>
+#include "avalon/payment/Backend.h"
 
 /**
  * @warning This is not a real backend implementation! This is just a dummy

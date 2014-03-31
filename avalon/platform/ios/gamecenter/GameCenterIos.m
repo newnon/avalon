@@ -1,8 +1,8 @@
-#import <avalon/platform/ios/gamecenter/GameCenterIos.h>
+#import "avalon/platform/ios/gamecenter/GameCenterIos.h"
 
 #import <GameKit/GameKit.h>
-#import "AppController.h"
-#import "RootViewController.h"
+//#import "AppController.h"
+//#import "RootViewController.h"
 
 @interface GameCenterIos(intern)
 - (void)saveAchievementToDevice:(GKAchievement*)achievement;
@@ -63,13 +63,16 @@ static GameCenterIos* instance = nil;
     if (![GKLocalPlayer localPlayer].isAuthenticated) {
         return NO;
     }
+    
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *rootViewController = window.rootViewController;
 
-    AppController* appController = (AppController*) [UIApplication sharedApplication].delegate;
+    //AppController* appController = (AppController*) [UIApplication sharedApplication].delegate;
 
     GKAchievementViewController* gkController = [[[GKAchievementViewController alloc] init] autorelease];
     gkController.achievementDelegate = self;
 
-    [appController.viewController presentModalViewController:gkController animated:YES];
+    [rootViewController presentModalViewController:gkController animated:YES];
     return YES;
 }
 
@@ -118,8 +121,11 @@ static GameCenterIos* instance = nil;
 
 -(void)achievementViewControllerDidFinish:(GKAchievementViewController *)view
 {
-    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    [app.viewController dismissViewControllerAnimated:YES completion:nil];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *rootViewController = window.rootViewController;
+
+    //AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -
@@ -131,13 +137,15 @@ static GameCenterIos* instance = nil;
         return NO;
     }
 
-    AppController* appController = (AppController*) [UIApplication sharedApplication].delegate;
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *rootViewController = window.rootViewController;
+    //AppController* appController = (AppController*) [UIApplication sharedApplication].delegate;
 
     GKLeaderboardViewController* gkController = [[[GKLeaderboardViewController alloc] init] autorelease];
     gkController.timeScope = GKLeaderboardTimeScopeAllTime;
     gkController.leaderboardDelegate = self;
 
-    [appController.viewController presentModalViewController:gkController animated:YES];
+    [rootViewController presentModalViewController:gkController animated:YES];
     return YES;
 }
 
@@ -173,8 +181,10 @@ static GameCenterIos* instance = nil;
 
 -(void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)view
 {
-    AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-    [app.viewController dismissViewControllerAnimated:YES completion:nil];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *rootViewController = window.rootViewController;
+    //AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
+    [rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -

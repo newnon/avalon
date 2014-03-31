@@ -1,14 +1,12 @@
-#ifdef AVALON_CONFIG_PAIMENT_ENABLED
 #ifndef AVALON_PAYMENT_H
 #define AVALON_PAYMENT_H
 
-#include <avalon/payment/Manager.h>
-#include <avalon/payment/ManagerDelegate.h>
+#include "avalon/payment/Manager.h"
+#include "avalon/payment/ManagerDelegate.h"
 
-#include <avalon/payment/Product.h>
-#include <avalon/payment/ProductConsumable.h>
+#include "avalon/payment/Product.h"
+#include "avalon/payment/ProductConsumable.h"
 
-#include <avalon/payment/Loader.h>
+#include "avalon/payment/Loader.h"
 
 #endif /* AVALON_PAYMENT_H */
-#endif //AVALON_CONFIG_PAIMENT_ENABLED
