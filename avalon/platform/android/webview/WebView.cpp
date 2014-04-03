@@ -6,138 +6,90 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#include "ZYWebView.h"
+#include "avalon/WebView.h"
 #include <jni.h>
 #include "platform/android/jni/JniHelper.h"
 #include <android/log.h>
 
-/*
- More info about JNI using, check this:
- http://go3k.org/?p=49
- */
+const char* kJNIPakageName = "org/cocos2dx/cpp/AppActivity";
 
-#warning 如果想在你的工程中嵌入，前务必修改这个包名，值为Andriod工程Main Activity的路径
-#warning If you want to use this CCXWebview in your project, please modify this packageName as your Android project.
-const char* kJNIPakageName = "org/go3k/ccxwebview/CCXWebview";
+#define  LOG_TAG    "WebView Debug"
+#define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
 
-ZYWebView::ZYWebView()
+namespace avalon {
+namespace web {
+
+WebView::WebView()
 {
-    
+
 }
 
-ZYWebView::~ZYWebView()
+WebView::~WebView()
 {
-    
+    removeWebView();
 }
 
-bool ZYWebView::init()
+void WebView::showWebView(const std::string &url, float x, float y, float width, float height)
 {
-	return true;
-}
-
-void ZYWebView::showWebView(const char* url, float x, float y, float width, float height)
-{
-    //1. 获取activity静态对象
-    JniMethodInfo minfo;
-    //getStaticMethodInfo 次函数返回一个bool值表示是否找到此函数
-    bool isHave = JniHelper::getStaticMethodInfo(minfo,
-                                                 kJNIPakageName,
-                                                 "getJavaActivity",
-                                                 "()Ljava/lang/Object;");
-    jobject activityObj;
-    if (isHave)
+    cocos2d::JniMethodInfo methodInfo;
+    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"displayWebView", "(IIII)V"))
     {
-        activityObj = minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);
-    }
-    
-    //2. 查找displayWebView接口，并用jobj调用
-    isHave = JniHelper::getMethodInfo(minfo,kJNIPakageName,"displayWebView", "(IIII)V");
-    
-    if (!isHave)
-    {
-        CCLog("jni:displayWebView 函数不存在");
-    }
-    else
-    {
-        //调用此函数
         jint jX = (int)x;
         jint jY = (int)y;
         jint jWidth = (int)width;
         jint jHeight = (int)height;
-        minfo.env->CallVoidMethod(activityObj, minfo.methodID, jX, jY, jWidth, jHeight);
-    }
-    
-    //3. 查找updateURL接口，并用jobj调用
-    isHave = JniHelper::getMethodInfo(minfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V");
-    
-    if (!isHave)
-    {
-        CCLog("jni:updateURL 函数不存在");
+         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jX, jY, jWidth, jHeight);
+         minfo.env->DeleteLocalRef(minfo.classID);
     }
     else
     {
-        //调用此函数
-        jstring jmsg = minfo.env->NewStringUTF(url);
-        minfo.env->CallVoidMethod(activityObj, minfo.methodID, jmsg);
+        LOGD("jni:displayWebView not found");
+    }
+    
+    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
+    {
+        jstring jmsg = minfo.env->NewStringUTF(url.c_str());
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jmsg);
+        minfo.env->DeleteLocalRef(minfo.classID);
+    }
+    else
+    {
+        LOGD("jni:updateURL not found");
     }
 }
 
-void ZYWebView::updateURL(const char* url)
+void WebView::updateURL(const std::string &url)
 {
-    //1. 获取activity静态对象
-    JniMethodInfo minfo;
-    //getStaticMethodInfo 次函数返回一个bool值表示是否找到此函数
-    bool isHave = JniHelper::getStaticMethodInfo(minfo,
-                                                 kJNIPakageName,
-                                                 "getJavaActivity",
-                                                 "()Ljava/lang/Object;");
-    jobject activityObj;
-    if (isHave)
-    {
-        activityObj = minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);
-    }
+    cocos2d::JniMethodInfo minfo;
     
-    //2. 查找updateURL接口，并用jobj调用
-    isHave = JniHelper::getMethodInfo(minfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V");
-    
-    if (!isHave)
+    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
     {
-        CCLog("jni:updateURL 函数不存在");
+        jstring jmsg = minfo.env->NewStringUTF(url.c_str());
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jmsg);
+        minfo.env->DeleteLocalRef(minfo.classID);
     }
     else
     {
-        //调用此函数
-        jstring jmsg = minfo.env->NewStringUTF(url);
-        minfo.env->CallVoidMethod(activityObj, minfo.methodID, jmsg);
+        LOGD("jni:updateURL not found");
     }
 }
 
-void ZYWebView::removeWebView()
-{
-    //1. 获取activity静态对象
-    JniMethodInfo minfo;
-    //getStaticMethodInfo 次函数返回一个bool值表示是否找到此函数
-    bool isHave = JniHelper::getStaticMethodInfo(minfo,
-                                                 kJNIPakageName,
-                                                 "getJavaActivity",
-                                                 "()Ljava/lang/Object;");
-    jobject activityObj;
-    if (isHave)
+void WebView::removeWebView()
     {
-        activityObj = minfo.env->CallStaticObjectMethod(minfo.classID, minfo.methodID);
-    }
+    cocos2d::JniMethodInfo minfo;
     
-    //2. 查找updateURL接口，并用jobj调用
-    isHave = JniHelper::getMethodInfo(minfo,kJNIPakageName,"removeWebView", "()V"); 
-    
-    if (!isHave)
+    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"removeWebView", "()V"))
     {
-        CCLog("jni:updateURL 函数不存在");
+        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID);
+        minfo.env->DeleteLocalRef(minfo.classID);
     }
     else
     {
-        //调用此函数
-        minfo.env->CallVoidMethod(activityObj, minfo.methodID);
+        LOGD("jni:updateURL failed");
     }
 }
+
+} // namespace web
+} // namespace avalon
+
 

@@ -13,6 +13,7 @@ class AppiraterDelegate
     virtual void appiraterDidOptToRemindLater(Appirater *appirater) {};
     virtual void appiraterWillPresentModalView(Appirater *appirater, bool animated) {};
     virtual void appiraterDidDismissModalView(Appirater *appirater, bool animated) {};
+    virtual ~AppiraterDelegate() {}
 };
 
 class Appirater

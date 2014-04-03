@@ -61,20 +61,39 @@ void callStaticVoidMethodWithInt(const char* name, const int value)
 } // namespace helper
 } // namespace appirater
 
+Appirater::Appirater()
+{
+#if AVALON_PLATFORM_IS_ANDROID_AMAZON
+    appirater::helper::callStaticVoidMethodWithString("setMarketUrl", "http://www.amazon.com/gp/mas/dl/android?p=%s");
+#else
+    appirater::helper::callStaticVoidMethodWithString("setMarketUrl", "market://details?id=%s");
+#endif
+}
+
 Appirater* Appirater::getInstance()
 {
     static Appirater* instance = new Appirater();
     return instance;
 }
 
-void Appirater::setInitialDaysUntilPrompt(const int days)
+void Appirater::appLaunched(bool canPromptForRating)
 {
-    appirater::helper::callStaticVoidMethodWithInt("setInitialDaysUntilPrompt", days);
+	appirater::helper::callStaticVoidMethodWithBool("appLaunched", canPromptForRating);
 }
 
-void Appirater::setReminderDaysUntilPrompt(const int days)
+void Appirater::appEnteredForeground(bool canPromptForRating)
 {
-    appirater::helper::callStaticVoidMethodWithInt("setReminderDaysUntilPrompt", days);
+	appirater::helper::callStaticVoidMethodWithBool("appLaunched", canPromptForRating);
+}
+
+void Appirater::setDaysUntilPrompt(double value)
+{
+    appirater::helper::callStaticVoidMethodWithInt("setInitialDaysUntilPrompt", value);
+}
+
+void Appirater::setUsesUntilPrompt(int value)
+{
+
 }
 
 void Appirater::setSignificantEventsUntilPrompt(const int events)
@@ -82,29 +101,49 @@ void Appirater::setSignificantEventsUntilPrompt(const int events)
     appirater::helper::callStaticVoidMethodWithInt("setSignificantEventsUntilPrompt", events);
 }
 
+void Appirater::setTimeBeforeReminding(double value)
+{
+	appirater::helper::callStaticVoidMethodWithInt("setReminderDaysUntilPrompt", value);
+}
+
 void Appirater::setDebug(const bool flag)
 {
     appirater::helper::callStaticVoidMethodWithBool("setDebug", flag);
 }
 
-void Appirater::init()
+void Appirater::setDelegate(AppiraterDelegate *delegate)
 {
-#if AVALON_PLATFORM_IS_ANDROID_AMAZON
-    appirater::helper::callStaticVoidMethodWithString("setMarketUrl", "http://www.amazon.com/gp/mas/dl/android?p=%s");
-#else
-    appirater::helper::callStaticVoidMethodWithString("setMarketUrl", "market://details?id=%s");
-#endif
-    appirater::helper::callStaticVoidMethod("appLaunched");
+
 }
 
-void Appirater::userDidSignificantEvent()
+void Appirater::userDidSignificantEvent(bool canPromptForRating)
 {
-    appirater::helper::callStaticVoidMethod("userDidSignificantEvent");
+    appirater::helper::callStaticVoidMethodWithBool("userDidSignificantEvent", canPromptForRating);
 }
 
-void Appirater::showIfNeeded()
+void Appirater::showPrompt()
 {
     appirater::helper::callStaticVoidMethod("showIfNeeded");
+}
+
+void Appirater::setAppId(const char *appName)
+{
+
+}
+
+void Appirater::setOpenInAppStore(bool openInAppStore)
+{
+
+}
+
+void Appirater::setUsesAnimation(bool animation)
+{
+
+}
+
+void Appirater::setAlwaysUseMainBundle(bool useMainBundle)
+{
+
 }
 
 } // namespace avalon

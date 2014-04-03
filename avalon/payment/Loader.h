@@ -3,6 +3,7 @@
 
 #include "avalon/utils/utility.hpp"
 #include "avalon/io/IniReader.h"
+#include <memory>
 
 namespace avalon {
 namespace payment {

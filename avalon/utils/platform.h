@@ -11,16 +11,16 @@
 #ifdef __APPLE__
     #include "TargetConditionals.h"
     #if TARGET_IPHONE_SIMULATOR
-        #define AVALON_PLATFORM_IS_IOS
+        #define AVALON_PLATFORM_IS_IOS 1
     #elif TARGET_OS_IPHONE
-        #define AVALON_PLATFORM_IS_IOS
+        #define AVALON_PLATFORM_IS_IOS 1
     #elif TARGET_OS_MAC
-        #define AVALON_PLATFORM_IS_MAC
+        #define AVALON_PLATFORM_IS_MAC 1
     #else
         // Unsupported platform
     #endif
 #elif __ANDROID__
-    #define AVALON_PLATFORM_IS_ANDROID
+    #define AVALON_PLATFORM_IS_ANDROID 1
 #endif //__APPLE__
 
 
@@ -35,6 +35,10 @@
 #else
     #define AVALON_PLATFORM_FLAVOR 0
 #endif
+
+#define AVALON_PLATFORM_IS_ANDROID_AMAZON  (AVALON_PLATFORM_IS_ANDROID && (AVALON_PLATFORM_FLAVOR == AVALON_PLATFORM_FLAVOR_AMAZON))
+#define AVALON_PLATFORM_IS_ANDROID_GOOGLE  (AVALON_PLATFORM_IS_ANDROID && (AVALON_PLATFORM_FLAVOR == AVALON_PLATFORM_FLAVOR_GOOGLE))
+#define AVALON_PLATFORM_IS_ANDROID_SAMSUNG (AVALON_PLATFORM_IS_ANDROID && (AVALON_PLATFORM_FLAVOR == AVALON_PLATFORM_FLAVOR_SAMSUNG))
 
 /*
 // such preprocessor stuff is always ugly to use and should be avoided at

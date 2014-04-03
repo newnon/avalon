@@ -92,7 +92,7 @@ bool GameCenter::showAchievements()
     return helper::gamecenter::callStaticBoolMethod("showAchievements");
 }
 
-void GameCenter::postAchievement(const char* idName, int percentComplete)
+void GameCenter::postAchievement(const std::string &idName, int percentComplete, bool showBanner)
 {
     std::string idNameStr(idName);
     replaceAll(idNameStr, ".", "_");
@@ -109,7 +109,7 @@ bool GameCenter::showScores()
     return helper::gamecenter::callStaticBoolMethod("showScores");
 }
 
-void GameCenter::postScore(const char* idName, int score)
+void GameCenter::postScore(const std::string &idName, int score)
 {
     std::string idNameStr(idName);
     replaceAll(idNameStr, ".", "_");

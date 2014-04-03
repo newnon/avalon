@@ -83,6 +83,12 @@ std::string callStaticStringMethod(const char *name)
  * Public API
  */
 
+GameCenter* GameCenter::getInstance()
+{
+    static GameCenter* instance = new GameCenter();
+    return instance;
+}
+
 void GameCenter::login()
 {
     helper::gamecenter::callStaticVoidMethod("login");
@@ -93,9 +99,9 @@ bool GameCenter::showAchievements()
     return helper::gamecenter::callStaticBoolMethod("showAchievements");
 }
 
-void GameCenter::postAchievement(const char* idName, int percentComplete, bool showBanner)
+void GameCenter::postAchievement(const std::string &idName, int percentComplete, bool showBanner)
 {
-    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postAchievement", idName, percentComplete);
+    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postAchievement", idName.c_str(), percentComplete);
 }
 
 void GameCenter::clearAllAchievements()
@@ -108,9 +114,9 @@ bool GameCenter::showScores()
     return helper::gamecenter::callStaticBoolMethod("showScores");
 }
 
-void GameCenter::postScore(const char* idName, int score)
+void GameCenter::postScore(const std::string &idName, int score)
 {
-    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postScore", idName, score);
+    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postScore", idName.c_str(), score);
 }
 
 void GameCenter::clearAllScores()
@@ -123,6 +129,7 @@ std::string GameCenter::getPlayerId()
 	return helper::gamecenter::callStaticStringMethod("getPlayerId");
 }
 
+/*
 void GameCenter::signIn()
 {
     helper::gamecenter::callStaticVoidMethod("signIn");
@@ -136,8 +143,7 @@ void GameCenter::signOut()
 bool GameCenter::isSignedIn()
 {
     return helper::gamecenter::callStaticBoolMethod("isSignedIn");
-
-}
+}*/
 
 } // namespace avalon
 

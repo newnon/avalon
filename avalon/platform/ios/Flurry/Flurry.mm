@@ -10,7 +10,6 @@
 #import "Flurry.h"
 
 namespace avalon {
-namespace flurry {
     
 static NSDictionary *nsDictionaryFromStringMap(const std::map<std::string,std::string> &stringMap) {
     if (stringMap.empty()) {
@@ -26,6 +25,19 @@ static NSDictionary *nsDictionaryFromStringMap(const std::map<std::string,std::s
         
     }
     return nsDict;
+}
+
+void uncaughtExceptionHandler(NSException *exception)
+{
+    [::Flurry logError:@"Uncaught" message:@"Crash!" exception:exception];
+}
+    
+void Flurry::setCaptureUncaughtExceptions(bool isEnabled)
+{
+    if(isEnabled)
+        NSSetUncaughtExceptionHandler(&uncaughtExceptionHandler);
+    else
+        NSSetUncaughtExceptionHandler(nil);
 }
 
 void Flurry::setAppVersion(const std::string &version) {
@@ -137,7 +149,6 @@ void Flurry::setReportLocation(bool reportLocation) {
     //Android only
 }
 
-} // namespace flurry
 } // namespace avalon
 
 

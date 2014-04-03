@@ -51,6 +51,7 @@ import org.cocos2dx.lib.Cocos2dxHelper;
  */
 public abstract class Appirater
 {
+    private static final String PREF_USES_COUNT = "uses_count";
     private static final String PREF_SIGNIFICANT_EVENT_COUNT = "significant_event";
     private static final String PREF_RATE_CLICKED = "rateclicked";
     private static final String PREF_DONT_SHOW = "dontshow";
@@ -58,6 +59,7 @@ public abstract class Appirater
     private static final String PREF_DATE_FIRST_LAUNCHED = "date_firstlaunch";
     private static final Activity activity = Cocos2dxHelper.getActivity();
     private static boolean testMode = false;
+    private static int usesUntilPrompt = 0;
     private static int initialDaysUntilPrompt = 0;
     private static int reminderDaysUntilPrompt = 0;
     private static int significantEventsUntilPrompt = 0;
@@ -164,18 +166,25 @@ public abstract class Appirater
         });
     }
 
-    public static void appLaunched() {
+    public static void appLaunched(boolean flag) {
         SharedPreferences prefs = getSharedPreferences();
-        if (prefs.getLong(PREF_DATE_FIRST_LAUNCHED, 0) > 0) {
-            return;
-        }
-
         SharedPreferences.Editor editor = prefs.edit();
+        
+        if (!(prefs.getLong(PREF_DATE_FIRST_LAUNCHED, 0) > 0)) {
         editor.putLong(PREF_DATE_FIRST_LAUNCHED, System.currentTimeMillis());
+        }
+        
+        long usesCount = prefs.getLong(PREF_USES_COUNT, 0);
+        usesCount++;
+        
+        editor.putLong(PREF_USES_COUNT, usesCount);
         editor.commit();
+        
+        if(flag)
+            showIfNeeded();
     }
 
-    public static void userDidSignificantEvent()
+    public static void userDidSignificantEvent(boolean flag)
     {
         SharedPreferences prefs = getSharedPreferences();
         SharedPreferences.Editor editor = prefs.edit();
@@ -185,6 +194,9 @@ public abstract class Appirater
 
         editor.putLong(PREF_SIGNIFICANT_EVENT_COUNT, significantEventCount);
         editor.commit();
+        
+        if(flag)
+            showIfNeeded();
     }
 
     public static void showIfNeeded()
@@ -211,7 +223,8 @@ public abstract class Appirater
                 }
             } else {
                 long significantEventCount = prefs.getLong(PREF_SIGNIFICANT_EVENT_COUNT, 0);
-                if (significantEventsUntilPrompt <= significantEventCount) {
+                long usesCount = prefs.getLong(PREF_USES_COUNT, 0);
+                if ((significantEventsUntilPrompt <= significantEventCount)&&(usesUntilPrompt <= usesCount)) {
                     showRateDialog();
                 }
             }
@@ -226,6 +239,11 @@ public abstract class Appirater
     public static void setInitialDaysUntilPrompt(int days)
     {
         initialDaysUntilPrompt = days;
+    }
+
+    public static void setUsesUntilPrompt(int count)
+    {
+        usesUntilPrompt = count;
     }
 
     public static void setReminderDaysUntilPrompt(int days)

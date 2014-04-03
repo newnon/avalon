@@ -6,13 +6,13 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "ZYWebView_iOS.h"
+#import "WebView_iOS.h"
 #import <UIKit/UIImageView.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 //#import "EAGLView.h"
 
-@implementation ZYWebView_iOS
+@implementation WebView_iOS
 
 
 - (void)showWebView_x:(float)x y:(float)y width:(float) widht height:(float)height
@@ -21,8 +21,8 @@
     {
         m_webview = [[UIWebView alloc] initWithFrame:CGRectMake(x, y, widht , height)];
         [m_webview setDelegate:self];
-
-        [[UIApplication sharedApplication].keyWindow addSubview:m_webview];
+        
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:m_webview];
         [m_webview release];
         
         m_webview.backgroundColor = [UIColor clearColor];
@@ -34,15 +34,15 @@
             { 
                 UIScrollView* scView = (UIScrollView *)aView;
                 
-//                [(UIScrollView *)aView setShowsVerticalScrollIndicator:NO]; //右侧的滚动条 （水平的类似）
+//              [(UIScrollView *)aView setShowsVerticalScrollIndicator:NO];
                 [scView setShowsHorizontalScrollIndicator:NO];
-//                scView.bounces = NO;
+//              scView.bounces = NO;
                 
                 for (UIView *shadowView in aView.subviews)  
                 {
                     if ([shadowView isKindOfClass:[UIImageView class]]) 
                     { 
-                        shadowView.hidden = YES;  //上下滚动出边界时的黑色的图片 也就是拖拽后的上下阴影
+                        shadowView.hidden = YES;
                     } 
                 } 
             } 
@@ -56,6 +56,11 @@
     [m_webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:request] 
                                             cachePolicy:NSURLRequestReloadIgnoringLocalCacheData 
                                         timeoutInterval:60]];
+}
+
+-(void)dealloc
+{
+    [self removeWebView];
 }
 
 - (void)removeWebView

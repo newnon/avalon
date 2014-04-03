@@ -19,15 +19,7 @@ class WebView
 public:
     WebView();
     ~WebView();
-    /**
-     *	@brief	显示WebView
-     *
-     *	@param 	url 	地址
-     *	@param 	x 	x位置
-     *	@param 	y 	y位置(左上的位置，坐标系为左上0)
-     *	@param 	width 	宽度
-     *	@param 	height 	高度
-     */
+
     void showWebView(const std::string &url, float x, float y, float width, float height);
 
     

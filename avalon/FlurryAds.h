@@ -13,7 +13,6 @@
 #include <map>
 
 namespace avalon {
-namespace flurryAds {
 
 class FlurryAdsDelegate;
 
@@ -429,7 +428,6 @@ class FlurryAdsDelegate
     
 };
     
-} // namespace flurryAds
 } // namespace avalon
 
 #endif

@@ -10,7 +10,6 @@
 #import "FlurryAds.h"
 
 namespace avalon {
-namespace flurryAds {
     
 static NSDictionary *nsDictionaryFromStringMap(const std::map<std::string,std::string> &stringMap) {
     if (stringMap.empty()) {
@@ -89,5 +88,4 @@ void FlurryAds::clearKeywords()
     
 }*/
 
-} // namespace flurryAds
 } // namespace avalon

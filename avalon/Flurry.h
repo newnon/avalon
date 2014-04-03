@@ -13,7 +13,6 @@
 #include <map>
 
 namespace avalon {
-namespace flurry {
     
     enum class FlurryLogLevel{
         None = 0,         //No output
@@ -52,7 +51,7 @@ public:
     static void setSessionContinueSeconds(int seconds);
     //iOS + Android
     static void setSecureTransportEnabled(bool value);
-    //iOS + Android
+    //iOS
 	static void setCrashReportingEnabled(bool value);
     
     /*
@@ -79,8 +78,8 @@ public:
     + (void)logError:(NSString *)errorID message:(NSString *)message exception:(NSException *)exception;
     + (void)logError:(NSString *)errorID message:(NSString *)message error:(NSError *)error;
      */
-    //iOS
-    static void logError(const std::string &errorID, const std::string &message, void *exception);
+    //iOS & android
+    void setCaptureUncaughtExceptions(bool isEnabled);
     //iOS
     static void logException(const std::string &errorID, const std::string &message, void *error);
     //iOS + Android
@@ -155,7 +154,6 @@ public:
     static void setEventLoggingEnabled(bool value);
 };
     
-} // namespace flurry
 } // namespace avalon
 
 #endif

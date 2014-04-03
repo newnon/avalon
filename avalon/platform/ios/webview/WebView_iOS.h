@@ -1,15 +1,12 @@
 //
-//  ZYWebView_iOS.h
-//  CCXWebview
+//  WebView_iOS.h
 //
-//  Created by Vincent on 12-11-27.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIWebView.h>
 
-@interface ZYWebView_iOS : NSObject <UIWebViewDelegate>
+@interface WebView_iOS : NSObject <UIWebViewDelegate>
 {
     UIWebView* m_webview;
 }
