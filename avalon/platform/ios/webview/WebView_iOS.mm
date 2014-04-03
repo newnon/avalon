@@ -61,6 +61,7 @@
 -(void)dealloc
 {
     [self removeWebView];
+    [super dealloc];
 }
 
 - (void)removeWebView
