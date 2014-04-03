@@ -32,25 +32,25 @@ WebView::~WebView()
 void WebView::showWebView(const std::string &url, float x, float y, float width, float height)
 {
     cocos2d::JniMethodInfo methodInfo;
-    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"displayWebView", "(IIII)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"displayWebView", "(IIII)V"))
     {
         jint jX = (int)x;
         jint jY = (int)y;
         jint jWidth = (int)width;
         jint jHeight = (int)height;
-         minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jX, jY, jWidth, jHeight);
-         minfo.env->DeleteLocalRef(minfo.classID);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jX, jY, jWidth, jHeight);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     else
     {
         LOGD("jni:displayWebView not found");
     }
     
-    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
     {
-        jstring jmsg = minfo.env->NewStringUTF(url.c_str());
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jmsg);
-        minfo.env->DeleteLocalRef(minfo.classID);
+        jstring jmsg = methodInfo.env->NewStringUTF(url.c_str());
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jmsg);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     else
     {
@@ -60,13 +60,13 @@ void WebView::showWebView(const std::string &url, float x, float y, float width,
 
 void WebView::updateURL(const std::string &url)
 {
-    cocos2d::JniMethodInfo minfo;
+    cocos2d::JniMethodInfo methodInfo;
     
-    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
     {
-        jstring jmsg = minfo.env->NewStringUTF(url.c_str());
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID, jmsg);
-        minfo.env->DeleteLocalRef(minfo.classID);
+        jstring jmsg = methodInfo.env->NewStringUTF(url.c_str());
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jmsg);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     else
     {
@@ -76,12 +76,12 @@ void WebView::updateURL(const std::string &url)
 
 void WebView::removeWebView()
     {
-    cocos2d::JniMethodInfo minfo;
+    cocos2d::JniMethodInfo methodInfo;
     
-    if(cocos2d::JniHelper::getStaticMethodInfo(minfo,kJNIPakageName,"removeWebView", "()V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"removeWebView", "()V"))
     {
-        minfo.env->CallStaticVoidMethod(minfo.classID, minfo.methodID);
-        minfo.env->DeleteLocalRef(minfo.classID);
+    	methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+    	methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     else
     {
