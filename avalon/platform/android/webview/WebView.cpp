@@ -11,7 +11,7 @@
 #include "platform/android/jni/JniHelper.h"
 #include <android/log.h>
 
-const char* kJNIPakageName = "org/cocos2dx/cpp/AppActivity";
+const char* const CLASS_NAME = "com/avalon/web/WebView";
 
 #define  LOG_TAG    "WebView Debug"
 #define  LOGD(...)  __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
@@ -32,7 +32,7 @@ WebView::~WebView()
 void WebView::showWebView(const std::string &url, float x, float y, float width, float height)
 {
     cocos2d::JniMethodInfo methodInfo;
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"displayWebView", "(IIII)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,CLASS_NAME,"displayWebView", "(IIII)V"))
     {
         jint jX = (int)x;
         jint jY = (int)y;
@@ -46,26 +46,18 @@ void WebView::showWebView(const std::string &url, float x, float y, float width,
         LOGD("jni:displayWebView not found");
     }
     
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
-    {
-        jstring jmsg = methodInfo.env->NewStringUTF(url.c_str());
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jmsg);
-        methodInfo.env->DeleteLocalRef(methodInfo.classID);
-    }
-    else
-    {
-        LOGD("jni:updateURL not found");
-    }
+    updateURL(url);
 }
 
 void WebView::updateURL(const std::string &url)
 {
     cocos2d::JniMethodInfo methodInfo;
     
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"updateURL", "(Ljava/lang/String;)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,CLASS_NAME,"updateURL", "(Ljava/lang/String;)V"))
     {
         jstring jmsg = methodInfo.env->NewStringUTF(url.c_str());
         methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jmsg);
+        methodInfo.env->DeleteLocalRef(jmsg);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
     else
@@ -78,7 +70,7 @@ void WebView::removeWebView()
     {
     cocos2d::JniMethodInfo methodInfo;
     
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,kJNIPakageName,"removeWebView", "()V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,CLASS_NAME,"removeWebView", "()V"))
     {
     	methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
     	methodInfo.env->DeleteLocalRef(methodInfo.classID);

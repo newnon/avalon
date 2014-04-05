@@ -39,6 +39,11 @@ void Flurry::setCaptureUncaughtExceptions(bool isEnabled)
     else
         NSSetUncaughtExceptionHandler(nil);
 }
+    
+void Flurry::logException(const std::string &errorID, const std::string &message, const std::string &errorClass)
+{
+    [::Flurry logError:[NSString stringWithCString:errorID.c_str() encoding:NSUTF8StringEncoding] message:[NSString stringWithCString:message.c_str() encoding:NSUTF8StringEncoding] error:[NSError errorWithDomain:[NSString stringWithCString:errorClass.c_str() encoding:NSUTF8StringEncoding] code:0 userInfo:nil]];
+}
 
 void Flurry::setAppVersion(const std::string &version) {
     [::Flurry setAppVersion:[NSString stringWithCString:version.c_str() encoding:NSUTF8StringEncoding]];

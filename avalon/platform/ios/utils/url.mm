@@ -1,10 +1,10 @@
-#include "avalon/utils/url.h"
+#include "avalon/url.h"
 
 #include <Foundation/Foundation.h>
 #include <UIKit/UIKit.h>
 
 namespace avalon {
-namespace utils {
+namespace web {
 
 void openUrl(const std::string &url)
 {
@@ -13,5 +13,5 @@ void openUrl(const std::string &url)
     [[UIApplication sharedApplication] openURL:nsUrl];
 }
 
-} // namespace utils
+} // namespace web
 } // namespace avalon

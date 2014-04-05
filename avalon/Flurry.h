@@ -45,7 +45,7 @@ public:
     static void setShowErrorInLogEnabled(bool value);
     //iOS + Android
     static void setDebugLogEnabled(bool value);
-    //iOS
+    //iOS + Android
     static void setLogLevel(FlurryLogLevel level);
     //iOS + Android. The param is in second. Will be converted to millisecond internally.
     static void setSessionContinueSeconds(int seconds);
@@ -62,7 +62,7 @@ public:
      */
     //iOS + Android
     static void startSession(const std::string &apiKey);
-    //iOS
+    //iOS + Android(but ignore options)
     static void startSession(const std::string &apiKey, const std::map<std::string,std::string> &options);
     //Ios
     static void pauseBackgroundSession();
@@ -79,9 +79,9 @@ public:
     + (void)logError:(NSString *)errorID message:(NSString *)message error:(NSError *)error;
      */
     //iOS & android
-    void setCaptureUncaughtExceptions(bool isEnabled);
+    static void setCaptureUncaughtExceptions(bool isEnabled);
     //iOS
-    static void logException(const std::string &errorID, const std::string &message, void *error);
+    static void logException(const std::string &errorID, const std::string &message, const std::string &errorClass);
     //iOS + Android
     static void logEvent(const std::string &eventName);
     //iOS + Android

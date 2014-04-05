@@ -126,6 +126,11 @@ void Appirater::showPrompt()
     appirater::helper::callStaticVoidMethod("showIfNeeded");
 }
 
+void Appirater::rateApp()
+{
+	appirater::helper::callStaticVoidMethod("showRateDialog");
+}
+
 void Appirater::setAppId(const char *appName)
 {
 
@@ -142,6 +147,11 @@ void Appirater::setUsesAnimation(bool animation)
 }
 
 void Appirater::setAlwaysUseMainBundle(bool useMainBundle)
+{
+
+}
+
+void Appirater::closeModal()
 {
 
 }

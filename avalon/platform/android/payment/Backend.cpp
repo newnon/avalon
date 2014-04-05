@@ -8,6 +8,7 @@
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
 #include <avalon/utils/assert.hpp>
+#include <avalon/utils/platform.h>
 
 namespace avalon {
 namespace payment {
@@ -19,7 +20,12 @@ namespace payment {
 namespace backend {
 namespace helper {
 
-const char* const CLASS_NAME = "com/avalon/payment/Backend";
+#if AVALON_PLATFORM_IS_ANDROID_AMAZON
+const char* const CLASS_NAME = "com/avalon/payment/BackendAmazon";
+#elif AVALON_PLATFORM_IS_ANDROID_GOOGLE
+const char* const CLASS_NAME = "com/avalon/payment/BackendGoogle";
+#endif
+
 static avalon::payment::Manager* globalManager = NULL;
 
 void callStaticVoidMethod(const char* name)

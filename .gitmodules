@@ -7,3 +7,6 @@
 [submodule "vendors/b2dJson"]
 	path = vendors/b2dJson
 	url = https://github.com/michaelcontento/b2dJson.git
+[submodule "vendors/google/marketbilling"]
+	path = vendors/google/marketbilling
+	url = https://code.google.com/p/marketbilling/

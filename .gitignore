@@ -12,3 +12,5 @@ docs/
 # Test runner
 tests/runner
 tests/libboost_unit_test_framework.*
+proj.android/bin
+proj.android/gen

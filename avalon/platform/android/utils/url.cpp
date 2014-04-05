@@ -1,17 +1,16 @@
-#include <avalon/utils/url.h>
+#include <avalon/url.h>
 
 #include <jni.h>
 #include "platform/android/jni/JniHelper.h"
 
 namespace avalon {
-namespace utils {
-namespace url {
+namespace web {
 
-void open(const char* url)
+void openUrl( const std::string &url)
 {
     cocos2d::JniMethodInfo t;
     if (cocos2d::JniHelper::getStaticMethodInfo(t, "com/avalon/utils/Url", "open", "(Ljava/lang/String;)V")) {
-        jstring jUrl = t.env->NewStringUTF(url);
+        jstring jUrl = t.env->NewStringUTF(url.c_str());
 
         t.env->CallStaticVoidMethod(t.classID, t.methodID, jUrl);
         t.env->DeleteLocalRef(t.classID);
@@ -20,6 +19,6 @@ void open(const char* url)
     }
 }
 
-} // namespace url
-} // namespace utils
+} // namespace web
 } // namespace avalon
+

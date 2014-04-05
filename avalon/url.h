@@ -6,7 +6,7 @@
 namespace avalon {
 namespace web {
 
-void openUrl(const std::string &url);
+void openUrl( const std::string &url);
 
 } // namespace web
 } // namespace avalon
