@@ -37,7 +37,7 @@ public:
         FULLSCREEN    = 3,
     };
     
-    static void fetchAdForSpace(const std::string &space, int x,int y,int width,int heignt, AdSize size);
+    static void fetchAdForSpace(const std::string &space, int x, int y, int width, int height, AdSize size);
     
     /*!
      *  @brief Returns if an ad is currently ready to display for a given @c space.
@@ -184,7 +184,7 @@ public:
      *  @param view The UIView in your app that the ad will be placed as a subview. Note: for fullscreen ads, this view is not used as a container, but the size of the view may still be used for determining what types of ads will fit in this space.
      *  @param size The default size of an ad space. This can be overriden on the server. See @c FlurryAdSize in the FlurryAds.h file for allowable values.
      */
-    static void fetchAndDisplayAdForSpace(const std::string &space, void *viewContainer, AdSize size);
+    static void fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int heignt, AdSize size, int timeout);
     
     /*!
      *  @brief Removes an ad for the given @c space.

@@ -117,13 +117,6 @@
 			remoteGlobalIDString = A50BC25F18E9A14800F1F979;
 			remoteInfo = FlurryAds;
 		};
-		A5BB768718E9DD440096422D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A50BC25218E99F5400F1F979;
-			remoteInfo = Flurry;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -613,7 +606,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A5BB768818E9DD440096422D /* PBXTargetDependency */,
 			);
 			name = FlurryAds;
 			productName = Avalon;
@@ -785,11 +777,6 @@
 			isa = PBXTargetDependency;
 			target = A50BC25F18E9A14800F1F979 /* FlurryAds */;
 			targetProxy = A50BC28318E9A5D200F1F979 /* PBXContainerItemProxy */;
-		};
-		A5BB768818E9DD440096422D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A50BC25218E99F5400F1F979 /* Flurry */;
-			targetProxy = A5BB768718E9DD440096422D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

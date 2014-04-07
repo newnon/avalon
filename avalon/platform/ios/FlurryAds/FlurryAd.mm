@@ -45,9 +45,9 @@ void FlurryAds::displayAdForSpaceModally(const std::string &space)
 {
     [::FlurryAds displayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] modallyForViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
-void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, void *viewContainer, AdSize size)
+void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int heignt, AdSize size, int timeout)
 {
-    [::FlurryAds fetchAndDisplayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] view:(UIView*)viewContainer size:(FlurryAdSize)size];
+    [::FlurryAds showAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] view:nil size:(FlurryAdSize)size timeout:timeout];
 }
 
 void FlurryAds::removeAdFromSpace(const std::string &space)
