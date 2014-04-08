@@ -6,6 +6,9 @@
 + (GameCenterIos*)shared;
 
 - (void)login;
+- (void)logout;
+
+- (BOOL)isLoggedIn;
 
 - (BOOL)showAchievements;
 - (void)postAchievement:(const char*)idName percent:(NSNumber*)percentComplete showBanner:(BOOL)show;

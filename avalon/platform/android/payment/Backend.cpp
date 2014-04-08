@@ -8,7 +8,6 @@
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
 #include <avalon/utils/assert.hpp>
-#include <avalon/utils/platform.h>
 
 namespace avalon {
 namespace payment {
@@ -20,14 +19,7 @@ namespace payment {
 namespace backend {
 namespace helper {
 
-#if AVALON_PLATFORM_IS_ANDROID_AMAZON
-const char* const CLASS_NAME = "com/avalon/payment/BackendAmazon";
-#define DELEGATE_FUNCTION(name) Java_com_avalon_payment_BackendAmazon_##name
-#elif AVALON_PLATFORM_IS_ANDROID_GOOGLE
-const char* const CLASS_NAME = "com/avalon/payment/BackendGoogle";
-#define DELEGATE_FUNCTION(name) Java_com_avalon_payment_BackendGoogle_##name
-#endif
-
+const char* const CLASS_NAME = "com/avalon/payment/Backend";
 static avalon::payment::Manager* globalManager = NULL;
 
 void callStaticVoidMethod(const char* name)
@@ -82,7 +74,7 @@ void callStaticVoidMethodWithStringAndBool(const char* name, const char* argumen
 
 extern "C" {
 
-JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnServiceStarted)(JNIEnv* env, jclass clazz)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnServiceStarted(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
@@ -92,7 +84,7 @@ JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnServiceStarted)(JNIEnv* env, 
     }
 }
 
-JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnPurchaseSucceed)(JNIEnv* env, jclass clazz, jstring jProductId)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed(JNIEnv* env, jclass clazz, jstring jProductId)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
@@ -114,7 +106,7 @@ JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnPurchaseSucceed)(JNIEnv* env,
     }
 }
 
-JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnPurchaseFail)(JNIEnv* env, jclass clazz)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseFail(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
@@ -124,7 +116,7 @@ JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnPurchaseFail)(JNIEnv* env, jc
     }
 }
 
-JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnTransactionStart)(JNIEnv* env, jclass clazz)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnTransactionStart(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
@@ -134,7 +126,7 @@ JNIEXPORT void JNICALL DELEGATE_FUNCTION(delegateOnTransactionStart)(JNIEnv* env
     }
 }
 
-JNIEXPORT void JNICALL JNICALL DELEGATE_FUNCTION(delegateOnTransactionEnd)(JNIEnv* env, jclass clazz)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnTransactionEnd(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
@@ -144,7 +136,7 @@ JNIEXPORT void JNICALL JNICALL DELEGATE_FUNCTION(delegateOnTransactionEnd)(JNIEn
     }
 }
 
-JNIEXPORT void JNICALL DELEGATE_FUNCTION(onInitialized)(JNIEnv* env, jclass clazz)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onInitialized(JNIEnv* env, jclass clazz)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
@@ -162,7 +154,7 @@ JNIEXPORT void JNICALL DELEGATE_FUNCTION(onInitialized)(JNIEnv* env, jclass claz
     backend::helper::callStaticVoidMethod("startItemDataRequest");
 }
 
-JNIEXPORT void JNICALL DELEGATE_FUNCTION(onItemData)(JNIEnv* env, jclass clazz, jstring jProductId, jstring jName, jstring jDesc, jstring jPriceStr, jfloat jprice)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onItemData(JNIEnv* env, jclass clazz, jstring jProductId, jstring jName, jstring jDesc, jstring jPriceStr, jfloat jprice)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");

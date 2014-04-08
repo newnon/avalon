@@ -55,6 +55,16 @@ static GameCenterIos* instance = nil;
     }];
 }
 
+- (void)logout
+{
+    //do nothing
+}
+
+- (BOOL)isLoggedIn
+{
+    return [GKLocalPlayer localPlayer].isAuthenticated;
+}
+
 #pragma mark -
 #pragma mark Achievements
 

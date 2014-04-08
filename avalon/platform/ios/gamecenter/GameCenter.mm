@@ -14,6 +14,16 @@ void GameCenter::login()
 {
     [[GameCenterIos shared] login];
 }
+    
+void GameCenter::logout()
+{
+    [[GameCenterIos shared] logout];
+}
+    
+bool GameCenter::isLoggedIn()
+{
+    return [[GameCenterIos shared] isLoggedIn];
+}
 
 #pragma mark -
 #pragma mark Achievements
