@@ -2,7 +2,6 @@ package com.avalon;
 
 import java.util.EnumSet;
 
-import android.app.Activity;
 import android.util.Log;
 
 import com.amazon.ags.api.AmazonGamesCallback;
@@ -11,7 +10,6 @@ import com.amazon.ags.api.AmazonGamesFeature;
 import com.amazon.ags.api.AmazonGamesStatus;
 import com.amazon.ags.api.AGResponseCallback;
 import com.amazon.ags.api.AGResponseHandle;
-import com.amazon.ags.api.RequestResponse;
 import com.amazon.ags.api.leaderboards.LeaderboardsClient;
 import com.amazon.ags.api.leaderboards.SubmitScoreResponse;
 import com.amazon.ags.api.achievements.AchievementsClient;
@@ -42,10 +40,28 @@ public abstract class GameCenter
             }
         });
     }
+    
+    public static void logout()
+    {
+        if (agsGameClient == null) {
+            return;
+        }
+        
+        Cocos2dxHelper.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                 AmazonGamesClient.shutdown();
+            }
+        });
+    }
+
+    public static boolean isloggedIn()
+    {
+        return (agsGameClient != null && AmazonGamesClient.isInitialized());
+    }
 
     public static boolean showAchievements()
     {
-        if (agsGameClient == null || !agsGameClient.isInitialized() || acClient == null) {
+        if (agsGameClient == null || !AmazonGamesClient.isInitialized() || acClient == null) {
             return false;
         } else {
             acClient.showAchievementsOverlay();
@@ -55,7 +71,7 @@ public abstract class GameCenter
 
     public static void postAchievement(String idName, int percentComplete)
     {
-        if (agsGameClient == null || !agsGameClient.isInitialized() || acClient == null) {
+        if (agsGameClient == null || !AmazonGamesClient.isInitialized() || acClient == null) {
             return;
         }
 
@@ -76,7 +92,7 @@ public abstract class GameCenter
 
     public static boolean showScores()
     {
-        if (agsGameClient == null || !agsGameClient.isInitialized() || lbClient == null) {
+        if (agsGameClient == null || !AmazonGamesClient.isInitialized() || lbClient == null) {
             return false;
         } else {
             lbClient.showLeaderboardsOverlay();
@@ -86,7 +102,7 @@ public abstract class GameCenter
 
     public static void postScore(String idName, int score)
     {
-        if (agsGameClient == null || !agsGameClient.isInitialized() || lbClient == null) {
+        if (agsGameClient == null || !AmazonGamesClient.isInitialized() || lbClient == null) {
             return;
         }
 

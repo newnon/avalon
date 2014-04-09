@@ -21,7 +21,7 @@ LOCAL_MODULE_FILENAME := libavalon
 
 LOCAL_SRC_FILES := avalon/utils/platform.cpp
 
-ifneq (,$(findstring ads,$(AVALON_FEATURES)))
+ifneq (,$(findstring adsmanager,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_ADS_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_ADS_ENABLED
     LOCAL_SRC_FILES += avalon/ads/Manager.cpp
@@ -44,7 +44,7 @@ endif
 ifneq (,$(findstring gamecenter,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_GAMECENTER_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_GAMECENTER_ENABLED
-    LOCAL_SRC_FILES += avalon/platform/android/gamecenter_switch.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/gamecenter/GameCenter.cpp
 endif
 
 ifneq (,$(findstring appirater,$(AVALON_FEATURES)))
@@ -54,21 +54,21 @@ ifneq (,$(findstring appirater,$(AVALON_FEATURES)))
 endif
 
 ifneq (,$(findstring web,$(AVALON_FEATURES)))
-    LOCAL_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
-    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
+    LOCAL_CFLAGS += -DAVALON_CONFIG_WEB_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_WEB_ENABLED
     LOCAL_SRC_FILES += avalon/platform/android/utils/url.cpp
     LOCAL_SRC_FILES += avalon/platform/android/webview/WebView.cpp
 endif
 
 ifneq (,$(findstring flurry,$(AVALON_FEATURES)))
-    LOCAL_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
-    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
+    LOCAL_CFLAGS += -DAVALON_CONFIG_FLURRY_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_FLURRY_ENABLED
     LOCAL_SRC_FILES += avalon/platform/android/flurry/flurry.cpp
 endif
 
 ifneq (,$(findstring flurryads,$(AVALON_FEATURES)))
-    LOCAL_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
-    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_APPIRATER_ENABLED
+    LOCAL_CFLAGS += -DAVALON_CONFIG_FLURRYADS_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_FLURRYADS_ENABLED
     LOCAL_SRC_FILES += avalon/platform/android/flurryads/flurryads.cpp
 endif
 

@@ -1,9 +1,6 @@
 //
-//  AnalyticX.h
-//  AnalyticX
+//  FlurryAds.h
 //
-//  Created by diwwu on 5/10/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #ifndef AVALON_FLURRY_FLURRYADS_H

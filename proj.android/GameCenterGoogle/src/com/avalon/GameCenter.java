@@ -1,15 +1,19 @@
 package com.avalon;
 
+import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
 import android.content.Intent;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
+import org.cocos2dx.lib.Cocos2dxHelper;
+
 import com.google.example.games.basegameutils.GameHelper;
 import com.google.android.gms.games.Games;
 
 public abstract class GameCenter
 {
     private static GameHelper mHelper = null;
+    private static OnActivityResultListener mListener = null;
     private static final String TAG = "avalon.GameCenter";
     private static final Cocos2dxActivity activity = (Cocos2dxActivity) Cocos2dxActivity.getContext();
     private final static int REQUEST_ACHIEVEMENTS = 9003;
@@ -30,24 +34,7 @@ public abstract class GameCenter
         });
     }
 
-    public static void signIn()
-    {
-        activity.runOnUiThread(new Runnable() {
-            public void run() {
-                getGameHelper().beginUserInitiatedSignIn();
-            }
-        });
-    }
-
-    public static java.lang.String getPlayerId() {
-    	if (getGameHelper().isSignedIn()) {
-    		return Games.getCurrentAccountName(getGameHelper().getApiClient());
-    	}
-    	
-    	return "";
-    }
-
-    public static void signOut()
+    public static void logout()
     {
         if (mHelper == null) {
             return;
@@ -60,14 +47,22 @@ public abstract class GameCenter
         });
     }
 
-    public static boolean isSignedIn()
+    public static boolean isloggedIn()
     {
         return (mHelper != null && getGameHelper().isSignedIn());
+    }
+    
+    public static java.lang.String getPlayerId() {
+    	if (getGameHelper().isSignedIn()) {
+    		return Games.getCurrentAccountName(getGameHelper().getApiClient());
+    	}
+    	
+    	return "";
     }
 
     public static boolean showAchievements()
     {
-        if (!isSignedIn()) {
+        if (!isloggedIn()) {
             return false;
         }
         
@@ -83,7 +78,7 @@ public abstract class GameCenter
 
     public static void postAchievement(final String idName, int percentComplete)
     {
-        if (!isSignedIn() || percentComplete < 100) {
+        if (!isloggedIn() || percentComplete < 100) {
             return;
         }
 
@@ -105,7 +100,7 @@ public abstract class GameCenter
 
     public static boolean showScores()
     {
-        if (!isSignedIn()) {
+        if (!isloggedIn()) {
             return false;
         }
         
@@ -122,7 +117,7 @@ public abstract class GameCenter
 
     public static void postScore(final String idName, final int score)
     {
-        if (!isSignedIn()) {
+        if (!isloggedIn()) {
             return;
         }
 
@@ -192,6 +187,14 @@ public abstract class GameCenter
         if (mHelper == null) {
             mHelper = new GameHelper(activity, GameHelper.CLIENT_GAMES);
             mHelper.enableDebugLog(true, TAG);
+            
+            Cocos2dxHelper.addOnActivityResultListener(new OnActivityResultListener(){
+                @Override
+                public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+                    GameCenter.onActivityResult(requestCode, resultCode, data);
+                    return true;
+                }
+            });
 
             activity.runOnUiThread(new Runnable() {
                 public void run() {

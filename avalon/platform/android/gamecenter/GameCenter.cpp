@@ -1,34 +1,20 @@
 #include <avalon/GameCenter.h>
 
-#include <string>
-
 #include <jni.h>
+#include <string>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"
 
 namespace avalon {
 
-namespace helper {
-namespace gamecenter {
-
 /**
  * C++ -->> Java
  */
 
-const char* const CLASS_NAME = "com/avalon/GameCenter";
-    
-static std::string& replaceAll(std::string& context, std::string const& from, std::string const& to)
-{
-    std::size_t lookHere = 0;
-    std::size_t foundHere;
-    while((foundHere = context.find(from, lookHere)) != std::string::npos)
-    {
-        context.replace(foundHere, from.size(), to);
-        lookHere = foundHere + to.size();
-    }
-    return context;
-}
+namespace helper {
+namespace gamecenter {
 
+const char* const CLASS_NAME = "com/avalon/GameCenter";
 
 void callStaticVoidMethod(const char* name)
 {
@@ -73,6 +59,21 @@ void callStaticVoidMethodWithStringAndInt(const char* name, const char* idName, 
     }
 }
 
+std::string callStaticStringMethod(const char *name)
+{
+    cocos2d::JniMethodInfo t;
+    if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "()Ljava/lang/String;")) {
+        jstring rv = (jstring) t.env->CallObjectMethod(t.classID, t.methodID);
+        t.env->DeleteLocalRef(t.classID);
+        const char *js = t.env->GetStringUTFChars(rv, NULL);
+        std::string cs(js);
+        t.env->ReleaseStringUTFChars(rv, js);
+        return cs;
+    }
+    else
+        return "";
+}
+
 } // namespace gamecenter
 } // namespace helper
 
@@ -80,9 +81,25 @@ void callStaticVoidMethodWithStringAndInt(const char* name, const char* idName, 
  * Public API
  */
 
+GameCenter* GameCenter::getInstance()
+{
+    static GameCenter* instance = new GameCenter();
+    return instance;
+}
+
 void GameCenter::login()
 {
     helper::gamecenter::callStaticVoidMethod("login");
+}
+
+void GameCenter::logout()
+{
+    helper::gamecenter::callStaticVoidMethod("logout");
+}
+
+bool GameCenter::isLoggedIn()
+{
+    return helper::gamecenter::callStaticBoolMethod("isLoggedIn");
 }
 
 bool GameCenter::showAchievements()
@@ -92,9 +109,7 @@ bool GameCenter::showAchievements()
 
 void GameCenter::postAchievement(const std::string &idName, int percentComplete, bool showBanner)
 {
-    std::string idNameStr(idName);
-    replaceAll(idNameStr, ".", "_");
-    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postAchievement", idNameStr.c_str(), percentComplete);
+    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postAchievement", idName.c_str(), percentComplete);
 }
 
 void GameCenter::clearAllAchievements()
@@ -109,14 +124,17 @@ bool GameCenter::showScores()
 
 void GameCenter::postScore(const std::string &idName, int score)
 {
-    std::string idNameStr(idName);
-    replaceAll(idNameStr, ".", "_");
-    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postScore", idNameStr.c_str(), score);
+    helper::gamecenter::callStaticVoidMethodWithStringAndInt("postScore", idName.c_str(), score);
 }
 
 void GameCenter::clearAllScores()
 {
     helper::gamecenter::callStaticVoidMethod("clearAllScores");
+}
+
+std::string GameCenter::getPlayerId()
+{
+	return helper::gamecenter::callStaticStringMethod("getPlayerId");
 }
 
 } // namespace avalon
