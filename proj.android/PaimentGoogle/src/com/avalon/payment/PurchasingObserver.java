@@ -23,14 +23,15 @@ public class PurchasingObserver implements OnActivityResultListener
     static final String TAG = "avalon.payment.PurchasingObserverGoogle";
     static final int RC_REQUEST = 10001;
     Activity activity = Cocos2dxHelper.getActivity();
-    public static String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw+YhuoxxvBD1yQ9aptZ9JDbWVMFGV0zOJLIbbnQ1qO2/WjGSu+r2MyakaWBU7aXlUXtBpJF46vHNWBSQeF40SQEhQkLsGSFKB/3byqkoXhu6DfBXZBUI+ib8NIrjZXkarLWKBPsS7TuhAh9Er5EyfJbPRx+Ddqth0YtbAYNpalJxWUhreQkab6JxyO2m1jrRVcp5MHysxuQosXdDUg2T2g92HFMdej+qRkhPesFKq3Ew/Y1ISPcXkDSOKJn5aMNDBzxxMR31slX/AxQ95e71vupHfnwlU3obGjQX+MXO0lJ5USMwZH33v5cx40jhOP5Rt8wGJeXJwbviJpNsgLQvWQIDAQAB";
+    public static String base64EncodedPublicKey = "";
     IabHelper mHelper;
     private Map<String, Boolean> productIds;
     private Integer taskCount = 0;
     private boolean checkTaskCountOnConsumeFinished = false;
 
-    public PurchasingObserver()
+    public PurchasingObserver(String data)
     {
+    	base64EncodedPublicKey = data;
         if (base64EncodedPublicKey.isEmpty()) {
             Cocos2dxHelper.runOnGLThread(new Runnable() {
                 @Override

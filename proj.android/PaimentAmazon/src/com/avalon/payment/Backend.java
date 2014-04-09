@@ -22,7 +22,7 @@ public class Backend
         return (mPurchaseObserver != null);
     }
 
-    public static void initialize()
+    public static void initialize(String data)
     {
         if (!isInitialized()) {
             mPurchaseObserver = new PurchasingObserver();

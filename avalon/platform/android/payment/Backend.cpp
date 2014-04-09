@@ -204,9 +204,9 @@ void Backend::shutdown()
     backend::helper::callStaticVoidMethod("shutdown");
 }
 
-void Backend::initialize()
+void Backend::initialize(const std::string &data)
 {
-    backend::helper::callStaticVoidMethod("initialize");
+    backend::helper::callStaticVoidMethodWithString("initialize",data.c_str());
 }
 
 bool Backend::isInitialized() const

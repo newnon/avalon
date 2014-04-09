@@ -2,6 +2,7 @@
 #define AVALON_PAYMENT_BACKEND_H
 
 #include "avalon/utils/utility.hpp"
+#include <string>
 
 namespace avalon {
 namespace payment {
@@ -23,7 +24,7 @@ public:
     ~Backend();
 
     bool isInitialized() const;
-    void initialize();
+    void initialize(const std::string &data);
     void shutdown();
 
     void purchase(Product* const product);

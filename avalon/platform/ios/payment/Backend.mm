@@ -35,7 +35,7 @@ bool Backend::isInitialized() const
     return __getIosBackend()->initialized;
 }
 
-void Backend::initialize()
+void Backend::initialize(const std::string &data)
 {
     // configure BackendIos
     __getIosBackend()->initialized = true;
@@ -48,8 +48,7 @@ void Backend::initialize()
     // convert Avalon::Payment::ProductList into NSMutableSet
     NSMutableSet* products = [[[NSMutableSet alloc] init] autorelease];
     for (const auto& pair : manager.getProducts()) {
-        const char* const productId = pair.second->getProductId().c_str();
-        [products addObject:[NSString stringWithUTF8String:productId]];
+        [products addObject:[NSString stringWithUTF8String:pair.second->getProductId().c_str()]];
     }
 
     // fetch product details

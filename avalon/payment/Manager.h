@@ -50,7 +50,7 @@ public:
     bool isPurchaseReady() const;
     void restorePurchases() const;
 
-    void startService();
+    void startService(const std::string &data);
     void stopService();
     bool isStarted() const;
 

@@ -19,10 +19,10 @@ public:
     std::string localizedName;
     std::string localizedDescription;
 
-    explicit Product(const char* const productId);
+    explicit Product(const std::string &productId);
     virtual ~Product();
 
-    std::string getProductId() const;
+    const std::string &getProductId() const;
 
     bool canBePurchased() const;
     void purchase();

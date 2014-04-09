@@ -131,7 +131,7 @@ void Manager::purchase(const char* const productIdOrAlias)
     }
 }
 
-void Manager::startService()
+void Manager::startService(const std::string &data)
 {
     if (isStarted()) {
         AVALON_ASSERT_MSG(false, "service already started");
@@ -142,7 +142,7 @@ void Manager::startService()
         throw new std::runtime_error("payment delegate must be set!");
     }
 
-    backend.initialize();
+    backend.initialize(data);
     started = true;
 }
 

@@ -7,14 +7,14 @@
 namespace avalon {
 namespace payment {
 
-Product::Product(const char* const productId)
+Product::Product(const std::string &productId)
 : price(0)
 , localizedPrice()
 , localizedName()
 , localizedDescription()
 , purchasedCounter(0)
 , manager(NULL)
-, productId(std::string(productId))
+, productId(productId)
 {
 }
 
@@ -22,7 +22,7 @@ Product::~Product()
 {
 }
 
-std::string Product::getProductId() const
+const std::string &Product::getProductId() const
 {
     return productId;
 }
