@@ -13,7 +13,6 @@ import com.google.android.gms.games.Games;
 public abstract class GameCenter
 {
     private static GameHelper mHelper = null;
-    private static OnActivityResultListener mListener = null;
     private static final String TAG = "avalon.GameCenter";
     private static final Cocos2dxActivity activity = (Cocos2dxActivity) Cocos2dxActivity.getContext();
     private final static int REQUEST_ACHIEVEMENTS = 9003;
@@ -182,7 +181,8 @@ public abstract class GameCenter
 
     }
 
-    private static GameHelper getGameHelper()
+    @SuppressWarnings("deprecation")
+	private static GameHelper getGameHelper()
     {
         if (mHelper == null) {
             mHelper = new GameHelper(activity, GameHelper.CLIENT_GAMES);

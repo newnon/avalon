@@ -16,3 +16,4 @@ proj.android/bin
 proj.android/gen
 bin
 gen
+local.properties

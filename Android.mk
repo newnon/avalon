@@ -72,6 +72,12 @@ ifneq (,$(findstring flurryads,$(AVALON_FEATURES)))
     LOCAL_SRC_FILES += avalon/platform/android/flurryads/flurryads.cpp
 endif
 
+ifneq (,$(findstring notifications,$(AVALON_FEATURES)))
+    LOCAL_CFLAGS += -DAVALON_CONFIG_NOTIFICATIONS_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_NOTIFICATIONS_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/notifications/notifications.cpp
+endif
+
 ifeq (google, $(AVALON_PLATFORM_FLAVOR))
     LOCAL_SRC_FILES += avalon/platform/android-google/ads/provider/TapForTap.cpp
 endif
