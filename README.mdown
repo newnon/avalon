@@ -2,8 +2,6 @@
 
 Productivity boost for cocos2d-x developers.
 
-[![Build Status](https://travis-ci.org/michaelcontento/avalon.png)](https://travis-ci.org/michaelcontento/avalon)
-
 Avalon provides various extension, helpers, libraries, classes, templates &
 functions on top of [cocos2d-x][]. It should speed up cross-platform development
 and automate annoying tasks.
@@ -12,72 +10,240 @@ and automate annoying tasks.
 
 ## General
 
+1. Checkout avalon to you project directory near `Classes` folder
+1. Don't forget `git submodule update --init`
+
 ## iOS
 
-1. Don't forget `git submodule update --init`
-1. Add this directory to __Header Search Path__ in __Build Settings__
-1. Add all sources files from `avalon/` to your project
-1. But choose the right platform stuff from `avalon/platform/`
+1. Add  __Avalon.xcodeproj__ to you project as subproject
 
 ## Android
 
-1. Don't forget `git submodule update --init`
 1. **TODO: IMPORT COCOS2D-X PROJECT INTO WORKSPACE**
 1. Add `LOCAL_WHOLE_STATIC_LIBRARIES += avalon_static` to `jni/Android.mk`
-1. Add `$(call import-module,$AVALON_PATH)` to `jni/Android.mk`
-    * Please change `$AVALON_PATH` to the right path on your disk
-    * **Warning** Keep in mind that all module imports are relative to `$NDKROOT`
-    * **Warning** This line must be _below_ `include $(BUILD_SHARED_LIBRARY)`
+1. Add `$(call import-module,../../avalon)` to `jni/Android.mk`
 1. **Optional** Declare additional features with `AVALON_FEATURES`
-    * They could require third-party libs so please read the feature section too
+    * available features AVALON_FEATURES := "gamecenter, payment, appirater, flurry, flurryads, notifications" 
 
 ### Features
 
-#### Payment
+#### Game Center
 
-##### Amazon
+##### Ios
+1. Add  GameCenter to `Build Phases` `Target Dependencies`
+1. Add  libGameCenter.a to `Build Phases` `Link Binary With Libraries`
+1. Add  GameKit.framework to `Build Phases` `Link Binary With Libraries`
+
+
+##### Android
+1. Add `gamecenter` to `AVALON_FEATURES` in your `jni/Android.mk` 
+
+###### Amazon
 
 1. Set `AVALON_PLATFORM_FLAVOR` to `amazon` in your `jni/Android.mk`
-1. Add `payment` to `AVALON_FEATURES` in your `jni/Android.mk`
-1. Copy the `com` folder from `avalon/platform/android-amazon/java/` to the
-   `src/` folder of you project
-1. Is there a `libs/` folder next to `src/`? No? Create it. Now.
-1. Copy `avalon/platform/android-amazon/java/in-app-purchasing-$VERSION.jar`
-   into `libs/`
+1. Import `GameCenterAmazon` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `GameCenterAmazon`
+
+###### Google
+
+1. Set `AVALON_PLATFORM_FLAVOR` to `google` in your `jni/Android.mk`
+1. Import `GameCenterGoogle` form /avalon/proj.android into work space
+1. Import `google-play-servicel_lib` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `GameCenterGoogle`
+1. Create file `ids.xml` in `proj.android/res/values` folder of you project
+   with following content
+   
+        <?xml version="1.0" encoding="utf-8"?>
+
+        <resources>
+            <string name="app_id">50439291110</string>
+            <string name="#Scrore1Name">#Score1Id</string>
+            ...
+            <string name="#Achievement1Name">#Achievement1Id</string>
+            ...
+        </resources> 
+
+
+1. Ensure the internet permission in your `AndroidManifest.xml`
+
+        <uses-permission android:name="android.permission.INTERNET"/>
+1. Ensure the `application` `meta-data` in your `AndroidManifest.xml`  
+       
+        <application>
+            ...
+            <meta-data 
+               android:name="com.google.android.gms.version" 
+               android:value="@integer/google_play_services_version" />
+            <meta-data 
+              android:name="com.google.android.gms.games.APP_ID"
+              android:value="@string/app_id" />
+            ...
+        </application>        
+
+#### Payment
+
+##### Ios
+1. Add  Payment to `Build Phases` `Target Dependencies`
+1. Add  libPayment.a to `Build Phases` `Link Binary With Libraries`
+1. Add  StoreKit.framework to `Build Phases` `Link Binary With Libraries`
+
+##### Android
+1. Add `payment` to `AVALON_FEATURES` in your `jni/Android.mk` 
+
+###### Amazon
+
+1. Set `AVALON_PLATFORM_FLAVOR` to `amazon` in your `jni/Android.mk`
+1. Import `PaymentAmazon` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `PaymentAmazon`
 1. Ensure the internet permission in your `AndroidManifest.xml`
 
         <uses-permission android:name="android.permission.INTERNET"/>
 
-1. Ensure the following receiver configuration in your `AndroidManifest.xml`
+1. Ensure the `application` `receiver` in your `AndroidManifest.xml`
 
-        <receiver android:name="com.amazon.inapp.purchasing.ResponseReceiver" >
-            <intent-filter>
-                <action android:name="com.amazon.inapp.purchasing.NOTIFY"
-                        android:permission="com.amazon.inapp.purchasing.Permission.NOTIFY" />
-            </intent-filter>
-        </receiver>
+        <application>
+            ...
+            <receiver android:name="com.amazon.inapp.purchasing.ResponseReceiver" >
+                <intent-filter>
+                    <action android:name="com.amazon.inapp.purchasing.NOTIFY"
+                            android:permission="com.amazon.inapp.purchasing.Permission.NOTIFY" />
+                </intent-filter>
+            </receiver>
+            ...
+        </application>
+        
 
-##### Google
+###### Google
 
-**TBD**
 
-##### Samsung
+1. Set `AVALON_PLATFORM_FLAVOR` to `google` in your `jni/Android.mk`
+1. Import `PaymentGoogle` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `PaymentGoogle`
+1. Ensure following permissions in your `AndroidManifest.xml`
 
-**TBD**
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="com.android.vending.BILLING"/>
 
-#### Ads
+#### Appirater
 
-##### Revmob
+##### Ios
+1. Add  Appirater to `Build Phases` `Target Dependencies`
+1. Add  libAppirater.a to `Build Phases` `Link Binary With Libraries`
+1. Add  StoreKit.framework to `Build Phases` `Link Binary With Libraries`
+1. Add  SystemConfiguration.framework to `Build Phases` `Link Binary With Libraries`
 
-**TBD**
+##### Android
+1. Add `appirater` to `AVALON_FEATURES` in your `jni/Android.mk` 
+1. Import `Appirater` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `Appirater`
+1. Ensure the `ACCESS_NETWORK_STATE` ne permission in your `AndroidManifest.xml`
 
-##### Chartboost
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
-**TBD**
+#### Flurry
 
-#### GameCenter
+##### Ios
+1. Add  Flurry to `Build Phases` `Target Dependencies`
+1. Add  libFlurry.a to `Build Phases` `Link Binary With Libraries`
+1. Add  SystemConfiguration.framework to `Build Phases` `Link Binary With Libraries`
+1. Add  Security.framework to `Build Phases` `Link Binary With Libraries`
 
-**TBD**
+##### Android
+1. Add `flurry` to `AVALON_FEATURES` in your `jni/Android.mk` 
+1. Import `Flurry` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `Flurry`
+1. Ensure the internet permission in your `AndroidManifest.xml`
+
+        <uses-permission android:name="android.permission.INTERNET"/>
+
+#### FlurryAds
+
+##### Ios
+1. Add  FlurryAds to `Build Phases` `Target Dependencies`
+1. Add  libFlurryAds.a to `Build Phases` `Link Binary With Libraries`
+1. Add  AddSupport.framework to `Build Phases` `Link Binary With Libraries`
+1. Add  SystemConfiguration.framework to `Build Phases` `Link Binary With Libraries`
+1. Add  AddSupport.framework to `Build Phases` `Link Binary With Libraries`
+1. Add  Security.framework to `Build Phases` `Link Binary With Libraries`
+1. Add  MediaPlayer.framework to `Build Phases` `Link Binary With Libraries`
+
+##### Android
+1. Add `flurryAds` to `AVALON_FEATURES` in your `jni/Android.mk` 
+1. Import `FlurryAds` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `FlurryAds`
+1. Ensure the following activity configuration in your `AndroidManifest.xml`
+
+#### Notificatios
+
+##### Ios
+1. Add  Notificatios to `Build Phases` `Target Dependencies`
+1. Add  libNotificatios.a to `Build Phases` `Link Binary With Libraries`
+1. Add   `#import "avalon/NotificationsAppController.h""` to your `AppController.h`
+1. Subclass your AppController from NotificationsAppController
+
+        @interface AppController : NotificationsAppController
+        
+##### Android
+1. Add `notificatios` to `AVALON_FEATURES` in your `jni/Android.mk` 
+1. Import `Notificatios` form /avalon/proj.android into work space
+1. Add to Project->properties->Android->Library `Notificatios`
+
+###### Local Notifications
+1. To restore local only notifications after reboot ensure following permissions in your `AndroidManifest.xml`
+
+        <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+1. Ensure the `application` `receivers` in your `AndroidManifest.xml`
+        <application>
+            ...
+            <receiver android:name="com.avalon.notifications.LocalNotificationsReceiver" />
+
+            <receiver android:name="com.avalon.notifications.LocalNotificationsRestore" >
+                <intent-filter>
+                    <action android:name="android.intent.action.BOOT_COMPLETED" />
+                </intent-filter>
+            </receiver>     
+            
+###### Remote Notifications  
+        
+1. Ensure the `application` `meta-data` in your `AndroidManifest.xml`  
+       
+        <application>
+            ...
+            <meta-data 
+               android:name="com.google.android.gms.version" 
+               android:value="@integer/google_play_services_version" />
+            ...
+        </application> 
+    
+1. Ensure following permissions for remote notifications in your `AndroidManifest.xml`
+
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    
+        <permission android:name="{package}.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+        <uses-permission android:name="{package}.cpp.permission.C2D_MESSAGE" />
+        <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+        
+    where `{package}` is you package name example `com.google.example`
+    
+1. Ensure the `application` `receivers` in your `AndroidManifest.xml`
+        <application>
+            ...
+        
+            <receiver
+                android:name="com.avalon.notifications.GcmBroadcastReceiver"
+                android:permission="com.google.android.c2dm.permission.SEND" >
+                <intent-filter>
+                    <!-- Receives the actual messages. -->
+                    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                    <category android:name="{package}" />
+                </intent-filter>
+            </receiver>
+            
+        where `{package}` is you package name example `com.google.example`
+
+
 
 # Documentations
 
@@ -88,6 +254,7 @@ and automate annoying tasks.
 
     The MIT License (MIT)
 
+    Copyright (c) 2014 Sergey Pereplitsa <non_2001@mail.ru>
     Copyright (c) 2013 Michael Contento <michaelcontento@gmail.com>
                        Jochen Heizmann  <info@intermediaware.de>
 
@@ -109,5 +276,5 @@ and automate annoying tasks.
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
 
-  [cocos2d-x]: http://cocos2d-x.org/
-  [boost]: http://www.boost.org/
+
+[cocos2d-x]: http://cocos2d-x.org/
