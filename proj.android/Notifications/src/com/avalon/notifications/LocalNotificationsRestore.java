@@ -23,7 +23,7 @@ public class LocalNotificationsRestore extends BroadcastReceiver {
     	Notifications.setContext(context);
     	
         // Obtain alarm details form Shared Preferences
-        SharedPreferences alarms = Notifications.getSharedPreferences();
+        SharedPreferences alarms = Notifications.getLocalSharedPreferences();
         Set<String> alarmIds     = alarms.getAll().keySet();
 
         /*
@@ -44,7 +44,7 @@ public class LocalNotificationsRestore extends BroadcastReceiver {
                  */
                 Notifications.add(message, sound, time, Integer.parseInt(alarmId), badgeNumber);
 
-            } catch (JSONException e) {}
+            } catch (Exception e) {}
         }
     }
 }

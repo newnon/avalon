@@ -33,7 +33,8 @@ public class Notifications{
 	
 	private static Context activity = Cocos2dxHelper.getActivity();
 	private static final String TAG = "avalon.notifications.Notifications";
-	private final static String PLUGIN_NAME = "LocalNotification";
+	private final static String LOCAL_NOTIFICAION_STORE = "LocalNotifications";
+	private final static String REMOTE_NOTIFICAION_STORE = "RemoteNotifications";
 	private static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
@@ -154,12 +155,19 @@ public class Notifications{
 		builder.setTicker(message);
 		builder.setAutoCancel(true);
 		builder.setNumber(badge);
-		builder.setDefaults(Notification.DEFAULT_ALL);
+		builder.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
 		if(!sound.isEmpty())
 			builder.setSound(Uri.parse(sound));
 		builder.setContentIntent(pendingIntent);
 
-		getNotificationManager().notify(notificationId, builder.build());
+		try
+	    {
+			getNotificationManager().notify(notificationId, builder.build());
+	    }
+		catch(Exception e)
+	    {
+			//Android 4.2 bug with vibrate permissions
+	    }
     }
 	
 	/**
@@ -170,7 +178,7 @@ public class Notifications{
      * @param callbackContext
      */
     public static boolean isScheduled (int id) {
-        SharedPreferences settings = getSharedPreferences();
+        SharedPreferences settings = getLocalSharedPreferences();
         Map<String, ?> alarms      = settings.getAll();
         return alarms.containsKey(id);
     }
@@ -181,7 +189,7 @@ public class Notifications{
      * @param callbackContext
      */
     public static int[] getScheduledIds () {
-        SharedPreferences settings = getSharedPreferences();
+        SharedPreferences settings = getLocalSharedPreferences();
         Map<String, ?> alarms      = settings.getAll();
         Set<String> keySet = alarms.keySet();
         int[] ret = new int[keySet.size()];
@@ -229,13 +237,15 @@ public class Notifications{
     }
 
 	static void cancelAll() {
-        SharedPreferences settings = getSharedPreferences();
+        SharedPreferences settings = getLocalSharedPreferences();
         NotificationManager nc     = getNotificationManager();
         Map<String, ?> alarms      = settings.getAll();
         Set<String> alarmIds       = alarms.keySet();
 
         for (String alarmId : alarmIds) {
-            cancel(Integer.parseInt(alarmId));
+        	try {
+        		cancel(Integer.parseInt(alarmId));
+        	} catch (Exception e) {}
         }
 
         nc.cancelAll();
@@ -304,7 +314,7 @@ public class Notifications{
      * @param regId registration ID
      */
     private static void storeRegistrationId(Context context, String regId) {
-        final SharedPreferences prefs = getSharedPreferences();
+        final SharedPreferences prefs = getRemoteSharedPreferences();
         int appVersion = getAppVersion(context);
         Log.i(TAG, "Saving regId on app version " + appVersion);
         SharedPreferences.Editor editor = prefs.edit();
@@ -322,7 +332,7 @@ public class Notifications{
      *         registration ID.
      */
     private static String getRegistrationId(Context context) {
-        final SharedPreferences prefs = getSharedPreferences();
+        final SharedPreferences prefs = getRemoteSharedPreferences();
         String registrationId = prefs.getString(PROPERTY_REG_ID, "");
         if (registrationId.isEmpty()) {
             Log.i(TAG, "Registration not found.");
@@ -419,7 +429,7 @@ public class Notifications{
      *            The assumption is that parse has been called already.
      */
     static void persist (int alarmId, JSONObject args) {
-        Editor editor = getSharedPreferences().edit();
+        Editor editor = getLocalSharedPreferences().edit();
 
         editor.putString("" +alarmId, args.toString());
         editor.apply();
@@ -432,7 +442,7 @@ public class Notifications{
      *            The Id of the notification that must be removed.
      */
     static void unpersist (int alarmId) {
-        Editor editor = getSharedPreferences().edit();
+        Editor editor = getLocalSharedPreferences().edit();
 
         editor.remove("" + alarmId);
         editor.apply();
@@ -442,7 +452,7 @@ public class Notifications{
      * Clear all alarms from the Android shared Preferences.
      */
     static void unpersistAll () {
-        Editor editor = getSharedPreferences().edit();
+        Editor editor = getLocalSharedPreferences().edit();
 
         editor.clear();
         editor.apply();
@@ -459,10 +469,17 @@ public class Notifications{
     }
 
     /**
-     * The Local storage for the application.
+     * The Local storage for local notifications.
      */
-    protected static SharedPreferences getSharedPreferences () {
-        return activity.getSharedPreferences(PLUGIN_NAME, Context.MODE_PRIVATE);
+    protected static SharedPreferences getLocalSharedPreferences () {
+        return activity.getSharedPreferences(LOCAL_NOTIFICAION_STORE, Context.MODE_PRIVATE);
+    }
+    
+    /**
+     * The Local storage for remote notifications.
+     */
+    protected static SharedPreferences getRemoteSharedPreferences () {
+        return activity.getSharedPreferences(REMOTE_NOTIFICAION_STORE, Context.MODE_PRIVATE);
     }
 
     /**

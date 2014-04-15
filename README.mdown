@@ -178,7 +178,7 @@ and automate annoying tasks.
 ##### Ios
 1. Add  Notificatios to `Build Phases` `Target Dependencies`
 1. Add  libNotificatios.a to `Build Phases` `Link Binary With Libraries`
-1. Add   `#import "avalon/NotificationsAppController.h""` to your `AppController.h`
+1. Add   `#import "avalon/platform/ios/notifications/NotificationsAppController.h"` to your `AppController.h`
 1. Subclass your AppController from NotificationsAppController
 
         @interface AppController : NotificationsAppController
@@ -194,6 +194,7 @@ and automate annoying tasks.
         <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 1. Ensure the `application` `receivers` in your `AndroidManifest.xml`
+
         <application>
             ...
             <receiver android:name="com.avalon.notifications.LocalNotificationsReceiver" />
@@ -202,7 +203,9 @@ and automate annoying tasks.
                 <intent-filter>
                     <action android:name="android.intent.action.BOOT_COMPLETED" />
                 </intent-filter>
-            </receiver>     
+            </receiver>
+            ...
+        </application>  
             
 ###### Remote Notifications  
         

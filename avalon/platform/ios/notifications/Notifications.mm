@@ -87,7 +87,7 @@ void Notifications::setBadgeNumber(unsigned value)
     
 unsigned Notifications::getBadgeNumber()
 {
-    return [UIApplication sharedApplication].applicationIconBadgeNumber;
+    return  static_cast<unsigned>([UIApplication sharedApplication].applicationIconBadgeNumber);
 }
     
 void Notifications::registerForRemoteNotification()
@@ -167,7 +167,7 @@ void Notifications::unregisterForRemoteNotifications()
             message = [localNotification.alertBody cStringUsingEncoding:NSUTF8StringEncoding];
         if(localNotification.soundName)
             sound = [localNotification.soundName cStringUsingEncoding:NSUTF8StringEncoding];
-        badge = localNotification.applicationIconBadgeNumber;
+        badge = static_cast<unsigned>(localNotification.applicationIconBadgeNumber);
         
         NSEnumerator *enumerator = [notification.userInfo keyEnumerator];
         id key;
