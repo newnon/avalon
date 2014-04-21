@@ -19,6 +19,8 @@ const char* const HELPER_CLASS_NAME = "com/avalon/flurryads/FlurryAdsHelper";
 
 namespace avalon {
 
+static FlurryAdsDelegate *_flurryAdsDelegate = nullptr;
+
 static jobject jobjectFromDictionary(const std::map<std::string,std::string> &dictionary)
 {
     JNIEnv* env = cocos2d::JniHelper::getEnv();
@@ -107,11 +109,11 @@ void FlurryAds::displayAdForSpaceModally(const std::string &space)
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
 }
-void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int height, AdSize size, int timeout)
+void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int height, AdSize size)
 {
     cocos2d::JniMethodInfo methodInfo;
 
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "fetchAndDisplayAdForSpace", "(Ljava/lang/String;IIIIII)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "fetchAndDisplayAdForSpace", "(Ljava/lang/String;IIIII)V"))
     {
         jstring jSpace = methodInfo.env->NewStringUTF(space.c_str());
         jint jx = x;
@@ -119,8 +121,7 @@ void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y
         jint jwidth = width;
         jint jheight = height;
         jint jsize = (int)size;
-        jint jtimeout = timeout;
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jSpace, jx, jy, jwidth, jheight, jsize, jtimeout);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jSpace, jx, jy, jwidth, jheight, jsize);
         methodInfo.env->DeleteLocalRef(jSpace);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
@@ -151,7 +152,16 @@ void FlurryAds::initialize()
 
 void FlurryAds::setAdDelegate(FlurryAdsDelegate *delegate)
 {
+    _flurryAdsDelegate = delegate;
 
+    cocos2d::JniMethodInfo methodInfo;
+
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setDelegate", "(Z)V"))
+    {
+        jboolean jenable = delegate != nullptr;
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jenable);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    }
 }
 void FlurryAds::enableTestAds(bool enable)
 {
@@ -214,7 +224,102 @@ void FlurryAds::clearKeywords()
 
 } // namespace avalon
 
+extern "C" {
 
+JNIEXPORT jboolean JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateShouldDisplayAd(JNIEnv* env, jclass clazz, jstring adSpace, jboolean interstitial)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        return avalon::_flurryAdsDelegate->shouldDisplayAd(space, interstitial);
+    }
+    return true;
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnAdClosed(JNIEnv* env, jclass clazz, jstring adSpace, jboolean interstitial)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        avalon::_flurryAdsDelegate->onAdClosed(space, interstitial);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnApplicationExit(JNIEnv* env, jclass clazz, jstring adSpace)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        avalon::_flurryAdsDelegate->onApplicationExit(space);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnRendered(JNIEnv* env, jclass clazz, jstring adSpace)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        avalon::_flurryAdsDelegate->onRendered(space);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnRenderFailed(JNIEnv* env, jclass clazz, jstring adSpace, jstring jerror)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        std::string error = cocos2d::JniHelper::jstring2string(jerror);
+        avalon::_flurryAdsDelegate->onRenderFailed(space, error);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnDidReceiveAd(JNIEnv* env, jclass clazz, jstring adSpace)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        avalon::_flurryAdsDelegate->onDidReceiveAd(space);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnDidFailToReceiveAd(JNIEnv* env, jclass clazz, jstring adSpace, jstring jerror)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        std::string error = cocos2d::JniHelper::jstring2string(jerror);
+        avalon::_flurryAdsDelegate->onDidFailToReceiveAd(space, error);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnAdClicked(JNIEnv* env, jclass clazz, jstring adSpace)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        avalon::_flurryAdsDelegate->onAdClicked(space);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnAdOpened(JNIEnv* env, jclass clazz, jstring adSpace)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        avalon::_flurryAdsDelegate->onAdOpened(space);
+    }
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_flurryads_FlurryAdsHelper_delegateOnVideoCompleted(JNIEnv* env, jclass clazz, jstring adSpace)
+{
+    if(avalon::_flurryAdsDelegate)
+    {
+        std::string space = cocos2d::JniHelper::jstring2string(adSpace);
+        avalon::_flurryAdsDelegate->onVideoCompleted(space);
+    }
+}
+
+}
 
 
 

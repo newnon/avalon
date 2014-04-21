@@ -8,6 +8,117 @@
 
 #include "avalon/FlurryAds.h"
 #import "FlurryAds.h"
+#import "FlurryAdDelegate.h"
+
+static avalon::FlurryAdsDelegate* _delegate = nullptr;
+static UIView *_bannerView = nil;
+
+@interface InternalFlurryDelegate : NSObject<FlurryAdDelegate> {
+    
+}
+@end
+
+@implementation InternalFlurryDelegate
+
+- (void) spaceDidReceiveAd:(NSString*)adSpace
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        _delegate->onDidReceiveAd(space);
+    }
+}
+
+- (void) spaceDidFailToReceiveAd:(NSString*)adSpace error:(NSError *)error
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        std::string errorStr = [[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding];;
+        _delegate->onDidFailToReceiveAd(space, errorStr);
+    }
+}
+
+- (BOOL) spaceShouldDisplay:(NSString*)adSpace interstitial:(BOOL)interstitial
+{
+    if(!_delegate)
+        return YES;
+    
+    std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+    return _delegate->shouldDisplayAd(space, interstitial);
+}
+
+- (void) spaceDidFailToRender:(NSString *)adSpace error:(NSError *)error
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        std::string errorStr = [[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding];;
+        _delegate->onRenderFailed(space, errorStr);
+    }
+}
+
+- (void)spaceWillDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial
+{
+}
+
+- (void)spaceDidDismiss:(NSString *)adSpace interstitial:(BOOL)interstitial
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        _delegate->onAdClosed(space, interstitial);
+    }
+}
+
+- (void)spaceWillLeaveApplication:(NSString *)adSpace
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        _delegate->onApplicationExit(space);
+    }
+}
+
+- (void) spaceWillExpand:(NSString *)adSpace
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        _delegate->onAdOpened(space);
+    }
+}
+
+- (void) spaceWillCollapse:(NSString *)adSpace
+{
+    
+}
+
+- (void) spaceDidCollapse:(NSString *)adSpace
+{
+}
+
+- (void) spaceDidReceiveClick:(NSString*)adSpace
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        _delegate->onAdClicked(space);
+    }
+}
+
+- (void)videoDidFinish:(NSString *)adSpace
+{
+    if(_delegate)
+    {
+        std::string space = [adSpace cStringUsingEncoding:NSUTF8StringEncoding];
+        _delegate->onVideoCompleted(space);
+    }
+}
+
+@end
+
+static InternalFlurryDelegate* _internalDelegate = nil;
 
 namespace avalon {
     
@@ -30,7 +141,8 @@ static NSDictionary *nsDictionaryFromStringMap(const std::map<std::string,std::s
 
 void FlurryAds::fetchAdForSpace(const std::string &space, int x,int y,int width,int heignt, AdSize size)
 {
-    [::FlurryAds fetchAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] frame:CGRectMake(x, y, width, heignt) size:(::FlurryAdSize)size];
+    float scaleFactor = [UIScreen mainScreen].scale;
+    [::FlurryAds fetchAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] frame:CGRectMake(x/scaleFactor, y/scaleFactor, width/scaleFactor, heignt/scaleFactor) size:(::FlurryAdSize)size];
 }
 
 bool FlurryAds::adReadyForSpace(const std::string &space)
@@ -45,9 +157,16 @@ void FlurryAds::displayAdForSpaceModally(const std::string &space)
 {
     [::FlurryAds displayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] modallyForViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
-void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int heignt, AdSize size, int timeout)
+void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int height, AdSize size)
 {
-    [::FlurryAds showAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] view:nil size:(FlurryAdSize)size timeout:timeout];
+    if(!_bannerView)
+    {
+        float scaleFactor = [UIScreen mainScreen].scale;
+        _bannerView = [[UIView alloc] initWithFrame:CGRectMake(x/scaleFactor, y/scaleFactor, width/scaleFactor , height/scaleFactor)];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
+        [_bannerView release];
+    }
+    [::FlurryAds fetchAndDisplayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] view:_bannerView size:(FlurryAdSize)size];
 }
 
 void FlurryAds::removeAdFromSpace(const std::string &space)
@@ -61,7 +180,24 @@ void FlurryAds::initialize()
 
 void FlurryAds::setAdDelegate(FlurryAdsDelegate *delegate)
 {
-    
+    if(delegate)
+    {
+        if(!_internalDelegate)
+        {
+            _internalDelegate = [[InternalFlurryDelegate alloc] init];
+            [::FlurryAds setAdDelegate:_internalDelegate];
+        }
+    }
+    else
+    {
+        if(_internalDelegate)
+        {
+            [_internalDelegate release];
+            _internalDelegate = nil;
+            [::FlurryAds setAdDelegate:nil];
+        }
+    }
+     _delegate = delegate;
 }
 void FlurryAds::enableTestAds(bool enable)
 {

@@ -12,6 +12,7 @@
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
     if (!manager) {
+        [request release];
         return;
     }
 
@@ -60,6 +61,7 @@
     if (manager->delegate) {
         manager->delegate->onServiceStarted(manager);
     }
+    [request release];
 }
 
 #pragma mark -

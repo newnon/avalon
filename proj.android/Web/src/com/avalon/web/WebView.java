@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 public abstract class WebView {
-	private static LinearLayout m_webLayout;
+	private static LinearLayout m_webLayout = null;
 	private static android.webkit.WebView m_webView;
 	private static final Activity activity = Cocos2dxHelper.getActivity();
     

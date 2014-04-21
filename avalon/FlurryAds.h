@@ -181,7 +181,7 @@ public:
      *  @param view The UIView in your app that the ad will be placed as a subview. Note: for fullscreen ads, this view is not used as a container, but the size of the view may still be used for determining what types of ads will fit in this space.
      *  @param size The default size of an ad space. This can be overriden on the server. See @c FlurryAdSize in the FlurryAds.h file for allowable values.
      */
-    static void fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int heignt, AdSize size, int timeout);
+    static void fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int heignt, AdSize size);
     
     /*!
      *  @brief Removes an ad for the given @c space.
@@ -377,6 +377,7 @@ public:
 
 class FlurryAdsDelegate
 {
+public:
     //Invoked when an ad will display on the specified adSpace.
     //(BOOL) - spaceShouldDisplay:interstitial:
     //boolean shouldDisplayAd (String adSpace, FlurryAdType type)
@@ -398,7 +399,7 @@ class FlurryAdsDelegate
     //Invoked when an ad fails to render.
     //(void) 	- spaceDidFailToRender:error:
     //void 	onRenderFailed (String adSpace)
-    virtual void onRenderFailed(const std::string &adSpace) {}
+    virtual void onRenderFailed(const std::string &adSpace, const std::string &error) {}
     
     //Invoked when ad was retrieved.
     //(void) 	- spaceDidReceiveAd:
@@ -408,7 +409,7 @@ class FlurryAdsDelegate
     //Invoked when ad retrieval fails.
     //(void) 	- spaceDidFailToReceiveAd:error:
     //void 	spaceDidFailToReceiveAd (String adSpace)
-    virtual void onDidFailToReceiveAd (const std::string &adSpace) {}
+    virtual void onDidFailToReceiveAd (const std::string &adSpace, const std::string &error) {}
     
     //Invoked when an ad is clicked.
     //(void) 	- spaceDidReceiveClick:

@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				A5D327891900F06900A65D25 /* PBXTargetDependency */,
 				A5D08BB518F6F5F900B4EBA1 /* PBXTargetDependency */,
 				A50BC28218E9A5D200F1F979 /* PBXTargetDependency */,
 				A50BC28418E9A5D200F1F979 /* PBXTargetDependency */,
@@ -44,19 +45,12 @@
 		A50BC23C18E984B100F1F979 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23B18E984B100F1F979 /* url.mm */; };
 		A50BC24318E9933E00F1F979 /* WebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24118E9933E00F1F979 /* WebView_iOS.mm */; };
 		A50BC24418E9933E00F1F979 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24218E9933E00F1F979 /* WebView.mm */; };
-		A50BC25418E99F5400F1F979 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24218E9933E00F1F979 /* WebView.mm */; };
-		A50BC25518E99F5400F1F979 /* WebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24118E9933E00F1F979 /* WebView_iOS.mm */; };
-		A50BC25718E99F5400F1F979 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23B18E984B100F1F979 /* url.mm */; };
 		A50BC25918E99F5400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
-		A50BC26118E9A14800F1F979 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24218E9933E00F1F979 /* WebView.mm */; };
-		A50BC26218E9A14800F1F979 /* WebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24118E9933E00F1F979 /* WebView_iOS.mm */; };
-		A50BC26418E9A14800F1F979 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23B18E984B100F1F979 /* url.mm */; };
 		A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */; };
 		A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC27718E9A5A500F1F979 /* FlurryAd.mm */; };
 		A50BC28A18E9B2B400F1F979 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */; };
 		A50BC28B18E9B2B400F1F979 /* Flurry.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC28918E9B2B400F1F979 /* Flurry.mm */; };
-		A50C343518EA00F0002B388C /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50C343418EA00F0002B388C /* AlertNative.mm */; };
 		A532994018EDC05A002A3BDE /* WebView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC24518E99A9D00F1F979 /* WebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532994118EDC05A002A3BDE /* url.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC23A18E984A100F1F979 /* url.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532994818EDC8AF002A3BDE /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A532994618EDC88E002A3BDE /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +71,19 @@
 		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; };
 		A5D08BCD18F7D0F000B4EBA1 /* NotificationsAppController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BCB18F7D0F000B4EBA1 /* NotificationsAppController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */; };
+		A5D327671900507400A65D25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5D327701900515B00A65D25 /* AdMob.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D3276F1900515B00A65D25 /* AdMob.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5D3277C1900517E00A65D25 /* GADAdMobExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327721900517E00A65D25 /* GADAdMobExtras.h */; };
+		A5D3277D1900517E00A65D25 /* GADAdNetworkExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327731900517E00A65D25 /* GADAdNetworkExtras.h */; };
+		A5D3277E1900517E00A65D25 /* GADAdSize.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327741900517E00A65D25 /* GADAdSize.h */; };
+		A5D3277F1900517E00A65D25 /* GADBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327751900517E00A65D25 /* GADBannerView.h */; };
+		A5D327801900517E00A65D25 /* GADBannerViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327761900517E00A65D25 /* GADBannerViewDelegate.h */; };
+		A5D327811900517E00A65D25 /* GADInterstitial.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327771900517E00A65D25 /* GADInterstitial.h */; };
+		A5D327821900517E00A65D25 /* GADInterstitialDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327781900517E00A65D25 /* GADInterstitialDelegate.h */; };
+		A5D327831900517E00A65D25 /* GADRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327791900517E00A65D25 /* GADRequest.h */; };
+		A5D327841900517E00A65D25 /* GADRequestError.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D3277A1900517E00A65D25 /* GADRequestError.h */; };
+		A5D327851900517E00A65D25 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D3277B1900517E00A65D25 /* libGoogleAdMobAds.a */; };
+		A5D327871900EEA700A65D25 /* AdNob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D327861900EEA700A65D25 /* AdNob.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +135,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A5D08BA518F6F5B100B4EBA1;
 			remoteInfo = Notifications;
+		};
+		A5D327881900F06900A65D25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5D3275E1900507400A65D25;
+			remoteInfo = AdMob;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -214,6 +228,19 @@
 		A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Notifications.mm; path = avalon/platform/ios/notifications/Notifications.mm; sourceTree = "<group>"; };
 		A5D08BCB18F7D0F000B4EBA1 /* NotificationsAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsAppController.h; path = avalon/platform/ios/notifications/NotificationsAppController.h; sourceTree = "<group>"; };
 		A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAppController.m; path = avalon/platform/ios/notifications/NotificationsAppController.m; sourceTree = "<group>"; };
+		A5D3276D1900507400A65D25 /* libAdMob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdMob.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5D3276F1900515B00A65D25 /* AdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdMob.h; path = avalon/AdMob.h; sourceTree = "<group>"; };
+		A5D327721900517E00A65D25 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdMobExtras.h; path = avalon/platform/ios/admob/GADAdMobExtras.h; sourceTree = "<group>"; };
+		A5D327731900517E00A65D25 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdNetworkExtras.h; path = avalon/platform/ios/admob/GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		A5D327741900517E00A65D25 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADAdSize.h; path = avalon/platform/ios/admob/GADAdSize.h; sourceTree = "<group>"; };
+		A5D327751900517E00A65D25 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerView.h; path = avalon/platform/ios/admob/GADBannerView.h; sourceTree = "<group>"; };
+		A5D327761900517E00A65D25 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADBannerViewDelegate.h; path = avalon/platform/ios/admob/GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		A5D327771900517E00A65D25 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitial.h; path = avalon/platform/ios/admob/GADInterstitial.h; sourceTree = "<group>"; };
+		A5D327781900517E00A65D25 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADInterstitialDelegate.h; path = avalon/platform/ios/admob/GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		A5D327791900517E00A65D25 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequest.h; path = avalon/platform/ios/admob/GADRequest.h; sourceTree = "<group>"; };
+		A5D3277A1900517E00A65D25 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GADRequestError.h; path = avalon/platform/ios/admob/GADRequestError.h; sourceTree = "<group>"; };
+		A5D3277B1900517E00A65D25 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAdMobAds.a; path = avalon/platform/ios/admob/libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		A5D327861900EEA700A65D25 /* AdNob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdNob.mm; path = avalon/platform/ios/admob/AdNob.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,12 +303,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5D327641900507400A65D25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5D327671900507400A65D25 /* Foundation.framework in Frameworks */,
+				A5D327851900517E00A65D25 /* libGoogleAdMobAds.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				A5D3276E1900514300A65D25 /* AdMob */,
 				A5D08BB618F6F66800B4EBA1 /* Notifications */,
 				A50BC28518E9B2B400F1F979 /* Flurry */,
 				A50BC26D18E9A1C100F1F979 /* FlurryAds */,
@@ -304,6 +341,7 @@
 				A50BC25E18E99F5400F1F979 /* libFlurry.a */,
 				A50BC26B18E9A14800F1F979 /* libFlurryAds.a */,
 				A5D08BB318F6F5B100B4EBA1 /* libNotifications.a */,
+				A5D3276D1900507400A65D25 /* libAdMob.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -492,6 +530,33 @@
 			name = "Notifications-ios";
 			sourceTree = "<group>";
 		};
+		A5D3276E1900514300A65D25 /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				A5D327861900EEA700A65D25 /* AdNob.mm */,
+				A5D3276F1900515B00A65D25 /* AdMob.h */,
+				A5D327711900516A00A65D25 /* AdMob-ios */,
+			);
+			name = AdMob;
+			sourceTree = "<group>";
+		};
+		A5D327711900516A00A65D25 /* AdMob-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A5D327721900517E00A65D25 /* GADAdMobExtras.h */,
+				A5D327731900517E00A65D25 /* GADAdNetworkExtras.h */,
+				A5D327741900517E00A65D25 /* GADAdSize.h */,
+				A5D327751900517E00A65D25 /* GADBannerView.h */,
+				A5D327761900517E00A65D25 /* GADBannerViewDelegate.h */,
+				A5D327771900517E00A65D25 /* GADInterstitial.h */,
+				A5D327781900517E00A65D25 /* GADInterstitialDelegate.h */,
+				A5D327791900517E00A65D25 /* GADRequest.h */,
+				A5D3277A1900517E00A65D25 /* GADRequestError.h */,
+				A5D3277B1900517E00A65D25 /* libGoogleAdMobAds.a */,
+			);
+			name = "AdMob-ios";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -556,6 +621,23 @@
 			files = (
 				A5D08BB818F6F67800B4EBA1 /* Notifications.h in Headers */,
 				A5D08BCD18F7D0F000B4EBA1 /* NotificationsAppController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5D327681900507400A65D25 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5D3277D1900517E00A65D25 /* GADAdNetworkExtras.h in Headers */,
+				A5D3277F1900517E00A65D25 /* GADBannerView.h in Headers */,
+				A5D327821900517E00A65D25 /* GADInterstitialDelegate.h in Headers */,
+				A5D327831900517E00A65D25 /* GADRequest.h in Headers */,
+				A5D3277E1900517E00A65D25 /* GADAdSize.h in Headers */,
+				A5D3277C1900517E00A65D25 /* GADAdMobExtras.h in Headers */,
+				A5D327841900517E00A65D25 /* GADRequestError.h in Headers */,
+				A5D327811900517E00A65D25 /* GADInterstitial.h in Headers */,
+				A5D327701900515B00A65D25 /* AdMob.h in Headers */,
+				A5D327801900517E00A65D25 /* GADBannerViewDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +764,23 @@
 			productReference = A5D08BB318F6F5B100B4EBA1 /* libNotifications.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5D3275E1900507400A65D25 /* AdMob */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5D3276A1900507400A65D25 /* Build configuration list for PBXNativeTarget "AdMob" */;
+			buildPhases = (
+				A5D3275F1900507400A65D25 /* Sources */,
+				A5D327641900507400A65D25 /* Frameworks */,
+				A5D327681900507400A65D25 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdMob;
+			productName = Avalon;
+			productReference = A5D3276D1900507400A65D25 /* libAdMob.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -734,6 +833,7 @@
 				A50BC25218E99F5400F1F979 /* Flurry */,
 				A50BC25F18E9A14800F1F979 /* FlurryAds */,
 				A5D08BA518F6F5B100B4EBA1 /* Notifications */,
+				A5D3275E1900507400A65D25 /* AdMob */,
 				A50BC24618E99DA500F1F979 /* Build all libs */,
 			);
 		};
@@ -787,7 +887,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50BC24418E9933E00F1F979 /* WebView.mm in Sources */,
-				A50C343518EA00F0002B388C /* AlertNative.mm in Sources */,
 				A50BC24318E9933E00F1F979 /* WebView_iOS.mm in Sources */,
 				A50BC23C18E984B100F1F979 /* url.mm in Sources */,
 			);
@@ -798,9 +897,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50BC28B18E9B2B400F1F979 /* Flurry.mm in Sources */,
-				A50BC25418E99F5400F1F979 /* WebView.mm in Sources */,
-				A50BC25518E99F5400F1F979 /* WebView_iOS.mm in Sources */,
-				A50BC25718E99F5400F1F979 /* url.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,9 +904,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50BC26118E9A14800F1F979 /* WebView.mm in Sources */,
-				A50BC26218E9A14800F1F979 /* WebView_iOS.mm in Sources */,
-				A50BC26418E9A14800F1F979 /* url.mm in Sources */,
 				A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -821,6 +914,14 @@
 			files = (
 				A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */,
 				A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5D3275F1900507400A65D25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5D327871900EEA700A65D25 /* AdNob.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +962,11 @@
 			isa = PBXTargetDependency;
 			target = A5D08BA518F6F5B100B4EBA1 /* Notifications */;
 			targetProxy = A5D08BB418F6F5F900B4EBA1 /* PBXContainerItemProxy */;
+		};
+		A5D327891900F06900A65D25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5D3275E1900507400A65D25 /* AdMob */;
+			targetProxy = A5D327881900F06900A65D25 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1197,6 +1303,38 @@
 			};
 			name = Release;
 		};
+		A5D3276B1900507400A65D25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = AdMob;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A5D3276C1900507400A65D25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = AdMob;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1277,6 +1415,15 @@
 			buildConfigurations = (
 				A5D08BB118F6F5B100B4EBA1 /* Debug */,
 				A5D08BB218F6F5B100B4EBA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5D3276A1900507400A65D25 /* Build configuration list for PBXNativeTarget "AdMob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5D3276B1900507400A65D25 /* Debug */,
+				A5D3276C1900507400A65D25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

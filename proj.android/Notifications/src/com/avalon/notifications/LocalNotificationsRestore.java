@@ -2,7 +2,6 @@ package com.avalon.notifications;
 
 import java.util.Set;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.BroadcastReceiver;
