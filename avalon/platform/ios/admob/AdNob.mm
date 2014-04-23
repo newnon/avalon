@@ -8,82 +8,6 @@
 #import "GADAdNetworkExtras.h"
 #import "GADAdMobExtras.h"
 
-namespace avalon {
-
-class AdMobHelper
-{
-public:
-    static GADRequest* createRequest(const AdMob &adMob)
-    {
-        GADRequest *request = [GADRequest request];
-        NSMutableArray *testDevices = [NSMutableArray arrayWithObject:GAD_SIMULATOR_ID];
-        for(auto it : adMob._testDevices)
-            [testDevices addObject:[NSString stringWithCString:it.c_str() encoding:NSUTF8StringEncoding]];
-        
-        request.testDevices = testDevices;
-        request.gender = (::GADGender)adMob._gender;
-        if(adMob._birthDate.defined)
-            [request setBirthdayWithMonth:adMob._birthDate.month day:adMob._birthDate.day year:adMob._birthDate.year];
-        if(adMob._location.defined)
-            [request setLocationWithLatitude:adMob._location.latitude longitude:adMob._location.longitude accuracy:adMob._location.accuracyInMeters];
-        else
-            if(!adMob._locationStr.empty())
-                [request setLocationWithDescription:[NSString stringWithCString:adMob._locationStr.c_str() encoding:NSUTF8StringEncoding]];
-        if(adMob._tagForChildDirectedTreatment.first)
-            [request tagForChildDirectedTreatment:adMob._tagForChildDirectedTreatment.second];
-        NSMutableArray *keyWords = [NSMutableArray array];
-        for(auto it : adMob._keywords)
-            [keyWords addObject:[NSString stringWithCString:it.c_str() encoding:NSUTF8StringEncoding]];
-        request.keywords = keyWords;
-        for(auto it : adMob._extras)
-        {
-            switch (it.first) {
-                case GADAdNetworkExtras::AdMob:
-                {
-                    GADAdMobExtras *extra = [[GADAdMobExtras alloc] init];
-                    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-                    for(auto mapIt : it.second)
-                    {
-                        [dict setObject:[NSString stringWithCString:mapIt.second.c_str() encoding:NSUTF8StringEncoding] forKey:[NSString stringWithCString:mapIt.first.c_str() encoding:NSUTF8StringEncoding]];
-                    }
-                    extra.additionalParameters = dict;
-                    [request registerAdNetworkExtras:extra];
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
-        }
-        
-        return request;
-    }
-    static void removeBanner(AdMob &adMob,const GADBannerView *banner)
-    {
-        for (auto it = adMob._bannerViews.begin();it!=adMob._bannerViews.end();++it)
-        {
-            if(it->get() == banner)
-            {
-                adMob._bannerViews.erase(it);
-                break;
-            }
-        }
-    }
-    static void removeInterstitial(AdMob &adMob,const GADInterstitial *interstitial)
-    {
-        for (auto it = adMob._interstitials.begin();it!=adMob._interstitials.end();++it)
-        {
-            if(it->get() == interstitial)
-            {
-                adMob._interstitials.erase(it);
-                break;
-            }
-        }
-    }
-};
-    
-}
-
 @interface GADIOSBannerViewDelegate : NSObject<GADBannerViewDelegate>
 {
     avalon::GADBannerViewDelegate *_delegate;
@@ -91,7 +15,6 @@ public:
 }
 
 @end
-
 
 @implementation GADIOSBannerViewDelegate
 
@@ -115,7 +38,7 @@ public:
 {
     if(_delegate)
         _delegate->adViewDidFailToReceive(_bannerView, [[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding]);
-    avalon::AdMobHelper::removeBanner(*avalon::AdMob::getInstance(), _bannerView);
+    avalon::AdMob::getInstance()->removeBanner(_bannerView);
 }
 
 - (void)adViewWillPresentScreen:(GADBannerView *)adView
@@ -128,13 +51,6 @@ public:
 {
     if(_delegate)
         _delegate->adViewWillDismissScreen(_bannerView);
-}
-
-- (void)adViewDidDismissScreen:(GADBannerView *)adView
-{
-    if(_delegate)
-        _delegate->adViewDidDismissScreen(_bannerView);
-    avalon::AdMobHelper::removeBanner(*avalon::AdMob::getInstance(), _bannerView);
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView
@@ -177,7 +93,7 @@ public:
 {
     if(_delegate)
         _delegate->interstitialDidFailToReceiveAd(_interstitial,[[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding]);
-    avalon::AdMobHelper::removeInterstitial(*avalon::AdMob::getInstance(), _interstitial);
+    avalon::AdMob::getInstance()->removeInterstitial(_interstitial);
 }
 
 - (void)interstitialWillPresentScreen:(GADInterstitial *)ad
@@ -190,13 +106,6 @@ public:
 {
     if(_delegate)
         _delegate->interstitialWillDismissScreen(_interstitial);
-}
-
-- (void)interstitialDidDismissScreen:(GADInterstitial *)ad
-{
-    if(_delegate)
-        _delegate->interstitialDidDismissScreen(_interstitial);
-    avalon::AdMobHelper::removeInterstitial(*avalon::AdMob::getInstance(), _interstitial);
 }
 
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)ad
@@ -302,23 +211,190 @@ private:
     GADIOSBannerViewDelegate *_delegate;
     ::GADBannerView *_bannerView;
 };
+
+    
+    
+class IOSAdMob : public AdMob
+{
+public:
+    
+    IOSAdMob(const std::string &version):AdMob(version),_gender(GADGender::Unknown),_tagForChildDirectedTreatment(false,false) {}
+    
+    virtual void setAdNetworkExtras(GADAdNetworkExtras network, const std::map<std::string,std::string> &extras) override
+    {
+        _extras[network] = extras;
+    }
+    void setTestDevices(const std::vector<std::string>& devices) override
+    {
+        _testDevices = devices;
+    }
+    void setGender(GADGender gender) override
+    {
+        _gender = gender;
+    }
+    void setBirthDate(unsigned month, unsigned day, unsigned year) override
+    {
+        _birthDate.defined = true;
+        _birthDate.month = month;
+        _birthDate.day = day;
+        _birthDate.year = year;
+    }
+    void setLocation(float latitude, float longitude, float accuracyInMeters) override
+    {
+        _location.defined = true;
+        _location.latitude = latitude;
+        _location.longitude = longitude;
+        _location.accuracyInMeters = accuracyInMeters;
+    }
+    void setLocation(const std::string &location) override
+    {
+        _locationStr = location;
+    }
+    void setTagForChildDirectedTreatment(bool value) override
+    {
+        _tagForChildDirectedTreatment.first = true;
+        _tagForChildDirectedTreatment.second = value;
+    }
+    void setKeywords(const std::vector<std::string>& keywords) override
+    {
+        _keywords = keywords;
+    }
+    
+    std::shared_ptr<GADInterstitial> createIntestitial(const std::string &adUnitID, GADInterstitialDelegate *delegate) override
+    {
+        _interstitials.emplace_back(new IOSGADInterstitial(createRequest(), adUnitID, delegate));
+        return _interstitials.back();
+    }
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate) override
+    {
+        _bannerViews.emplace_back(new IOSGADBannerView(createRequest(), adUnitID, size, CGRectMake(x, y, width, height), delegate));
+        return _bannerViews.back();
+    }
+    
+    virtual std::vector<std::shared_ptr<GADInterstitial>> getReadyInterstitials() const
+    {
+        std::vector<std::shared_ptr<GADInterstitial>> ret;
+        for(auto &it : _interstitials)
+        {
+            if(it && it->isReady())
+                ret.push_back(it);
+            
+        }
+        return ret;
+    }
+    virtual std::vector<std::shared_ptr<GADBannerView>> getBannerViews() const
+    {
+        std::vector<std::shared_ptr<GADBannerView>> ret;
+        for(auto &it : _bannerViews)
+        {
+            ret.push_back(it);
+        }
+        return ret;
+
+    }
+    
+    GADRequest* createRequest() const
+    {
+        GADRequest *request = [GADRequest request];
+        NSMutableArray *testDevices = [NSMutableArray arrayWithObject:GAD_SIMULATOR_ID];
+        for(auto it : _testDevices)
+            [testDevices addObject:[NSString stringWithCString:it.c_str() encoding:NSUTF8StringEncoding]];
+        
+        request.testDevices = testDevices;
+        request.gender = (::GADGender)_gender;
+        if(_birthDate.defined)
+            [request setBirthdayWithMonth:_birthDate.month day:_birthDate.day year:_birthDate.year];
+        if(_location.defined)
+            [request setLocationWithLatitude:_location.latitude longitude:_location.longitude accuracy:_location.accuracyInMeters];
+        else
+            if(!_locationStr.empty())
+                [request setLocationWithDescription:[NSString stringWithCString:_locationStr.c_str() encoding:NSUTF8StringEncoding]];
+        if(_tagForChildDirectedTreatment.first)
+            [request tagForChildDirectedTreatment:_tagForChildDirectedTreatment.second];
+        NSMutableArray *keyWords = [NSMutableArray array];
+        for(auto it : _keywords)
+            [keyWords addObject:[NSString stringWithCString:it.c_str() encoding:NSUTF8StringEncoding]];
+        request.keywords = keyWords;
+        for(auto it : _extras)
+        {
+            switch (it.first) {
+                case GADAdNetworkExtras::AdMob:
+                {
+                    GADAdMobExtras *extra = [[GADAdMobExtras alloc] init];
+                    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+                    for(auto mapIt : it.second)
+                    {
+                        [dict setObject:[NSString stringWithCString:mapIt.second.c_str() encoding:NSUTF8StringEncoding] forKey:[NSString stringWithCString:mapIt.first.c_str() encoding:NSUTF8StringEncoding]];
+                    }
+                    extra.additionalParameters = dict;
+                    [request registerAdNetworkExtras:extra];
+                }
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        
+        return request;
+    }
+    
+    virtual void removeBanner(const GADBannerView *bannerView) override
+    {
+        for (auto it = _bannerViews.begin();it!=_bannerViews.end();++it)
+        {
+            if(it->get() == bannerView)
+            {
+                _bannerViews.erase(it);
+                break;
+            }
+        }
+    }
+    virtual void removeInterstitial(const GADInterstitial *interstitial) override
+    {
+        for (auto it = _interstitials.begin();it!=_interstitials.end();++it)
+        {
+            if(it->get() == interstitial)
+            {
+                _interstitials.erase(it);
+                break;
+            }
+        }
+    }
+    
+private:
+    struct BirthDate
+    {
+        BirthDate():defined(false) {}
+        bool defined;
+        unsigned month;
+        unsigned day;
+        unsigned year;
+    };
+    struct Location
+    {
+        Location():defined(false) {}
+        bool defined;
+        unsigned latitude;
+        unsigned longitude;
+        unsigned accuracyInMeters;
+    };
+    std::map<GADAdNetworkExtras, std::map<std::string,std::string>> _extras;
+    std::vector<std::string> _testDevices;
+    GADGender _gender;
+    BirthDate _birthDate;
+    Location _location;
+    std::string _locationStr;
+    std::pair<bool,bool> _tagForChildDirectedTreatment;
+    std::vector<std::string> _keywords;
+    std::list<std::shared_ptr<GADBannerView>> _bannerViews;
+    std::list<std::shared_ptr<GADInterstitial>> _interstitials;
+};
     
 AdMob *AdMob::getInstance()
 {
-    static AdMob *instance = new AdMob([[GADRequest sdkVersion] cStringUsingEncoding:NSUTF8StringEncoding]);
+    static IOSAdMob *instance = new IOSAdMob([[GADRequest sdkVersion] cStringUsingEncoding:NSUTF8StringEncoding]);
     return instance;
-}
-    
-const std::shared_ptr<GADInterstitial>& AdMob::createIntestitial(const std::string &adUnitID, GADInterstitialDelegate *delegate)
-{
-    _interstitials.emplace_back(new IOSGADInterstitial(AdMobHelper::createRequest(*this), adUnitID, delegate));
-    return _interstitials.back();
-}
-    
-const std::shared_ptr<GADBannerView>& AdMob::createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate)
-{
-    _bannerViews.emplace_back(new IOSGADBannerView(AdMobHelper::createRequest(*this), adUnitID, size, CGRectMake(x, y, width, height), delegate));
-    return _bannerViews.back();
 }
 
 }
