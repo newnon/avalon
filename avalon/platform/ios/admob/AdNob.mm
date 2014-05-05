@@ -146,7 +146,7 @@ public:
     
     virtual ~IOSGADInterstitial()
     {
-        [_interstitial release];
+        [_interstitial autorelease];
         [_delegate release];
     }
     
@@ -297,7 +297,7 @@ public:
     {
         GADRequest *request = [GADRequest request];
         NSMutableArray *testDevices = [NSMutableArray arrayWithObject:GAD_SIMULATOR_ID];
-        for(auto it : _testDevices)
+        for(const auto &it : _testDevices)
             [testDevices addObject:[NSString stringWithCString:it.c_str() encoding:NSUTF8StringEncoding]];
         
         request.testDevices = testDevices;
@@ -312,17 +312,17 @@ public:
         if(_tagForChildDirectedTreatment.first)
             [request tagForChildDirectedTreatment:_tagForChildDirectedTreatment.second];
         NSMutableArray *keyWords = [NSMutableArray array];
-        for(auto it : _keywords)
+        for(const auto &it : _keywords)
             [keyWords addObject:[NSString stringWithCString:it.c_str() encoding:NSUTF8StringEncoding]];
         request.keywords = keyWords;
-        for(auto it : _extras)
+        for(const auto &it : _extras)
         {
             switch (it.first) {
                 case GADAdNetworkExtras::AdMob:
                 {
                     GADAdMobExtras *extra = [[GADAdMobExtras alloc] init];
                     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-                    for(auto mapIt : it.second)
+                    for(const auto &mapIt : it.second)
                     {
                         [dict setObject:[NSString stringWithCString:mapIt.second.c_str() encoding:NSUTF8StringEncoding] forKey:[NSString stringWithCString:mapIt.first.c_str() encoding:NSUTF8StringEncoding]];
                     }
