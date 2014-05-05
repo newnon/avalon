@@ -131,8 +131,8 @@ static NSDictionary *nsDictionaryFromStringMap(const std::map<std::string,std::s
     
     for(auto it=stringMap.begin();it!=stringMap.end();++it)
     {
-        NSString *value = [[[NSString alloc] initWithBytes:it->first.c_str() length:it->first.size() encoding:NSUTF8StringEncoding] autorelease];
-        [nsDict setValue:value forKey:[NSString stringWithCString:it->second.c_str() encoding:NSUTF8StringEncoding]];
+        NSString *value = [NSString stringWithCString:it->second.c_str() encoding:NSUTF8StringEncoding];
+        [nsDict setValue:value forKey:[NSString stringWithCString:it->first.c_str() encoding:NSUTF8StringEncoding]];
         
     }
     return nsDict;
