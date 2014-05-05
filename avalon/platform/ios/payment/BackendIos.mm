@@ -9,6 +9,43 @@
 #pragma mark -
 #pragma mark SKProductsRequestDelegate
 
++ (avalon::payment::ManagerDelegateErrors) convertErrorToCode:(NSError *) error
+{
+    avalon::payment::ManagerDelegateErrors ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+	switch (error.code) {
+		case SKErrorPaymentCancelled:
+            NSLog(@"[Payment] failedTransaction: SKErrorPaymentCancelled");
+            ret = avalon::payment::ManagerDelegateErrors::PAYMENTCANCELLED;
+            break;
+            
+		case SKErrorUnknown:
+            NSLog(@"[Payment] failedTransaction: SKErrorUnknown: %@ | %@", error.localizedDescription, error.localizedFailureReason );
+            ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+            break;
+            
+		case SKErrorClientInvalid:
+            NSLog(@"[Payment] failedTransaction: SKErrorClientInvalid");
+            ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+            break;
+            
+		case SKErrorPaymentInvalid:
+            NSLog(@"[Payment] failedTransaction: SKErrorPaymentInvalid");
+            ret = avalon::payment::ManagerDelegateErrors::PAYMENTINVALID;
+            break;
+            
+		case SKErrorPaymentNotAllowed:
+			NSLog(@"[Payment] failedTransaction: SKErrorPaymentNotAllowed");
+            ret = avalon::payment::ManagerDelegateErrors::PAYMENTNOTALLOWED;
+            break;
+            
+		default:
+            NSLog(@"[Payment] failedTransaction: UNHANDELED: %ld", (long)error.code);
+            ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+			break;
+	}
+    return ret;
+}
+
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
     if (!manager) {
@@ -108,12 +145,10 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
 {
-    if (error.code != SKErrorPaymentCancelled) {
-        NSLog(@"[Payment] restoreCompletedTransactions failed: %@", error.localizedDescription);
-
-        if (manager && manager->delegate) {
-            manager->delegate->onRestoreFail(manager);
-        }
+    NSLog(@"[Payment] restoreCompletedTransactions failed: %@", error.localizedDescription);
+    
+    if (manager && manager->delegate) {
+        manager->delegate->onPurchaseFail(manager, [BackendIos convertErrorToCode:error]);
     }
 
     transactionDepth = std::max(0, --transactionDepth);
@@ -191,36 +226,8 @@
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction
 {
-    bool reportFailure = true;
-	switch (transaction.error.code) {
-		case SKErrorPaymentCancelled:
-            NSLog(@"[Payment] failedTransaction: SKErrorPaymentCancelled");
-            reportFailure = false;
-            break;
-
-		case SKErrorUnknown:
-            NSLog(@"[Payment] failedTransaction: SKErrorUnknown: %@ | %@", transaction.error.localizedDescription, transaction.error.localizedFailureReason );
-            break;
-
-		case SKErrorClientInvalid:
-            NSLog(@"[Payment] failedTransaction: SKErrorClientInvalid");
-            break;
-
-		case SKErrorPaymentInvalid:
-            NSLog(@"[Payment] failedTransaction: SKErrorPaymentInvalid");
-            break;
-
-		case SKErrorPaymentNotAllowed:
-			NSLog(@"[Payment] failedTransaction: SKErrorPaymentNotAllowed");
-            break;
-
-		default:
-            NSLog(@"[Payment] failedTransaction: UNHANDELED: %ld", (long)transaction.error.code);
-			break;
-	}
-
-    if (manager && manager->delegate && reportFailure) {
-        manager->delegate->onPurchaseFail(manager);
+    if (manager && manager->delegate) {
+        manager->delegate->onPurchaseFail(manager, [BackendIos convertErrorToCode:transaction.error]);
     }
 
     transactionDepth = std::max(0, --transactionDepth);

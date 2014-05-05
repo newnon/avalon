@@ -67,7 +67,7 @@ public class Backend
 
     public static native void delegateOnServiceStarted();
     public static native void delegateOnPurchaseSucceed(String productId);
-    public static native void delegateOnPurchaseFail();
+    public static native void delegateOnPurchaseFail(int code);
     public static native void delegateOnTransactionStart();
     public static native void delegateOnTransactionEnd();
     public static native void onItemData(String productId, String name, String desc, String priceStr, float price);

@@ -28,6 +28,12 @@ public class PurchasingObserver implements OnActivityResultListener
     private Map<String, Boolean> productIds;
     private Integer taskCount = 0;
     private boolean checkTaskCountOnConsumeFinished = false;
+    
+    public static final int ERROR_UNKNOWN = 0;
+    public static final int ERROR_PAYMENTCANCELLED = 3;
+    public static final int ERROR_PAYMENTINVALID = 4;
+    public static final int ERROR_PAYMENTNOTALLOWED = 5;
+    public static final int ERROR_STOREPRODUCTNOTAVAILABLE = 6;
 
     public PurchasingObserver(String data)
     {
@@ -129,11 +135,26 @@ public class PurchasingObserver implements OnActivityResultListener
         @Override
         public void onIabPurchaseFinished(IabResult result, final Purchase purchase) {
             if (result.isFailure()) {
-                if (result.getResponse() == -1005) {
-                    // user canceled and we don't count this as an failure
-                } else {
+                {
                     Log.e(TAG, "onIabPurchaseFinished failed: " + result);
-                    threadDelegateOnPurchaseFail();
+                    int retCode = 0;
+                    switch (result.getResponse()) {
+                    	case IabHelper.BILLING_RESPONSE_RESULT_USER_CANCELED: retCode = ERROR_PAYMENTCANCELLED;
+                             break;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE: retCode = ERROR_PAYMENTNOTALLOWED;
+                        	break;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_UNAVAILABLE: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
+                        	break;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_DEVELOPER_ERROR: retCode = ERROR_UNKNOWN;
+                    		break;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ERROR: retCode = ERROR_PAYMENTINVALID;
+                    		break;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
+                    		break;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
+                			break;
+                    }
+                    threadDelegateOnPurchaseFail(retCode);
                 }
             } else if (isConsumable(purchase.getSku())) {
                 threadConsumeAsync(purchase);
@@ -187,12 +208,13 @@ public class PurchasingObserver implements OnActivityResultListener
         });
     }
 
-    private void threadDelegateOnPurchaseFail()
+    private void threadDelegateOnPurchaseFail(int code)
     {
+        final int lcode = code;
         Cocos2dxHelper.runOnGLThread(new Runnable() {
             @Override
             public void run() {
-            	Backend.delegateOnPurchaseFail();
+            	Backend.delegateOnPurchaseFail(lcode);
             }
         });
     }

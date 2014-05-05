@@ -106,13 +106,13 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed
     }
 }
 
-JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseFail(JNIEnv* env, jclass clazz)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseFail(JNIEnv* env, jclass clazz, jint code)
 {
     using backend::helper::globalManager;
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
     if (globalManager && globalManager->delegate) {
-        globalManager->delegate->onPurchaseFail(globalManager);
+        globalManager->delegate->onPurchaseFail(globalManager, static_cast<avalon::payment::ManagerDelegateErrors>(code));
     }
 }
 

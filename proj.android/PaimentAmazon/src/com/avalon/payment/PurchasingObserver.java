@@ -37,6 +37,12 @@ public class PurchasingObserver extends BasePurchasingObserver
     private String userId;
     public Map<String, String> requestIds;
     public Integer taskCount = 0;
+    
+    public static final int ERROR_UNKNOWN = 0;
+    public static final int ERROR_PAYMENTCANCELLED = 3;
+    public static final int ERROR_PAYMENTINVALID = 4;
+    public static final int ERROR_PAYMENTNOTALLOWED = 5;
+    public static final int ERROR_STOREPRODUCTNOTAVAILABLE = 6;
 
     /**
      * Creates new instance of the PurchasingObserver class.
@@ -373,7 +379,7 @@ public class PurchasingObserver extends BasePurchasingObserver
 
                     Cocos2dxHelper.runOnGLThread(new Runnable() {
                         public void run() {
-                        	Backend.delegateOnPurchaseFail();
+                        	Backend.delegateOnPurchaseFail(ERROR_PAYMENTINVALID);
                         }
                     });
 
@@ -386,7 +392,7 @@ public class PurchasingObserver extends BasePurchasingObserver
 
                     Cocos2dxHelper.runOnGLThread(new Runnable() {
                         public void run() {
-                        	Backend.delegateOnPurchaseFail();
+                        	Backend.delegateOnPurchaseFail(ERROR_STOREPRODUCTNOTAVAILABLE);
                         }
                     });
 
