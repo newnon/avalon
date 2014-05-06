@@ -51,6 +51,7 @@
 {
     if(_delegate)
         _delegate->adViewWillDismissScreen(_bannerView);
+    avalon::AdMob::getInstance()->removeBanner(_bannerView);
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView
@@ -106,6 +107,7 @@
 {
     if(_delegate)
         _delegate->interstitialWillDismissScreen(_interstitial);
+    avalon::AdMob::getInstance()->removeInterstitial(_interstitial);
 }
 
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)ad
@@ -132,11 +134,7 @@ public:
     
     virtual bool isReady() const
     {
-        return [_interstitial isReady];
-    }
-    virtual bool hasBeenUsed() const
-    {
-        return [_interstitial hasBeenUsed];
+        return [_interstitial isReady] && ![_interstitial hasBeenUsed];
     }
     
     virtual void show() override
@@ -146,6 +144,7 @@ public:
     
     virtual ~IOSGADInterstitial()
     {
+        _interstitial.delegate = nil;
         [_interstitial autorelease];
         [_delegate release];
     }
@@ -198,7 +197,8 @@ public:
     
     virtual ~IOSGADBannerView()
     {
-        [_bannerView release];
+        _bannerView.delegate = nil;
+        [_bannerView autorelease];
         [_delegate release];
     }
     
