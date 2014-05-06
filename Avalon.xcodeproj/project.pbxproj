@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				A5ACF04F1918B2EB00A010A5 /* PBXTargetDependency */,
 				A5D327891900F06900A65D25 /* PBXTargetDependency */,
 				A5D08BB518F6F5F900B4EBA1 /* PBXTargetDependency */,
 				A50BC28218E9A5D200F1F979 /* PBXTargetDependency */,
@@ -64,6 +65,17 @@
 		A532995418EDC98E002A3BDE /* GameCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1B518E9638C00F1F979 /* GameCenter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532995618EDC9AE002A3BDE /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC28C18E9B2C200F1F979 /* Flurry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532995918EDC9D0002A3BDE /* FlurryAds.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC27118E9A29800F1F979 /* FlurryAds.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5ACF0391918B1E500A010A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5ACF04A1918B25C00A010A5 /* AdNob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D327861900EEA700A65D25 /* AdNob.mm */; };
+		A5ACF04D1918B2E300A010A5 /* GoogleAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5ACF0581918B37500A010A5 /* GAI.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF0511918B37500A010A5 /* GAI.h */; };
+		A5ACF0591918B37500A010A5 /* GAIDictionaryBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF0521918B37500A010A5 /* GAIDictionaryBuilder.h */; };
+		A5ACF05A1918B37500A010A5 /* GAIFields.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF0531918B37500A010A5 /* GAIFields.h */; };
+		A5ACF05B1918B37500A010A5 /* GAILogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF0541918B37500A010A5 /* GAILogger.h */; };
+		A5ACF05C1918B37500A010A5 /* GAITrackedViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF0551918B37500A010A5 /* GAITrackedViewController.h */; };
+		A5ACF05D1918B37500A010A5 /* GAITracker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF0561918B37500A010A5 /* GAITracker.h */; };
+		A5ACF05E1918B37500A010A5 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5ACF0571918B37500A010A5 /* libGoogleAnalyticsServices.a */; };
+		A5ACF0601918B3B300A010A5 /* GoogleAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5ACF05F1918B3B300A010A5 /* GoogleAnalytics.mm */; };
 		A5BB768918E9DD4D0096422D /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC25E18E99F5400F1F979 /* libFlurry.a */; };
 		A5BB771418E9F4950096422D /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A5D08BAC18F6F5B100B4EBA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -83,7 +95,6 @@
 		A5D327831900517E00A65D25 /* GADRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D327791900517E00A65D25 /* GADRequest.h */; };
 		A5D327841900517E00A65D25 /* GADRequestError.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D3277A1900517E00A65D25 /* GADRequestError.h */; };
 		A5D327851900517E00A65D25 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D3277B1900517E00A65D25 /* libGoogleAdMobAds.a */; };
-		A5D327871900EEA700A65D25 /* AdNob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D327861900EEA700A65D25 /* AdNob.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +139,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A50BC25F18E9A14800F1F979;
 			remoteInfo = FlurryAds;
+		};
+		A5ACF04E1918B2EB00A010A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5ACF0351918B1E500A010A5;
+			remoteInfo = GoogleAnalytics;
 		};
 		A5D08BB418F6F5F900B4EBA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -223,6 +241,16 @@
 		A50BC28C18E9B2C200F1F979 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = avalon/Flurry.h; sourceTree = SOURCE_ROOT; };
 		A50C343418EA00F0002B388C /* AlertNative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AlertNative.mm; path = avalon/platform/ios/ui/AlertNative.mm; sourceTree = "<group>"; };
 		A532994618EDC88E002A3BDE /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = avalon/platform/ios/payment.h; sourceTree = SOURCE_ROOT; };
+		A5ACF0491918B1E500A010A5 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGoogleAnalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleAnalytics.h; path = avalon/GoogleAnalytics.h; sourceTree = "<group>"; };
+		A5ACF0511918B37500A010A5 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		A5ACF0521918B37500A010A5 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		A5ACF0531918B37500A010A5 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		A5ACF0541918B37500A010A5 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		A5ACF0551918B37500A010A5 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		A5ACF0561918B37500A010A5 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		A5ACF0571918B37500A010A5 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		A5ACF05F1918B3B300A010A5 /* GoogleAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GoogleAnalytics.mm; path = avalon/platform/ios/googleAnalitics/GoogleAnalytics.mm; sourceTree = "<group>"; };
 		A5D08BB318F6F5B100B4EBA1 /* libNotifications.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNotifications.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D08BB718F6F67800B4EBA1 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Notifications.h; path = avalon/Notifications.h; sourceTree = "<group>"; };
 		A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Notifications.mm; path = avalon/platform/ios/notifications/Notifications.mm; sourceTree = "<group>"; };
@@ -295,6 +323,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5ACF0381918B1E500A010A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5ACF0391918B1E500A010A5 /* Foundation.framework in Frameworks */,
+				A5ACF05E1918B37500A010A5 /* libGoogleAnalyticsServices.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5D08BAB18F6F5B100B4EBA1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,6 +355,7 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				A5ACF04B1918B2D700A010A5 /* GoogleAnalytics */,
 				A5D3276E1900514300A65D25 /* AdMob */,
 				A5D08BB618F6F66800B4EBA1 /* Notifications */,
 				A50BC28518E9B2B400F1F979 /* Flurry */,
@@ -342,6 +380,7 @@
 				A50BC26B18E9A14800F1F979 /* libFlurryAds.a */,
 				A5D08BB318F6F5B100B4EBA1 /* libNotifications.a */,
 				A5D3276D1900507400A65D25 /* libAdMob.a */,
+				A5ACF0491918B1E500A010A5 /* libGoogleAnalytics.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -511,6 +550,31 @@
 			path = "Flurry-ios";
 			sourceTree = "<group>";
 		};
+		A5ACF04B1918B2D700A010A5 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				A5ACF0501918B37500A010A5 /* GoogleAnalytics-ios */,
+				A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */,
+				A5ACF05F1918B3B300A010A5 /* GoogleAnalytics.mm */,
+			);
+			name = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+		A5ACF0501918B37500A010A5 /* GoogleAnalytics-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A5ACF0511918B37500A010A5 /* GAI.h */,
+				A5ACF0521918B37500A010A5 /* GAIDictionaryBuilder.h */,
+				A5ACF0531918B37500A010A5 /* GAIFields.h */,
+				A5ACF0541918B37500A010A5 /* GAILogger.h */,
+				A5ACF0551918B37500A010A5 /* GAITrackedViewController.h */,
+				A5ACF0561918B37500A010A5 /* GAITracker.h */,
+				A5ACF0571918B37500A010A5 /* libGoogleAnalyticsServices.a */,
+			);
+			name = "GoogleAnalytics-ios";
+			path = avalon/platform/ios/googleAnalitics;
+			sourceTree = "<group>";
+		};
 		A5D08BB618F6F66800B4EBA1 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -612,6 +676,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				A532995918EDC9D0002A3BDE /* FlurryAds.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5ACF03B1918B1E500A010A5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5ACF0581918B37500A010A5 /* GAI.h in Headers */,
+				A5ACF05B1918B37500A010A5 /* GAILogger.h in Headers */,
+				A5ACF04D1918B2E300A010A5 /* GoogleAnalytics.h in Headers */,
+				A5ACF0591918B37500A010A5 /* GAIDictionaryBuilder.h in Headers */,
+				A5ACF05A1918B37500A010A5 /* GAIFields.h in Headers */,
+				A5ACF05C1918B37500A010A5 /* GAITrackedViewController.h in Headers */,
+				A5ACF05D1918B37500A010A5 /* GAITracker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +825,23 @@
 			productReference = A50BC26B18E9A14800F1F979 /* libFlurryAds.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5ACF0351918B1E500A010A5 /* GoogleAnalytics */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5ACF0461918B1E500A010A5 /* Build configuration list for PBXNativeTarget "GoogleAnalytics" */;
+			buildPhases = (
+				A5ACF0361918B1E500A010A5 /* Sources */,
+				A5ACF0381918B1E500A010A5 /* Frameworks */,
+				A5ACF03B1918B1E500A010A5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GoogleAnalytics;
+			productName = Avalon;
+			productReference = A5ACF0491918B1E500A010A5 /* libGoogleAnalytics.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A5D08BA518F6F5B100B4EBA1 /* Notifications */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5D08BB018F6F5B100B4EBA1 /* Build configuration list for PBXNativeTarget "Notifications" */;
@@ -834,6 +929,7 @@
 				A50BC25F18E9A14800F1F979 /* FlurryAds */,
 				A5D08BA518F6F5B100B4EBA1 /* Notifications */,
 				A5D3275E1900507400A65D25 /* AdMob */,
+				A5ACF0351918B1E500A010A5 /* GoogleAnalytics */,
 				A50BC24618E99DA500F1F979 /* Build all libs */,
 			);
 		};
@@ -908,6 +1004,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5ACF0361918B1E500A010A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5ACF0601918B3B300A010A5 /* GoogleAnalytics.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5D08BA618F6F5B100B4EBA1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -921,7 +1025,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5D327871900EEA700A65D25 /* AdNob.mm in Sources */,
+				A5ACF04A1918B25C00A010A5 /* AdNob.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -957,6 +1061,11 @@
 			isa = PBXTargetDependency;
 			target = A50BC25F18E9A14800F1F979 /* FlurryAds */;
 			targetProxy = A50BC28318E9A5D200F1F979 /* PBXContainerItemProxy */;
+		};
+		A5ACF04F1918B2EB00A010A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5ACF0351918B1E500A010A5 /* GoogleAnalytics */;
+			targetProxy = A5ACF04E1918B2EB00A010A5 /* PBXContainerItemProxy */;
 		};
 		A5D08BB518F6F5F900B4EBA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1279,6 +1388,38 @@
 			};
 			name = Release;
 		};
+		A5ACF0471918B1E500A010A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/googleAnalitics",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = GoogleAnalytics;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A5ACF0481918B1E500A010A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/googleAnalitics",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = GoogleAnalytics;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A5D08BB118F6F5B100B4EBA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1406,6 +1547,15 @@
 			buildConfigurations = (
 				A50BC26918E9A14800F1F979 /* Debug */,
 				A50BC26A18E9A14800F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5ACF0461918B1E500A010A5 /* Build configuration list for PBXNativeTarget "GoogleAnalytics" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5ACF0471918B1E500A010A5 /* Debug */,
+				A5ACF0481918B1E500A010A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
