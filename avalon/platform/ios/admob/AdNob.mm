@@ -58,6 +58,7 @@
 {
     if(_delegate)
         _delegate->adViewWillLeaveApplication(_bannerView);
+    avalon::AdMob::getInstance()->removeBanner(_bannerView);
 }
 
 @end
@@ -114,6 +115,7 @@
 {
     if(_delegate)
         _delegate->interstitialWillLeaveApplication(_interstitial);
+    avalon::AdMob::getInstance()->removeInterstitial(_interstitial);
 }
 @end
 

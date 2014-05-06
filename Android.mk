@@ -78,6 +78,18 @@ ifneq (,$(findstring notifications,$(AVALON_FEATURES)))
     LOCAL_SRC_FILES += avalon/platform/android/notifications/notifications.cpp
 endif
 
+ifneq (,$(findstring admob,$(AVALON_FEATURES)))
+    LOCAL_CFLAGS += -DAVALON_CONFIG_ADMOB_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_ADMOB_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/admob/admob.cpp
+endif
+
+ifneq (,$(findstring googleanalytics,$(AVALON_FEATURES)))
+    LOCAL_CFLAGS += -DAVALON_CONFIG_GOOGLEANALYTICS_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_GOOGLEANALYTICS_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/googleanalytics/GoogleAnalytics.cpp
+endif
+
 ifeq (google, $(AVALON_PLATFORM_FLAVOR))
     LOCAL_SRC_FILES += avalon/platform/android-google/ads/provider/TapForTap.cpp
 endif

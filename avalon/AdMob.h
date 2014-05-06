@@ -78,6 +78,7 @@ public:
     virtual void adViewWillPresentScreen(GADBannerView *adView) {}
     virtual void adViewWillDismissScreen(GADBannerView *adView) {}
     virtual void adViewWillLeaveApplication(GADBannerView *adView) {}
+    virtual ~GADBannerViewDelegate() {}
 };
 
 class AdMob
@@ -108,7 +109,7 @@ public:
     
 protected:
     AdMob(const std::string &version):_sdkVersion(version) {}
-    ~AdMob() {}
+    virtual ~AdMob() {}
     
 private:
     std::string _sdkVersion;
