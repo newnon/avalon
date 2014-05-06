@@ -200,13 +200,13 @@ public abstract class FlurryAdsHelper {
 		});
     }
 	
-	public static void fetchAdForSpace(String space, int x,int y,int width,int heignt, int size)
+	public static void fetchAdForSpace(String space, int x,int y,int width,int height, int size)
     {
 		final String curSpace = space;
 		final int curX = x;
 		final int curY = y;
 		final int curWidth = width;
-		final int curHeight = heignt;
+		final int curHeight = height;
 		final FlurryAdSize curSize = FlurryAdSize.values()[size-1];
 		
 		activity.runOnUiThread(new Runnable() {
