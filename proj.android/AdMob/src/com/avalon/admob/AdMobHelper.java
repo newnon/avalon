@@ -22,10 +22,16 @@
 
 package com.avalon.admob;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import android.app.Activity;
+import android.location.Location;
+import android.os.Bundle;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -35,6 +41,8 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.mediation.NetworkExtras;
+import com.google.android.gms.ads.mediation.admob.AdMobExtras;
 
 import org.cocos2dx.lib.Cocos2dxHelper;
 
@@ -42,8 +50,16 @@ import org.cocos2dx.lib.Cocos2dxHelper;
 public abstract class AdMobHelper
 {
 	private static LinearLayout m_adsLayout = null;
-	private static AbsoluteLayout mBannerView = null;
+	private static AbsoluteLayout m_BannerView = null;
 	private static final Activity activity = Cocos2dxHelper.getActivity();
+	
+	private static String m_keyWords[] = null;
+	private static String m_testDevices[] = null;
+	private static NetworkExtras m_networkExtras = null;
+	private static Date m_Birthday = null;
+	private static int m_Gender = 0;
+	private static Location m_Location;
+	private static Boolean m_TagForChildDirectedTreatment = null;
 	
 	public static native void delegateAdViewDidReceiveAd(long object);
 	public static native void delegateAdViewDidFailToReceiveAd(long object, String error);
@@ -56,6 +72,53 @@ public abstract class AdMobHelper
 	public static native void delegateInterstitialWillPresentScreen(long object);
 	public static native void delegateInterstitialWillDismissScreen(long object);
 	public static native void delegateInterstitialWillLeaveApplication(long object);
+	
+	public static void setKeyWords(String keyWords[])
+	{
+		m_keyWords = keyWords;
+	}
+	
+	public static void setTestDevices(String devices[])
+	{
+		m_testDevices = devices;
+	}
+	
+	public static void setAdNetworkExtras(int network, Map<String,String> extras)
+	{
+		if(network == 0)
+		{
+			Bundle bundle = new Bundle();
+			for (Map.Entry<String, String> entry : extras.entrySet())
+			{
+				bundle.putString(entry.getKey(),entry.getValue());
+			}
+			m_networkExtras = new AdMobExtras(bundle);
+		}
+	}
+	public static void setBirthday(int year, int month, int day)
+	{
+		Calendar cal = GregorianCalendar.getInstance();
+		cal.set(year, month, day);
+		m_Birthday = cal.getTime();
+	}
+	
+	public static void setGender(int gender)
+	{
+		m_Gender = gender;
+	}
+	
+	public static void setLocation(float latitude, float longitude, float accuracyInMeters)
+	{
+		m_Location = new Location("custom");
+		m_Location.setLatitude(latitude);
+		m_Location.setLongitude(longitude);
+		m_Location.setAccuracy(accuracyInMeters);
+	}
+	
+	public static void setTagForChildDirectedTreatment(boolean tag)
+	{
+		m_TagForChildDirectedTreatment = tag;
+	}
 	
 	public static void adViewReceiveAd(long object)
     {
@@ -277,6 +340,28 @@ public abstract class AdMobHelper
 		}
 	}
 	
+	private static AdRequest createRequest()
+	{
+		AdRequest.Builder builder = new AdRequest.Builder();
+		if(m_networkExtras != null)
+			builder.addNetworkExtras(m_networkExtras);
+		if(m_keyWords != null)
+			for (String keyWord : m_keyWords)
+				builder.addKeyword(keyWord);
+		if(m_testDevices != null)
+			for (String testDevice : m_testDevices)
+				builder.addTestDevice(testDevice);
+		builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+		if(m_Birthday != null)
+			builder.setBirthday(m_Birthday);
+		builder.setGender(m_Gender);
+		if(m_Location != null)
+			builder.setLocation(m_Location);
+		if(m_TagForChildDirectedTreatment != null)
+			builder.tagForChildDirectedTreatment(m_TagForChildDirectedTreatment);
+		return builder.build(); 
+	}
+	
 	public static void addInterstitialDelegate(InterstitialAd intersititial, long value)
 	{
 		final InterstitialAd curIntersititial = intersititial;
@@ -298,8 +383,8 @@ public abstract class AdMobHelper
             public InterstitialAd call() {
             	InterstitialAd interstitial = new InterstitialAd(Cocos2dxHelper.getActivity());
         		interstitial.setAdUnitId(curAdUnitID);
-        	    AdRequest adRequest = new AdRequest.Builder().build();
-        	    interstitial.loadAd(adRequest);
+
+        	    interstitial.loadAd(createRequest());
         		return interstitial;
             }
         });
@@ -402,29 +487,28 @@ public abstract class AdMobHelper
 							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 				}
 
-				if (null != mBannerView) {
-					m_adsLayout.removeView(mBannerView);
-					mBannerView = null;
+				if (null != m_BannerView) {
+					m_adsLayout.removeView(m_BannerView);
+					m_BannerView = null;
 				}
-				mBannerView = new AbsoluteLayout(activity);
-				m_adsLayout.addView(mBannerView);
+				m_BannerView = new AbsoluteLayout(activity);
+				m_adsLayout.addView(m_BannerView);
 
-				LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) mBannerView
+				LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) m_BannerView
 						.getLayoutParams();
 				linearParams.leftMargin = curX;
 				linearParams.topMargin = curY;
 				linearParams.width = curWidth;
 				linearParams.height = curHeight;
-				mBannerView.setLayoutParams(linearParams);
+				m_BannerView.setLayoutParams(linearParams);
 				
 				AdView adView = new AdView(activity);
 				adView.setAdUnitId(curAdUnitID);
 			    adView.setAdSize(curAdSize);
 			    
-			    mBannerView.addView(adView);
+			    m_BannerView.addView(adView);
 			    
-			    AdRequest adRequest = new AdRequest.Builder().build();
-			    adView.loadAd(adRequest);
+			    adView.loadAd(createRequest());
 				return adView;
             }
         });

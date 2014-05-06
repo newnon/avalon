@@ -10,6 +10,54 @@ const char* const HELPER_CLASS_NAME = "com/avalon/admob/AdMobHelper";
 
 namespace avalon {
 
+static jobject jobjectFromDictionary(const std::map<std::string,std::string> &dictionary)
+{
+    JNIEnv* env = cocos2d::JniHelper::getEnv();
+    jclass mapClass = env->FindClass("java/util/HashMap");
+    if(mapClass == NULL)
+    {
+        return NULL;
+    }
+
+    jsize map_len = 1;
+
+    jmethodID init = env->GetMethodID(mapClass, "<init>", "(I)V");
+    jobject hashMap = env->NewObject(mapClass, init, map_len);
+
+    jmethodID put = env->GetMethodID(mapClass, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+
+    for(auto &it : dictionary)
+    {
+        jstring key = env->NewStringUTF(it.first.c_str());
+        jstring value = env->NewStringUTF(it.second.c_str());
+
+        env->CallObjectMethod(hashMap, put, key, value);
+
+        env->DeleteLocalRef(key);
+        env->DeleteLocalRef(value);
+    }
+
+    env->DeleteLocalRef(mapClass);
+    return hashMap;
+}
+
+static jobject jobjectFromVector(const std::vector<std::string> &vector)
+{
+    JNIEnv* env = cocos2d::JniHelper::getEnv();
+    jclass clsString = env->FindClass("java/lang/String");
+    jobjectArray stringArray = env->NewObjectArray(vector.size(), clsString, 0);
+
+    for(size_t i = 0; i < vector.size(); ++i)
+    {
+        jstring tmp = env->NewStringUTF(vector[i].c_str());
+        env->SetObjectArrayElement(stringArray, i, tmp);
+        env->DeleteLocalRef(tmp);
+    }
+
+    env->DeleteLocalRef(clsString);
+    return stringArray;
+}
+
 class AndroidGADInterstitial:public GADInterstitial
 {
 public:
@@ -65,7 +113,7 @@ public:
                 methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _interstitial, (jlong)0);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
-            cocos2d::JniHelper::getEnv()->DeleteLocalRef(_interstitial);
+            cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_interstitial);
         }
     }
 
@@ -131,7 +179,7 @@ public:
                 methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView, (jlong)0);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
-            cocos2d::JniHelper::getEnv()->DeleteLocalRef(_bannerView);
+            cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_bannerView);
         }
     }
 
@@ -169,36 +217,86 @@ private:
     GADBannerViewDelegate *_delegate;
 };
 
-
 class AndroidAdMob : public AdMob
 {
 public:
 
     AndroidAdMob(const std::string &version):AdMob(version) {}
+    virtual ~AndroidAdMob() {}
 
     virtual void setAdNetworkExtras(GADAdNetworkExtras network, const std::map<std::string,std::string> &extras) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setAdNetworkExtras", "(ILjava/util/Map;)V"))
+        {
+            jobject jExtras = jobjectFromDictionary(extras);
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)network, jExtras);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jExtras);
+        }
     }
+
     void setTestDevices(const std::vector<std::string>& devices) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setTestDevices", "([Ljava/lang/String;)V"))
+        {
+            jobject jDevices = jobjectFromVector(devices);
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jDevices);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jDevices);
+        }
     }
+
     void setGender(GADGender gender) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setGender", "(I)V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)gender);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
     }
     void setBirthDate(unsigned month, unsigned day, unsigned year) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setBirthday", "(III)V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jint)year, (jint)month, (jint)day);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
     }
     void setLocation(float latitude, float longitude, float accuracyInMeters) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setLocation", "(FFF)V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jfloat)latitude, (jfloat)longitude, (jfloat)accuracyInMeters);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
     }
     void setLocation(const std::string &location) override
     {
     }
     void setTagForChildDirectedTreatment(bool value) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setTagForChildDirectedTreatment", "(Z)V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jboolean)value);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
     }
     void setKeywords(const std::vector<std::string>& keywords) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setKeyWords", "([Ljava/lang/String;)V"))
+        {
+            jobject jKeywords = jobjectFromVector(keywords);
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jKeywords);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jKeywords);
+        }
     }
 
     std::shared_ptr<GADInterstitial> createIntestitial(const std::string &adUnitID, GADInterstitialDelegate *delegate) override
