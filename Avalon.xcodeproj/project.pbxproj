@@ -34,7 +34,6 @@
 		A50BC1AE18E9635400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC1BA18E963A300F1F979 /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1B718E963A300F1F979 /* GameCenter.mm */; };
 		A50BC1BB18E963A300F1F979 /* GameCenterIos.m in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1B918E963A300F1F979 /* GameCenterIos.m */; };
-		A50BC1CD18E9699B00F1F979 /* Loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C118E9699B00F1F979 /* Loader.cpp */; };
 		A50BC1CE18E9699B00F1F979 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C318E9699B00F1F979 /* Manager.cpp */; };
 		A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C618E9699B00F1F979 /* Product.cpp */; };
 		A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */; };
@@ -56,7 +55,6 @@
 		A532994118EDC05A002A3BDE /* url.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC23A18E984A100F1F979 /* url.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532994818EDC8AF002A3BDE /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A532994618EDC88E002A3BDE /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532994918EDC8AF002A3BDE /* Backend.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C018E9699B00F1F979 /* Backend.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A532994A18EDC8AF002A3BDE /* Loader.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C218E9699B00F1F979 /* Loader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532994B18EDC8AF002A3BDE /* Manager.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C418E9699B00F1F979 /* Manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532994C18EDC8AF002A3BDE /* ManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A532994D18EDC8AF002A3BDE /* Product.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C718E9699B00F1F979 /* Product.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -173,8 +171,6 @@
 		A50BC1B818E963A300F1F979 /* GameCenterIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterIos.h; sourceTree = "<group>"; };
 		A50BC1B918E963A300F1F979 /* GameCenterIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterIos.m; sourceTree = "<group>"; };
 		A50BC1C018E9699B00F1F979 /* Backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Backend.h; sourceTree = "<group>"; };
-		A50BC1C118E9699B00F1F979 /* Loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loader.cpp; sourceTree = "<group>"; };
-		A50BC1C218E9699B00F1F979 /* Loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loader.h; sourceTree = "<group>"; };
 		A50BC1C318E9699B00F1F979 /* Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Manager.cpp; sourceTree = "<group>"; };
 		A50BC1C418E9699B00F1F979 /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
 		A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerDelegate.h; sourceTree = "<group>"; };
@@ -427,8 +423,6 @@
 			isa = PBXGroup;
 			children = (
 				A50BC1C018E9699B00F1F979 /* Backend.h */,
-				A50BC1C118E9699B00F1F979 /* Loader.cpp */,
-				A50BC1C218E9699B00F1F979 /* Loader.h */,
 				A50BC1C318E9699B00F1F979 /* Manager.cpp */,
 				A50BC1C418E9699B00F1F979 /* Manager.h */,
 				A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */,
@@ -639,7 +633,6 @@
 			files = (
 				A532994818EDC8AF002A3BDE /* payment.h in Headers */,
 				A532994918EDC8AF002A3BDE /* Backend.h in Headers */,
-				A532994A18EDC8AF002A3BDE /* Loader.h in Headers */,
 				A532994B18EDC8AF002A3BDE /* Manager.h in Headers */,
 				A532994C18EDC8AF002A3BDE /* ManagerDelegate.h in Headers */,
 				A532994D18EDC8AF002A3BDE /* Product.h in Headers */,
@@ -969,7 +962,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50BC1CD18E9699B00F1F979 /* Loader.cpp in Sources */,
 				A50BC1D618E969B700F1F979 /* BackendIos.mm in Sources */,
 				A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */,
 				A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */,

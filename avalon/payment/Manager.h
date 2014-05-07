@@ -3,8 +3,7 @@
 
 #include <string>
 #include <map>
-#include "avalon/utils/utility.hpp"
-#include "avalon/payment/Backend.h"
+#include "Backend.h"
 
 namespace avalon {
 namespace payment {
@@ -25,7 +24,7 @@ typedef std::map<const std::string, Product* const> ProductList;
  * @warning It's a good idea to use payment::Loader to instaniate and configure
  *          this class!
  */
-class Manager : avalon::noncopyable
+class Manager
 {
 public:
     /**
@@ -61,6 +60,9 @@ private:
     Backend backend;
     mutable ProductList products;
     std::map<std::string, std::string> productIdAliases;
+    
+    Manager( const Manager& ) = delete;
+    Manager& operator=( const Manager& ) = delete;
 };
 
 } // namespace payment

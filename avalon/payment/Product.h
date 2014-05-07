@@ -2,14 +2,13 @@
 #define AVALON_PAYMENT_PRODUCT_H
 
 #include <string>
-#include "avalon/utils/utility.hpp"
 
 namespace avalon {
 namespace payment {
 
 class Manager;
 
-class Product : avalon::noncopyable
+class Product
 {
     friend class Manager;
 
@@ -37,6 +36,9 @@ protected:
 
 private:
     const std::string productId;
+    
+    Product( const Product& ) = delete;
+    Product& operator=( const Product& ) = delete;
 };
 
 } // namespace payment

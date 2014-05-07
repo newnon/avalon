@@ -7,6 +7,4 @@
 #include "avalon/Product.h"
 #include "avalon/ProductConsumable.h"
 
-#include "avalon/Loader.h"
-
 #endif /* AVALON_PAYMENT_H */

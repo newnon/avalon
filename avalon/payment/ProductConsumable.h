@@ -1,7 +1,7 @@
 #ifndef AVALON_PAYMENT_PRODUCTCONSUMABLE_H
 #define AVALON_PAYMENT_PRODUCTCONSUMABLE_H
 
-#include "avalon/payment/Product.h"
+#include "Product.h"
 
 namespace avalon {
 namespace payment {

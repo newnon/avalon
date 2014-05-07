@@ -1,7 +1,6 @@
 #ifndef AVALON_PAYMENT_BACKEND_H
 #define AVALON_PAYMENT_BACKEND_H
 
-#include "avalon/utils/utility.hpp"
 #include <string>
 
 namespace avalon {
@@ -17,7 +16,7 @@ class Product;
  * @warning This is _not_ an interface and the use hast to choose the right
  *          implementation from avalon/platform!
  */
-class Backend : avalon::noncopyable
+class Backend
 {
 public:
     explicit Backend(Manager& manager);
@@ -31,9 +30,13 @@ public:
     bool isPurchaseReady() const;
 
     void restorePurchases() const;
+    
 
 private:
     Manager& manager;
+    
+    Backend( const Backend& ) = delete;
+    Backend& operator=( const Backend& ) = delete;
 };
 
 //
