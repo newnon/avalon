@@ -122,10 +122,10 @@ public:
         if(_delegate)
             _delegate->interstitialDidReceiveAd(this);
     }
-    void interstitialDidFailToReceiveAd(const std::string &error)
+    void interstitialDidFailToReceiveAd(int error)
     {
         if(_delegate)
-            _delegate->interstitialDidFailToReceiveAd(this, error);
+            _delegate->interstitialDidFailToReceiveAd(this, static_cast<GADErrorCode>(error));
         avalon::AdMob::getInstance()->removeInterstitial(this);
     }
     void interstitialWillPresentScreen()
@@ -143,7 +143,6 @@ public:
     {
         if(_delegate)
             _delegate->interstitialWillLeaveApplication(this);
-        avalon::AdMob::getInstance()->removeInterstitial(this);
     }
 
 private:
@@ -188,10 +187,10 @@ public:
         if(_delegate)
             _delegate->adViewDidReceiveAd(this);
     }
-    void adViewDidFailToReceive(const std::string &error)
+    void adViewDidFailToReceive(int error)
     {
         if(_delegate)
-            _delegate->adViewDidFailToReceive(this, error);
+            _delegate->adViewDidFailToReceive(this, static_cast<GADErrorCode>(error));
         avalon::AdMob::getInstance()->removeBanner(this);
     }
     void adViewWillPresentScreen()
@@ -209,7 +208,6 @@ public:
     {
         if(_delegate)
             _delegate->adViewWillLeaveApplication(this);
-        avalon::AdMob::getInstance()->removeBanner(this);
     }
 
 private:
@@ -400,10 +398,9 @@ JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewDidReceiv
 {
     ((avalon::AndroidGADBannerView*)object)->adViewDidReceiveAd();
 }
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jstring error)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jint error)
 {
-    std::string errorStr = cocos2d::JniHelper::jstring2string(error);
-    ((avalon::AndroidGADBannerView*)object)->adViewDidFailToReceive(errorStr);
+    ((avalon::AndroidGADBannerView*)object)->adViewDidFailToReceive(error);
 }
 JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewWillPresentScreen(JNIEnv* env, jclass clazz, jlong object)
 {
@@ -422,10 +419,9 @@ JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialDid
 {
     ((avalon::AndroidGADInterstitial*)object)->interstitialDidReceiveAd();
 }
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jstring error)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jint error)
 {
-    std::string errorStr = cocos2d::JniHelper::jstring2string(error);
-    ((avalon::AndroidGADInterstitial*)object)->interstitialDidFailToReceiveAd(errorStr);
+    ((avalon::AndroidGADInterstitial*)object)->interstitialDidFailToReceiveAd(error);
 }
 JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialWillPresentScreen(JNIEnv* env, jclass clazz, jlong object)
 {

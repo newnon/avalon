@@ -34,11 +34,53 @@ protected:
     std::string _adUnitID;
 };
     
+enum class GADErrorCode
+{
+    /// Something happened internally; for instance, an invalid response was received from the ad server.
+    INTERNAL_ERROR = 0,
+    
+    /// The ad request is invalid.  The localizedFailureReason error description will have more
+    /// details.  Typically this is because the ad did not have the ad unit ID or root view
+    /// controller set.
+    INVALID_REQUEST,
+    
+    /// The ad request was successful, but no ad was returned.
+    NO_FILL,
+    
+    /// There was an error loading data from the network.
+    NETWORK_ERROR,
+    
+    /// The ad server experienced a failure processing the request.
+    SERVER_ERROR,
+    
+    /// The current device's OS is below the minimum required version.
+    OS_VERSION_TOO_LOW,
+    
+    /// The request was unable to be loaded before being timed out.
+    TIMEOUT,
+    
+    /// Will not send request because the interstitial object has already been used.
+    INTERSTITIAL_ALREADY_USED,
+    
+    /// The mediation response was invalid.
+    MEDIATION_DATA_ERROR,
+    
+    /// Error finding or creating a mediation ad network adapter.
+    MEDIATION_ADAPTER_ERROR,
+    
+    /// The mediation request was successful, but no ad was returned from any ad networks.
+    MEDIATION_NO_FILL,
+    
+    /// Attempting to pass an invalid ad size to an adapter.
+    MEDIATION_INVALID_ADSIZE,
+    
+};
+    
 class GADInterstitialDelegate
 {
 public:
     virtual void interstitialDidReceiveAd(GADInterstitial *view) {}
-    virtual void interstitialDidFailToReceiveAd(GADInterstitial *view, const std::string &error) {}
+    virtual void interstitialDidFailToReceiveAd(GADInterstitial *view, GADErrorCode error) {}
     virtual void interstitialWillPresentScreen(GADInterstitial *adView) {}
     virtual void interstitialWillDismissScreen(GADInterstitial *adView) {}
     virtual void interstitialWillLeaveApplication(GADInterstitial *adView) {}
@@ -74,7 +116,7 @@ class GADBannerViewDelegate
 {
 public:
     virtual void adViewDidReceiveAd(GADBannerView *view) {}
-    virtual void adViewDidFailToReceive(GADBannerView *view, const std::string &error) {}
+    virtual void adViewDidFailToReceive(GADBannerView *view, GADErrorCode error) {}
     virtual void adViewWillPresentScreen(GADBannerView *adView) {}
     virtual void adViewWillDismissScreen(GADBannerView *adView) {}
     virtual void adViewWillLeaveApplication(GADBannerView *adView) {}

@@ -37,7 +37,7 @@
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
     if(_delegate)
-        _delegate->adViewDidFailToReceive(_bannerView, [[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding]);
+        _delegate->adViewDidFailToReceive(_bannerView, static_cast<avalon::GADErrorCode>(error.code+1));
     avalon::AdMob::getInstance()->removeBanner(_bannerView);
 }
 
@@ -58,7 +58,6 @@
 {
     if(_delegate)
         _delegate->adViewWillLeaveApplication(_bannerView);
-    avalon::AdMob::getInstance()->removeBanner(_bannerView);
 }
 
 @end
@@ -94,7 +93,7 @@
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
     if(_delegate)
-        _delegate->interstitialDidFailToReceiveAd(_interstitial,[[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding]);
+        _delegate->interstitialDidFailToReceiveAd(_interstitial, static_cast<avalon::GADErrorCode>(error.code+1));
     avalon::AdMob::getInstance()->removeInterstitial(_interstitial);
 }
 
@@ -115,7 +114,6 @@
 {
     if(_delegate)
         _delegate->interstitialWillLeaveApplication(_interstitial);
-    avalon::AdMob::getInstance()->removeInterstitial(_interstitial);
 }
 @end
 

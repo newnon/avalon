@@ -62,16 +62,38 @@ public abstract class AdMobHelper
 	private static Boolean m_TagForChildDirectedTreatment = null;
 	
 	public static native void delegateAdViewDidReceiveAd(long object);
-	public static native void delegateAdViewDidFailToReceiveAd(long object, String error);
+	public static native void delegateAdViewDidFailToReceiveAd(long object, int error);
 	public static native void delegateAdViewWillPresentScreen(long object);
 	public static native void delegateAdViewWillDismissScreen(long object);
 	public static native void delegateAdViewWillLeaveApplication(long object);
 
 	public static native void delegateInterstitialDidReceiveAd(long object);
-	public static native void delegateInterstitialDidFailToReceiveAd(long object, String error);
+	public static native void delegateInterstitialDidFailToReceiveAd(long object, int error);
 	public static native void delegateInterstitialWillPresentScreen(long object);
 	public static native void delegateInterstitialWillDismissScreen(long object);
 	public static native void delegateInterstitialWillLeaveApplication(long object);
+	
+	final private static int kGADErrorInternalError = 0;
+	final private static int kGADErrorInvalidRequest = 1;
+	final private static int kGADErrorNoFill = 2;
+	final private static int kGADErrorNetworkError = 3;
+	final private static int kGADErrorServerError = 4;
+	final private static int kGADErrorOSVersionTooLow = 5;
+	final private static int kGADErrorTimeout = 6;
+	final private static int kGADErrorInterstitialAlreadyUsed = 7;
+	final private static int kGADErrorMediationDataError = 8;
+	final private static int kGADErrorMediationAdapterError = 9;
+	final private static int kGADErrorMediationNoFill = 10;
+	final private static int kGADErrorMediationInvalidAdSize = 11;
+	  
+	final private static int kGADAdSizeInvalid = 0;
+	final private static int kGADAdSizeBanner = 1;
+	final private static int kGADAdSizeMediumRectangle = 2;
+	final private static int kGADAdSizeFullBanner = 3;
+	final private static int kGADAdSizeLeaderboard = 4;
+	final private static int kGADAdSizeSkyscraper = 5;
+	final private static int kGADAdSizeSmartBannerPortrait = 6;
+	final private static int kGADAdSizeSmartBannerLandscape = 7;
 	
 	public static void setKeyWords(String keyWords[])
 	{
@@ -132,10 +154,10 @@ public abstract class AdMobHelper
 		});
     }
 	
-	public static void adViewDidFailToReceive(long object, String error)
+	public static void adViewDidFailToReceive(long object, int error)
     {
     	final long lObject = object;
-    	final String lError = error;
+    	final int lError = error;
     	
 		Cocos2dxHelper.runOnGLThread(new Runnable() {
 			@Override
@@ -193,10 +215,10 @@ public abstract class AdMobHelper
 		});
     }
 	
-	public static void interstitialDidFailToReceive(long object, String error)
+	public static void interstitialDidFailToReceive(long object, int error)
     {
     	final long lObject = object;
-    	final String lError = error;
+    	final int lError = error;
     	
 		Cocos2dxHelper.runOnGLThread(new Runnable() {
 			@Override
@@ -248,38 +270,43 @@ public abstract class AdMobHelper
 		{
 			pointer = value;
 		}
+		@Override
 		public void onAdLoaded()
 		{
 			AdMobHelper.adViewReceiveAd(pointer);
 		}
+		@Override
 		public void onAdFailedToLoad(int errorCode)
 		{
-			String error = "";
+			int error = kGADErrorInternalError;
 			switch(errorCode)
 			{
 				case AdRequest.ERROR_CODE_INTERNAL_ERROR:
-					error = "ERROR_CODE_INTERNAL_ERROR";
+					error = kGADErrorInternalError;
 					break;
 				case AdRequest.ERROR_CODE_INVALID_REQUEST:
-					error = "ERROR_CODE_INVALID_REQUEST";
+					error = kGADErrorInvalidRequest;
 					break;
 				case AdRequest.ERROR_CODE_NETWORK_ERROR:
-					error = "ERROR_CODE_NETWORK_ERROR";
+					error = kGADErrorNetworkError;
 					break;
 				case AdRequest.ERROR_CODE_NO_FILL:
-					error = "ERROR_CODE_NO_FILL";
+					error = kGADErrorNoFill;
 					break;
 			}
 			AdMobHelper.adViewDidFailToReceive(pointer, error);
 		}
+		@Override
 		public void onAdOpened()
 		{
 			AdMobHelper.adViewWillPresentScreen(pointer);
 		}
+		@Override
 		public void onAdClosed()
 		{
 			AdMobHelper.adViewWillDismissScreen(pointer);
 		}
+		@Override
 		public void onAdLeftApplication()
 		{
 			AdMobHelper.adViewWillLeaveApplication(pointer);
@@ -305,20 +332,20 @@ public abstract class AdMobHelper
 		@Override
 		public void onAdFailedToLoad(int errorCode)
 		{
-			String error = "";
+			int error = kGADErrorInternalError;
 			switch(errorCode)
 			{
 				case AdRequest.ERROR_CODE_INTERNAL_ERROR:
-					error = "ERROR_CODE_INTERNAL_ERROR";
+					error = kGADErrorInternalError;
 					break;
 				case AdRequest.ERROR_CODE_INVALID_REQUEST:
-					error = "ERROR_CODE_INVALID_REQUEST";
+					error = kGADErrorInvalidRequest;
 					break;
 				case AdRequest.ERROR_CODE_NETWORK_ERROR:
-					error = "ERROR_CODE_NETWORK_ERROR";
+					error = kGADErrorNetworkError;
 					break;
 				case AdRequest.ERROR_CODE_NO_FILL:
-					error = "ERROR_CODE_NO_FILL";
+					error = kGADErrorNoFill;
 					break;
 			}
 			AdMobHelper.interstitialDidFailToReceive(pointer, error);
@@ -452,25 +479,25 @@ public abstract class AdMobHelper
 		AdSize tempSize = AdSize.BANNER;
 		switch(size)
 		{
-			case 1:
+			case kGADAdSizeBanner:
 				tempSize = AdSize.BANNER;
 				break;
-			case 2:
+			case kGADAdSizeMediumRectangle:
 				tempSize = AdSize.MEDIUM_RECTANGLE;
 				break;
-			case 3:
+			case kGADAdSizeFullBanner:
 				tempSize = AdSize.FULL_BANNER;
 				break;
-			case 4:
+			case kGADAdSizeLeaderboard:
 				tempSize = AdSize.LEADERBOARD;
 				break;
-			case 5:
+			case kGADAdSizeSkyscraper:
 				tempSize = AdSize.WIDE_SKYSCRAPER;
 				break;
-			case 6:
+			case kGADAdSizeSmartBannerPortrait:
 				tempSize = AdSize.SMART_BANNER;
 				break;
-			case 7:
+			case kGADAdSizeSmartBannerLandscape:
 				tempSize = AdSize.SMART_BANNER;
 				break;
 			default:
