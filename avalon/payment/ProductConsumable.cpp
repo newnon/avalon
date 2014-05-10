@@ -20,8 +20,7 @@ ProductConsumable::~ProductConsumable()
 void ProductConsumable::consume()
 {
     Product::consume();
-    if(purchasedCounter)
-        --purchasedCounter;
+    purchasedCounter = 0;
 }
 
 float ProductConsumable::getQuantity() const
