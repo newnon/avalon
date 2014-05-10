@@ -7,37 +7,6 @@
 
 namespace avalon {
 
-static std::map<int,std::string> _contentGroups;
-static std::map<int,std::string> _customDimensions;
-static std::map<int,std::string> _customMetrics;
-    
-const std::string &GAIFields::getContentGroup(int index)
-{
-    auto it = _contentGroups.find(index);
-    if(it != _contentGroups.end())
-        return it->second;
-    auto ret = _contentGroups.insert(std::make_pair(index, [[::GAIFields contentGroupForIndex:index] cStringUsingEncoding:NSUTF8StringEncoding]));
-    return ret.first->second;
-}
-    
-const std::string &GAIFields::getCustomDimension(int index)
-{
-    auto it = _customDimensions.find(index);
-    if(it != _customDimensions.end())
-        return it->second;
-    auto ret = _customDimensions.insert(std::make_pair(index, [[::GAIFields customDimensionForIndex:index] cStringUsingEncoding:NSUTF8StringEncoding]));
-    return ret.first->second;
-}
-    
-const std::string &GAIFields::getCustomMetric(int index)
-{
-    auto it = _customMetrics.find(index);
-    if(it != _customMetrics.end())
-        return it->second;
-    auto ret = _customMetrics.insert(std::make_pair(index, [[::GAIFields customMetricForIndex:index] cStringUsingEncoding:NSUTF8StringEncoding]));
-    return ret.first->second;
-}
-
     
 class IOSGAITracker: public GoogleAnalyticsTracker
 {
@@ -61,7 +30,7 @@ public:
         [_tracker set:kGAISampleRate value:[NSString stringWithFormat:@"%f", value]];
     }
 
-    virtual float GetSampleRate() const override
+    virtual float getSampleRate() const override
     {
         NSString *ret = [_tracker get:kGAISampleRate];
         if(ret)
@@ -75,10 +44,27 @@ public:
         return _trackerId;
     }
 
-    
-    virtual void sendAppView(const std::string &name) override
+    virtual void setScreenName(const std::string &name) override
     {
         [_tracker set:kGAIScreenName value:[NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding]];
+    }
+    
+    virtual void setCustomDimension(int index, const std::string &value) override
+    {
+        [_tracker set:[::GAIFields customDimensionForIndex:index] value:[NSString stringWithCString:value.c_str() encoding:NSUTF8StringEncoding]];
+    }
+    virtual void setCustomMetric(int index, float value) override
+    {
+        [_tracker set:[::GAIFields customMetricForIndex:index] value:[NSString stringWithFormat:@"%f", value]];
+    }
+    
+    virtual void setNewSession() override
+    {
+        [_tracker set:kGAISessionControl  value:@"start"];
+    }
+    
+    virtual void sendAppView() override
+    {
         [_tracker send:[[GAIDictionaryBuilder createAppView] build]];
     }
 
@@ -152,11 +138,11 @@ private:
     std::string _trackerId;
 };
     
-void GoogleAnalytics::setDispatchInterval(double value)
+void GoogleAnalytics::setDispatchInterval(int value)
 {
     [GAI sharedInstance].dispatchInterval = value;
 }
-double GoogleAnalytics::getDispatchInterval() const
+int GoogleAnalytics::getDispatchInterval() const
 {
     return [GAI sharedInstance].dispatchInterval;
 }
@@ -201,6 +187,8 @@ GoogleAnalyticsTracker* GoogleAnalytics::getTracker(const std::string &trackingI
         return it->second;
     IOSGAITracker *ret = new IOSGAITracker(trackingId, [[GAI sharedInstance] trackerWithTrackingId:[NSString stringWithCString:trackingId.c_str() encoding:NSUTF8StringEncoding]]);
     _trackers.insert(std::make_pair(trackingId, ret));
+    if(!_defaultTracker)
+        _defaultTracker = ret;
     return ret;
 }
 void GoogleAnalytics::removeTracker(GoogleAnalyticsTracker *tracker)
@@ -210,15 +198,46 @@ void GoogleAnalytics::removeTracker(GoogleAnalyticsTracker *tracker)
         const std::string &trackerId = tracker->getTrackerId();
         [[GAI sharedInstance] removeTrackerByName:[NSString stringWithCString:trackerId.c_str() encoding:NSUTF8StringEncoding]];
         _trackers.erase(trackerId);
+        delete tracker;
     }
+}
+    
+GoogleAnalyticsTracker* GoogleAnalytics::getDefaultTracker()
+{
+    return _defaultTracker;
+}
+    
+void GoogleAnalytics::setDefaultTracker(GoogleAnalyticsTracker *tracker)
+{
+    _defaultTracker = tracker;
 }
 
 void GoogleAnalytics::dispatch()
 {
     [[GAI sharedInstance] dispatch];
 }
+    
+void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)
+{
+    [[GAI sharedInstance] logger].logLevel = (GAILogLevel)logLevel;
+}
 
-GoogleAnalytics::GoogleAnalytics()
+GoogleAnalyticsLogLevel GoogleAnalytics::getLogLevel() const
+{
+    return static_cast<GoogleAnalyticsLogLevel>([[GAI sharedInstance] logger].logLevel);
+}
+    
+void GoogleAnalytics::startSession()
+{
+        
+}
+    
+void GoogleAnalytics::endSession()
+{
+        
+}
+
+GoogleAnalytics::GoogleAnalytics():_defaultTracker(nullptr)
 {
     
 }

@@ -6,25 +6,24 @@
 
 namespace avalon {
     
-class GAIFields{
-public:
-    static const std::string &getContentGroup(int index);
-    static const std::string &getCustomDimension(int index);
-    static const std::string &getCustomMetric(int index);
-};
-    
 class GoogleAnalyticsTracker
 {
 public:
+    friend class GoogleAnalytics;
     virtual void setParameter(const std::string &name, const std::string &value) = 0;
     virtual std::string getParameter(const std::string &name) const = 0;
     
     virtual void setSampleRate(float value) = 0;
-    virtual float GetSampleRate() const = 0;
+    virtual float getSampleRate() const = 0;
     
     virtual const std::string &getTrackerId() const = 0;
     
-    virtual void sendAppView(const std::string &name) = 0;
+    virtual void setScreenName(const std::string &name) = 0;
+    virtual void setCustomDimension(int index, const std::string &name) = 0;
+    virtual void setCustomMetric(int index, float value) = 0;
+    virtual void setNewSession() = 0;
+    
+    virtual void sendAppView() = 0;
     virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value) = 0;
     virtual void sendException(const std::string &description, bool fatal) = 0;
     virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode) = 0;
@@ -33,15 +32,24 @@ public:
     virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode) = 0;
     
 protected:
-    ~GoogleAnalyticsTracker() {}
+    virtual ~GoogleAnalyticsTracker() {}
+};
+    
+enum class GoogleAnalyticsLogLevel
+{
+    NONE = 0,
+    ERROR,
+    WARNING,
+    INFO,
+    VERBOSE,
 };
     
     
 class GoogleAnalytics
 {
 public:
-    void setDispatchInterval(double value);
-    double getDispatchInterval() const;
+    void setDispatchInterval(int value);
+    int getDispatchInterval() const;
     
     void setTrackUncaughtExceptions(bool value);
     bool getTrackUncaughtExceptions() const;
@@ -57,7 +65,16 @@ public:
     GoogleAnalyticsTracker* getTracker(const std::string &trackingId);
     void removeTracker(GoogleAnalyticsTracker *tracker);
     
+    GoogleAnalyticsTracker* getDefaultTracker();
+    void setDefaultTracker(GoogleAnalyticsTracker *tracker);
+    
     void dispatch();
+    
+    void setLogLevel(GoogleAnalyticsLogLevel logLevel);
+    GoogleAnalyticsLogLevel getLogLevel() const;
+    
+    void startSession();
+    void endSession();
     
 protected:
     GoogleAnalytics();
@@ -65,6 +82,7 @@ protected:
     
 private:
     std::map<std::string, GoogleAnalyticsTracker*> _trackers;
+    GoogleAnalyticsTracker *_defaultTracker;
     GoogleAnalytics(const GoogleAnalytics &) = delete;
     GoogleAnalytics &operator =(const GoogleAnalytics &) = delete;
     
