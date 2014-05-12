@@ -19,7 +19,8 @@
 {
     if (!m_webview)
     {
-        m_webview = [[UIWebView alloc] initWithFrame:CGRectMake(x, y, widht , height)];
+        float scaleFactor = [UIScreen mainScreen].scale;
+        m_webview = [[UIWebView alloc] initWithFrame:CGRectMake(x/scaleFactor, y/scaleFactor, widht/scaleFactor , height/scaleFactor)];
         [m_webview setDelegate:self];
         
         [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:m_webview];
