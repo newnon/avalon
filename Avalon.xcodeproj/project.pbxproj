@@ -74,7 +74,6 @@
 		A5ACF05D1918B37500A010A5 /* GAITracker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF0561918B37500A010A5 /* GAITracker.h */; };
 		A5ACF05E1918B37500A010A5 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5ACF0571918B37500A010A5 /* libGoogleAnalyticsServices.a */; };
 		A5ACF0601918B3B300A010A5 /* GoogleAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5ACF05F1918B3B300A010A5 /* GoogleAnalytics.mm */; };
-		A5BB768918E9DD4D0096422D /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC25E18E99F5400F1F979 /* libFlurry.a */; };
 		A5BB771418E9F4950096422D /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A5D08BAC18F6F5B100B4EBA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5D08BB818F6F67800B4EBA1 /* Notifications.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BB718F6F67800B4EBA1 /* Notifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -313,7 +312,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5BB768918E9DD4D0096422D /* libFlurry.a in Frameworks */,
 				A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */,
 				A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */,
 			);
