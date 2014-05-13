@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50BC22C18E9842F00F1F979"
-               BuildableName = "libweb.a"
-               BlueprintName = "Web"
-               ReferencedContainer = "container:Avalon.xcodeproj">
+               BlueprintIdentifier = "A5ACF0351918B1E500A010A5"
+               BuildableName = "libGoogleAnalytics.a"
+               BlueprintName = "GoogleAnalytics"
+               ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

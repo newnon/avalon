@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50BC17818E962DE00F1F979"
-               BuildableName = "libGameCenter.a"
-               BlueprintName = "GameCenter"
+               BlueprintIdentifier = "A5D3275E1900507400A65D25"
+               BuildableName = "libAdMob.a"
+               BlueprintName = "AdMob"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

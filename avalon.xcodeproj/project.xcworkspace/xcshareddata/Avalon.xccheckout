@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E1C2C7CF-C006-4B17-8FC8-E4BF5A787C87</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Avalon</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7628B4C1-3D8C-4578-B196-756AAE93A29F</key>
+		<string>https://github.com/hovergames/avalon.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Avalon.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7628B4C1-3D8C-4578-B196-756AAE93A29F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hovergames/avalon.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7628B4C1-3D8C-4578-B196-756AAE93A29F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7628B4C1-3D8C-4578-B196-756AAE93A29F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>avalon</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A50BC24618E99DA500F1F979"
                BuildableName = "Build all libs"
                BlueprintName = "Build all libs"
-               ReferencedContainer = "container:Avalon.xcodeproj">
+               ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A5D08BA518F6F5B100B4EBA1"
                BuildableName = "libNotifications.a"
                BlueprintName = "Notifications"
-               ReferencedContainer = "container:Avalon.xcodeproj">
+               ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

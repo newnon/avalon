@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50BC17818E962DE00F1F979"
-               BuildableName = "libGameCenter.a"
-               BlueprintName = "GameCenter"
+               BlueprintIdentifier = "A50BC22C18E9842F00F1F979"
+               BuildableName = "libWeb.a"
+               BlueprintName = "Web"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

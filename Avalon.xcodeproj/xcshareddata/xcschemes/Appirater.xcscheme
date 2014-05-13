@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A50BC1A218E9634600F1F979"
                BuildableName = "libAppirater.a"
                BlueprintName = "Appirater"
-               ReferencedContainer = "container:Avalon.xcodeproj">
+               ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

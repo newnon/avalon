@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A50BC25218E99F5400F1F979"
                BuildableName = "libFlurry.a"
                BlueprintName = "Flurry"
-               ReferencedContainer = "container:Avalon.xcodeproj">
+               ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
