@@ -90,6 +90,12 @@ ifneq (,$(findstring googleanalytics,$(AVALON_FEATURES)))
     LOCAL_SRC_FILES += avalon/platform/android/googleanalytics/GoogleAnalytics.cpp
 endif
 
+ifneq (,$(findstring mopub,$(AVALON_FEATURES)))
+    LOCAL_CFLAGS += -DAVALON_CONFIG_MOPUB_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_MOPUB_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/mopub/MoPub.cpp
+endif
+
 ifeq (google, $(AVALON_PLATFORM_FLAVOR))
     LOCAL_SRC_FILES += avalon/platform/android-google/ads/provider/TapForTap.cpp
 endif
