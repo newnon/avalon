@@ -747,9 +747,6 @@
 		A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMoPubVungleAdaptor.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A75A6419249F5400C44FBF /* vunglepub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vunglepub.framework; path = avalon/platform/ios/mopub/Networks/vunglepub.framework; sourceTree = "<group>"; };
 		A5A75ACE1924E0E800C44FBF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		A5A75AD21924E0E800C44FBF /* MoPubResources-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MoPubResources-Info.plist"; sourceTree = "<group>"; };
-		A5A75AD41924E0E800C44FBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		A5A75AD61924E0E800C44FBF /* MoPubResources-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoPubResources-Prefix.pch"; sourceTree = "<group>"; };
 		A5A75AF81924EE7000C44FBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A5A75AF91924EE7000C44FBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Info.plist; sourceTree = "<group>"; };
 		A5A75AFA1924EE7000C44FBF /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
@@ -896,7 +893,6 @@
 				A50BC1D718E96DEB00F1F979 /* Appirater */,
 				A50BC1BD18E9695B00F1F979 /* Paiment */,
 				A50BC1B418E9638100F1F979 /* GameCenter */,
-				A5A75AD01924E0E800C44FBF /* MoPubResources */,
 				A50BC17B18E962DE00F1F979 /* Frameworks */,
 				A50BC17A18E962DE00F1F979 /* Products */,
 			);
@@ -1564,24 +1560,6 @@
 				A5A75A6419249F5400C44FBF /* vunglepub.framework */,
 			);
 			name = Vungle;
-			sourceTree = "<group>";
-		};
-		A5A75AD01924E0E800C44FBF /* MoPubResources */ = {
-			isa = PBXGroup;
-			children = (
-				A5A75AD11924E0E800C44FBF /* Supporting Files */,
-			);
-			path = MoPubResources;
-			sourceTree = "<group>";
-		};
-		A5A75AD11924E0E800C44FBF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A5A75AD21924E0E800C44FBF /* MoPubResources-Info.plist */,
-				A5A75AD31924E0E800C44FBF /* InfoPlist.strings */,
-				A5A75AD61924E0E800C44FBF /* MoPubResources-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		A5A75AF61924EE7000C44FBF /* Resources */ = {
@@ -2325,14 +2303,6 @@
 			name = AppiraterLocalizable.strings;
 			sourceTree = "<group>";
 		};
-		A5A75AD31924E0E800C44FBF /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A5A75AD41924E0E800C44FBF /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		A5A75AF71924EE7000C44FBF /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2428,7 +2398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Avalon.dst;
-				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					AVALON_CONFIG_GAMECENTER_ENABLED,
 					"$(inherited)",
@@ -2443,7 +2413,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Avalon.dst;
-				GCC_PREFIX_HEADER = avalon/platform/ios/prefix.pch;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					AVALON_CONFIG_GAMECENTER_ENABLED,
 					"$(inherited)",
