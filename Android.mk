@@ -111,4 +111,4 @@ LOCAL_WHOLE_STATIC_LIBRARIES += cocos2dx_static
 
 include $(BUILD_STATIC_LIBRARY)
 
-$(call import-module,2d)
+$(call import-module,.)
