@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A56C4821199E1DA900BF30BA"
-               BuildableName = "libGameCenter iOS copy.a"
+               BuildableName = "libGameCenter Mac.a"
                BlueprintName = "GameCenter Mac"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
