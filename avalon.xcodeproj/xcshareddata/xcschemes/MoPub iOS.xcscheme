@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50BC22C18E9842F00F1F979"
-               BuildableName = "libWeb.a"
-               BlueprintName = "Web"
+               BlueprintIdentifier = "A58EA778192390A4000D0B28"
+               BuildableName = "libMoPub.a"
+               BlueprintName = "MoPub iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

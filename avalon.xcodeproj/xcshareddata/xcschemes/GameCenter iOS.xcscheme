@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50BC25F18E9A14800F1F979"
-               BuildableName = "libFlurryAds.a"
-               BlueprintName = "FlurryAds"
+               BlueprintIdentifier = "A50BC17818E962DE00F1F979"
+               BuildableName = "libGameCenter iOS.a"
+               BlueprintName = "GameCenter iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

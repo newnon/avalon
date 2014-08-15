@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5A7596F19249DFE00C44FBF"
-               BuildableName = "libMoPubVungleAdaptor.a"
-               BlueprintName = "MoPubVungleAdaptor"
+               BlueprintIdentifier = "A56C4821199E1DA900BF30BA"
+               BuildableName = "libGameCenter iOS copy.a"
+               BlueprintName = "GameCenter Mac"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

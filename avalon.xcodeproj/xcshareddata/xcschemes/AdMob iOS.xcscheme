@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A58EA778192390A4000D0B28"
-               BuildableName = "libMoPub.a"
-               BlueprintName = "MoPub"
+               BlueprintIdentifier = "A5D3275E1900507400A65D25"
+               BuildableName = "libAdMob.a"
+               BlueprintName = "AdMob iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

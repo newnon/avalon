@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5ACF0351918B1E500A010A5"
-               BuildableName = "libGoogleAnalytics.a"
-               BlueprintName = "GoogleAnalytics"
+               BlueprintIdentifier = "A50BC1A218E9634600F1F979"
+               BuildableName = "libAppirater.a"
+               BlueprintName = "Appirater iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

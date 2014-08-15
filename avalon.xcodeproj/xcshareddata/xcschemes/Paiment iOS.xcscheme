@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5D08BA518F6F5B100B4EBA1"
-               BuildableName = "libNotifications.a"
-               BlueprintName = "Notifications"
+               BlueprintIdentifier = "A50BC1AB18E9635400F1F979"
+               BuildableName = "libPaiment.a"
+               BlueprintName = "Paiment iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
