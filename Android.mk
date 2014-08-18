@@ -96,10 +96,6 @@ ifneq (,$(findstring mopub,$(AVALON_FEATURES)))
     LOCAL_SRC_FILES += avalon/platform/android/mopub/MoPub.cpp
 endif
 
-ifeq (google, $(AVALON_PLATFORM_FLAVOR))
-    LOCAL_SRC_FILES += avalon/platform/android-google/ads/provider/TapForTap.cpp
-endif
-
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 
