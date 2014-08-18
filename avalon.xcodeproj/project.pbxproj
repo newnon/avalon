@@ -53,6 +53,10 @@
 		A50BC28A18E9B2B400F1F979 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */; };
 		A50BC28B18E9B2B400F1F979 /* Flurry.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC28918E9B2B400F1F979 /* Flurry.mm */; };
 		A50D47E7192218E300351428 /* NotificationsAppController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5D08BCB18F7D0F000B4EBA1 /* NotificationsAppController.h */; };
+		A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1FE18E96E2800F1F979 /* Appirater.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A531BEF719A1F1B2003D87A3 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55C4D9119A1EBA000F3449A /* Appirater.mm */; };
+		A55C4DA419A1F16C00F3449A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A55C4DA619A1F16C00F3449A /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A56C4826199E1DA900BF30BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A56C4831199E1E1B00BF30BA /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A56C482E199E1E1B00BF30BA /* GameCenter.mm */; };
 		A56C4832199E1E1B00BF30BA /* GameCenterMac.m in Sources */ = {isa = PBXBuildFile; fileRef = A56C4830199E1E1B00BF30BA /* GameCenterMac.m */; };
@@ -560,6 +564,8 @@
 		A50BC28C18E9B2C200F1F979 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = avalon/Flurry.h; sourceTree = SOURCE_ROOT; };
 		A50C343418EA00F0002B388C /* AlertNative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AlertNative.mm; path = avalon/platform/ios/ui/AlertNative.mm; sourceTree = "<group>"; };
 		A532994618EDC88E002A3BDE /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = avalon/platform/ios/payment.h; sourceTree = SOURCE_ROOT; };
+		A55C4D9119A1EBA000F3449A /* Appirater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Appirater.mm; path = avalon/platform/mac/appirater/Appirater.mm; sourceTree = "<group>"; };
+		A55C4DAC19A1F16C00F3449A /* libAppirater Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAppirater Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56C482C199E1DA900BF30BA /* libGameCenter Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGameCenter Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56C482E199E1E1B00BF30BA /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GameCenter.mm; path = avalon/platform/mac/gamecenter/GameCenter.mm; sourceTree = "<group>"; };
 		A56C482F199E1E1B00BF30BA /* GameCenterMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCenterMac.h; path = avalon/platform/mac/gamecenter/GameCenterMac.h; sourceTree = "<group>"; };
@@ -866,6 +872,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A55C4DA319A1F16C00F3449A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55C4DA419A1F16C00F3449A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A56C4825199E1DA900BF30BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -953,6 +967,7 @@
 				A58EA78A192390A4000D0B28 /* libMoPub.a */,
 				A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor.a */,
 				A56C482C199E1DA900BF30BA /* libGameCenter Mac.a */,
+				A55C4DAC19A1F16C00F3449A /* libAppirater Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1031,6 +1046,7 @@
 			children = (
 				A50BC1FE18E96E2800F1F979 /* Appirater.h */,
 				A50BC1D818E96E0000F1F979 /* appirater-ios */,
+				A55C4D8219A1EB4900F3449A /* appirater-mac */,
 			);
 			name = Appirater;
 			sourceTree = "<group>";
@@ -1120,6 +1136,14 @@
 				A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */,
 			);
 			path = "Flurry-ios";
+			sourceTree = "<group>";
+		};
+		A55C4D8219A1EB4900F3449A /* appirater-mac */ = {
+			isa = PBXGroup;
+			children = (
+				A55C4D9119A1EBA000F3449A /* Appirater.mm */,
+			);
+			name = "appirater-mac";
 			sourceTree = "<group>";
 		};
 		A56C482D199E1DD400BF30BA /* gamecenter-mac */ = {
@@ -1715,6 +1739,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		A531BEF519A1F19E003D87A3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A56C4839199E1F1C00BF30BA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1962,6 +1994,24 @@
 			productReference = A50BC26B18E9A14800F1F979 /* libFlurryAds.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A55C4D9F19A1F16C00F3449A /* Appirater Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55C4DA919A1F16C00F3449A /* Build configuration list for PBXNativeTarget "Appirater Mac" */;
+			buildPhases = (
+				A55C4DA019A1F16C00F3449A /* Sources */,
+				A55C4DA319A1F16C00F3449A /* Frameworks */,
+				A55C4DA519A1F16C00F3449A /* Resources */,
+				A531BEF519A1F19E003D87A3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Appirater Mac";
+			productName = Avalon;
+			productReference = A55C4DAC19A1F16C00F3449A /* libAppirater Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A56C4821199E1DA900BF30BA /* GameCenter Mac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A56C4829199E1DA900BF30BA /* Build configuration list for PBXNativeTarget "GameCenter Mac" */;
@@ -2117,6 +2167,7 @@
 				A50BC17818E962DE00F1F979 /* GameCenter iOS */,
 				A56C4821199E1DA900BF30BA /* GameCenter Mac */,
 				A50BC1A218E9634600F1F979 /* Appirater iOS */,
+				A55C4D9F19A1F16C00F3449A /* Appirater Mac */,
 				A50BC1AB18E9635400F1F979 /* Paiment iOS */,
 				A50BC22C18E9842F00F1F979 /* Web iOS */,
 				A50BC25218E99F5400F1F979 /* Flurry iOS */,
@@ -2132,6 +2183,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A55C4DA519A1F16C00F3449A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55C4DA619A1F16C00F3449A /* AppiraterLocalizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5BB76B518E9F0480096422D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2196,6 +2255,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55C4DA019A1F16C00F3449A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A531BEF719A1F1B2003D87A3 /* Appirater.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2697,6 +2764,38 @@
 			};
 			name = Release;
 		};
+		A55C4DAA19A1F16C00F3449A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_APPIRATER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Appirater Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A55C4DAB19A1F16C00F3449A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_APPIRATER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Appirater Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A56C482A199E1DA900BF30BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2970,6 +3069,15 @@
 			buildConfigurations = (
 				A50BC26918E9A14800F1F979 /* Debug */,
 				A50BC26A18E9A14800F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55C4DA919A1F16C00F3449A /* Build configuration list for PBXNativeTarget "Appirater Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55C4DAA19A1F16C00F3449A /* Debug */,
+				A55C4DAB19A1F16C00F3449A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
