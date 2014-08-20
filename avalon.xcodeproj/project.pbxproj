@@ -69,18 +69,15 @@
 		A55885F419A4C87D00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A558860119A4C89000914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A558860D19A4C8CE00914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558860C19A4C8CE00914838 /* AlertNative.mm */; };
-		A558860E19A4C8CE00914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558860C19A4C8CE00914838 /* AlertNative.mm */; };
 		A558861019A4C8FF00914838 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; };
 		A558861119A4C8FF00914838 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; };
 		A558861319A4C90B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
 		A558861419A4C90B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
-		A558861519A4C90B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
 		A558861619A4C91B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
 		A558861719A4C92300914838 /* Alert.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; };
 		A558861819A4C94E00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
 		A558861919A4C95500914838 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A558861B19A4C97500914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558861A19A4C97500914838 /* AlertNative.mm */; };
-		A558861C19A4C97500914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558861A19A4C97500914838 /* AlertNative.mm */; };
 		A55C4DA419A1F16C00F3449A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A55C4DA619A1F16C00F3449A /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A56C4826199E1DA900BF30BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -2689,10 +2686,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A558861519A4C90B00914838 /* Alert.cpp in Sources */,
-				A558861C19A4C97500914838 /* AlertNative.mm in Sources */,
 				A5F0C9271922353E006B8457 /* GoogleAnalytics.mm in Sources */,
-				A558860E19A4C8CE00914838 /* AlertNative.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
