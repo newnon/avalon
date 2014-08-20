@@ -66,6 +66,21 @@
 		A55885E419A4BC9400914838 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E219A4BC9400914838 /* WebView.mm */; };
 		A55885E619A4BC9F00914838 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E519A4BC9F00914838 /* Notifications.mm */; };
 		A55885EA19A4BCD600914838 /* GoogleAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E819A4BCB800914838 /* GoogleAnalytics.mm */; };
+		A55885F419A4C87D00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A558860119A4C89000914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A558860D19A4C8CE00914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558860C19A4C8CE00914838 /* AlertNative.mm */; };
+		A558860E19A4C8CE00914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558860C19A4C8CE00914838 /* AlertNative.mm */; };
+		A558861019A4C8FF00914838 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; };
+		A558861119A4C8FF00914838 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; };
+		A558861319A4C90B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
+		A558861419A4C90B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
+		A558861519A4C90B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
+		A558861619A4C91B00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
+		A558861719A4C92300914838 /* Alert.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; };
+		A558861819A4C94E00914838 /* Alert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A558861219A4C90B00914838 /* Alert.cpp */; };
+		A558861919A4C95500914838 /* Alert.h in Headers */ = {isa = PBXBuildFile; fileRef = A558860F19A4C8FF00914838 /* Alert.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A558861B19A4C97500914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558861A19A4C97500914838 /* AlertNative.mm */; };
+		A558861C19A4C97500914838 /* AlertNative.mm in Sources */ = {isa = PBXBuildFile; fileRef = A558861A19A4C97500914838 /* AlertNative.mm */; };
 		A55C4DA419A1F16C00F3449A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A55C4DA619A1F16C00F3449A /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A56C4826199E1DA900BF30BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -377,6 +392,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A55885F519A4C87D00914838 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A558861719A4C92300914838 /* Alert.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A58EA785192390A4000D0B28 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -581,6 +606,12 @@
 		A55885E219A4BC9400914838 /* WebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WebView.mm; path = avalon/platform/mac/web/WebView.mm; sourceTree = "<group>"; };
 		A55885E519A4BC9F00914838 /* Notifications.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Notifications.mm; path = avalon/platform/mac/notifications/Notifications.mm; sourceTree = "<group>"; };
 		A55885E819A4BCB800914838 /* GoogleAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GoogleAnalytics.mm; path = avalon/platform/mac/googleanalytics/GoogleAnalytics.mm; sourceTree = "<group>"; };
+		A55885FB19A4C87D00914838 /* libUI iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUI iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A558860819A4C89000914838 /* libUI Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUI Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A558860C19A4C8CE00914838 /* AlertNative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AlertNative.mm; path = avalon/platform/ios/ui/AlertNative.mm; sourceTree = "<group>"; };
+		A558860F19A4C8FF00914838 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alert.h; path = avalon/ui/Alert.h; sourceTree = "<group>"; };
+		A558861219A4C90B00914838 /* Alert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Alert.cpp; path = avalon/ui/Alert.cpp; sourceTree = "<group>"; };
+		A558861A19A4C97500914838 /* AlertNative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AlertNative.mm; path = avalon/platform/mac/ui/AlertNative.mm; sourceTree = "<group>"; };
 		A55C4D9119A1EBA000F3449A /* Appirater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Appirater.mm; path = avalon/platform/mac/appirater/Appirater.mm; sourceTree = "<group>"; };
 		A55C4DAC19A1F16C00F3449A /* libAppirater Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAppirater Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56C482C199E1DA900BF30BA /* libGameCenter Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGameCenter Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -913,6 +944,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A55885F319A4C87D00914838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885F419A4C87D00914838 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A558860019A4C89000914838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A558860119A4C89000914838 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A55C4DA319A1F16C00F3449A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -978,6 +1025,7 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				A558860919A4C8A600914838 /* UI */,
 				A58EA78B192390C6000D0B28 /* MoPub */,
 				A5ACF04B1918B2D700A010A5 /* GoogleAnalytics */,
 				A5D3276E1900514300A65D25 /* AdMob */,
@@ -1012,6 +1060,8 @@
 				A55885A919A4AE4E00914838 /* libNotifications Mac.a */,
 				A55885BD19A4AEFA00914838 /* libGoogleAnalytics Mac.a */,
 				A55885CD19A4B92600914838 /* libWeb Mac.a */,
+				A55885FB19A4C87D00914838 /* libUI iOS.a */,
+				A558860819A4C89000914838 /* libUI Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1205,6 +1255,33 @@
 				A55885E819A4BCB800914838 /* GoogleAnalytics.mm */,
 			);
 			name = "googleAnalytics-mac";
+			sourceTree = "<group>";
+		};
+		A558860919A4C8A600914838 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A558860F19A4C8FF00914838 /* Alert.h */,
+				A558861219A4C90B00914838 /* Alert.cpp */,
+				A558860B19A4C8BD00914838 /* UI-mac */,
+				A558860A19A4C8B300914838 /* UI-ios */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		A558860A19A4C8B300914838 /* UI-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A558860C19A4C8CE00914838 /* AlertNative.mm */,
+			);
+			name = "UI-ios";
+			sourceTree = "<group>";
+		};
+		A558860B19A4C8BD00914838 /* UI-mac */ = {
+			isa = PBXGroup;
+			children = (
+				A558861A19A4C97500914838 /* AlertNative.mm */,
+			);
+			name = "UI-mac";
 			sourceTree = "<group>";
 		};
 		A55C4D8219A1EB4900F3449A /* appirater-mac */ = {
@@ -1838,8 +1915,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A558861019A4C8FF00914838 /* Alert.h in Headers */,
 				A55885CE19A4B95F00914838 /* WebView.h in Headers */,
 				A55885CF19A4B96600914838 /* url.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A558860219A4C89000914838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A558861919A4C95500914838 /* Alert.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1962,6 +2048,7 @@
 				A5F0C9311922356B006B8457 /* GAIDictionaryBuilder.h in Headers */,
 				A5F0C9331922356B006B8457 /* GAILogger.h in Headers */,
 				A5F0C9341922356B006B8457 /* GAITrackedViewController.h in Headers */,
+				A558861119A4C8FF00914838 /* Alert.h in Headers */,
 				A5F0C9351922356B006B8457 /* GAITracker.h in Headers */,
 				A5F0C9321922356B006B8457 /* GAIFields.h in Headers */,
 				A5F0C9301922356B006B8457 /* GAI.h in Headers */,
@@ -2141,6 +2228,40 @@
 			productReference = A55885CD19A4B92600914838 /* libWeb Mac.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A55885EE19A4C87D00914838 /* UI iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55885F819A4C87D00914838 /* Build configuration list for PBXNativeTarget "UI iOS" */;
+			buildPhases = (
+				A55885EF19A4C87D00914838 /* Sources */,
+				A55885F319A4C87D00914838 /* Frameworks */,
+				A55885F519A4C87D00914838 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UI iOS";
+			productName = Avalon;
+			productReference = A55885FB19A4C87D00914838 /* libUI iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A55885FC19A4C89000914838 /* UI Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A558860519A4C89000914838 /* Build configuration list for PBXNativeTarget "UI Mac" */;
+			buildPhases = (
+				A55885FD19A4C89000914838 /* Sources */,
+				A558860019A4C89000914838 /* Frameworks */,
+				A558860219A4C89000914838 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UI Mac";
+			productName = Avalon;
+			productReference = A558860819A4C89000914838 /* libUI Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A55C4D9F19A1F16C00F3449A /* Appirater Mac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A55C4DA919A1F16C00F3449A /* Build configuration list for PBXNativeTarget "Appirater Mac" */;
@@ -2318,6 +2439,8 @@
 				A50BC1AB18E9635400F1F979 /* Paiment iOS */,
 				A50BC22C18E9842F00F1F979 /* Web iOS */,
 				A55885C419A4B92600914838 /* Web Mac */,
+				A55885EE19A4C87D00914838 /* UI iOS */,
+				A55885FC19A4C89000914838 /* UI Mac */,
 				A50BC25218E99F5400F1F979 /* Flurry iOS */,
 				A50BC25F18E9A14800F1F979 /* FlurryAds iOS */,
 				A5D08BA518F6F5B100B4EBA1 /* Notifications iOS */,
@@ -2388,6 +2511,7 @@
 			files = (
 				A55885DE19A4BA9C00914838 /* url.mm in Sources */,
 				A55885E019A4BA9C00914838 /* WebView.mm in Sources */,
+				A558861319A4C90B00914838 /* Alert.cpp in Sources */,
 				A55885DF19A4BA9C00914838 /* WebView_iOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2428,8 +2552,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A558861419A4C90B00914838 /* Alert.cpp in Sources */,
 				A55885E319A4BC9400914838 /* url.mm in Sources */,
 				A55885E419A4BC9400914838 /* WebView.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885EF19A4C87D00914838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A558861619A4C91B00914838 /* Alert.cpp in Sources */,
+				A558860D19A4C8CE00914838 /* AlertNative.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885FD19A4C89000914838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A558861819A4C94E00914838 /* Alert.cpp in Sources */,
+				A558861B19A4C97500914838 /* AlertNative.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2546,7 +2689,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A558861519A4C90B00914838 /* Alert.cpp in Sources */,
+				A558861C19A4C97500914838 /* AlertNative.mm in Sources */,
 				A5F0C9271922353E006B8457 /* GoogleAnalytics.mm in Sources */,
+				A558860E19A4C8CE00914838 /* AlertNative.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3015,6 +3161,55 @@
 			};
 			name = Release;
 		};
+		A55885F919A4C87D00914838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "UI iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A55885FA19A4C87D00914838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "UI iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A558860619A4C89000914838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "UI Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A558860719A4C89000914838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "UI Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A55C4DAA19A1F16C00F3449A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3347,6 +3542,24 @@
 			buildConfigurations = (
 				A55885CB19A4B92600914838 /* Debug */,
 				A55885CC19A4B92600914838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55885F819A4C87D00914838 /* Build configuration list for PBXNativeTarget "UI iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55885F919A4C87D00914838 /* Debug */,
+				A55885FA19A4C87D00914838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A558860519A4C89000914838 /* Build configuration list for PBXNativeTarget "UI Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A558860619A4C89000914838 /* Debug */,
+				A558860719A4C89000914838 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

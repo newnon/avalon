@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A55885C419A4B92600914838"
-               BuildableName = "libWeb Mac.a"
-               BlueprintName = "Web Mac"
+               BlueprintIdentifier = "A55885EE19A4C87D00914838"
+               BuildableName = "libUI iOS.a"
+               BlueprintName = "UI iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
