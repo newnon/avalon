@@ -43,9 +43,6 @@
 		A50BC1FC18E96E0000F1F979 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1DC18E96E0000F1F979 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A50BC1FD18E96E0000F1F979 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1FB18E96E0000F1F979 /* Appirater.mm */; };
 		A50BC23118E9842F00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
-		A50BC23C18E984B100F1F979 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC23B18E984B100F1F979 /* url.mm */; };
-		A50BC24318E9933E00F1F979 /* WebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24118E9933E00F1F979 /* WebView_iOS.mm */; };
-		A50BC24418E9933E00F1F979 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC24218E9933E00F1F979 /* WebView.mm */; };
 		A50BC25918E99F5400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */; };
@@ -55,6 +52,20 @@
 		A50D47E7192218E300351428 /* NotificationsAppController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5D08BCB18F7D0F000B4EBA1 /* NotificationsAppController.h */; };
 		A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1FE18E96E2800F1F979 /* Appirater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A531BEF719A1F1B2003D87A3 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55C4D9119A1EBA000F3449A /* Appirater.mm */; };
+		A55885A119A4AE4E00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A55885AA19A4AE6D00914838 /* Notifications.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BB718F6F67800B4EBA1 /* Notifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A55885B719A4AEFA00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A55885BE19A4B90100914838 /* GoogleAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A55885C719A4B92600914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A55885CE19A4B95F00914838 /* WebView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC24518E99A9D00F1F979 /* WebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A55885CF19A4B96600914838 /* url.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC23A18E984A100F1F979 /* url.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A55885DE19A4BA9C00914838 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885DA19A4BA9C00914838 /* url.mm */; };
+		A55885DF19A4BA9C00914838 /* WebView_iOS.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885DC19A4BA9C00914838 /* WebView_iOS.mm */; };
+		A55885E019A4BA9C00914838 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885DD19A4BA9C00914838 /* WebView.mm */; };
+		A55885E319A4BC9400914838 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E119A4BC9400914838 /* url.mm */; };
+		A55885E419A4BC9400914838 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E219A4BC9400914838 /* WebView.mm */; };
+		A55885E619A4BC9F00914838 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E519A4BC9F00914838 /* Notifications.mm */; };
+		A55885EA19A4BCD600914838 /* GoogleAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E819A4BCB800914838 /* GoogleAnalytics.mm */; };
 		A55C4DA419A1F16C00F3449A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A55C4DA619A1F16C00F3449A /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A56C4826199E1DA900BF30BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -491,8 +502,8 @@
 /* Begin PBXFileReference section */
 		A50BC17918E962DE00F1F979 /* libGameCenter iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGameCenter iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50BC17C18E962DE00F1F979 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		A50BC1AA18E9634600F1F979 /* libAppirater.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppirater.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A50BC1B318E9635400F1F979 /* libPaiment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPaiment.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC1AA18E9634600F1F979 /* libAppirater iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAppirater iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC1B318E9635400F1F979 /* libPaiment iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPaiment iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50BC1B518E9638C00F1F979 /* GameCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCenter.h; path = avalon/GameCenter.h; sourceTree = "<group>"; };
 		A50BC1B718E963A300F1F979 /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameCenter.mm; sourceTree = "<group>"; };
 		A50BC1B818E963A300F1F979 /* GameCenterIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterIos.h; sourceTree = "<group>"; };
@@ -544,15 +555,11 @@
 		A50BC1FA18E96E0000F1F979 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		A50BC1FB18E96E0000F1F979 /* Appirater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Appirater.mm; sourceTree = "<group>"; };
 		A50BC1FE18E96E2800F1F979 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Appirater.h; path = avalon/Appirater.h; sourceTree = "<group>"; };
-		A50BC23618E9842F00F1F979 /* libWeb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWeb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC23618E9842F00F1F979 /* libWeb iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libWeb iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50BC23A18E984A100F1F979 /* url.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = url.h; path = avalon/url.h; sourceTree = "<group>"; };
-		A50BC23B18E984B100F1F979 /* url.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = url.mm; path = avalon/platform/ios/utils/url.mm; sourceTree = "<group>"; };
-		A50BC24018E9933E00F1F979 /* WebView_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebView_iOS.h; path = avalon/platform/ios/webview/WebView_iOS.h; sourceTree = "<group>"; };
-		A50BC24118E9933E00F1F979 /* WebView_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WebView_iOS.mm; path = avalon/platform/ios/webview/WebView_iOS.mm; sourceTree = "<group>"; };
-		A50BC24218E9933E00F1F979 /* WebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WebView.mm; path = avalon/platform/ios/webview/WebView.mm; sourceTree = "<group>"; };
 		A50BC24518E99A9D00F1F979 /* WebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebView.h; path = avalon/WebView.h; sourceTree = "<group>"; };
-		A50BC25E18E99F5400F1F979 /* libFlurry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFlurry.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A50BC26B18E9A14800F1F979 /* libFlurryAds.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFlurryAds.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC25E18E99F5400F1F979 /* libFlurry iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFlurry iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50BC26B18E9A14800F1F979 /* libFlurryAds iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFlurryAds iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50BC27118E9A29800F1F979 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlurryAds.h; path = avalon/FlurryAds.h; sourceTree = "<group>"; };
 		A50BC27418E9A5A500F1F979 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
 		A50BC27518E9A5A500F1F979 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAds.h; sourceTree = "<group>"; };
@@ -562,8 +569,18 @@
 		A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		A50BC28918E9B2B400F1F979 /* Flurry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Flurry.mm; sourceTree = "<group>"; };
 		A50BC28C18E9B2C200F1F979 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = avalon/Flurry.h; sourceTree = SOURCE_ROOT; };
-		A50C343418EA00F0002B388C /* AlertNative.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AlertNative.mm; path = avalon/platform/ios/ui/AlertNative.mm; sourceTree = "<group>"; };
 		A532994618EDC88E002A3BDE /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = avalon/platform/ios/payment.h; sourceTree = SOURCE_ROOT; };
+		A55885A919A4AE4E00914838 /* libNotifications Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNotifications Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A55885BD19A4AEFA00914838 /* libGoogleAnalytics Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGoogleAnalytics Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A55885CD19A4B92600914838 /* libWeb Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libWeb Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A55885DA19A4BA9C00914838 /* url.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = url.mm; path = avalon/platform/ios/web/url.mm; sourceTree = "<group>"; };
+		A55885DB19A4BA9C00914838 /* WebView_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WebView_iOS.h; path = avalon/platform/ios/web/WebView_iOS.h; sourceTree = "<group>"; };
+		A55885DC19A4BA9C00914838 /* WebView_iOS.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WebView_iOS.mm; path = avalon/platform/ios/web/WebView_iOS.mm; sourceTree = "<group>"; };
+		A55885DD19A4BA9C00914838 /* WebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WebView.mm; path = avalon/platform/ios/web/WebView.mm; sourceTree = "<group>"; };
+		A55885E119A4BC9400914838 /* url.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = url.mm; path = avalon/platform/mac/web/url.mm; sourceTree = "<group>"; };
+		A55885E219A4BC9400914838 /* WebView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = WebView.mm; path = avalon/platform/mac/web/WebView.mm; sourceTree = "<group>"; };
+		A55885E519A4BC9F00914838 /* Notifications.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Notifications.mm; path = avalon/platform/mac/notifications/Notifications.mm; sourceTree = "<group>"; };
+		A55885E819A4BCB800914838 /* GoogleAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GoogleAnalytics.mm; path = avalon/platform/mac/googleanalytics/GoogleAnalytics.mm; sourceTree = "<group>"; };
 		A55C4D9119A1EBA000F3449A /* Appirater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Appirater.mm; path = avalon/platform/mac/appirater/Appirater.mm; sourceTree = "<group>"; };
 		A55C4DAC19A1F16C00F3449A /* libAppirater Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAppirater Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56C482C199E1DA900BF30BA /* libGameCenter Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGameCenter Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -582,7 +599,7 @@
 		A56C49C1199E4FAC00BF30BA /* MPMoPubNativeCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMoPubNativeCustomEvent.m; sourceTree = "<group>"; };
 		A56C49C6199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPUserInteractionGestureRecognizer.h; sourceTree = "<group>"; };
 		A56C49C7199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPUserInteractionGestureRecognizer.m; sourceTree = "<group>"; };
-		A58EA78A192390A4000D0B28 /* libMoPub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMoPub.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A58EA78A192390A4000D0B28 /* libMoPub iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMoPub iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58EA78F192390FA000D0B28 /* MPBannerAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPBannerAdManager.h; sourceTree = "<group>"; };
 		A58EA790192390FA000D0B28 /* MPBannerAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPBannerAdManager.m; sourceTree = "<group>"; };
 		A58EA791192390FA000D0B28 /* MPBannerAdManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPBannerAdManagerDelegate.h; sourceTree = "<group>"; };
@@ -782,7 +799,7 @@
 		A59E86881925E5390082E270 /* VungleInterstitialCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VungleInterstitialCustomEvent.h; sourceTree = "<group>"; };
 		A59E86891925E5390082E270 /* VungleInterstitialCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VungleInterstitialCustomEvent.m; sourceTree = "<group>"; };
 		A5A7596519249C6300C44FBF /* vunglepub */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = vunglepub; path = avalon/platform/ios/mopub/Networks/vunglepub.framework/vunglepub; sourceTree = "<group>"; };
-		A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMoPubVungleAdaptor.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMoPubVungleAdaptor iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A75A6419249F5400C44FBF /* vunglepub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vunglepub.framework; path = avalon/platform/ios/mopub/Networks/vunglepub.framework; sourceTree = "<group>"; };
 		A5A75ACE1924E0E800C44FBF /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		A5A75AF81924EE7000C44FBF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -791,14 +808,14 @@
 		A5A75AFB1924EE7000C44FBF /* vg_button_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_button_close.png; sourceTree = "<group>"; };
 		A5A75AFC1924EE7000C44FBF /* vg_button_mute_plain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_button_mute_plain.png; sourceTree = "<group>"; };
 		A5A75AFD1924EE7000C44FBF /* vg_button_mute_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_button_mute_selected.png; sourceTree = "<group>"; };
-		A5ACF0491918B1E500A010A5 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGoogleAnalytics.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5ACF0491918B1E500A010A5 /* libGoogleAnalytics iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGoogleAnalytics iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleAnalytics.h; path = avalon/GoogleAnalytics.h; sourceTree = "<group>"; };
-		A5D08BB318F6F5B100B4EBA1 /* libNotifications.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNotifications.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5D08BB318F6F5B100B4EBA1 /* libNotifications iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNotifications iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D08BB718F6F67800B4EBA1 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Notifications.h; path = avalon/Notifications.h; sourceTree = "<group>"; };
 		A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Notifications.mm; path = avalon/platform/ios/notifications/Notifications.mm; sourceTree = "<group>"; };
 		A5D08BCB18F7D0F000B4EBA1 /* NotificationsAppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotificationsAppController.h; path = avalon/platform/ios/notifications/NotificationsAppController.h; sourceTree = "<group>"; };
 		A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotificationsAppController.m; path = avalon/platform/ios/notifications/NotificationsAppController.m; sourceTree = "<group>"; };
-		A5D3276D1900507400A65D25 /* libAdMob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdMob.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5D3276D1900507400A65D25 /* libAdMob iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAdMob iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D3276F1900515B00A65D25 /* AdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdMob.h; path = avalon/AdMob.h; sourceTree = "<group>"; };
 		A5D327861900EEA700A65D25 /* AdNob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdNob.mm; path = avalon/platform/ios/admob/AdNob.mm; sourceTree = "<group>"; };
 		A5F0C9121922343A006B8457 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
@@ -811,7 +828,7 @@
 		A5F0C9191922343A006B8457 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
 		A5F0C91A1922343A006B8457 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		A5F0C91B1922343A006B8457 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		A5F0C9261922353E006B8457 /* GoogleAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GoogleAnalytics.mm; path = avalon/platform/ios/googleAnalytics/GoogleAnalytics.mm; sourceTree = "<group>"; };
+		A5F0C9261922353E006B8457 /* GoogleAnalytics.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GoogleAnalytics.mm; path = ../GoogleAnalytics.mm; sourceTree = "<group>"; };
 		A5F0C9291922356B006B8457 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
 		A5F0C92A1922356B006B8457 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		A5F0C92B1922356B006B8457 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
@@ -869,6 +886,30 @@
 			files = (
 				A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */,
 				A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885A019A4AE4E00914838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885A119A4AE4E00914838 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885B619A4AEFA00914838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885B719A4AEFA00914838 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885C619A4B92600914838 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885C719A4B92600914838 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,18 +997,21 @@
 			isa = PBXGroup;
 			children = (
 				A50BC17918E962DE00F1F979 /* libGameCenter iOS.a */,
-				A50BC1AA18E9634600F1F979 /* libAppirater.a */,
-				A50BC1B318E9635400F1F979 /* libPaiment.a */,
-				A50BC23618E9842F00F1F979 /* libWeb.a */,
-				A50BC25E18E99F5400F1F979 /* libFlurry.a */,
-				A50BC26B18E9A14800F1F979 /* libFlurryAds.a */,
-				A5D08BB318F6F5B100B4EBA1 /* libNotifications.a */,
-				A5D3276D1900507400A65D25 /* libAdMob.a */,
-				A5ACF0491918B1E500A010A5 /* libGoogleAnalytics.a */,
-				A58EA78A192390A4000D0B28 /* libMoPub.a */,
-				A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor.a */,
+				A50BC1AA18E9634600F1F979 /* libAppirater iOS.a */,
+				A50BC1B318E9635400F1F979 /* libPaiment iOS.a */,
+				A50BC23618E9842F00F1F979 /* libWeb iOS.a */,
+				A50BC25E18E99F5400F1F979 /* libFlurry iOS.a */,
+				A50BC26B18E9A14800F1F979 /* libFlurryAds iOS.a */,
+				A5D08BB318F6F5B100B4EBA1 /* libNotifications iOS.a */,
+				A5D3276D1900507400A65D25 /* libAdMob iOS.a */,
+				A5ACF0491918B1E500A010A5 /* libGoogleAnalytics iOS.a */,
+				A58EA78A192390A4000D0B28 /* libMoPub iOS.a */,
+				A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor iOS.a */,
 				A56C482C199E1DA900BF30BA /* libGameCenter Mac.a */,
 				A55C4DAC19A1F16C00F3449A /* libAppirater Mac.a */,
+				A55885A919A4AE4E00914838 /* libNotifications Mac.a */,
+				A55885BD19A4AEFA00914838 /* libGoogleAnalytics Mac.a */,
+				A55885CD19A4B92600914838 /* libWeb Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1078,23 +1122,23 @@
 		A50BC22B18E96F7600F1F979 /* Web */ = {
 			isa = PBXGroup;
 			children = (
-				A50C343418EA00F0002B388C /* AlertNative.mm */,
-				A50BC24518E99A9D00F1F979 /* WebView.h */,
-				A50BC23F18E9933000F1F979 /* WebView-ios */,
-				A50BC23B18E984B100F1F979 /* url.mm */,
+				A55885D919A4BA5400914838 /* web-mac */,
+				A50BC23F18E9933000F1F979 /* web-ios */,
 				A50BC23A18E984A100F1F979 /* url.h */,
+				A50BC24518E99A9D00F1F979 /* WebView.h */,
 			);
 			name = Web;
 			sourceTree = "<group>";
 		};
-		A50BC23F18E9933000F1F979 /* WebView-ios */ = {
+		A50BC23F18E9933000F1F979 /* web-ios */ = {
 			isa = PBXGroup;
 			children = (
-				A50BC24018E9933E00F1F979 /* WebView_iOS.h */,
-				A50BC24118E9933E00F1F979 /* WebView_iOS.mm */,
-				A50BC24218E9933E00F1F979 /* WebView.mm */,
+				A55885DA19A4BA9C00914838 /* url.mm */,
+				A55885DB19A4BA9C00914838 /* WebView_iOS.h */,
+				A55885DC19A4BA9C00914838 /* WebView_iOS.mm */,
+				A55885DD19A4BA9C00914838 /* WebView.mm */,
 			);
-			name = "WebView-ios";
+			name = "web-ios";
 			sourceTree = "<group>";
 		};
 		A50BC26D18E9A1C100F1F979 /* FlurryAds */ = {
@@ -1136,6 +1180,31 @@
 				A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */,
 			);
 			path = "Flurry-ios";
+			sourceTree = "<group>";
+		};
+		A558859C19A4AE3B00914838 /* Notifications-mac */ = {
+			isa = PBXGroup;
+			children = (
+				A55885E519A4BC9F00914838 /* Notifications.mm */,
+			);
+			name = "Notifications-mac";
+			sourceTree = "<group>";
+		};
+		A55885D919A4BA5400914838 /* web-mac */ = {
+			isa = PBXGroup;
+			children = (
+				A55885E119A4BC9400914838 /* url.mm */,
+				A55885E219A4BC9400914838 /* WebView.mm */,
+			);
+			name = "web-mac";
+			sourceTree = "<group>";
+		};
+		A55885E719A4BCAA00914838 /* googleAnalytics-mac */ = {
+			isa = PBXGroup;
+			children = (
+				A55885E819A4BCB800914838 /* GoogleAnalytics.mm */,
+			);
+			name = "googleAnalytics-mac";
 			sourceTree = "<group>";
 		};
 		A55C4D8219A1EB4900F3449A /* appirater-mac */ = {
@@ -1667,8 +1736,8 @@
 		A5ACF04B1918B2D700A010A5 /* GoogleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
+				A55885E719A4BCAA00914838 /* googleAnalytics-mac */,
 				A5F0C9281922356B006B8457 /* googleAnalytics-ios */,
-				A5F0C9261922353E006B8457 /* GoogleAnalytics.mm */,
 				A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */,
 			);
 			name = GoogleAnalytics;
@@ -1677,6 +1746,7 @@
 		A5D08BB618F6F66800B4EBA1 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				A558859C19A4AE3B00914838 /* Notifications-mac */,
 				A5D08BBA18F7A43800B4EBA1 /* Notifications-ios */,
 				A5D08BB718F6F67800B4EBA1 /* Notifications.h */,
 			);
@@ -1724,6 +1794,7 @@
 		A5F0C9281922356B006B8457 /* googleAnalytics-ios */ = {
 			isa = PBXGroup;
 			children = (
+				A5F0C9261922353E006B8457 /* GoogleAnalytics.mm */,
 				A5F0C9291922356B006B8457 /* GAI.h */,
 				A5F0C92A1922356B006B8457 /* GAIDictionaryBuilder.h */,
 				A5F0C92B1922356B006B8457 /* GAIFields.h */,
@@ -1744,6 +1815,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885A419A4AE4E00914838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885AA19A4AE6D00914838 /* Notifications.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885B819A4AEFA00914838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885BE19A4B90100914838 /* GoogleAnalytics.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885C819A4B92600914838 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885CE19A4B95F00914838 /* WebView.h in Headers */,
+				A55885CF19A4B96600914838 /* url.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1923,7 +2019,7 @@
 			);
 			name = "Appirater iOS";
 			productName = Avalon;
-			productReference = A50BC1AA18E9634600F1F979 /* libAppirater.a */;
+			productReference = A50BC1AA18E9634600F1F979 /* libAppirater iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A50BC1AB18E9635400F1F979 /* Paiment iOS */ = {
@@ -1940,7 +2036,7 @@
 			);
 			name = "Paiment iOS";
 			productName = Avalon;
-			productReference = A50BC1B318E9635400F1F979 /* libPaiment.a */;
+			productReference = A50BC1B318E9635400F1F979 /* libPaiment iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A50BC22C18E9842F00F1F979 /* Web iOS */ = {
@@ -1957,7 +2053,7 @@
 			);
 			name = "Web iOS";
 			productName = Avalon;
-			productReference = A50BC23618E9842F00F1F979 /* libWeb.a */;
+			productReference = A50BC23618E9842F00F1F979 /* libWeb iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A50BC25218E99F5400F1F979 /* Flurry iOS */ = {
@@ -1974,7 +2070,7 @@
 			);
 			name = "Flurry iOS";
 			productName = Avalon;
-			productReference = A50BC25E18E99F5400F1F979 /* libFlurry.a */;
+			productReference = A50BC25E18E99F5400F1F979 /* libFlurry iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A50BC25F18E9A14800F1F979 /* FlurryAds iOS */ = {
@@ -1991,7 +2087,58 @@
 			);
 			name = "FlurryAds iOS";
 			productName = Avalon;
-			productReference = A50BC26B18E9A14800F1F979 /* libFlurryAds.a */;
+			productReference = A50BC26B18E9A14800F1F979 /* libFlurryAds iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A558859D19A4AE4E00914838 /* Notifications Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55885A619A4AE4E00914838 /* Build configuration list for PBXNativeTarget "Notifications Mac" */;
+			buildPhases = (
+				A558859E19A4AE4E00914838 /* Sources */,
+				A55885A019A4AE4E00914838 /* Frameworks */,
+				A55885A419A4AE4E00914838 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Notifications Mac";
+			productName = Avalon;
+			productReference = A55885A919A4AE4E00914838 /* libNotifications Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A55885B419A4AEFA00914838 /* GoogleAnalytics Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55885BA19A4AEFA00914838 /* Build configuration list for PBXNativeTarget "GoogleAnalytics Mac" */;
+			buildPhases = (
+				A55885B519A4AEFA00914838 /* Sources */,
+				A55885B619A4AEFA00914838 /* Frameworks */,
+				A55885B819A4AEFA00914838 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GoogleAnalytics Mac";
+			productName = Avalon;
+			productReference = A55885BD19A4AEFA00914838 /* libGoogleAnalytics Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A55885C419A4B92600914838 /* Web Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55885CA19A4B92600914838 /* Build configuration list for PBXNativeTarget "Web Mac" */;
+			buildPhases = (
+				A55885C519A4B92600914838 /* Sources */,
+				A55885C619A4B92600914838 /* Frameworks */,
+				A55885C819A4B92600914838 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Web Mac";
+			productName = Avalon;
+			productReference = A55885CD19A4B92600914838 /* libWeb Mac.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A55C4D9F19A1F16C00F3449A /* Appirater Mac */ = {
@@ -2045,7 +2192,7 @@
 			);
 			name = "MoPub iOS";
 			productName = Avalon;
-			productReference = A58EA78A192390A4000D0B28 /* libMoPub.a */;
+			productReference = A58EA78A192390A4000D0B28 /* libMoPub iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A5A7596F19249DFE00C44FBF /* MoPubVungleAdaptor iOS */ = {
@@ -2063,7 +2210,7 @@
 			);
 			name = "MoPubVungleAdaptor iOS";
 			productName = Avalon;
-			productReference = A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor.a */;
+			productReference = A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A5ACF0351918B1E500A010A5 /* GoogleAnalytics iOS */ = {
@@ -2081,7 +2228,7 @@
 			);
 			name = "GoogleAnalytics iOS";
 			productName = Avalon;
-			productReference = A5ACF0491918B1E500A010A5 /* libGoogleAnalytics.a */;
+			productReference = A5ACF0491918B1E500A010A5 /* libGoogleAnalytics iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A5D08BA518F6F5B100B4EBA1 /* Notifications iOS */ = {
@@ -2098,7 +2245,7 @@
 			);
 			name = "Notifications iOS";
 			productName = Avalon;
-			productReference = A5D08BB318F6F5B100B4EBA1 /* libNotifications.a */;
+			productReference = A5D08BB318F6F5B100B4EBA1 /* libNotifications iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A5D3275E1900507400A65D25 /* AdMob iOS */ = {
@@ -2116,7 +2263,7 @@
 			);
 			name = "AdMob iOS";
 			productName = Avalon;
-			productReference = A5D3276D1900507400A65D25 /* libAdMob.a */;
+			productReference = A5D3276D1900507400A65D25 /* libAdMob iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -2170,11 +2317,14 @@
 				A55C4D9F19A1F16C00F3449A /* Appirater Mac */,
 				A50BC1AB18E9635400F1F979 /* Paiment iOS */,
 				A50BC22C18E9842F00F1F979 /* Web iOS */,
+				A55885C419A4B92600914838 /* Web Mac */,
 				A50BC25218E99F5400F1F979 /* Flurry iOS */,
 				A50BC25F18E9A14800F1F979 /* FlurryAds iOS */,
 				A5D08BA518F6F5B100B4EBA1 /* Notifications iOS */,
+				A558859D19A4AE4E00914838 /* Notifications Mac */,
 				A5D3275E1900507400A65D25 /* AdMob iOS */,
 				A5ACF0351918B1E500A010A5 /* GoogleAnalytics iOS */,
+				A55885B419A4AEFA00914838 /* GoogleAnalytics Mac */,
 				A58EA778192390A4000D0B28 /* MoPub iOS */,
 				A5A7596F19249DFE00C44FBF /* MoPubVungleAdaptor iOS */,
 				A50BC24618E99DA500F1F979 /* Build all libs iOS */,
@@ -2236,9 +2386,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50BC24418E9933E00F1F979 /* WebView.mm in Sources */,
-				A50BC24318E9933E00F1F979 /* WebView_iOS.mm in Sources */,
-				A50BC23C18E984B100F1F979 /* url.mm in Sources */,
+				A55885DE19A4BA9C00914838 /* url.mm in Sources */,
+				A55885E019A4BA9C00914838 /* WebView.mm in Sources */,
+				A55885DF19A4BA9C00914838 /* WebView_iOS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2255,6 +2405,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A558859E19A4AE4E00914838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885E619A4BC9F00914838 /* Notifications.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885B519A4AEFA00914838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885EA19A4BCD600914838 /* GoogleAnalytics.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A55885C519A4B92600914838 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A55885E319A4BC9400914838 /* url.mm in Sources */,
+				A55885E419A4BC9400914838 /* WebView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2612,7 +2787,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Appirater;
+				PRODUCT_NAME = "Appirater iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2627,7 +2802,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Appirater;
+				PRODUCT_NAME = "Appirater iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2642,7 +2817,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Paiment;
+				PRODUCT_NAME = "Paiment iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2657,7 +2832,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Paiment;
+				PRODUCT_NAME = "Paiment iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2669,7 +2844,7 @@
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Web;
+				PRODUCT_NAME = "Web iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2681,7 +2856,7 @@
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Web;
+				PRODUCT_NAME = "Web iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2711,7 +2886,7 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/Flurry/Flurry-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Flurry;
+				PRODUCT_NAME = "Flurry iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2727,7 +2902,7 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/Flurry/Flurry-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Flurry;
+				PRODUCT_NAME = "Flurry iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2743,7 +2918,7 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/FlurryAds/FlurryAds-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = FlurryAds;
+				PRODUCT_NAME = "FlurryAds iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2759,7 +2934,83 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/FlurryAds/FlurryAds-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = FlurryAds;
+				PRODUCT_NAME = "FlurryAds iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A55885A719A4AE4E00914838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Notifications Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A55885A819A4AE4E00914838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Notifications Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A55885BB19A4AEFA00914838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "GoogleAnalytics Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A55885BC19A4AEFA00914838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "GoogleAnalytics Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A55885CB19A4B92600914838 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Web Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A55885CC19A4B92600914838 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Web Mac";
+				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2843,7 +3094,7 @@
 					"$(PROJECT_DIR)/vendors/vungle/ios/vunglepub.embeddedframework/vunglepub.framework/Versions/A",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MoPub;
+				PRODUCT_NAME = "MoPub iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2863,7 +3114,7 @@
 					"$(PROJECT_DIR)/vendors/vungle/ios/vunglepub.embeddedframework/vunglepub.framework/Versions/A",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MoPub;
+				PRODUCT_NAME = "MoPub iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2884,7 +3135,7 @@
 					"$(PROJECT_DIR)/vendors/vungle/ios/vunglepub.embeddedframework/vunglepub.framework/Versions/A",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MoPubVungleAdaptor;
+				PRODUCT_NAME = "MoPubVungleAdaptor iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2905,7 +3156,7 @@
 					"$(PROJECT_DIR)/vendors/vungle/ios/vunglepub.embeddedframework/vunglepub.framework/Versions/A",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = MoPubVungleAdaptor;
+				PRODUCT_NAME = "MoPubVungleAdaptor iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2921,7 +3172,7 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/googleAnalytics/googleAnalytics-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = GoogleAnalytics;
+				PRODUCT_NAME = "GoogleAnalytics iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2937,7 +3188,7 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/googleAnalytics/googleAnalytics-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = GoogleAnalytics;
+				PRODUCT_NAME = "GoogleAnalytics iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2949,7 +3200,7 @@
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Notifications;
+				PRODUCT_NAME = "Notifications iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2961,7 +3212,7 @@
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = Notifications;
+				PRODUCT_NAME = "Notifications iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2977,7 +3228,7 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = AdMob;
+				PRODUCT_NAME = "AdMob iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2993,7 +3244,7 @@
 					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = AdMob;
+				PRODUCT_NAME = "AdMob iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -3069,6 +3320,33 @@
 			buildConfigurations = (
 				A50BC26918E9A14800F1F979 /* Debug */,
 				A50BC26A18E9A14800F1F979 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55885A619A4AE4E00914838 /* Build configuration list for PBXNativeTarget "Notifications Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55885A719A4AE4E00914838 /* Debug */,
+				A55885A819A4AE4E00914838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55885BA19A4AEFA00914838 /* Build configuration list for PBXNativeTarget "GoogleAnalytics Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55885BB19A4AEFA00914838 /* Debug */,
+				A55885BC19A4AEFA00914838 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55885CA19A4B92600914838 /* Build configuration list for PBXNativeTarget "Web Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A55885CB19A4B92600914838 /* Debug */,
+				A55885CC19A4B92600914838 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

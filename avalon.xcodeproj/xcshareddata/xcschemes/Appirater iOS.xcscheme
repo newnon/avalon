@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A50BC1A218E9634600F1F979"
-               BuildableName = "libAppirater.a"
+               BuildableName = "libAppirater iOS.a"
                BlueprintName = "Appirater iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

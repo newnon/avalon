@@ -56,8 +56,8 @@ endif
 ifneq (,$(findstring web,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_WEB_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_WEB_ENABLED
-    LOCAL_SRC_FILES += avalon/platform/android/utils/url.cpp
-    LOCAL_SRC_FILES += avalon/platform/android/webview/WebView.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/web/url.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/web/WebView.cpp
 endif
 
 ifneq (,$(findstring flurry,$(AVALON_FEATURES)))

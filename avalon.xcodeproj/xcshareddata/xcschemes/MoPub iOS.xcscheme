@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A58EA778192390A4000D0B28"
-               BuildableName = "libMoPub.a"
+               BuildableName = "libMoPub iOS.a"
                BlueprintName = "MoPub iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

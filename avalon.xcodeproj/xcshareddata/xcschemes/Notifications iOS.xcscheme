@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A5D08BA518F6F5B100B4EBA1"
-               BuildableName = "libNotifications.a"
+               BuildableName = "libNotifications iOS.a"
                BlueprintName = "Notifications iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

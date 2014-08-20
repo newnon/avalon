@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A50BC1AB18E9635400F1F979"
-               BuildableName = "libPaiment.a"
+               BuildableName = "libPaiment iOS.a"
                BlueprintName = "Paiment iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

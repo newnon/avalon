@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A50BC25F18E9A14800F1F979"
-               BuildableName = "libFlurryAds.a"
+               BuildableName = "libFlurryAds iOS.a"
                BlueprintName = "FlurryAds iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

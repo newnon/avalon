@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A5ACF0351918B1E500A010A5"
-               BuildableName = "libGoogleAnalytics.a"
+               BuildableName = "libGoogleAnalytics iOS.a"
                BlueprintName = "GoogleAnalytics iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A50BC22C18E9842F00F1F979"
-               BuildableName = "libWeb.a"
+               BuildableName = "libWeb iOS.a"
                BlueprintName = "Web iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

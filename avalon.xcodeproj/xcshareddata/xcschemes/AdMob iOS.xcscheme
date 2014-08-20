@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A5D3275E1900507400A65D25"
-               BuildableName = "libAdMob.a"
+               BuildableName = "libAdMob iOS.a"
                BlueprintName = "AdMob iOS"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A50BC25218E99F5400F1F979"
-               BuildableName = "libFlurry iOS.a"
-               BlueprintName = "Flurry iOS"
+               BlueprintIdentifier = "A55885C419A4B92600914838"
+               BuildableName = "libGoogleAnalytics Mac copy.a"
+               BlueprintName = "Web Mac"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
