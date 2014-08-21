@@ -24,6 +24,11 @@ bool GameCenter::isLoggedIn()
 {
     return [[GameCenterMac shared] isLoggedIn];
 }
+    
+bool GameCenter::showGameCenter()
+{
+    return [[GameCenterMac shared] showGameCenter];
+}
 
 #pragma mark -
 #pragma mark Achievements

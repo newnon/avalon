@@ -58,6 +58,17 @@ public abstract class GameCenter
     {
         return (agsGameClient != null && AmazonGamesClient.isInitialized());
     }
+    
+    public static boolean showGameCenter()
+    {
+        if (agsGameClient == null || !AmazonGamesClient.isInitialized()) {
+            return false;
+        } else {
+            agsGameClient.showGameCircle();
+            return true;
+        }
+        return false;
+    }
 
     public static boolean showAchievements()
     {

@@ -58,6 +58,11 @@ public abstract class GameCenter
     	
     	return "";
     }
+    
+    public static boolean showGameCenter()
+    {
+        return false;
+    }
 
     public static boolean showAchievements()
     {

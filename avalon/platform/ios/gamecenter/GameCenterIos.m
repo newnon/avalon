@@ -65,6 +65,31 @@ static GameCenterIos* instance = nil;
     return [GKLocalPlayer localPlayer].isAuthenticated;
 }
 
+- (BOOL)showGameCenter
+{
+    if (![GKLocalPlayer localPlayer].isAuthenticated) {
+        return NO;
+    }
+    
+    NSWindow *window = [NSApplication sharedApplication].keyWindow;
+    
+    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc] init];
+    gameCenterViewController.gameCenterDelegate = self;
+    if (gameCenterViewController != nil) {
+        GKDialogController *gcController = [GKDialogController sharedDialogController];
+        gcController.parentWindow = window;
+        [gcController presentViewController:gameCenterViewController];
+    }
+    
+    return YES;
+}
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    GKDialogController *gcController = [GKDialogController sharedDialogController];
+    [gcController dismiss: self];
+}
+
 #pragma mark -
 #pragma mark Achievements
 

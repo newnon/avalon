@@ -10,6 +10,8 @@
 
 - (BOOL)isLoggedIn;
 
+- (BOOL)showGameCenter;
+
 - (BOOL)showAchievements;
 - (void)postAchievement:(const char*)idName percent:(NSNumber*)percentComplete showBanner:(BOOL)show;
 - (void)clearAllAchivements;

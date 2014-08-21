@@ -102,6 +102,11 @@ bool GameCenter::isLoggedIn()
     return helper::gamecenter::callStaticBoolMethod("isLoggedIn");
 }
 
+bool GameCenter::showGameCenter()
+{
+	return helper::gamecenter::callStaticBoolMethod("showGameCenter");
+}
+
 bool GameCenter::showAchievements()
 {
     return helper::gamecenter::callStaticBoolMethod("showAchievements");

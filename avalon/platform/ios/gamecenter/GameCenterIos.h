@@ -1,5 +1,5 @@
 #import <GameKit/GameKit.h>
-@interface GameCenterIos : NSObject <GKLeaderboardViewControllerDelegate, GKAchievementViewControllerDelegate>
+@interface GameCenterIos : NSObject <GKGameCenterControllerDelegate, GKLeaderboardViewControllerDelegate, GKAchievementViewControllerDelegate>
 {
 }
 
@@ -9,6 +9,8 @@
 - (void)logout;
 
 - (BOOL)isLoggedIn;
+
+- (BOOL)showGameCenter;
 
 - (BOOL)showAchievements;
 - (void)postAchievement:(const char*)idName percent:(NSNumber*)percentComplete showBanner:(BOOL)show;

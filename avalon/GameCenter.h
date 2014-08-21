@@ -14,6 +14,8 @@ public:
     void logout();
     
     bool isLoggedIn();
+    
+    bool showGameCenter();
 
     bool showAchievements();
     void postAchievement(const std::string &idName, int percentComplete, bool showBanner);
