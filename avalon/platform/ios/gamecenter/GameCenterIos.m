@@ -71,23 +71,23 @@ static GameCenterIos* instance = nil;
         return NO;
     }
     
-    NSWindow *window = [NSApplication sharedApplication].keyWindow;
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *rootViewController = window.rootViewController;
     
-    GKGameCenterViewController *gameCenterViewController = [[GKGameCenterViewController alloc] init];
-    gameCenterViewController.gameCenterDelegate = self;
-    if (gameCenterViewController != nil) {
-        GKDialogController *gcController = [GKDialogController sharedDialogController];
-        gcController.parentWindow = window;
-        [gcController presentViewController:gameCenterViewController];
-    }
+    GKGameCenterViewController *gkController = [[GKGameCenterViewController alloc] init];
+    gkController.gameCenterDelegate = self;
+    
+    [rootViewController presentModalViewController:gkController animated:YES];
     
     return YES;
 }
 
 - (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
 {
-    GKDialogController *gcController = [GKDialogController sharedDialogController];
-    [gcController dismiss: self];
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    UIViewController *rootViewController = window.rootViewController;
+    
+    [rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark -
@@ -101,8 +101,6 @@ static GameCenterIos* instance = nil;
     
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
-
-    //AppController* appController = (AppController*) [UIApplication sharedApplication].delegate;
 
     GKAchievementViewController* gkController = [[[GKAchievementViewController alloc] init] autorelease];
     gkController.achievementDelegate = self;
@@ -159,7 +157,6 @@ static GameCenterIos* instance = nil;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
 
-    //AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
     [rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -174,7 +171,6 @@ static GameCenterIos* instance = nil;
 
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
-    //AppController* appController = (AppController*) [UIApplication sharedApplication].delegate;
 
     GKLeaderboardViewController* gkController = [[[GKLeaderboardViewController alloc] init] autorelease];
     gkController.timeScope = GKLeaderboardTimeScopeAllTime;
