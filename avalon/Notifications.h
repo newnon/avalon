@@ -26,7 +26,7 @@ public:
 class Notifications
 {
 public:
-    static void schedule(const std::string &message, long long time, int id, const std::string &sound = "", unsigned badgeNumber = 0, const std::unordered_map<std::string,std::string> &userDict = {});
+    static void schedule(const std::string &message, long long time, int id, const std::string &sound = "", unsigned badgeNumber = 0, const std::unordered_map<std::string,std::string> &userDict = std::unordered_map<std::string,std::string>());
     static void cancel(int id);
     static void cancelAll();
     static bool isScheduled(int id);

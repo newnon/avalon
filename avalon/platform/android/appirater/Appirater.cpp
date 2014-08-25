@@ -1,6 +1,5 @@
 #include <avalon/Appirater.h>
 
-#include <avalon/utils/platform.h>
 #include <jni.h>
 #include "cocos2d.h"
 #include "platform/android/jni/JniHelper.h"

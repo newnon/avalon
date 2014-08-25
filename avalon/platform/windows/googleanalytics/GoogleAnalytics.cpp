@@ -4,7 +4,7 @@
 namespace avalon {
 
     
-class MacGAITracker: public GoogleAnalyticsTracker
+class WinGAITracker: public GoogleAnalyticsTracker
 {
 public:
     virtual void setParameter(const std::string &name, const std::string &value) override
@@ -73,11 +73,11 @@ public:
     {
     }
 
-    MacGAITracker(const std::string &trackerId/*, id<GAITracker> tracker*/):/*_tracker(tracker),*/_trackerId(trackerId)
+    WinGAITracker(const std::string &trackerId/*, id<GAITracker> tracker*/):/*_tracker(tracker),*/_trackerId(trackerId)
     {
         
     }
-    ~MacGAITracker()
+    ~WinGAITracker()
     {
         
     }
@@ -129,7 +129,7 @@ GoogleAnalyticsTracker* GoogleAnalytics::getTracker(const std::string &trackingI
     auto it = _trackers.find(trackingId);
     if(it != _trackers.end())
         return it->second;
-    MacGAITracker *ret = new MacGAITracker(trackingId);
+    WinGAITracker *ret = new WinGAITracker(trackingId);
     _trackers.insert(std::make_pair(trackingId, ret));
     if(!_defaultTracker)
         _defaultTracker = ret;

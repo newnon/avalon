@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
 # inject the used flavor into the c++ preprocessor. please keep this block
-# up to date with <avalon/utils/platform.h> and <avalon/utils/platform.cpp>!
+# up to date with <avalon/utils/platform.h>!
 ifeq (amazon, $(AVALON_PLATFORM_FLAVOR))
     LOCAL_CFLAGS += -DAVALON_PLATFORM_FLAVOR=1
     LOCAL_EXPORT_CFLAGS += -DAVALON_PLATFORM_FLAVOR=1
@@ -19,26 +19,13 @@ endif
 LOCAL_MODULE := avalon_static
 LOCAL_MODULE_FILENAME := libavalon
 
-LOCAL_SRC_FILES := avalon/utils/platform.cpp
-
-ifneq (,$(findstring adsmanager,$(AVALON_FEATURES)))
-    LOCAL_CFLAGS += -DAVALON_CONFIG_ADS_ENABLED
-    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_ADS_ENABLED
-    LOCAL_SRC_FILES += avalon/ads/Manager.cpp
-    LOCAL_SRC_FILES += avalon/platform/android/ads/provider/Chartboost.cpp
-    LOCAL_SRC_FILES += avalon/platform/android/ads/provider/Revmob.cpp
-    LOCAL_SRC_FILES += avalon/platform/android/ads/provider/SamsungAdHub.cpp
-endif
-
 ifneq (,$(findstring payment,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_PAIMENT_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_PAIMENT_ENABLED
-    LOCAL_SRC_FILES += avalon/payment/Loader.cpp
     LOCAL_SRC_FILES += avalon/payment/Manager.cpp
     LOCAL_SRC_FILES += avalon/payment/Product.cpp
     LOCAL_SRC_FILES += avalon/payment/ProductConsumable.cpp
     LOCAL_SRC_FILES += avalon/platform/android/payment/Backend.cpp
-    LOCAL_SRC_FILES += avalon/io/IniReader.cpp
 endif
 
 ifneq (,$(findstring gamecenter,$(AVALON_FEATURES)))
