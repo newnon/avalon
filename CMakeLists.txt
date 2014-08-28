@@ -24,7 +24,7 @@ elseif(ANDROID)# Android
   set(PLATFORM_FOLDER android)
 endif()
 
-set(AVALON_SRC)
+set(AVALON_SRC avalon/empty.cpp)
 
 if(AVALON_PAYMENT)
 add_definitions(-DAVALON_CONFIG_PAIMENT_ENABLED)
