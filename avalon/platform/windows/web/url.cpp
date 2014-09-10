@@ -1,4 +1,5 @@
 #include "avalon/url.h"
+#include <windows.h>
 #include <shellapi.h>
 
 namespace avalon {
