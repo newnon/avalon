@@ -1,4 +1,4 @@
-#ifdef AVALON_CONFIG_PAIMENT_ENABLED
+#ifdef AVALON_CONFIG_PAYMENT_ENABLED
 #include "avalon/payment/Manager.h"
 
 #include <typeinfo>
@@ -179,4 +179,4 @@ Backend& Manager::getBackend()
 
 } // namespace payment
 } // namespace avalon
-#endif //AVALON_CONFIG_PAIMENT_ENABLED
+#endif //AVALON_CONFIG_PAYMENT_ENABLED

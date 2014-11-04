@@ -1,4 +1,4 @@
-#ifdef AVALON_CONFIG_PAIMENT_ENABLED
+#ifdef AVALON_CONFIG_PAYMENT_ENABLED
 #include "avalon/payment/ProductConsumable.h"
 
 #include "avalon/utils/assert.hpp"
@@ -30,4 +30,4 @@ float ProductConsumable::getQuantity() const
 
 } // namespace payment
 } // namespace avalon
-#endif //AVALON_CONFIG_PAIMENT_ENABLED
+#endif //AVALON_CONFIG_PAYMENT_ENABLED
