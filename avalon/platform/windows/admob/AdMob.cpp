@@ -32,7 +32,7 @@ private:
 class WINGADBannerView:public GADBannerView
 {
 public:
-    WINGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, CGRect rect, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
+    WINGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
     {
     }
     
@@ -103,7 +103,7 @@ public:
     }
     std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate) override
     {
-        _bannerViews.emplace_back(new WINGADBannerView(createRequest(), adUnitID, size, CGRectMake(x, y, width, height), delegate));
+        _bannerViews.emplace_back(new WINGADBannerView(createRequest(), adUnitID, size, x, y, width, height, delegate));
         return _bannerViews.back();
     }
     
