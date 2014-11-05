@@ -90,7 +90,7 @@
 		A547D08B1A06F1EE00E6D357 /* Backend.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D0881A06F1EE00E6D357 /* Backend.mm */; };
 		A547D08C1A06F1EE00E6D357 /* BackendMac.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D0891A06F1EE00E6D357 /* BackendMac.h */; };
 		A547D08D1A06F1EE00E6D357 /* BackendMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D08A1A06F1EE00E6D357 /* BackendMac.mm */; };
-		A547D08F1A06F20400E6D357 /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D08E1A06F20400E6D357 /* payment.h */; };
+		A547D08F1A06F20400E6D357 /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D08E1A06F20400E6D357 /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A55885A119A4AE4E00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A55885AA19A4AE6D00914838 /* Notifications.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BB718F6F67800B4EBA1 /* Notifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A55885B719A4AEFA00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -2065,11 +2065,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A547D08F1A06F20400E6D357 /* payment.h in Headers */,
 				A547D0671A06E9AE00E6D357 /* Backend.h in Headers */,
 				A547D08C1A06F1EE00E6D357 /* BackendMac.h in Headers */,
 				A547D0681A06E9AE00E6D357 /* Manager.h in Headers */,
 				A547D0691A06E9AE00E6D357 /* ManagerDelegate.h in Headers */,
-				A547D08F1A06F20400E6D357 /* payment.h in Headers */,
 				A547D06A1A06E9AE00E6D357 /* Product.h in Headers */,
 				A547D06B1A06E9AE00E6D357 /* ProductConsumable.h in Headers */,
 			);
