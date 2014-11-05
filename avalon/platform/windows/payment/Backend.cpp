@@ -23,7 +23,7 @@ bool Backend::isInitialized() const
 }
 
 void Backend::initialize(const std::string &data)
-
+{
 }
 
 void Backend::shutdown()
