@@ -35,6 +35,11 @@ protected:
     virtual ~GoogleAnalyticsTracker() {}
 };
     
+//windows conflict
+#ifdef ERROR
+#undef ERROR
+#endif
+    
 enum class GoogleAnalyticsLogLevel
 {
     NONE = 0,

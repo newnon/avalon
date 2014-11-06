@@ -12,6 +12,10 @@ option(AVALON_GOOGLEANALYTICS "googleanalytics" OFF)
 option(AVALON_MOPUB "mopub" OFF)
 option(AVALON_UI "ui" OFF)
 
+if(NOT MSVC)# all gcc
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+endif()
+
 if(WIN32) # Win32
   set(PLATFORM_FOLDER windows)
 elseif(APPLE)# osx or ios
