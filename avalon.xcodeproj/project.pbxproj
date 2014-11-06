@@ -91,6 +91,14 @@
 		A547D08C1A06F1EE00E6D357 /* BackendMac.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D0891A06F1EE00E6D357 /* BackendMac.h */; };
 		A547D08D1A06F1EE00E6D357 /* BackendMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D08A1A06F1EE00E6D357 /* BackendMac.mm */; };
 		A547D08F1A06F20400E6D357 /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D08E1A06F20400E6D357 /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5538E271A0AD6B800E949AD /* KKGAIDictionaryBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */; };
+		A5538E281A0AD6B800E949AD /* KKGAIDictionaryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5538E291A0AD6B800E949AD /* KKGAIFields.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E201A0AD6B800E949AD /* KKGAIFields.h */; };
+		A5538E2A1A0AD6B800E949AD /* KKGAIFields.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E211A0AD6B800E949AD /* KKGAIFields.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5538E2C1A0AD6B800E949AD /* KKGAISystemInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E231A0AD6B800E949AD /* KKGAISystemInfo.h */; };
+		A5538E2D1A0AD6B800E949AD /* KKGAISystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E241A0AD6B800E949AD /* KKGAISystemInfo.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5538E2E1A0AD6B800E949AD /* KKGAI.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E251A0AD6B800E949AD /* KKGAI.h */; };
+		A5538E2F1A0AD6B800E949AD /* KKGAI.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E261A0AD6B800E949AD /* KKGAI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A55885A119A4AE4E00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A55885AA19A4AE6D00914838 /* Notifications.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BB718F6F67800B4EBA1 /* Notifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A55885B719A4AEFA00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -303,6 +311,8 @@
 		A5A75B041924EF1100C44FBF /* vg_button_mute_selected.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A75AFD1924EE7000C44FBF /* vg_button_mute_selected.png */; };
 		A5ACF0391918B1E500A010A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5ACF04A1918B25C00A010A5 /* AdMob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D327861900EEA700A65D25 /* AdMob.mm */; };
+		A5B1138E1A0B81BF008F9AF2 /* KKGAILogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1138C1A0B81BF008F9AF2 /* KKGAILogger.h */; };
+		A5B1138F1A0B81BF008F9AF2 /* KKGAITracker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1138D1A0B81BF008F9AF2 /* KKGAITracker.h */; };
 		A5BB771418E9F4950096422D /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A5D08BAC18F6F5B100B4EBA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; };
@@ -659,6 +669,14 @@
 		A547D0891A06F1EE00E6D357 /* BackendMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackendMac.h; sourceTree = "<group>"; };
 		A547D08A1A06F1EE00E6D357 /* BackendMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BackendMac.mm; sourceTree = "<group>"; };
 		A547D08E1A06F20400E6D357 /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = ../payment.h; sourceTree = "<group>"; };
+		A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAIDictionaryBuilder.h; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAIDictionaryBuilder.m; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.m; sourceTree = "<group>"; };
+		A5538E201A0AD6B800E949AD /* KKGAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAIFields.h; path = avalon/platform/mac/googleanalytics/KKGAIFields.h; sourceTree = "<group>"; };
+		A5538E211A0AD6B800E949AD /* KKGAIFields.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAIFields.m; path = avalon/platform/mac/googleanalytics/KKGAIFields.m; sourceTree = "<group>"; };
+		A5538E231A0AD6B800E949AD /* KKGAISystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAISystemInfo.h; path = avalon/platform/mac/googleanalytics/KKGAISystemInfo.h; sourceTree = "<group>"; };
+		A5538E241A0AD6B800E949AD /* KKGAISystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAISystemInfo.m; path = avalon/platform/mac/googleanalytics/KKGAISystemInfo.m; sourceTree = "<group>"; };
+		A5538E251A0AD6B800E949AD /* KKGAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAI.h; path = avalon/platform/mac/googleanalytics/KKGAI.h; sourceTree = "<group>"; };
+		A5538E261A0AD6B800E949AD /* KKGAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAI.m; path = avalon/platform/mac/googleanalytics/KKGAI.m; sourceTree = "<group>"; };
 		A55885A919A4AE4E00914838 /* libNotifications Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNotifications Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55885BD19A4AEFA00914838 /* libGoogleAnalytics Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGoogleAnalytics Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55885CD19A4B92600914838 /* libWeb Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libWeb Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -905,6 +923,8 @@
 		A5A75AFD1924EE7000C44FBF /* vg_button_mute_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_button_mute_selected.png; sourceTree = "<group>"; };
 		A5ACF0491918B1E500A010A5 /* libGoogleAnalytics iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGoogleAnalytics iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleAnalytics.h; path = avalon/GoogleAnalytics.h; sourceTree = "<group>"; };
+		A5B1138C1A0B81BF008F9AF2 /* KKGAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAILogger.h; path = avalon/platform/mac/googleanalytics/KKGAILogger.h; sourceTree = "<group>"; };
+		A5B1138D1A0B81BF008F9AF2 /* KKGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAITracker.h; path = avalon/platform/mac/googleanalytics/KKGAITracker.h; sourceTree = "<group>"; };
 		A5D08BB318F6F5B100B4EBA1 /* libNotifications iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNotifications iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D08BB718F6F67800B4EBA1 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Notifications.h; path = avalon/Notifications.h; sourceTree = "<group>"; };
 		A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Notifications.mm; path = avalon/platform/ios/notifications/Notifications.mm; sourceTree = "<group>"; };
@@ -1401,6 +1421,16 @@
 		A55885E719A4BCAA00914838 /* googleAnalytics-mac */ = {
 			isa = PBXGroup;
 			children = (
+				A5B1138C1A0B81BF008F9AF2 /* KKGAILogger.h */,
+				A5B1138D1A0B81BF008F9AF2 /* KKGAITracker.h */,
+				A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */,
+				A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */,
+				A5538E201A0AD6B800E949AD /* KKGAIFields.h */,
+				A5538E211A0AD6B800E949AD /* KKGAIFields.m */,
+				A5538E231A0AD6B800E949AD /* KKGAISystemInfo.h */,
+				A5538E241A0AD6B800E949AD /* KKGAISystemInfo.m */,
+				A5538E251A0AD6B800E949AD /* KKGAI.h */,
+				A5538E261A0AD6B800E949AD /* KKGAI.m */,
 				A55885E819A4BCB800914838 /* GoogleAnalytics.mm */,
 			);
 			name = "googleAnalytics-mac";
@@ -2087,7 +2117,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5538E2C1A0AD6B800E949AD /* KKGAISystemInfo.h in Headers */,
+				A5538E271A0AD6B800E949AD /* KKGAIDictionaryBuilder.h in Headers */,
+				A5538E2E1A0AD6B800E949AD /* KKGAI.h in Headers */,
+				A5B1138F1A0B81BF008F9AF2 /* KKGAITracker.h in Headers */,
 				A55885BE19A4B90100914838 /* GoogleAnalytics.h in Headers */,
+				A5B1138E1A0B81BF008F9AF2 /* KKGAILogger.h in Headers */,
+				A5538E291A0AD6B800E949AD /* KKGAIFields.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2802,7 +2838,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5538E2F1A0AD6B800E949AD /* KKGAI.m in Sources */,
+				A5538E2D1A0AD6B800E949AD /* KKGAISystemInfo.m in Sources */,
 				A55885EA19A4BCD600914838 /* GoogleAnalytics.mm in Sources */,
+				A5538E281A0AD6B800E949AD /* KKGAIDictionaryBuilder.m in Sources */,
+				A5538E2A1A0AD6B800E949AD /* KKGAIFields.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
