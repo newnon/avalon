@@ -221,6 +221,16 @@ public:
         [_delegate release];
     }
     
+    virtual void setVisible(bool value)
+    {
+        _bannerView.hidden = !value;
+    }
+    
+    virtual bool isVisible()
+    {
+        return !_bannerView.hidden;
+    }
+    
     virtual bool hasAutoRefreshed() const
     {
         return [_bannerView hasAutoRefreshed];

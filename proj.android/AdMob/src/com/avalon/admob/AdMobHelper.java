@@ -469,6 +469,19 @@ public abstract class AdMobHelper
 		adView.setAdListener(new AdMobHelper.adViewAdListener(value));
 	}
 	
+	public static void setBannerVisible(AdView adView, boolean value)
+	{
+		if(value)
+			adView.setVisibility(View.VISIBLE)
+		else
+			adView.setVisibility(View.GONE)
+	}
+	
+	public static boolean isBannerVisible(AdView adView)
+	{
+		return adView.getWindowVisibility() == View.VISIBLE;
+	}
+	
 	public static AdView createBannerView(String adUnitID, int size, int x, int y, int width, int height)
 	{
 		final String curAdUnitID = adUnitID;

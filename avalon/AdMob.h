@@ -104,6 +104,8 @@ class GADBannerView
 public:
     const std::string &getAdUnitID() const { return _adUnitID; }
     GADAdSize getAdSize() const { return _adSize; }
+    virtual void setVisible(bool value)  = 0;
+    virtual bool isVisible() = 0;
     virtual ~GADBannerView() {}
     
 protected:

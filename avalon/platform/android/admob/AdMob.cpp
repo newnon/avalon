@@ -181,6 +181,33 @@ public:
             cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_bannerView);
         }
     }
+    
+    virtual void setVisible(bool value)
+    {
+        if(_bannerView)
+        {
+            cocos2d::JniMethodInfo methodInfo;
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setBannerVisible", "(Lcom/google/android/gms/ads/AdView;Z)V"))
+            {
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView, (jboolean)value);
+                methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            }
+            cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_bannerView);
+        }
+    }
+    
+    virtual bool isVisible()
+    {
+        if(!_bannerView)
+            return false;
+        cocos2d::JniMethodInfo methodInfo;
+        bool ret = false;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "isBannerVisible", "(Lcom/google/android/gms/ads/AdView;)Z"))
+        {
+            ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _bannerView);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
+    }
 
     void adViewDidReceiveAd()
     {

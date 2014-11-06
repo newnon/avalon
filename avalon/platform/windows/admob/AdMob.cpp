@@ -40,6 +40,15 @@ public:
     {
     }
     
+    virtual void setVisible(bool value)
+    {
+    }
+    
+    virtual bool isVisible()
+    {
+        return false;
+    }
+    
     virtual bool hasAutoRefreshed() const
     {
         return false;
