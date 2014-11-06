@@ -1,4 +1,7 @@
 #include "avalon/AdMob.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 #import "GADRequest.h"
 #import "GADInterstitial.h"
 #import "GADBannerView.h"
@@ -7,6 +10,9 @@
 #import "GADInterstitialDelegate.h"
 #import "GADAdNetworkExtras.h"
 #import "GADAdMobExtras.h"
+#ifdef __cplusplus
+}
+#endif
 
 @interface GADIOSBannerViewDelegate : NSObject<GADBannerViewDelegate>
 {
@@ -154,12 +160,18 @@ private:
     ::GADInterstitial *_interstitial;
 };
     
-    
 class IOSGADBannerView:public GADBannerView
 {
 public:
     IOSGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, CGRect rect, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
     {
+        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
+            float scale = [[UIScreen mainScreen] scale];
+            rect.origin.x /= scale;
+            rect.origin.y /= scale;
+            rect.size.width /= scale;
+            rect.size.height /= scale;
+        }
         ::GADAdSize bannerSize;
         switch (size) {
             case GADAdSize::Banner:
@@ -178,25 +190,32 @@ public:
                 bannerSize = kGADAdSizeSkyscraper;
                 break;
             case GADAdSize::SmartBannerPortrait:
-                bannerSize = kGADAdSizeSmartBannerPortrait;
+                bannerSize = GADAdSizeFromCGSize(rect.size);
                 break;
             case GADAdSize::SmartBannerLandscape:
-                bannerSize = kGADAdSizeSmartBannerLandscape;
+                bannerSize = GADAdSizeFromCGSize(rect.size);
                 break;
             default:
                 bannerSize = kGADAdSizeInvalid;
                 break;
         }
-        _bannerView = [[::GADBannerView alloc] initWithAdSize:bannerSize origin:CGPointMake(rect.origin.x, rect.origin.y)];
-        _bannerView.frame = rect;
+        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        
+        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
+        
+        _bannerView = [[::GADBannerView alloc] initWithAdSize:bannerSize origin:CGPointMake(rect.origin.x + (rect.size.width - bannerSize.size.width)/2.0f,rect.origin.y + (rect.size.height - bannerSize.size.height)/2.0f)];
+        _bannerView.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         _bannerView.adUnitID = [NSString stringWithCString:adUnitID.c_str() encoding:NSUTF8StringEncoding];
+        _bannerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, rect.size.width/bannerSize.size.width, rect.size.height/bannerSize.size.height);
         _delegate = [[GADIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
+        [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
         _bannerView.delegate = _delegate;
         [_bannerView loadRequest:request];
     }
     
     virtual ~IOSGADBannerView()
     {
+        [_bannerView removeFromSuperview];
         _bannerView.delegate = nil;
         [_bannerView autorelease];
         [_delegate release];
