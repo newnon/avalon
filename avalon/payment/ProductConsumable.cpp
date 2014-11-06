@@ -6,7 +6,7 @@
 namespace avalon {
 namespace payment {
 
-ProductConsumable::ProductConsumable(const char* const productId, const float quantityPerPurchase)
+ProductConsumable::ProductConsumable(const std::string &productId, const float quantityPerPurchase)
 : Product(productId)
 , quantityPerPurchase(quantityPerPurchase)
 {

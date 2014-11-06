@@ -9,7 +9,7 @@ namespace payment {
 class ProductConsumable : public Product
 {
 public:
-    ProductConsumable(const char* const productId, const float quantityPerPurchase);
+    ProductConsumable(const std::string &productId, const float quantityPerPurchase);
     virtual ~ProductConsumable();
 
     virtual void consume() override;

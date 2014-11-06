@@ -77,7 +77,7 @@ const ProductList& Manager::getProducts() const
     return products;
 }
 
-Product* Manager::getProduct(const char* const productIdOrAlias) const
+Product* Manager::getProduct(const std::string &productIdOrAlias) const
 {
     auto productId = string(productIdOrAlias);
     auto product = products.find(productId);
@@ -97,12 +97,12 @@ Product* Manager::getProduct(const char* const productIdOrAlias) const
     return NULL;
 }
 
-ProductConsumable* Manager::getProductConsumable(const char* const productIdOrAlias) const
+ProductConsumable* Manager::getProductConsumable(const std::string &productIdOrAlias) const
 {
     return dynamic_cast<ProductConsumable* const>(getProduct(productIdOrAlias));
 }
 
-bool Manager::hasProduct(const char* const productIdOrAlias) const
+bool Manager::hasProduct(const std::string &productIdOrAlias) const
 {
     auto productId = string(productIdOrAlias);
 
@@ -118,7 +118,7 @@ bool Manager::hasProduct(const char* const productIdOrAlias) const
     return (products.count(aliasId) > 0);
 }
 
-void Manager::purchase(const char* const productIdOrAlias)
+void Manager::purchase(const std::string &productIdOrAlias)
 {
     if (!isPurchaseReady()) {
         AVALON_ASSERT_MSG(false, "backend service not started yet");

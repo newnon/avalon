@@ -30,6 +30,18 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A5081EBF1A0BFE460082FBB2 /* RMAppReceipt.h in Headers */ = {isa = PBXBuildFile; fileRef = A5081E5F1A0BFE460082FBB2 /* RMAppReceipt.h */; };
+		A5081EC21A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.h in Headers */ = {isa = PBXBuildFile; fileRef = A5081E611A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.h */; };
+		A5081EC51A0BFE460082FBB2 /* RMStoreKeychainPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = A5081E631A0BFE460082FBB2 /* RMStoreKeychainPersistence.h */; };
+		A5081EC61A0BFE460082FBB2 /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E641A0BFE460082FBB2 /* RMStoreKeychainPersistence.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5081EC71A0BFE460082FBB2 /* RMStoreKeychainPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E641A0BFE460082FBB2 /* RMStoreKeychainPersistence.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5081ECE1A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = A5081E691A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.h */; };
+		A5081F201A0BFE460082FBB2 /* RMStore.h in Headers */ = {isa = PBXBuildFile; fileRef = A5081EBD1A0BFE460082FBB2 /* RMStore.h */; };
+		A5081F211A0BFE460082FBB2 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081EBE1A0BFE460082FBB2 /* RMStore.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5081F221A0BFE460082FBB2 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081EBE1A0BFE460082FBB2 /* RMStore.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5081F261A0C054B0082FBB2 /* AppleIncRootCertificate.cer in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5081E5E1A0BFE460082FBB2 /* AppleIncRootCertificate.cer */; };
+		A5081F7F1A0C14BB0082FBB2 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E601A0BFE460082FBB2 /* RMAppReceipt.m */; };
+		A5081F801A0C14BB0082FBB2 /* RMStoreAppReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E621A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.m */; };
 		A50BC17D18E962DE00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC1A518E9634600F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC1AE18E9635400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -39,7 +51,6 @@
 		A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C618E9699B00F1F979 /* Product.cpp */; };
 		A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */; };
 		A50BC1D518E969B700F1F979 /* Backend.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1D218E969B700F1F979 /* Backend.mm */; };
-		A50BC1D618E969B700F1F979 /* BackendIos.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1D418E969B700F1F979 /* BackendIos.mm */; };
 		A50BC1FC18E96E0000F1F979 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1DC18E96E0000F1F979 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A50BC1FD18E96E0000F1F979 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1FB18E96E0000F1F979 /* Appirater.mm */; };
 		A50BC23118E9842F00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -88,8 +99,6 @@
 		A547D0801A06EEA900E6D357 /* GAIEcommerceProductAction.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07C1A06EEA900E6D357 /* GAIEcommerceProductAction.h */; };
 		A547D0811A06EEA900E6D357 /* GAIEcommercePromotion.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07D1A06EEA900E6D357 /* GAIEcommercePromotion.h */; };
 		A547D08B1A06F1EE00E6D357 /* Backend.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D0881A06F1EE00E6D357 /* Backend.mm */; };
-		A547D08C1A06F1EE00E6D357 /* BackendMac.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D0891A06F1EE00E6D357 /* BackendMac.h */; };
-		A547D08D1A06F1EE00E6D357 /* BackendMac.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D08A1A06F1EE00E6D357 /* BackendMac.mm */; };
 		A547D08F1A06F20400E6D357 /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D08E1A06F20400E6D357 /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5538E271A0AD6B800E949AD /* KKGAIDictionaryBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */; };
 		A5538E281A0AD6B800E949AD /* KKGAIDictionaryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -426,6 +435,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A5081F251A0C05300082FBB2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = MainBundleAssets;
+			dstSubfolderSpec = 16;
+			files = (
+				A5081F261A0C054B0082FBB2 /* AppleIncRootCertificate.cer in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A50D47E6192218C800351428 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,6 +589,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A5081E5E1A0BFE460082FBB2 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
+		A5081E5F1A0BFE460082FBB2 /* RMAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMAppReceipt.h; sourceTree = "<group>"; };
+		A5081E601A0BFE460082FBB2 /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMAppReceipt.m; sourceTree = "<group>"; };
+		A5081E611A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreAppReceiptVerificator.h; sourceTree = "<group>"; };
+		A5081E621A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreAppReceiptVerificator.m; sourceTree = "<group>"; };
+		A5081E631A0BFE460082FBB2 /* RMStoreKeychainPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreKeychainPersistence.h; sourceTree = "<group>"; };
+		A5081E641A0BFE460082FBB2 /* RMStoreKeychainPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreKeychainPersistence.m; sourceTree = "<group>"; };
+		A5081E691A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStoreUserDefaultsPersistence.h; sourceTree = "<group>"; };
+		A5081E6A1A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStoreUserDefaultsPersistence.m; sourceTree = "<group>"; };
+		A5081EBD1A0BFE460082FBB2 /* RMStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMStore.h; sourceTree = "<group>"; };
+		A5081EBE1A0BFE460082FBB2 /* RMStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMStore.m; sourceTree = "<group>"; };
 		A50BC17918E962DE00F1F979 /* libGameCenter iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGameCenter iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A50BC17C18E962DE00F1F979 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A50BC1AA18E9634600F1F979 /* libAppirater iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAppirater iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -589,8 +619,6 @@
 		A50BC1CA18E9699B00F1F979 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mdown; sourceTree = "<group>"; };
 		A50BC1CB18E9699B00F1F979 /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = avalon/payment.h; sourceTree = "<group>"; };
 		A50BC1D218E969B700F1F979 /* Backend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Backend.mm; sourceTree = "<group>"; };
-		A50BC1D318E969B700F1F979 /* BackendIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackendIos.h; sourceTree = "<group>"; };
-		A50BC1D418E969B700F1F979 /* BackendIos.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BackendIos.mm; sourceTree = "<group>"; };
 		A50BC1DA18E96E0000F1F979 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		A50BC1DB18E96E0000F1F979 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		A50BC1DC18E96E0000F1F979 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
@@ -666,8 +694,6 @@
 		A547D07C1A06EEA900E6D357 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
 		A547D07D1A06EEA900E6D357 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
 		A547D0881A06F1EE00E6D357 /* Backend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Backend.mm; sourceTree = "<group>"; };
-		A547D0891A06F1EE00E6D357 /* BackendMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackendMac.h; sourceTree = "<group>"; };
-		A547D08A1A06F1EE00E6D357 /* BackendMac.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BackendMac.mm; sourceTree = "<group>"; };
 		A547D08E1A06F20400E6D357 /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = ../payment.h; sourceTree = "<group>"; };
 		A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAIDictionaryBuilder.h; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAIDictionaryBuilder.m; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.m; sourceTree = "<group>"; };
@@ -1122,6 +1148,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5081E5C1A0BFE460082FBB2 /* RMStore */ = {
+			isa = PBXGroup;
+			children = (
+				A5081E5D1A0BFE460082FBB2 /* Optional */,
+				A5081EBD1A0BFE460082FBB2 /* RMStore.h */,
+				A5081EBE1A0BFE460082FBB2 /* RMStore.m */,
+			);
+			name = RMStore;
+			path = vendors/RMStore/RMStore;
+			sourceTree = "<group>";
+		};
+		A5081E5D1A0BFE460082FBB2 /* Optional */ = {
+			isa = PBXGroup;
+			children = (
+				A5081E5E1A0BFE460082FBB2 /* AppleIncRootCertificate.cer */,
+				A5081E5F1A0BFE460082FBB2 /* RMAppReceipt.h */,
+				A5081E601A0BFE460082FBB2 /* RMAppReceipt.m */,
+				A5081E611A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.h */,
+				A5081E621A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.m */,
+				A5081E631A0BFE460082FBB2 /* RMStoreKeychainPersistence.h */,
+				A5081E641A0BFE460082FBB2 /* RMStoreKeychainPersistence.m */,
+				A5081E691A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.h */,
+				A5081E6A1A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.m */,
+			);
+			path = Optional;
+			sourceTree = "<group>";
+		};
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
@@ -1201,6 +1254,7 @@
 		A50BC1BD18E9695B00F1F979 /* Paiment */ = {
 			isa = PBXGroup;
 			children = (
+				A5081E5C1A0BFE460082FBB2 /* RMStore */,
 				A547D0041A06E16C00E6D357 /* payment-mac */,
 				A50BC1D118E969B700F1F979 /* payment-ios */,
 				A50BC1BE18E9699B00F1F979 /* payment */,
@@ -1231,8 +1285,6 @@
 			children = (
 				A547D0221A06E4C000E6D357 /* payment.h */,
 				A50BC1D218E969B700F1F979 /* Backend.mm */,
-				A50BC1D318E969B700F1F979 /* BackendIos.h */,
-				A50BC1D418E969B700F1F979 /* BackendIos.mm */,
 			);
 			name = "payment-ios";
 			path = avalon/platform/ios/payment;
@@ -1386,8 +1438,6 @@
 			children = (
 				A547D08E1A06F20400E6D357 /* payment.h */,
 				A547D0881A06F1EE00E6D357 /* Backend.mm */,
-				A547D0891A06F1EE00E6D357 /* BackendMac.h */,
-				A547D08A1A06F1EE00E6D357 /* BackendMac.mm */,
 			);
 			name = "payment-mac";
 			path = avalon/platform/mac/payment;
@@ -2095,13 +2145,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5081EC21A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.h in Headers */,
+				A5081EC51A0BFE460082FBB2 /* RMStoreKeychainPersistence.h in Headers */,
+				A5081EBF1A0BFE460082FBB2 /* RMAppReceipt.h in Headers */,
 				A547D08F1A06F20400E6D357 /* payment.h in Headers */,
 				A547D0671A06E9AE00E6D357 /* Backend.h in Headers */,
-				A547D08C1A06F1EE00E6D357 /* BackendMac.h in Headers */,
 				A547D0681A06E9AE00E6D357 /* Manager.h in Headers */,
+				A5081F201A0BFE460082FBB2 /* RMStore.h in Headers */,
 				A547D0691A06E9AE00E6D357 /* ManagerDelegate.h in Headers */,
 				A547D06A1A06E9AE00E6D357 /* Product.h in Headers */,
 				A547D06B1A06E9AE00E6D357 /* ProductConsumable.h in Headers */,
+				A5081ECE1A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2354,6 +2408,7 @@
 				A50BC1AC18E9635400F1F979 /* Sources */,
 				A50BC1AD18E9635400F1F979 /* Frameworks */,
 				A5F0C941192260B8006B8457 /* CopyFiles */,
+				A5081F251A0C05300082FBB2 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2771,11 +2826,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50BC1D618E969B700F1F979 /* BackendIos.mm in Sources */,
+				A5081F7F1A0C14BB0082FBB2 /* RMAppReceipt.m in Sources */,
+				A5081F801A0C14BB0082FBB2 /* RMStoreAppReceiptVerificator.m in Sources */,
 				A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */,
 				A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */,
 				A50BC1CE18E9699B00F1F979 /* Manager.cpp in Sources */,
 				A50BC1D518E969B700F1F979 /* Backend.mm in Sources */,
+				A5081EC61A0BFE460082FBB2 /* RMStoreKeychainPersistence.m in Sources */,
+				A5081F211A0BFE460082FBB2 /* RMStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2820,9 +2878,10 @@
 			files = (
 				A547D06D1A06E9C600E6D357 /* Manager.cpp in Sources */,
 				A547D06E1A06E9C600E6D357 /* Product.cpp in Sources */,
-				A547D08B1A06F1EE00E6D357 /* Backend.mm in Sources */,
 				A547D06F1A06E9C600E6D357 /* ProductConsumable.cpp in Sources */,
-				A547D08D1A06F1EE00E6D357 /* BackendMac.mm in Sources */,
+				A547D08B1A06F1EE00E6D357 /* Backend.mm in Sources */,
+				A5081F221A0BFE460082FBB2 /* RMStore.m in Sources */,
+				A5081EC71A0BFE460082FBB2 /* RMStoreKeychainPersistence.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3259,6 +3318,15 @@
 					AVALON_CONFIG_PAYMENT_ENABLED,
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/vendors/RMStore/RMStore/Optional/openssl-1.0.1e/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/RMStore/RMStore/Optional/openssl-1.0.1e/lib",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment iOS";
 				SKIP_INSTALL = YES;
@@ -3273,6 +3341,15 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					AVALON_CONFIG_PAYMENT_ENABLED,
 					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/vendors/RMStore/RMStore/Optional/openssl-1.0.1e/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/RMStore/RMStore/Optional/openssl-1.0.1e/lib",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment iOS";
@@ -3412,7 +3489,14 @@
 			buildSettings = {
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_PAYMENT_ENABLED,
+					"$(inherited)",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/RMStore/RMStore/Optional/openssl-1.0.1e/lib",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment Mac";
 				SDKROOT = macosx;
@@ -3425,6 +3509,11 @@
 			buildSettings = {
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = AVALON_CONFIG_PAYMENT_ENABLED;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/RMStore/RMStore/Optional/openssl-1.0.1e/lib",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment Mac";
 				SDKROOT = macosx;

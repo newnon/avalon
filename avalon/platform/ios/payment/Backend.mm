@@ -2,27 +2,84 @@
 
 #include <StoreKit/StoreKit.h>
 
-#include "avalon/platform/ios/payment/BackendIos.h"
 #include "avalon/payment/Manager.h"
 #include "avalon/payment/ManagerDelegate.h"
 #include "avalon/payment/Product.h"
 
+#import "RMStore.h"
+#import "RMStoreAppReceiptVerificator.h"
+#import "RMStoreKeychainPersistence.h"
+
 namespace avalon {
 namespace payment {
-
-BackendIos* const __getIosBackend()
+    
+static bool _initialized = false;
+    
+avalon::payment::ManagerDelegateErrors convertErrorToCode(NSError * error)
 {
-    static BackendIos* instance = nullptr;
-    if (!instance) {
-        instance = [[BackendIos alloc] init];
-        instance->initialized = false;
+    avalon::payment::ManagerDelegateErrors ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+    switch (error.code) {
+        case SKErrorPaymentCancelled:
+            NSLog(@"[Payment] failedTransaction: SKErrorPaymentCancelled");
+            ret = avalon::payment::ManagerDelegateErrors::PAYMENTCANCELLED;
+            break;
+            
+        case SKErrorUnknown:
+            NSLog(@"[Payment] failedTransaction: SKErrorUnknown: %@ | %@", error.localizedDescription, error.localizedFailureReason );
+            ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+            break;
+            
+        case SKErrorClientInvalid:
+            NSLog(@"[Payment] failedTransaction: SKErrorClientInvalid");
+            ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+            break;
+            
+        case SKErrorPaymentInvalid:
+            NSLog(@"[Payment] failedTransaction: SKErrorPaymentInvalid");
+            ret = avalon::payment::ManagerDelegateErrors::PAYMENTINVALID;
+            break;
+            
+        case SKErrorPaymentNotAllowed:
+            NSLog(@"[Payment] failedTransaction: SKErrorPaymentNotAllowed");
+            ret = avalon::payment::ManagerDelegateErrors::PAYMENTNOTALLOWED;
+            break;
+            
+        case 100:
+            NSLog(@"[Payment] failedTransaction: RMStoreErrorCodeUnknownProductIdentifier");
+            ret = avalon::payment::ManagerDelegateErrors::STOREPRODUCTNOTAVAILABLE;
+            break;
+        case 200:
+            NSLog(@"[Payment] failedTransaction: RMStoreErrorCodeUnableToCompleteVerification");
+            ret = avalon::payment::ManagerDelegateErrors::PAYMENTINVALID;
+            break;
+            
+        default:
+            NSLog(@"[Payment] failedTransaction: UNHANDELED: %ld", (long)error.code);
+            ret = avalon::payment::ManagerDelegateErrors::UNKNOWN;
+            break;
     }
-    return instance;
+    return ret;
+}
+
+
+RMStore* const __getIosBackend()
+{
+    static RMStoreKeychainPersistence* persistence = nullptr;
+    static RMStoreAppReceiptVerificator *receiptVerificator = nullptr;
+    if (!persistence) {
+        receiptVerificator = [[RMStoreAppReceiptVerificator alloc] init];
+        [RMStore defaultStore].receiptVerificator = receiptVerificator;
+        persistence = [[RMStoreKeychainPersistence alloc] init];
+        [RMStore defaultStore].transactionPersistor = persistence;
+    }
+    return [RMStore defaultStore];
 }
 
 Backend::Backend(Manager& manager)
 : manager(manager)
 {
+    RMStoreKeychainPersistence *_persistence = [[RMStoreKeychainPersistence alloc] init];
+    [RMStore defaultStore].transactionPersistor = _persistence;
 }
 
 Backend::~Backend()
@@ -32,29 +89,51 @@ Backend::~Backend()
 
 bool Backend::isInitialized() const
 {
-    return __getIosBackend()->initialized;
+    return _initialized;
 }
 
 void Backend::initialize(const std::string &data)
 {
-    // configure BackendIos
-    __getIosBackend()->initialized = true;
-    __getIosBackend()->manager = &manager;
-    __getIosBackend()->transactionDepth = 0;
-
-    // register transcationObserver
-    [[SKPaymentQueue defaultQueue] addTransactionObserver:__getIosBackend()];
-
+    _initialized = true;
     // convert Avalon::Payment::ProductList into NSMutableSet
-    NSMutableSet* products = [[[NSMutableSet alloc] init] autorelease];
+    NSMutableSet* productsIds = [[[NSMutableSet alloc] init] autorelease];
     for (const auto& pair : manager.getProducts()) {
-        [products addObject:[NSString stringWithUTF8String:pair.second->getProductId().c_str()]];
+        [productsIds addObject:[NSString stringWithUTF8String:pair.second->getProductId().c_str()]];
     }
-
-    // fetch product details
-    SKProductsRequest* request = [[SKProductsRequest alloc] initWithProductIdentifiers:products];
-    request.delegate = __getIosBackend();
-    [request start];
+    
+    [__getIosBackend() requestProducts:productsIds success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+        for (SKProduct* skProduct in products) {
+            const char* productId = [[skProduct productIdentifier] cStringUsingEncoding:NSASCIIStringEncoding];
+            avalon::payment::Product* avProduct = manager.getProduct(productId);
+            if (avProduct == NULL) {
+                NSLog(@"[Payment] productsRequest: Product not found on our side - productId: %s", productId);
+                continue;
+            }
+            
+            NSNumberFormatter* numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+            [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+            [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            
+            avProduct->price = [[skProduct price] floatValue];
+            [numberFormatter setLocale:skProduct.priceLocale];
+            avProduct->localizedPrice = [[numberFormatter stringFromNumber:skProduct.price] UTF8String];
+            
+            NSString* localizedName = [skProduct localizedTitle];
+            if (localizedName != NULL) {
+                avProduct->localizedName = [localizedName UTF8String];
+            }
+            NSString* localizedDescription = [skProduct localizedDescription];
+            if (localizedDescription != NULL) {
+                avProduct->localizedDescription = [localizedDescription UTF8String];
+            }
+        }
+        
+        if (manager.delegate) {
+            manager.delegate->onServiceStarted(&manager);
+        }
+        
+    } failure:^(NSError *error) {
+    }];
 }
 
 void Backend::shutdown()
@@ -62,42 +141,64 @@ void Backend::shutdown()
     if (!isInitialized()) {
         return;
     }
-
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:__getIosBackend()];
-    __getIosBackend()->initialized = false;
-    __getIosBackend()->manager = NULL;
 }
 
 void Backend::purchase(Product* const product)
 {
-    if (__getIosBackend()->transactionDepth == 0) {
-        if (manager.delegate) {
-            manager.delegate->onTransactionStart(&manager);
+    [__getIosBackend() addPayment:[NSString stringWithCString:product->getProductId().c_str() encoding:NSUTF8StringEncoding] success:^(SKPaymentTransaction *transaction) {
+        const char* productId = [transaction.payment.productIdentifier cStringUsingEncoding:NSASCIIStringEncoding];
+        avalon::payment::Product* product = manager.getProduct(productId);
+        if (product) {
+            product->onHasBeenPurchased();
+        } else {
+            NSLog(@"[Payment] completeTransaction failed: invalid productId: %s", productId);
         }
-    }
-    __getIosBackend()->transactionDepth += 1;
-
-    NSString* productId = [[[NSString alloc] initWithUTF8String:product->getProductId().c_str()] autorelease];
-    SKPayment *payment = [SKPayment paymentWithProductIdentifier:productId];
-    [[SKPaymentQueue defaultQueue] addPayment:payment];
+        if (product) {
+            if (manager.delegate) {
+                manager.delegate->onPurchaseSucceed(&manager, product);
+            }
+        }
+    } failure:^(SKPaymentTransaction *transaction, NSError *error) {
+        if (manager.delegate) {
+            manager.delegate->onPurchaseFail(&manager, convertErrorToCode(error));
+        }
+    }];
 }
 
 bool Backend::isPurchaseReady() const
 {
-    return [SKPaymentQueue canMakePayments];
+    return [RMStore canMakePayments];
 }
 
 void Backend::restorePurchases() const
 {
-    if (__getIosBackend()->transactionDepth == 0) {
-        if (manager.delegate) {
-            manager.delegate->onTransactionStart(&manager);
+    [__getIosBackend() restoreTransactionsOnSuccess:^(NSArray *transactions) {
+        for (SKPaymentTransaction* transaction in transactions) {
+            const char* productId = [transaction.payment.productIdentifier cStringUsingEncoding:NSASCIIStringEncoding];
+            avalon::payment::Product* product = manager.getProduct(productId);
+            if (product) {
+                product->onHasBeenPurchased();
+            } else {
+                NSLog(@"[Payment] completeTransaction failed: invalid productId: %s", productId);
+            }
+            if (product) {
+                [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+                
+                if (manager.delegate) {
+                    manager.delegate->onPurchaseSucceed(&manager, product);
+                }
+            }
         }
-    }
-    __getIosBackend()->transactionDepth += 1;
-
+        if (manager.delegate) {
+            manager.delegate->onRestoreSucceed(&manager);
+        }
+    } failure:^(NSError *error) {
+        if (manager.delegate) {
+            manager.delegate->onRestoreFail(&manager, convertErrorToCode(error));
+        }
+    }];
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
-
+    
 } // namespace payment
 } // namespace avalon

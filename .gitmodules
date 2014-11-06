@@ -13,3 +13,6 @@
 [submodule "vendors/mopub/ios"]
 	path = vendors/mopub/ios
 	url = https://github.com/mopub/mopub-ios-sdk.git
+[submodule "vendors/RMStore"]
+	path = vendors/RMStore
+	url = https://github.com/newnon/RMStore.git

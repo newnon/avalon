@@ -41,11 +41,11 @@ public:
     void addProduct(Product* const product, const char* const alias);
 
     const ProductList& getProducts() const;
-    Product* getProduct(const char* const productIdOrAlias) const;
-    ProductConsumable* getProductConsumable(const char* const productIdOrAlias) const;
-    bool hasProduct(const char* const productIdOrAlias) const;
+    Product* getProduct(const std::string &productIdOrAlias) const;
+    ProductConsumable* getProductConsumable(const std::string &productIdOrAlias) const;
+    bool hasProduct(const std::string &productIdOrAlias) const;
 
-    void purchase(const char* const productIdOrAlias);
+    void purchase(const std::string &productIdOrAlias);
     bool isPurchaseReady() const;
     void restorePurchases() const;
 
