@@ -31,7 +31,7 @@ endif()
 set(AVALON_SRC avalon/empty.cpp)
 
 if(AVALON_PAYMENT)
-add_definitions(-DAVALON_CONFIG_PAIMENT_ENABLED)
+add_definitions(-DAVALON_CONFIG_PAYMENT_ENABLED)
 set(AVALON_SRC
   ${AVALON_SRC}
   avalon/payment/Manager.cpp
