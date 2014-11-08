@@ -6,6 +6,7 @@
 #include <map>
 #include <list>
 #include <memory>
+#include "Ads.h"
 
 namespace avalon {
 
@@ -97,37 +98,19 @@ enum class GADAdSize
     Skyscraper,
     SmartBannerPortrait,
     SmartBannerLandscape,
-    CustomSize
 };
     
-enum class BannerScaleType
-{
-    None,
-    Proportional,
-    Fill
-    
-};
-    
-enum class BannerGravityType
-{
-    TopLeft,
-    CenterLeft,
-    BottomLeft,
-    TopCenter,
-    Center,
-    BottomCenter,
-    TopRight,
-    CenterRight,
-    BottomRight
-};
+GADAdSize makeCustomGADAdSize(unsigned short width, unsigned short height);
 
 class GADBannerView
 {
 public:
     const std::string &getAdUnitID() const { return _adUnitID; }
     GADAdSize getAdSize() const { return _adSize; }
-    virtual void setVisible(bool value)  = 0;
     virtual bool isVisible() = 0;
+    virtual bool hasAutoRefreshed() const = 0;
+    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) = 0;
+    virtual void hide() = 0;
     virtual ~GADBannerView() {}
     
 protected:
@@ -165,7 +148,7 @@ public:
     virtual void setKeywords(const std::vector<std::string>& keywords) = 0;
     
     virtual std::shared_ptr<GADInterstitial> createIntestitial(const std::string &adUnitID, GADInterstitialDelegate *delegate) = 0;
-    virtual std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) = 0;
+    virtual std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, GADBannerViewDelegate *delegate) = 0;
     
     virtual std::vector<std::shared_ptr<GADInterstitial>> getReadyInterstitials() const = 0;
     virtual std::vector<std::shared_ptr<GADBannerView>> getBannerViews() const = 0;

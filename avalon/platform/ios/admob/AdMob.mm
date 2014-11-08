@@ -125,6 +125,11 @@ extern "C" {
 
 namespace avalon {
     
+GADAdSize makeCustomGADAdSize(unsigned short width, unsigned short height)
+{
+    return static_cast<GADAdSize>(width<<16 | height);
+};
+    
 class IOSGADInterstitial:public GADInterstitial
 {
 public:
@@ -163,15 +168,8 @@ private:
 class IOSGADBannerView:public GADBannerView
 {
 public:
-    IOSGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, CGRect rect, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
+    IOSGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
     {
-        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
-            float scale = [[UIScreen mainScreen] scale];
-            rect.origin.x /= scale;
-            rect.origin.y /= scale;
-            rect.size.width /= scale;
-            rect.size.height /= scale;
-        }
         ::GADAdSize bannerSize;
         switch (size) {
             case GADAdSize::Banner:
@@ -195,20 +193,51 @@ public:
             case GADAdSize::SmartBannerLandscape:
                 bannerSize = kGADAdSizeSmartBannerLandscape;
                 break;
-            case GADAdSize::CustomSize:
-                bannerSize = GADAdSizeFromCGSize(rect.size);
-                break;
-            default:
+            case GADAdSize::Invalid:
                 bannerSize = kGADAdSizeInvalid;
                 break;
+            default:
+                {
+                    unsigned short width = static_cast<unsigned short>(static_cast<unsigned int>(size)>>16);
+                    unsigned short height = static_cast<unsigned short>(size);
+                    bannerSize = GADAdSizeFromCGSize(CGSizeMake(width, height));
+                }
+                break;
         }
-        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
-        
-        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
         
         _bannerView = [[::GADBannerView alloc] initWithAdSize:bannerSize];
         _bannerView.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         _bannerView.adUnitID = [NSString stringWithCString:adUnitID.c_str() encoding:NSUTF8StringEncoding];
+        _delegate = [[GADIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
+        [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
+        _bannerView.delegate = _delegate;
+        [_bannerView loadRequest:request];
+        _bannerView.hidden = YES;
+    }
+    
+    virtual ~IOSGADBannerView()
+    {
+        [_bannerView removeFromSuperview];
+        _bannerView.delegate = nil;
+        [_bannerView autorelease];
+        [_delegate release];
+    }
+    
+    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
+    {
+        CGRect rect = CGRectMake(x, y, width, height);
+        
+        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
+            float scale = [[UIScreen mainScreen] scale];
+            rect.origin.x /= scale;
+            rect.origin.y /= scale;
+            rect.size.width /= scale;
+            rect.size.height /= scale;
+        }
+        
+        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        
+        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
         
         float xScale = 1.0f;
         float yScale = 1.0f;
@@ -273,35 +302,20 @@ public:
             default:
                 break;
         }
-        
-        //_bannerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, rect.size.width/bannerSize.size.width, rect.size.height/bannerSize.size.height);
-        //_bannerView.frame.origin = CGPointMake(0, 100);
-        //_bannerView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, 100);
-        _delegate = [[GADIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
-        [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
-        _bannerView.delegate = _delegate;
-        [_bannerView loadRequest:request];
+        _bannerView.hidden = false;
     }
     
-    virtual ~IOSGADBannerView()
+    virtual void hide() override
     {
-        [_bannerView removeFromSuperview];
-        _bannerView.delegate = nil;
-        [_bannerView autorelease];
-        [_delegate release];
+        _bannerView.hidden = true;
     }
     
-    virtual void setVisible(bool value)
-    {
-        _bannerView.hidden = !value;
-    }
-    
-    virtual bool isVisible()
+    virtual bool isVisible() override
     {
         return !_bannerView.hidden;
     }
     
-    virtual bool hasAutoRefreshed() const
+    virtual bool hasAutoRefreshed() const override
     {
         return [_bannerView hasAutoRefreshed];
     }
@@ -364,9 +378,9 @@ public:
         _interstitials.emplace_back(new IOSGADInterstitial(createRequest(), adUnitID, delegate));
         return _interstitials.back();
     }
-    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) override
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size,  GADBannerViewDelegate *delegate) override
     {
-        _bannerViews.emplace_back(new IOSGADBannerView(createRequest(), adUnitID, size, CGRectMake(x, y, width, height), scaleType, gravity, delegate));
+        _bannerViews.emplace_back(new IOSGADBannerView(createRequest(), adUnitID, size, delegate));
         return _bannerViews.back();
     }
     

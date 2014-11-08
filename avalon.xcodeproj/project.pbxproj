@@ -153,6 +153,14 @@
 		A56C49C8199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = A56C49C6199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.h */; };
 		A56C49C9199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A56C49C7199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.m */; };
 		A57695461A0E1831002FDCB5 /* AppiraterLocalizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
+		A576954B1A0E6DD6002FDCB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A57695871A0E6E97002FDCB5 /* iAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = A57695861A0E6E97002FDCB5 /* iAd.mm */; };
+		A57695891A0E6EA8002FDCB5 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A57695881A0E6EA8002FDCB5 /* iAd.framework */; };
+		A57695921A0E8C70002FDCB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A576959D1A0E8CB3002FDCB5 /* Ads.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A576959B1A0E8C9A002FDCB5 /* Ads.h */; };
+		A57695AB1A0E8DC3002FDCB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A57695B21A0E8DDB002FDCB5 /* Ads.h in Headers */ = {isa = PBXBuildFile; fileRef = A576959B1A0E8C9A002FDCB5 /* Ads.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A57695BC1A0E8F08002FDCB5 /* iAd.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A57695841A0E6E6C002FDCB5 /* iAd.h */; };
 		A58EA77C192390A4000D0B28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A58EA838192390FB000D0B28 /* MPBannerAdManager.h in Headers */ = {isa = PBXBuildFile; fileRef = A58EA78F192390FA000D0B28 /* MPBannerAdManager.h */; };
 		A58EA839192390FB000D0B28 /* MPBannerAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A58EA790192390FA000D0B28 /* MPBannerAdManager.m */; };
@@ -404,6 +412,20 @@
 			remoteGlobalIDString = A50BC25F18E9A14800F1F979;
 			remoteInfo = FlurryAds;
 		};
+		A57695B71A0E8E63002FDCB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
+		};
+		A57695BA1A0E8EDF002FDCB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57695A71A0E8DC3002FDCB5;
+			remoteInfo = "Ads Mac";
+		};
 		A58EA8DF1923A291000D0B28 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
@@ -473,6 +495,26 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A57695461A0E1831002FDCB5 /* AppiraterLocalizable.strings in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A57695691A0E6DD6002FDCB5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A57695BC1A0E8F08002FDCB5 /* iAd.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A57695951A0E8C70002FDCB5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A576959D1A0E8CB3002FDCB5 /* Ads.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +788,13 @@
 		A56C49C1199E4FAC00BF30BA /* MPMoPubNativeCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPMoPubNativeCustomEvent.m; sourceTree = "<group>"; };
 		A56C49C6199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPUserInteractionGestureRecognizer.h; sourceTree = "<group>"; };
 		A56C49C7199E4FCD00BF30BA /* MPUserInteractionGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPUserInteractionGestureRecognizer.m; sourceTree = "<group>"; };
+		A576956E1A0E6DD6002FDCB5 /* libiAd iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libiAd iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A57695841A0E6E6C002FDCB5 /* iAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iAd.h; path = avalon/iAd.h; sourceTree = "<group>"; };
+		A57695861A0E6E97002FDCB5 /* iAd.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iAd.mm; path = avalon/platform/ios/iad/iAd.mm; sourceTree = "<group>"; };
+		A57695881A0E6EA8002FDCB5 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		A576959A1A0E8C70002FDCB5 /* libAds iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAds iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A576959B1A0E8C9A002FDCB5 /* Ads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ads.h; path = avalon/Ads.h; sourceTree = "<group>"; };
+		A57695B11A0E8DC3002FDCB5 /* libAds Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAds Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58EA78A192390A4000D0B28 /* libMoPub iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMoPub iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58EA78F192390FA000D0B28 /* MPBannerAdManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPBannerAdManager.h; sourceTree = "<group>"; };
 		A58EA790192390FA000D0B28 /* MPBannerAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPBannerAdManager.m; sourceTree = "<group>"; };
@@ -1110,6 +1159,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A576954A1A0E6DD6002FDCB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A57695891A0E6EA8002FDCB5 /* iAd.framework in Frameworks */,
+				A576954B1A0E6DD6002FDCB5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A57695901A0E8C70002FDCB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A57695921A0E8C70002FDCB5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A57695AA1A0E8DC3002FDCB5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A57695AB1A0E8DC3002FDCB5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A58EA77B192390A4000D0B28 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1186,6 +1260,8 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				A576958C1A0E8C41002FDCB5 /* Ads */,
+				A57695831A0E6E1F002FDCB5 /* iAd */,
 				A558860919A4C8A600914838 /* UI */,
 				A58EA78B192390C6000D0B28 /* MoPub */,
 				A5ACF04B1918B2D700A010A5 /* GoogleAnalytics */,
@@ -1225,6 +1301,9 @@
 				A558860819A4C89000914838 /* libUI Mac.a */,
 				A547D0511A06E58400E6D357 /* libAdMob Mac.a */,
 				A547D0651A06E8DA00E6D357 /* libPayment Mac.a */,
+				A576956E1A0E6DD6002FDCB5 /* libiAd iOS.a */,
+				A576959A1A0E8C70002FDCB5 /* libAds iOS.a */,
+				A57695B11A0E8DC3002FDCB5 /* libAds Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1232,6 +1311,7 @@
 		A50BC17B18E962DE00F1F979 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A57695881A0E6EA8002FDCB5 /* iAd.framework */,
 				A50BC17C18E962DE00F1F979 /* Foundation.framework */,
 				A5A75ACE1924E0E800C44FBF /* CoreFoundation.framework */,
 			);
@@ -1535,6 +1615,23 @@
 				A56C4830199E1E1B00BF30BA /* GameCenterMac.m */,
 			);
 			name = "gamecenter-mac";
+			sourceTree = "<group>";
+		};
+		A57695831A0E6E1F002FDCB5 /* iAd */ = {
+			isa = PBXGroup;
+			children = (
+				A57695861A0E6E97002FDCB5 /* iAd.mm */,
+				A57695841A0E6E6C002FDCB5 /* iAd.h */,
+			);
+			name = iAd;
+			sourceTree = "<group>";
+		};
+		A576958C1A0E8C41002FDCB5 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				A576959B1A0E8C9A002FDCB5 /* Ads.h */,
+			);
+			name = Ads;
 			sourceTree = "<group>";
 		};
 		A58EA78B192390C6000D0B28 /* MoPub */ = {
@@ -2213,6 +2310,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A57695AC1A0E8DC3002FDCB5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A57695B21A0E8DDB002FDCB5 /* Ads.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A58EA77E192390A4000D0B28 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -2487,6 +2592,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A57695BB1A0E8EDF002FDCB5 /* PBXTargetDependency */,
 			);
 			name = "AdMob Mac";
 			productName = Avalon;
@@ -2630,6 +2736,57 @@
 			productReference = A56C482C199E1DA900BF30BA /* libGameCenter Mac.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A57695471A0E6DD6002FDCB5 /* iAd iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A576956B1A0E6DD6002FDCB5 /* Build configuration list for PBXNativeTarget "iAd iOS" */;
+			buildPhases = (
+				A57695481A0E6DD6002FDCB5 /* Sources */,
+				A576954A1A0E6DD6002FDCB5 /* Frameworks */,
+				A57695691A0E6DD6002FDCB5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iAd iOS";
+			productName = Avalon;
+			productReference = A576956E1A0E6DD6002FDCB5 /* libiAd iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A576958D1A0E8C70002FDCB5 /* Ads iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A57695971A0E8C70002FDCB5 /* Build configuration list for PBXNativeTarget "Ads iOS" */;
+			buildPhases = (
+				A576958E1A0E8C70002FDCB5 /* Sources */,
+				A57695901A0E8C70002FDCB5 /* Frameworks */,
+				A57695951A0E8C70002FDCB5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Ads iOS";
+			productName = Avalon;
+			productReference = A576959A1A0E8C70002FDCB5 /* libAds iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A57695A71A0E8DC3002FDCB5 /* Ads Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A57695AE1A0E8DC3002FDCB5 /* Build configuration list for PBXNativeTarget "Ads Mac" */;
+			buildPhases = (
+				A57695A81A0E8DC3002FDCB5 /* Sources */,
+				A57695AA1A0E8DC3002FDCB5 /* Frameworks */,
+				A57695AC1A0E8DC3002FDCB5 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Ads Mac";
+			productName = Avalon;
+			productReference = A57695B11A0E8DC3002FDCB5 /* libAds Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A58EA778192390A4000D0B28 /* MoPub iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A58EA787192390A4000D0B28 /* Build configuration list for PBXNativeTarget "MoPub iOS" */;
@@ -2714,6 +2871,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A57695B81A0E8E63002FDCB5 /* PBXTargetDependency */,
 			);
 			name = "AdMob iOS";
 			productName = Avalon;
@@ -2779,8 +2937,11 @@
 				A50BC25F18E9A14800F1F979 /* FlurryAds iOS */,
 				A5D08BA518F6F5B100B4EBA1 /* Notifications iOS */,
 				A558859D19A4AE4E00914838 /* Notifications Mac */,
+				A576958D1A0E8C70002FDCB5 /* Ads iOS */,
+				A57695A71A0E8DC3002FDCB5 /* Ads Mac */,
 				A5D3275E1900507400A65D25 /* AdMob iOS */,
 				A547D0471A06E58400E6D357 /* AdMob Mac */,
+				A57695471A0E6DD6002FDCB5 /* iAd iOS */,
 				A5ACF0351918B1E500A010A5 /* GoogleAnalytics iOS */,
 				A55885B419A4AEFA00914838 /* GoogleAnalytics Mac */,
 				A58EA778192390A4000D0B28 /* MoPub iOS */,
@@ -2948,6 +3109,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A57695481A0E6DD6002FDCB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A57695871A0E6E97002FDCB5 /* iAd.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A576958E1A0E8C70002FDCB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A57695A81A0E8DC3002FDCB5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A58EA779192390A4000D0B28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3097,6 +3280,16 @@
 			isa = PBXTargetDependency;
 			target = A50BC25F18E9A14800F1F979 /* FlurryAds iOS */;
 			targetProxy = A50BC28318E9A5D200F1F979 /* PBXContainerItemProxy */;
+		};
+		A57695B81A0E8E63002FDCB5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = A57695B71A0E8E63002FDCB5 /* PBXContainerItemProxy */;
+		};
+		A57695BB1A0E8EDF002FDCB5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57695A71A0E8DC3002FDCB5 /* Ads Mac */;
+			targetProxy = A57695BA1A0E8EDF002FDCB5 /* PBXContainerItemProxy */;
 		};
 		A58EA8E01923A291000D0B28 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3708,6 +3901,95 @@
 			};
 			name = Release;
 		};
+		A576956C1A0E6DD6002FDCB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "iAd iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A576956D1A0E6DD6002FDCB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "iAd iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A57695981A0E8C70002FDCB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Ads iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A57695991A0E8C70002FDCB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Ads iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A57695AF1A0E8DC3002FDCB5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Ads Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A57695B01A0E8DC3002FDCB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Ads Mac";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A58EA788192390A4000D0B28 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4030,6 +4312,33 @@
 			buildConfigurations = (
 				A56C482A199E1DA900BF30BA /* Debug */,
 				A56C482B199E1DA900BF30BA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A576956B1A0E6DD6002FDCB5 /* Build configuration list for PBXNativeTarget "iAd iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A576956C1A0E6DD6002FDCB5 /* Debug */,
+				A576956D1A0E6DD6002FDCB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A57695971A0E8C70002FDCB5 /* Build configuration list for PBXNativeTarget "Ads iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A57695981A0E8C70002FDCB5 /* Debug */,
+				A57695991A0E8C70002FDCB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A57695AE1A0E8DC3002FDCB5 /* Build configuration list for PBXNativeTarget "Ads Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A57695AF1A0E8DC3002FDCB5 /* Debug */,
+				A57695B01A0E8DC3002FDCB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

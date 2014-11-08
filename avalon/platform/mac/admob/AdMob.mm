@@ -2,6 +2,11 @@
 
 namespace avalon {
     
+GADAdSize makeCustomGADAdSize(unsigned short width, unsigned short height)
+{
+    return static_cast<GADAdSize>(width<<16 | height);
+};
+    
 class GADRequest;
     
 class MACGADInterstitial:public GADInterstitial
@@ -32,7 +37,7 @@ private:
 class MACGADBannerView:public GADBannerView
 {
 public:
-    MACGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, CGRect rect, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
+    MACGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
     {
     }
     
@@ -40,18 +45,24 @@ public:
     {
     }
     
-    virtual void setVisible(bool value)
-    {
-    }
-    
-    virtual bool isVisible()
+    virtual bool isVisible() override
     {
         return false;
     }
     
-    virtual bool hasAutoRefreshed() const
+    virtual bool hasAutoRefreshed() const override
     {
         return false;
+    }
+    
+    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity)
+    {
+        
+    }
+    
+    virtual void hide() override
+    {
+        
     }
     
 private:
@@ -110,9 +121,9 @@ public:
         _interstitials.emplace_back(new MACGADInterstitial(createRequest(), adUnitID, delegate));
         return _interstitials.back();
     }
-    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) override
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, GADBannerViewDelegate *delegate) override
     {
-        _bannerViews.emplace_back(new MACGADBannerView(createRequest(), adUnitID, size, CGRectMake(x, y, width, height), delegate));
+        _bannerViews.emplace_back(new MACGADBannerView(createRequest(), adUnitID, size, delegate));
         return _bannerViews.back();
     }
     
