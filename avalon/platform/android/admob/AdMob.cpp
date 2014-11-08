@@ -342,14 +342,14 @@ public:
         }
         return _interstitials.back();
     }
-    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate) override
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) override
     {
         cocos2d::JniMethodInfo methodInfo;
 
-        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createBannerView", "(Ljava/lang/String;IIIII)Lcom/google/android/gms/ads/AdView;"))
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createBannerView", "(Ljava/lang/String;IIIIIII)Lcom/google/android/gms/ads/AdView;"))
         {
             jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
-            jobject bannerView = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jint)size, x, y, width, height);
+            jobject bannerView = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jint)size, x, y, width, height, static_cast<int>(scaleType), static_cast<int>(gravity));
             methodInfo.env->DeleteLocalRef(jAdUnitID);
             methodInfo.env->DeleteLocalRef(methodInfo.classID);
             _bannerViews.emplace_back(new AndroidGADBannerView(bannerView, adUnitID, size, delegate));

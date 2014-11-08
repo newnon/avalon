@@ -163,7 +163,7 @@ private:
 class IOSGADBannerView:public GADBannerView
 {
 public:
-    IOSGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, CGRect rect, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
+    IOSGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, CGRect rect, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
     {
         if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
             float scale = [[UIScreen mainScreen] scale];
@@ -190,9 +190,12 @@ public:
                 bannerSize = kGADAdSizeSkyscraper;
                 break;
             case GADAdSize::SmartBannerPortrait:
-                bannerSize = GADAdSizeFromCGSize(rect.size);
+                bannerSize = kGADAdSizeSmartBannerPortrait;
                 break;
             case GADAdSize::SmartBannerLandscape:
+                bannerSize = kGADAdSizeSmartBannerLandscape;
+                break;
+            case GADAdSize::CustomSize:
                 bannerSize = GADAdSizeFromCGSize(rect.size);
                 break;
             default:
@@ -203,10 +206,77 @@ public:
         
         rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
         
-        _bannerView = [[::GADBannerView alloc] initWithAdSize:bannerSize origin:CGPointMake(rect.origin.x + (rect.size.width - bannerSize.size.width)/2.0f,rect.origin.y + (rect.size.height - bannerSize.size.height)/2.0f)];
+        _bannerView = [[::GADBannerView alloc] initWithAdSize:bannerSize];
         _bannerView.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         _bannerView.adUnitID = [NSString stringWithCString:adUnitID.c_str() encoding:NSUTF8StringEncoding];
-        _bannerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, rect.size.width/bannerSize.size.width, rect.size.height/bannerSize.size.height);
+        
+        float xScale = 1.0f;
+        float yScale = 1.0f;
+        
+        switch (scaleType) {
+            case BannerScaleType::Fill:
+                xScale = frame.size.width / _bannerView.frame.size.width;
+                yScale = frame.size.height / _bannerView.frame.size.height;
+                break;
+                
+            case BannerScaleType::Proportional:
+                xScale = frame.size.width / _bannerView.frame.size.width;
+                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = std::min(xScale, yScale);
+                yScale = xScale;
+                break;
+                
+            default:
+                break;
+        }
+        
+        _bannerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, xScale, yScale);
+        
+        switch (gravity) {
+            case BannerGravityType::TopLeft:
+                _bannerView.layer.anchorPoint = CGPointMake(0, 0);
+                _bannerView.center = CGPointMake(rect.origin.x, rect.origin.y);
+                break;
+            case BannerGravityType::CenterLeft:
+                _bannerView.layer.anchorPoint = CGPointMake(0, 0.5);
+                _bannerView.center = CGPointMake(rect.origin.x, (rect.origin.y + rect.size.height)/2);
+                break;
+            case BannerGravityType::BottomLeft:
+                _bannerView.layer.anchorPoint = CGPointMake(0, 1.0);
+                _bannerView.center = CGPointMake(rect.origin.x, rect.origin.y + rect.size.height);
+                break;
+            case BannerGravityType::TopCenter:
+                _bannerView.layer.anchorPoint = CGPointMake(0.5, 0);
+                _bannerView.center = CGPointMake((rect.origin.x + rect.size.width)/2, rect.origin.y);
+                break;
+            case BannerGravityType::Center:
+                _bannerView.layer.anchorPoint = CGPointMake(0.5, 0.5);
+                _bannerView.center = CGPointMake((rect.origin.x + rect.size.width)/2, (rect.origin.y + rect.size.height)/2);
+                break;
+            case BannerGravityType::BottomCenter:
+                _bannerView.layer.anchorPoint = CGPointMake(0.5, 1.0);
+                _bannerView.center = CGPointMake((rect.origin.x + rect.size.width)/2, rect.origin.y + rect.size.height);
+                break;
+            case BannerGravityType::TopRight:
+                _bannerView.layer.anchorPoint = CGPointMake(1.0, 0);
+                _bannerView.center = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y );
+                break;
+            case BannerGravityType::CenterRight:
+                _bannerView.layer.anchorPoint = CGPointMake(1.0, 0.5);
+                _bannerView.center = CGPointMake(rect.origin.x + rect.size.width, (rect.origin.y + rect.size.height)/2);;
+                break;
+            case BannerGravityType::BottomRight:
+                _bannerView.layer.anchorPoint = CGPointMake(1.0, 1.0);
+                _bannerView.center = CGPointMake(rect.origin.x + rect.size.width, rect.origin.y + rect.size.height);;
+                break;
+                
+            default:
+                break;
+        }
+        
+        //_bannerView.transform = CGAffineTransformScale(CGAffineTransformIdentity, rect.size.width/bannerSize.size.width, rect.size.height/bannerSize.size.height);
+        //_bannerView.frame.origin = CGPointMake(0, 100);
+        //_bannerView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, 100);
         _delegate = [[GADIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
         [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
         _bannerView.delegate = _delegate;
@@ -294,9 +364,9 @@ public:
         _interstitials.emplace_back(new IOSGADInterstitial(createRequest(), adUnitID, delegate));
         return _interstitials.back();
     }
-    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate) override
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) override
     {
-        _bannerViews.emplace_back(new IOSGADBannerView(createRequest(), adUnitID, size, CGRectMake(x, y, width, height), delegate));
+        _bannerViews.emplace_back(new IOSGADBannerView(createRequest(), adUnitID, size, CGRectMake(x, y, width, height), scaleType, gravity, delegate));
         return _bannerViews.back();
     }
     
@@ -326,6 +396,7 @@ public:
     {
         GADRequest *request = [GADRequest request];
         NSMutableArray *testDevices = [NSMutableArray arrayWithObject:GAD_SIMULATOR_ID];
+        //[testDevices addObject:@"9ad070fbd963423d1d537b142209fcb5" ];
         for(const auto &it : _testDevices)
             [testDevices addObject:[NSString stringWithCString:it.c_str() encoding:NSUTF8StringEncoding]];
         

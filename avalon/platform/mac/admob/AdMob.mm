@@ -110,7 +110,7 @@ public:
         _interstitials.emplace_back(new MACGADInterstitial(createRequest(), adUnitID, delegate));
         return _interstitials.back();
     }
-    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate) override
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) override
     {
         _bannerViews.emplace_back(new MACGADBannerView(createRequest(), adUnitID, size, CGRectMake(x, y, width, height), delegate));
         return _bannerViews.back();

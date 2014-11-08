@@ -96,7 +96,29 @@ enum class GADAdSize
     Leaderboard,
     Skyscraper,
     SmartBannerPortrait,
-    SmartBannerLandscape
+    SmartBannerLandscape,
+    CustomSize
+};
+    
+enum class BannerScaleType
+{
+    None,
+    Proportional,
+    Fill
+    
+};
+    
+enum class BannerGravityType
+{
+    TopLeft,
+    CenterLeft,
+    BottomLeft,
+    TopCenter,
+    Center,
+    BottomCenter,
+    TopRight,
+    CenterRight,
+    BottomRight
 };
 
 class GADBannerView
@@ -143,7 +165,7 @@ public:
     virtual void setKeywords(const std::vector<std::string>& keywords) = 0;
     
     virtual std::shared_ptr<GADInterstitial> createIntestitial(const std::string &adUnitID, GADInterstitialDelegate *delegate) = 0;
-    virtual std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate) = 0;
+    virtual std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) = 0;
     
     virtual std::vector<std::shared_ptr<GADInterstitial>> getReadyInterstitials() const = 0;
     virtual std::vector<std::shared_ptr<GADBannerView>> getBannerViews() const = 0;

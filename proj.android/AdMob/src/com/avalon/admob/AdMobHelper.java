@@ -482,13 +482,15 @@ public abstract class AdMobHelper
 		return adView.getWindowVisibility() == View.VISIBLE;
 	}
 	
-	public static AdView createBannerView(String adUnitID, int size, int x, int y, int width, int height)
+	public static AdView createBannerView(String adUnitID, int size, int x, int y, int width, int height, int scaleType, int gravity)
 	{
 		final String curAdUnitID = adUnitID;
 		final int curX = x;
 		final int curY = y;
 		final int curWidth = width;
 		final int curHeight = height;
+		final int curScaleType = scaleType;
+		final int curGravity = gravity;
 		AdSize tempSize = AdSize.BANNER;
 		switch(size)
 		{
