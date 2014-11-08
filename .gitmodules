@@ -3,7 +3,7 @@
 	url = https://github.com/playgameservices/android-samples.git
 [submodule "vendors/appirater-ios"]
 	path = vendors/appirater-ios
-	url = https://github.com/arashpayan/appirater.git
+url=https://github.com/newnon/appirater.git
 [submodule "vendors/google/marketbilling"]
 	path = vendors/google/marketbilling
 	url = https://code.google.com/p/marketbilling/
