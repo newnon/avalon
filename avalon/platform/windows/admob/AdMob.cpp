@@ -32,7 +32,7 @@ private:
 class WINGADBannerView:public GADBannerView
 {
 public:
-    WINGADBannerView(GADRequest *request, const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
+    WINGADBannerView(GADRequest *request, const std::string &adUnitID, GADBannerViewDelegate *delegate):GADBannerView(adUnitID,size)
     {
     }
     
@@ -40,19 +40,24 @@ public:
     {
     }
     
-    virtual void setVisible(bool value)
+    virtual bool isVisible() override
     {
+        return false;
     }
-    
-    virtual bool isVisible()
+   
+    virtual bool hasAutoRefreshed() const  override
     {
         return false;
     }
     
-    virtual bool hasAutoRefreshed() const
+    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
     {
-        return false;
     }
+    
+    virtual void hide() override
+    {
+    }
+
     
 private:
 };
@@ -110,9 +115,9 @@ public:
         _interstitials.emplace_back(new WINGADInterstitial(createRequest(), adUnitID, delegate));
         return _interstitials.back();
     }
-    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) override
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, GADBannerViewDelegate *delegate) override
     {
-        _bannerViews.emplace_back(new WINGADBannerView(createRequest(), adUnitID, size, x, y, width, height, delegate));
+        _bannerViews.emplace_back(new WINGADBannerView(createRequest(), adUnitID, delegate));
         return _bannerViews.back();
     }
     

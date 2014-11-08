@@ -182,21 +182,33 @@ public:
         }
     }
     
-    virtual void setVisible(bool value)
+    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
     {
         if(_bannerView)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setBannerVisible", "(Lcom/google/android/gms/ads/AdView;Z)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "showBanner", "(Lcom/google/android/gms/ads/AdView;IIIIII)V"))
             {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView, (jboolean)value);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView, x, y, width, height, static_cast<int>(scaleType), static_cast<int>(gravity));
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
-            cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_bannerView);
+        }
+    }
+        
+    virtual void hide() override
+    {
+        if(_bannerView)
+        {
+            cocos2d::JniMethodInfo methodInfo;
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "hideBanner", "(Lcom/google/android/gms/ads/AdView;)V"))
+            {
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView);
+                methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            }
         }
     }
     
-    virtual bool isVisible()
+    virtual bool isVisible() override
     {
         if(!_bannerView)
             return false;
@@ -207,6 +219,21 @@ public:
             ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _bannerView);
             methodInfo.env->DeleteLocalRef(methodInfo.classID);
         }
+        return ret;
+    }
+    
+    virtual bool hasAutoRefreshed() const override
+    {
+        if(!_bannerView)
+            return false;
+        cocos2d::JniMethodInfo methodInfo;
+        bool ret = false;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "isBannerAutoRefreshed", "(Lcom/google/android/gms/ads/AdView;)Z"))
+        {
+            ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _bannerView);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
+        return ret;
     }
 
     void adViewDidReceiveAd()
@@ -342,14 +369,14 @@ public:
         }
         return _interstitials.back();
     }
-    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity, GADBannerViewDelegate *delegate) override
+    std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, GADBannerViewDelegate *delegate) override
     {
         cocos2d::JniMethodInfo methodInfo;
 
-        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createBannerView", "(Ljava/lang/String;IIIIIII)Lcom/google/android/gms/ads/AdView;"))
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createBannerView", "(Ljava/lang/String;I)Lcom/google/android/gms/ads/AdView;"))
         {
             jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
-            jobject bannerView = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jint)size, x, y, width, height, static_cast<int>(scaleType), static_cast<int>(gravity));
+            jobject bannerView = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jint)size);
             methodInfo.env->DeleteLocalRef(jAdUnitID);
             methodInfo.env->DeleteLocalRef(methodInfo.classID);
             _bannerViews.emplace_back(new AndroidGADBannerView(bannerView, adUnitID, size, delegate));
