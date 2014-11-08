@@ -302,12 +302,12 @@ public:
             default:
                 break;
         }
-        _bannerView.hidden = false;
+        _bannerView.hidden = NO;
     }
     
     virtual void hide() override
     {
-        _bannerView.hidden = true;
+        _bannerView.hidden = YES;
     }
     
     virtual bool isVisible() override

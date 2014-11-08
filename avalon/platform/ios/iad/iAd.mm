@@ -177,6 +177,12 @@ public:
         }
         _delegate = [[ADIOSBannerViewDelegate alloc] initWithBannerView:this];
         _bannerView.delegate = _delegate;
+        CGRect contentFrame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
+        if (contentFrame.size.width < contentFrame.size.height) {
+            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+        } else {
+            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        }
         [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
         _bannerView.hidden = YES;
     }
@@ -222,8 +228,6 @@ public:
             _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         }
         
-        _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-        
         if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
             float scale = [[UIScreen mainScreen] scale];
             rect.origin.x /= scale;
@@ -232,22 +236,20 @@ public:
             rect.size.height /= scale;
         }
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
-        
-        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
+        rect.origin.y = contentFrame.size.height - rect.size.height - rect.origin.y;
         
         float xScale = 1.0f;
         float yScale = 1.0f;
         
         switch (scaleType) {
             case BannerScaleType::Fill:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = contentFrame.size.width / _bannerView.frame.size.width;
+                yScale = contentFrame.size.height / _bannerView.frame.size.height;
                 break;
                 
             case BannerScaleType::Proportional:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = contentFrame.size.width / _bannerView.frame.size.width;
+                yScale = contentFrame.size.height / _bannerView.frame.size.height;
                 xScale = std::min(xScale, yScale);
                 yScale = xScale;
                 break;
@@ -299,11 +301,11 @@ public:
             default:
                 break;
         }
-        _bannerView.hidden = false;
+        _bannerView.hidden = NO;
     }
     virtual void hide() override
     {
-        _bannerView.hidden = true;
+        _bannerView.hidden = YES;
     }
     
 private:
