@@ -40,8 +40,8 @@
 		A5081F211A0BFE460082FBB2 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081EBE1A0BFE460082FBB2 /* RMStore.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A5081F221A0BFE460082FBB2 /* RMStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081EBE1A0BFE460082FBB2 /* RMStore.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A5081F261A0C054B0082FBB2 /* AppleIncRootCertificate.cer in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5081E5E1A0BFE460082FBB2 /* AppleIncRootCertificate.cer */; };
-		A5081F7F1A0C14BB0082FBB2 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E601A0BFE460082FBB2 /* RMAppReceipt.m */; };
-		A5081F801A0C14BB0082FBB2 /* RMStoreAppReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E621A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.m */; };
+		A5081F7F1A0C14BB0082FBB2 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E601A0BFE460082FBB2 /* RMAppReceipt.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5081F801A0C14BB0082FBB2 /* RMStoreAppReceiptVerificator.m in Sources */ = {isa = PBXBuildFile; fileRef = A5081E621A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A50BC17D18E962DE00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC1A518E9634600F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC1AE18E9635400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };

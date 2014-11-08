@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A57695A71A0E8DC3002FDCB5"
-               BuildableName = "libAdMob Mac copy.a"
+               BuildableName = "libAds Mac.a"
                BlueprintName = "Ads Mac"
                ReferencedContainer = "container:avalon.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57695A71A0E8DC3002FDCB5"
-            BuildableName = "libAdMob Mac copy.a"
+            BuildableName = "libAds Mac.a"
             BlueprintName = "Ads Mac"
             ReferencedContainer = "container:avalon.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A57695A71A0E8DC3002FDCB5"
-            BuildableName = "libAdMob Mac copy.a"
+            BuildableName = "libAds Mac.a"
             BlueprintName = "Ads Mac"
             ReferencedContainer = "container:avalon.xcodeproj">
          </BuildableReference>
