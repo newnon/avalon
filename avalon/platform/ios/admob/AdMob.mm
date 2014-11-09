@@ -209,10 +209,8 @@ public:
         _bannerView.rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         _bannerView.adUnitID = [NSString stringWithCString:adUnitID.c_str() encoding:NSUTF8StringEncoding];
         _delegate = [[GADIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
-        [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
         _bannerView.delegate = _delegate;
         [_bannerView loadRequest:request];
-        _bannerView.hidden = YES;
     }
     
     virtual ~IOSGADBannerView()
@@ -225,6 +223,7 @@ public:
     
     virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
     {
+        [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
         CGRect rect = CGRectMake(x, y, width, height);
         
         if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
@@ -302,17 +301,16 @@ public:
             default:
                 break;
         }
-        _bannerView.hidden = NO;
     }
     
     virtual void hide() override
     {
-        _bannerView.hidden = YES;
+        [_bannerView removeFromSuperview];
     }
     
     virtual bool isVisible() override
     {
-        return !_bannerView.hidden;
+        return [_bannerView isDescendantOfView:[UIApplication sharedApplication].keyWindow];
     }
     
     virtual bool hasAutoRefreshed() const override

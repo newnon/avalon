@@ -183,12 +183,11 @@ public:
         } else {
             _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
         }
-        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
-        _bannerView.hidden = YES;
     }
     ~IOSADBannerView()
     {
         [_bannerView removeFromSuperview];
+        _bannerView.delegate = nil;
         [_bannerView release];
         [_delegate release];
     }
@@ -219,6 +218,7 @@ public:
     
     virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
     {
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
         CGRect rect = CGRectMake(x, y, width, height);
         
         CGRect contentFrame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
@@ -301,11 +301,10 @@ public:
             default:
                 break;
         }
-        _bannerView.hidden = NO;
     }
     virtual void hide() override
     {
-        _bannerView.hidden = YES;
+        [_bannerView removeFromSuperview];
     }
     
 private:
