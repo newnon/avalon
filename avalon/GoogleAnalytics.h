@@ -74,6 +74,7 @@ public:
     void setDefaultTracker(GoogleAnalyticsTracker *tracker);
     
     void dispatch();
+    bool dispatchAndWait(int maxTimeSeconds);
     
     void setLogLevel(GoogleAnalyticsLogLevel logLevel);
     GoogleAnalyticsLogLevel getLogLevel() const;

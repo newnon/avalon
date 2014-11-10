@@ -217,6 +217,30 @@ void GoogleAnalytics::dispatch()
     [[GAI sharedInstance] dispatch];
 }
     
+bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
+{
+    NSDate *start = [NSDate date];
+    __block bool finished;
+    [[GAI sharedInstance] dispatchWithCompletionHandler:^(GAIDispatchResult) {
+        finished = true;
+    }];
+    while(true)
+    {
+        if(finished)
+        {
+            NSLog(@"GoogleAnalytics succesfull dispatchAndWait");
+            break;
+        }
+        else if(fabs([start timeIntervalSinceNow])>maxTimeSeconds)
+        {
+            NSLog(@"GoogleAnalytics failed dispatchAndWait");
+            break;
+        }
+        [NSThread sleepForTimeInterval:0.1];
+    }
+    return true;
+}
+    
 void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)
 {
     [[GAI sharedInstance] logger].logLevel = (GAILogLevel)logLevel;

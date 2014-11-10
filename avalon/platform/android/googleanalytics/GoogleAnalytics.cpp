@@ -439,6 +439,12 @@ void GoogleAnalytics::dispatch()
     }
 }
 
+bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
+{
+	dispatch();
+	return false;
+}
+
 void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)
 {
     cocos2d::JniMethodInfo methodInfo;

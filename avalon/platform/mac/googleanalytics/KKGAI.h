@@ -3,6 +3,12 @@
 #import "KKGAILogger.h"
 #import "KKGAITracker.h"
 
+typedef NS_ENUM(NSUInteger, GAIDispatchResult) {
+    kGAIDispatchNoData,
+    kGAIDispatchGood,
+    kGAIDispatchError
+};
+
 @interface GAI : NSObject
 
 /*!
@@ -112,6 +118,21 @@
  Note that this does not have any effect on dispatchInterval, and can be used in
  conjunction with periodic dispatch. */
 - (void)dispatch;
+
+/*!
+ Dispatches the next tracking beacon in the queue, calling completionHandler when
+ the tracking beacon has either been sent (returning kGAIDispatchGood) or an error has resulted
+ (returning kGAIDispatchError).  If there is no network connection or there is no data to send,
+ kGAIDispatchNoData is returned.
+ 
+ Calling this method with a nil completionHandler is the same as calling the dispatch
+ above.
+ 
+ It would be wise to call this when application is exiting to initiate the
+ submission of any unsubmitted tracking information. Note that this does not
+ have any effect on dispatchInterval, and can be used in conjunction with
+ periodic dispatch. */
+- (void)dispatchWithCompletionHandler:(void (^)(GAIDispatchResult))completionHandler;
 
 - (void)startDispatching;
 - (void)pauseDispatching;

@@ -278,49 +278,68 @@ static NSString *const KKGoogleAnalyticsErrorDomain = @"KKGoogleAnalyticsErrorDo
 
 - (void)dispatch
 {
-	if ([self.operationQueue operationCount]) {
-		return;
-	}
+    [self dispatchWithCompletionHandler:nil];
+}
 
-	__block NSError *error = nil;
-	__block NSArray *array = nil;
-	void (^getArrayBlock)(void) = ^{
-		NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Record" inManagedObjectContext:self.managedObjectContext];
-		NSFetchRequest *request = [[NSFetchRequest alloc] init];
-		[request setEntity:entityDescription];
-		array = [self.managedObjectContext executeFetchRequest:request error:&error];
-	};
-	if (![NSThread isMainThread]) {
-		dispatch_sync(dispatch_get_main_queue(), getArrayBlock);
-	}
-	else {
-		getArrayBlock();
-	}
-	if (!array || ![array count]) {
-		return;
-	}
-	NSMutableString *payload = [NSMutableString string];
-	[array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		[payload appendFormat:@"%@\n", [obj valueForKey:@"text"]];
-	}];
-
-	NSURL *URL = [NSURL URLWithString:@"http://www.google-analytics.com/collect"];
-	NSMutableURLRequest *HTTPRequest = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-	[HTTPRequest setHTTPMethod:@"POST"];
-	[HTTPRequest setHTTPBody:[payload dataUsingEncoding:NSUTF8StringEncoding]];
-	[HTTPRequest addValue:UserAgentString() forHTTPHeaderField:@"User-Agent"];
-
-	[NSURLConnection sendAsynchronousRequest:HTTPRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-		if (!connectionError) {
-			dispatch_async(dispatch_get_main_queue(), ^{
-				for (id object in array) {
-					[self.managedObjectContext deleteObject:object];
-				}
-				[self.managedObjectContext save:nil];
-			});
-		}
-	}];
-	return;
+- (void)dispatchWithCompletionHandler:(void (^)(GAIDispatchResult))completionHandler
+{
+    if ([self.operationQueue operationCount]) {
+        if(completionHandler)
+            dispatch_async(dispatch_get_main_queue(), ^{ completionHandler(kGAIDispatchError); });
+        return;
+    }
+    
+    __block NSError *error = nil;
+    __block NSArray *array = nil;
+    void (^getArrayBlock)(void) = ^{
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Record" inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest *request = [[NSFetchRequest alloc] init];
+        [request setEntity:entityDescription];
+        array = [self.managedObjectContext executeFetchRequest:request error:&error];
+    };
+    if (![NSThread isMainThread]) {
+        dispatch_sync(dispatch_get_main_queue(), getArrayBlock);
+    }
+    else {
+        getArrayBlock();
+    }
+    if (!array || ![array count]) {
+        if(completionHandler)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{ completionHandler(kGAIDispatchNoData); });
+        }
+        return;
+    }
+    NSMutableString *payload = [NSMutableString string];
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [payload appendFormat:@"%@\n", [obj valueForKey:@"text"]];
+    }];
+    
+    NSURL *URL = [NSURL URLWithString:@"http://www.google-analytics.com/collect"];
+    NSMutableURLRequest *HTTPRequest = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    [HTTPRequest setHTTPMethod:@"POST"];
+    [HTTPRequest setHTTPBody:[payload dataUsingEncoding:NSUTF8StringEncoding]];
+    [HTTPRequest addValue:UserAgentString() forHTTPHeaderField:@"User-Agent"];
+    
+    [NSURLConnection sendAsynchronousRequest:HTTPRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!connectionError) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                for (id object in array) {
+                    [self.managedObjectContext deleteObject:object];
+                }
+                [self.managedObjectContext save:nil];
+                
+                if(completionHandler)
+                    completionHandler(kGAIDispatchGood);
+            });
+        }
+        else
+        {
+            if(completionHandler)
+                dispatch_async(dispatch_get_main_queue(), ^{ completionHandler(kGAIDispatchError); });
+        }
+    }];
+    return;
 }
 
 - (void)startDispatching

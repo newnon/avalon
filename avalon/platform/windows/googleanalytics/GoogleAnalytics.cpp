@@ -158,6 +158,11 @@ void GoogleAnalytics::setDefaultTracker(GoogleAnalyticsTracker *tracker)
 void GoogleAnalytics::dispatch()
 {
 }
+
+bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
+{
+    return false;
+}
     
 void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)
 {
