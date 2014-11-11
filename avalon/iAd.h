@@ -256,6 +256,7 @@ public:
      */
     virtual void cancelBannerViewAction() = 0;
     
+    virtual bool isVisible() = 0;
     virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) = 0;
     virtual void hide() = 0;
     

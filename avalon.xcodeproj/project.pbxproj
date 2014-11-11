@@ -329,6 +329,10 @@
 		A5A75B041924EF1100C44FBF /* vg_button_mute_selected.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A75AFD1924EE7000C44FBF /* vg_button_mute_selected.png */; };
 		A5ACF0391918B1E500A010A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5ACF04A1918B25C00A010A5 /* AdMob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D327861900EEA700A65D25 /* AdMob.mm */; };
+		A5AF667F1A1281B80043CC22 /* Ads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5AF667E1A1281B80043CC22 /* Ads.cpp */; };
+		A5AF66801A1281B80043CC22 /* Ads.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5AF667E1A1281B80043CC22 /* Ads.cpp */; };
+		A5AF66811A1281E10043CC22 /* libAds iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A576959A1A0E8C70002FDCB5 /* libAds iOS.a */; };
+		A5AF66821A1282090043CC22 /* libAds iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A576959A1A0E8C70002FDCB5 /* libAds iOS.a */; };
 		A5B1138E1A0B81BF008F9AF2 /* KKGAILogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1138C1A0B81BF008F9AF2 /* KKGAILogger.h */; };
 		A5B1138F1A0B81BF008F9AF2 /* KKGAITracker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B1138D1A0B81BF008F9AF2 /* KKGAITracker.h */; };
 		A5D08BAC18F6F5B100B4EBA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -439,6 +443,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A5ACF0351918B1E500A010A5;
 			remoteInfo = GoogleAnalytics;
+		};
+		A5AF667C1A1280F00043CC22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
 		};
 		A5D08BB418F6F5F900B4EBA1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1006,6 +1017,7 @@
 		A5A75AFD1924EE7000C44FBF /* vg_button_mute_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_button_mute_selected.png; sourceTree = "<group>"; };
 		A5ACF0491918B1E500A010A5 /* libGoogleAnalytics iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGoogleAnalytics iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GoogleAnalytics.h; path = avalon/GoogleAnalytics.h; sourceTree = "<group>"; };
+		A5AF667E1A1281B80043CC22 /* Ads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Ads.cpp; path = avalon/ads/Ads.cpp; sourceTree = "<group>"; };
 		A5B1138C1A0B81BF008F9AF2 /* KKGAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAILogger.h; path = avalon/platform/mac/googleanalytics/KKGAILogger.h; sourceTree = "<group>"; };
 		A5B1138D1A0B81BF008F9AF2 /* KKGAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAITracker.h; path = avalon/platform/mac/googleanalytics/KKGAITracker.h; sourceTree = "<group>"; };
 		A5D08BB318F6F5B100B4EBA1 /* libNotifications iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNotifications iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1163,6 +1175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5AF66811A1281E10043CC22 /* libAds iOS.a in Frameworks */,
 				A57695891A0E6EA8002FDCB5 /* iAd.framework in Frameworks */,
 				A576954B1A0E6DD6002FDCB5 /* Foundation.framework in Frameworks */,
 			);
@@ -1222,6 +1235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5AF66821A1282090043CC22 /* libAds iOS.a in Frameworks */,
 				A5D327671900507400A65D25 /* Foundation.framework in Frameworks */,
 				A5F0C9251922343A006B8457 /* libGoogleAdMobAds.a in Frameworks */,
 			);
@@ -1629,6 +1643,7 @@
 		A576958C1A0E8C41002FDCB5 /* Ads */ = {
 			isa = PBXGroup;
 			children = (
+				A5AF667E1A1281B80043CC22 /* Ads.cpp */,
 				A576959B1A0E8C9A002FDCB5 /* Ads.h */,
 			);
 			name = Ads;
@@ -2747,6 +2762,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A5AF667D1A1280F00043CC22 /* PBXTargetDependency */,
 			);
 			name = "iAd iOS";
 			productName = Avalon;
@@ -3121,6 +3137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5AF667F1A1281B80043CC22 /* Ads.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3128,6 +3145,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5AF66801A1281B80043CC22 /* Ads.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3300,6 +3318,11 @@
 			isa = PBXTargetDependency;
 			target = A5ACF0351918B1E500A010A5 /* GoogleAnalytics iOS */;
 			targetProxy = A5ACF04E1918B2EB00A010A5 /* PBXContainerItemProxy */;
+		};
+		A5AF667D1A1280F00043CC22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = A5AF667C1A1280F00043CC22 /* PBXContainerItemProxy */;
 		};
 		A5D08BB518F6F5F900B4EBA1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
