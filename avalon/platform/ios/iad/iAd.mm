@@ -44,6 +44,20 @@ public:
     {
         
     }
+    void closed()
+    {
+        [_interstitial release];
+        _interstitial = [[::ADInterstitialAd alloc] init];
+        _delegate = [[ADIOSInterstitialDelegate alloc] initWithInterstitial:this];
+        _interstitial.delegate = _delegate;
+    }
+    void error()
+    {
+        [_interstitial release];
+        _interstitial = [[::ADInterstitialAd alloc] init];
+        _delegate = [[ADIOSInterstitialDelegate alloc] initWithInterstitial:this];
+        _interstitial.delegate = _delegate;
+    }
     virtual void setDelegate(ADInterstitialAdDelegate *delegate) override
     {
         _delegate.delegate = delegate;
@@ -66,7 +80,8 @@ public:
     }
     virtual bool presentInView(/*UIView *containerView*/) override
     {
-        return [_interstitial presentInView:[UIApplication sharedApplication].keyWindow];
+        [_interstitial presentFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+        return true;
     }
     
 private:
@@ -356,6 +371,7 @@ ADBannerView* ADBannerView::createWithAdType(ADAdType type)
 {
     if(_delegate)
         _delegate->interstitialDidFailWithError(_interstitial, static_cast<avalon::ADError>(error.code));
+    _interstitial->error();
 }
 
 - (void)interstitialAdWillLoad:(ADInterstitialAd *)interstitialAd
@@ -381,6 +397,7 @@ ADBannerView* ADBannerView::createWithAdType(ADAdType type)
 {
     if(_delegate)
         _delegate->interstitialAdActionDidFinish(_interstitial);
+    _interstitial->closed();
 }
 
 @end
