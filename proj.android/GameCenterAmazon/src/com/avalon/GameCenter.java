@@ -67,7 +67,6 @@ public abstract class GameCenter
             agsGameClient.showGameCircle();
             return true;
         }
-        return false;
     }
 
     public static boolean showAchievements()

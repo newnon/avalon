@@ -17,3 +17,4 @@ proj.android/gen
 bin
 gen
 local.properties
+.settings

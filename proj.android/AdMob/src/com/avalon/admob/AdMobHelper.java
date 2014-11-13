@@ -32,6 +32,7 @@ import java.util.concurrent.FutureTask;
 import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -472,9 +473,9 @@ public abstract class AdMobHelper
 	public static void setBannerVisible(AdView adView, boolean value)
 	{
 		if(value)
-			adView.setVisibility(View.VISIBLE)
+			adView.setVisibility(View.VISIBLE);
 		else
-			adView.setVisibility(View.GONE)
+			adView.setVisibility(View.GONE);
 	}
 	
 	public static boolean isBannerVisible(AdView adView)
