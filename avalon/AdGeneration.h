@@ -13,9 +13,9 @@ namespace avalon {
 enum class AdGenerationSize
 {
     SP,
-	TABLET,
 	LARGE,
-	RECT
+	RECT,
+    TABLET
 };
     
 AdGenerationSize makeCustomAdGenerationAdSize(unsigned short width, unsigned short height);

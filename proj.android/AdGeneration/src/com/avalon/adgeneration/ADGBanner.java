@@ -22,9 +22,9 @@ public class ADGBanner{
 	private ADG m_banner = null;
 	
 	final private static int kADGSP = 0;
-	final private static int kADTABLET = 1;
-	final private static int kADGLARGE= 2;
-	final private static int kADGRECT = 3;
+	final private static int kADGLARGE= 1;
+	final private static int kADGRECT = 2;
+	final private static int kADTABLET = 3;
 	
 	public static native void delegateOnReceiveAd(long object);
 	public static native void delegateOnFailedToReceiveAd(long object);
@@ -134,9 +134,9 @@ public class ADGBanner{
 		params.x = x;
 		params.y = metrics.heightPixels - y - height;
 
-		params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-		params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-		params.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+		params.height = width;
+		params.width = height;
+		params.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_SCALED;
 		params.format = PixelFormat.TRANSLUCENT;
 		params.windowAnimations = 0;
 	    
@@ -162,14 +162,14 @@ public class ADGBanner{
 			case kADGSP:
 				tempSize = AdFrameSize.SP;
 				break;
-			case kADTABLET:
-				tempSize = AdFrameSize.TABLET;
-				break;
 			case kADGLARGE:
 				tempSize = AdFrameSize.LARGE;
 				break;
 			case kADGRECT:
 				tempSize = AdFrameSize.RECT;
+				break;
+			case kADTABLET:
+				tempSize = AdFrameSize.TABLET;
 				break;
 			default:
 				tempSize = AdFrameSize.FREE;

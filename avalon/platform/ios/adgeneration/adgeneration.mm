@@ -54,13 +54,13 @@ public:
             case AdGenerationSize::SP:
                 bannerSize = kADG_AdType_Sp;
                 break;
-            case AdGenerationSize::TABLET:
+            case AdGenerationSize::LARGE:
                 bannerSize = kADG_AdType_Large;
                 break;
-            case AdGenerationSize::LARGE:
+            case AdGenerationSize::RECT:
                 bannerSize = kADG_AdType_Rect;
                 break;
-            case AdGenerationSize::RECT:
+            case AdGenerationSize::TABLET:
                 bannerSize = kADG_AdType_Tablet;
                 break;
             default:
@@ -73,7 +73,7 @@ public:
         }
         
         NSDictionary *adgparam = @{
-                                   @"locationid" : @"10723",
+                                   @"locationid" : [NSString stringWithUTF8String:adUnitID.c_str()],
                                    @"adtype" : @(bannerSize),
                                    @"w" : @(width),
                                    @"h" : @(height)
