@@ -135,6 +135,8 @@ public:
             _delegate->onPurchaseFail(managerTransaction, ManagerDelegateErrors::PRODUCT_UNKNOWN);
         }
         
+        NSString *externalId = [NSString stringWithUTF8String:id.c_str()];
+        
         [[RMStore defaultStore] addPayment:[NSString stringWithCString:productToPurchase->productIdentifier.c_str() encoding:NSUTF8StringEncoding] success:^(SKPaymentTransaction *transaction) {
             const char* productId = [transaction.payment.productIdentifier cStringUsingEncoding:NSASCIIStringEncoding];
             if (_delegate)
@@ -142,7 +144,7 @@ public:
                 Transaction managerTransaction;
                 managerTransaction.transactionIdentifier = [transaction.transactionIdentifier cStringUsingEncoding:NSASCIIStringEncoding];
                 managerTransaction.transactionState = (transaction.transactionState == SKPaymentTransactionStateRestored)? TransactionState::Restored : TransactionState::Purchased;
-                managerTransaction.productId = id;
+                managerTransaction.productId = [externalId cStringUsingEncoding:NSASCIIStringEncoding];
                 
                 const avalon::payment::Product* product = getProductByProductIdentifier(productId);
                 if(product)
