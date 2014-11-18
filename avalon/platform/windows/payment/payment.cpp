@@ -108,6 +108,7 @@ public:
             _started = true;
             if (_delegate) {
                 _delegate->onServiceStarted();
+            }
         }
     }
     
@@ -130,7 +131,7 @@ private:
 
 Manager *Manager::getInstance()
 {
-    static WindowsManager *manager;
+    static WindowsManager *manager = nullptr;
     if(!manager)
     {
         manager = new WindowsManager();

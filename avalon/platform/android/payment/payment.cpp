@@ -173,7 +173,7 @@ private:
 
 Manager *Manager::getInstance()
 {
-    static AndroidManager *manager;
+    static AndroidManager *manager = nullptr;
     if(!manager)
     {
         manager = new AndroidManager();

@@ -278,7 +278,7 @@ private:
 
 Manager *Manager::getInstance()
 {
-    static MACManager *manager;
+    static MACManager *manager = nullptr;
     if(!manager)
     {
         manager = new MACManager();

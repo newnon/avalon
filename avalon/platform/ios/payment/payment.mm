@@ -283,7 +283,7 @@ private:
     
 Manager *Manager::getInstance()
 {
-    static IOSManager *manager;
+    static IOSManager *manager = nullptr;
     if(!manager)
     {
         manager = new IOSManager();
