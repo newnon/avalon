@@ -47,10 +47,7 @@
 		A50BC1AE18E9635400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC1BA18E963A300F1F979 /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1B718E963A300F1F979 /* GameCenter.mm */; };
 		A50BC1BB18E963A300F1F979 /* GameCenterIos.m in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1B918E963A300F1F979 /* GameCenterIos.m */; };
-		A50BC1CE18E9699B00F1F979 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C318E9699B00F1F979 /* Manager.cpp */; };
-		A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C618E9699B00F1F979 /* Product.cpp */; };
-		A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */; };
-		A50BC1D518E969B700F1F979 /* Backend.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1D218E969B700F1F979 /* Backend.mm */; };
+		A50BC1D518E969B700F1F979 /* payment.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1D218E969B700F1F979 /* payment.mm */; };
 		A50BC1FC18E96E0000F1F979 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1DC18E96E0000F1F979 /* Appirater.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A50BC1FD18E96E0000F1F979 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1FB18E96E0000F1F979 /* Appirater.mm */; };
 		A50BC23118E9842F00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -63,6 +60,8 @@
 		A50D47E7192218E300351428 /* NotificationsAppController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5D08BCB18F7D0F000B4EBA1 /* NotificationsAppController.h */; };
 		A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1FE18E96E2800F1F979 /* Appirater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A531BEF719A1F1B2003D87A3 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55C4D9119A1EBA000F3449A /* Appirater.mm */; };
+		A543087C1A1AABBB001D7746 /* payment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1CB18E9699B00F1F979 /* payment.h */; };
+		A543087D1A1AABC7001D7746 /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1CB18E9699B00F1F979 /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A547CFA31A06E04900E6D357 /* GADInAppPurchase.h in Headers */ = {isa = PBXBuildFile; fileRef = A547CFA01A06E04900E6D357 /* GADInAppPurchase.h */; };
 		A547CFA41A06E04900E6D357 /* GADInAppPurchaseDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A547CFA11A06E04900E6D357 /* GADInAppPurchaseDelegate.h */; };
 		A547CFA51A06E04900E6D357 /* GADModules.h in Headers */ = {isa = PBXBuildFile; fileRef = A547CFA21A06E04900E6D357 /* GADModules.h */; };
@@ -81,25 +80,15 @@
 		A547CFC51A06E05300E6D357 /* GADCustomEventRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A547CFB51A06E05300E6D357 /* GADCustomEventRequest.h */; };
 		A547CFC61A06E05300E6D357 /* GADSearchBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = A547CFB71A06E05300E6D357 /* GADSearchBannerView.h */; };
 		A547CFC71A06E05300E6D357 /* GADSearchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A547CFB81A06E05300E6D357 /* GADSearchRequest.h */; };
-		A547D0251A06E4DB00E6D357 /* payment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A547D0221A06E4C000E6D357 /* payment.h */; };
 		A547D04B1A06E58400E6D357 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A547D0521A06E5B400E6D357 /* AdMob.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D3276F1900515B00A65D25 /* AdMob.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A547D0531A06E5D900E6D357 /* AdMob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D0091A06E25E00E6D357 /* AdMob.mm */; };
 		A547D05D1A06E8DA00E6D357 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
-		A547D0671A06E9AE00E6D357 /* Backend.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C018E9699B00F1F979 /* Backend.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A547D0681A06E9AE00E6D357 /* Manager.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C418E9699B00F1F979 /* Manager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A547D0691A06E9AE00E6D357 /* ManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A547D06A1A06E9AE00E6D357 /* Product.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C718E9699B00F1F979 /* Product.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A547D06B1A06E9AE00E6D357 /* ProductConsumable.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1C918E9699B00F1F979 /* ProductConsumable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A547D06D1A06E9C600E6D357 /* Manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C318E9699B00F1F979 /* Manager.cpp */; };
-		A547D06E1A06E9C600E6D357 /* Product.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C618E9699B00F1F979 /* Product.cpp */; };
-		A547D06F1A06E9C600E6D357 /* ProductConsumable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */; };
 		A547D07E1A06EEA900E6D357 /* GAIEcommerceFields.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07A1A06EEA900E6D357 /* GAIEcommerceFields.h */; };
 		A547D07F1A06EEA900E6D357 /* GAIEcommerceProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07B1A06EEA900E6D357 /* GAIEcommerceProduct.h */; };
 		A547D0801A06EEA900E6D357 /* GAIEcommerceProductAction.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07C1A06EEA900E6D357 /* GAIEcommerceProductAction.h */; };
 		A547D0811A06EEA900E6D357 /* GAIEcommercePromotion.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07D1A06EEA900E6D357 /* GAIEcommercePromotion.h */; };
-		A547D08B1A06F1EE00E6D357 /* Backend.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D0881A06F1EE00E6D357 /* Backend.mm */; };
-		A547D08F1A06F20400E6D357 /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D08E1A06F20400E6D357 /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A547D08B1A06F1EE00E6D357 /* payment.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D0881A06F1EE00E6D357 /* payment.mm */; };
 		A5538E271A0AD6B800E949AD /* KKGAIDictionaryBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */; };
 		A5538E281A0AD6B800E949AD /* KKGAIDictionaryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A5538E291A0AD6B800E949AD /* KKGAIFields.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E201A0AD6B800E949AD /* KKGAIFields.h */; };
@@ -385,11 +374,6 @@
 		A5F0C9351922356B006B8457 /* GAITracker.h in Headers */ = {isa = PBXBuildFile; fileRef = A5F0C92E1922356B006B8457 /* GAITracker.h */; };
 		A5F0C9361922356B006B8457 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0C92F1922356B006B8457 /* libGoogleAnalyticsServices.a */; };
 		A5F0C93E1922607B006B8457 /* GameCenter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1B518E9638C00F1F979 /* GameCenter.h */; };
-		A5F0C943192260DB006B8457 /* Backend.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1C018E9699B00F1F979 /* Backend.h */; };
-		A5F0C944192260DB006B8457 /* Manager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1C418E9699B00F1F979 /* Manager.h */; };
-		A5F0C945192260DB006B8457 /* ManagerDelegate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */; };
-		A5F0C946192260DB006B8457 /* Product.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1C718E9699B00F1F979 /* Product.h */; };
-		A5F0C947192260DB006B8457 /* ProductConsumable.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1C918E9699B00F1F979 /* ProductConsumable.h */; };
 		A5F0C949192260EF006B8457 /* WebView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC24518E99A9D00F1F979 /* WebView.h */; };
 		A5F0C94A192260EF006B8457 /* url.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC23A18E984A100F1F979 /* url.h */; };
 		A5F0C94C19226104006B8457 /* Flurry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC28C18E9B2C200F1F979 /* Flurry.h */; };
@@ -631,12 +615,7 @@
 			dstPath = "include/$(PROJECT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				A547D0251A06E4DB00E6D357 /* payment.h in CopyFiles */,
-				A5F0C943192260DB006B8457 /* Backend.h in CopyFiles */,
-				A5F0C944192260DB006B8457 /* Manager.h in CopyFiles */,
-				A5F0C945192260DB006B8457 /* ManagerDelegate.h in CopyFiles */,
-				A5F0C946192260DB006B8457 /* Product.h in CopyFiles */,
-				A5F0C947192260DB006B8457 /* ProductConsumable.h in CopyFiles */,
+				A543087C1A1AABBB001D7746 /* payment.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,17 +702,8 @@
 		A50BC1B718E963A300F1F979 /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameCenter.mm; sourceTree = "<group>"; };
 		A50BC1B818E963A300F1F979 /* GameCenterIos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterIos.h; sourceTree = "<group>"; };
 		A50BC1B918E963A300F1F979 /* GameCenterIos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterIos.m; sourceTree = "<group>"; };
-		A50BC1C018E9699B00F1F979 /* Backend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Backend.h; sourceTree = "<group>"; };
-		A50BC1C318E9699B00F1F979 /* Manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Manager.cpp; sourceTree = "<group>"; };
-		A50BC1C418E9699B00F1F979 /* Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manager.h; sourceTree = "<group>"; };
-		A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerDelegate.h; sourceTree = "<group>"; };
-		A50BC1C618E9699B00F1F979 /* Product.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Product.cpp; sourceTree = "<group>"; };
-		A50BC1C718E9699B00F1F979 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
-		A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProductConsumable.cpp; sourceTree = "<group>"; };
-		A50BC1C918E9699B00F1F979 /* ProductConsumable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductConsumable.h; sourceTree = "<group>"; };
-		A50BC1CA18E9699B00F1F979 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mdown; sourceTree = "<group>"; };
 		A50BC1CB18E9699B00F1F979 /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = avalon/payment.h; sourceTree = "<group>"; };
-		A50BC1D218E969B700F1F979 /* Backend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Backend.mm; sourceTree = "<group>"; };
+		A50BC1D218E969B700F1F979 /* payment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payment.mm; sourceTree = "<group>"; };
 		A50BC1DB18E96E0000F1F979 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		A50BC1DC18E96E0000F1F979 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		A50BC1DE18E96E0000F1F979 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
@@ -799,15 +769,13 @@
 		A547CFB71A06E05300E6D357 /* GADSearchBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchBannerView.h; sourceTree = "<group>"; };
 		A547CFB81A06E05300E6D357 /* GADSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchRequest.h; sourceTree = "<group>"; };
 		A547D0091A06E25E00E6D357 /* AdMob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdMob.mm; path = avalon/platform/mac/admob/AdMob.mm; sourceTree = "<group>"; };
-		A547D0221A06E4C000E6D357 /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = ../payment.h; sourceTree = "<group>"; };
 		A547D0511A06E58400E6D357 /* libAdMob Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAdMob Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A547D0651A06E8DA00E6D357 /* libPayment Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPayment Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A547D07A1A06EEA900E6D357 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
 		A547D07B1A06EEA900E6D357 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
 		A547D07C1A06EEA900E6D357 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
 		A547D07D1A06EEA900E6D357 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
-		A547D0881A06F1EE00E6D357 /* Backend.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Backend.mm; sourceTree = "<group>"; };
-		A547D08E1A06F20400E6D357 /* payment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payment.h; path = ../payment.h; sourceTree = "<group>"; };
+		A547D0881A06F1EE00E6D357 /* payment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payment.mm; sourceTree = "<group>"; };
 		A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAIDictionaryBuilder.h; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAIDictionaryBuilder.m; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.m; sourceTree = "<group>"; };
 		A5538E201A0AD6B800E949AD /* KKGAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAIFields.h; path = avalon/platform/mac/googleanalytics/KKGAIFields.h; sourceTree = "<group>"; };
@@ -1455,34 +1423,15 @@
 				A5081E5C1A0BFE460082FBB2 /* RMStore */,
 				A547D0041A06E16C00E6D357 /* payment-mac */,
 				A50BC1D118E969B700F1F979 /* payment-ios */,
-				A50BC1BE18E9699B00F1F979 /* payment */,
 				A50BC1CB18E9699B00F1F979 /* payment.h */,
 			);
 			name = Paiment;
 			sourceTree = "<group>";
 		};
-		A50BC1BE18E9699B00F1F979 /* payment */ = {
-			isa = PBXGroup;
-			children = (
-				A50BC1C018E9699B00F1F979 /* Backend.h */,
-				A50BC1C318E9699B00F1F979 /* Manager.cpp */,
-				A50BC1C418E9699B00F1F979 /* Manager.h */,
-				A50BC1C518E9699B00F1F979 /* ManagerDelegate.h */,
-				A50BC1C618E9699B00F1F979 /* Product.cpp */,
-				A50BC1C718E9699B00F1F979 /* Product.h */,
-				A50BC1C818E9699B00F1F979 /* ProductConsumable.cpp */,
-				A50BC1C918E9699B00F1F979 /* ProductConsumable.h */,
-				A50BC1CA18E9699B00F1F979 /* README.mdown */,
-			);
-			name = payment;
-			path = avalon/payment;
-			sourceTree = "<group>";
-		};
 		A50BC1D118E969B700F1F979 /* payment-ios */ = {
 			isa = PBXGroup;
 			children = (
-				A547D0221A06E4C000E6D357 /* payment.h */,
-				A50BC1D218E969B700F1F979 /* Backend.mm */,
+				A50BC1D218E969B700F1F979 /* payment.mm */,
 			);
 			name = "payment-ios";
 			path = avalon/platform/ios/payment;
@@ -1632,8 +1581,7 @@
 		A547D0041A06E16C00E6D357 /* payment-mac */ = {
 			isa = PBXGroup;
 			children = (
-				A547D08E1A06F20400E6D357 /* payment.h */,
-				A547D0881A06F1EE00E6D357 /* Backend.mm */,
+				A547D0881A06F1EE00E6D357 /* payment.mm */,
 			);
 			name = "payment-mac";
 			path = avalon/platform/mac/payment;
@@ -2402,16 +2350,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A543087D1A1AABC7001D7746 /* payment.h in Headers */,
 				A5081EC21A0BFE460082FBB2 /* RMStoreAppReceiptVerificator.h in Headers */,
 				A5081EC51A0BFE460082FBB2 /* RMStoreKeychainPersistence.h in Headers */,
 				A5081EBF1A0BFE460082FBB2 /* RMAppReceipt.h in Headers */,
-				A547D08F1A06F20400E6D357 /* payment.h in Headers */,
-				A547D0671A06E9AE00E6D357 /* Backend.h in Headers */,
-				A547D0681A06E9AE00E6D357 /* Manager.h in Headers */,
 				A5081F201A0BFE460082FBB2 /* RMStore.h in Headers */,
-				A547D0691A06E9AE00E6D357 /* ManagerDelegate.h in Headers */,
-				A547D06A1A06E9AE00E6D357 /* Product.h in Headers */,
-				A547D06B1A06E9AE00E6D357 /* ProductConsumable.h in Headers */,
 				A5081ECE1A0BFE460082FBB2 /* RMStoreUserDefaultsPersistence.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3212,10 +3155,7 @@
 			files = (
 				A5081F7F1A0C14BB0082FBB2 /* RMAppReceipt.m in Sources */,
 				A5081F801A0C14BB0082FBB2 /* RMStoreAppReceiptVerificator.m in Sources */,
-				A50BC1D018E9699B00F1F979 /* ProductConsumable.cpp in Sources */,
-				A50BC1CF18E9699B00F1F979 /* Product.cpp in Sources */,
-				A50BC1CE18E9699B00F1F979 /* Manager.cpp in Sources */,
-				A50BC1D518E969B700F1F979 /* Backend.mm in Sources */,
+				A50BC1D518E969B700F1F979 /* payment.mm in Sources */,
 				A5081EC61A0BFE460082FBB2 /* RMStoreKeychainPersistence.m in Sources */,
 				A5081F211A0BFE460082FBB2 /* RMStore.m in Sources */,
 			);
@@ -3260,10 +3200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A547D06D1A06E9C600E6D357 /* Manager.cpp in Sources */,
-				A547D06E1A06E9C600E6D357 /* Product.cpp in Sources */,
-				A547D06F1A06E9C600E6D357 /* ProductConsumable.cpp in Sources */,
-				A547D08B1A06F1EE00E6D357 /* Backend.mm in Sources */,
+				A547D08B1A06F1EE00E6D357 /* payment.mm in Sources */,
 				A5081F221A0BFE460082FBB2 /* RMStore.m in Sources */,
 				A5081EC71A0BFE460082FBB2 /* RMStoreKeychainPersistence.m in Sources */,
 			);

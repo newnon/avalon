@@ -33,9 +33,9 @@ public class Backend
     {
     }
 
-    public static void purchase(String productId, boolean isConsumable)
+    public static void purchase(String productId)
     {
-        mPurchaseObserver.purchase(productId, isConsumable);
+        mPurchaseObserver.purchase(productId);
     }
 
     public static boolean isPurchaseReady()
@@ -53,10 +53,10 @@ public class Backend
         mPurchaseObserver.startItemDataRequest(pendingItemData);
     }
 
-    public static void delegateOnItemData(String productId, String name, String desc, String priceStr, float price)
+    public static void delegateOnItemData(String productId, String name, String desc, String priceStr, String curencyCode, float price)
     {
         ++itemDataReturned;
-        onItemData(productId, name, desc, priceStr, price);
+        onItemData(productId, name, desc, priceStr, curencyCode, price);
     }
 
     /**
@@ -66,11 +66,9 @@ public class Backend
      */
 
     public static native void delegateOnServiceStarted();
-    public static native void delegateOnPurchaseSucceed(String productId);
-    public static native void delegateOnPurchaseFail(int code);
-    public static native void delegateOnTransactionStart();
-    public static native void delegateOnTransactionEnd();
-    public static native void onItemData(String productId, String name, String desc, String priceStr, float price);
+    public static native void delegateOnPurchaseSucceed(String productId, String orderId, boolean restored);
+    public static native void delegateOnPurchaseFail(String productId, int code);
+    public static native void onItemData(String productId, String name, String desc, String priceStr, String curencyCode, float price);
     public static native void onInitialized();
 
     /**

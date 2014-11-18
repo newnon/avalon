@@ -29,6 +29,8 @@ public class SkuDetails {
     String mTitle;
     String mDescription;
     String mJson;
+    String mCurrencyCode;
+    float mPriceValue;
 
     public SkuDetails(String jsonSkuDetails) throws JSONException {
         this(IabHelper.ITEM_TYPE_INAPP, jsonSkuDetails);
@@ -40,6 +42,8 @@ public class SkuDetails {
         JSONObject o = new JSONObject(mJson);
         mSku = o.optString("productId");
         mType = o.optString("type");
+        mPriceValue = (float) (o.getLong("price_amount_micros") / 1000000.0);
+        mCurrencyCode = o.optString("price_currency_code");
         mPrice = o.optString("price");
         mTitle = o.optString("title");
         mDescription = o.optString("description");
@@ -50,6 +54,8 @@ public class SkuDetails {
     public String getPrice() { return mPrice; }
     public String getTitle() { return mTitle; }
     public String getDescription() { return mDescription; }
+    public String getCurrencyCode() { return mCurrencyCode; }
+    public float getPriceValue() { return mPriceValue; }
 
     @Override
     public String toString() {

@@ -122,7 +122,7 @@ public class PurchasingObserver implements OnActivityResultListener
                 if (isConsumable(sku)) {
                     threadConsumeAsync(inventory.getPurchase(sku));
                 } else {
-                    threadDelegateOnPurchaseSucceed(sku);
+                    threadDelegateOnPurchaseSucceed(sku, inventory.getPurchase(sku).getOrderId(), true);
                 }
             }
 
@@ -154,12 +154,12 @@ public class PurchasingObserver implements OnActivityResultListener
                     	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
                 			break;
                     }
-                    threadDelegateOnPurchaseFail(retCode);
+                    threadDelegateOnPurchaseFail(purchase.getSku(), retCode);
                 }
             } else if (isConsumable(purchase.getSku())) {
                 threadConsumeAsync(purchase);
             } else {
-                threadDelegateOnPurchaseSucceed(purchase.getSku());
+                threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), false);
             }
 
             threadDecrementTaskCounter();
@@ -175,7 +175,7 @@ public class PurchasingObserver implements OnActivityResultListener
                 return;
             }
 
-            threadDelegateOnPurchaseSucceed(purchase.getSku());
+            threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), false);
             if (checkTaskCountOnConsumeFinished) {
                 threadDecrementTaskCounter();
             }
@@ -208,13 +208,13 @@ public class PurchasingObserver implements OnActivityResultListener
         });
     }
 
-    private void threadDelegateOnPurchaseFail(int code)
+    private void threadDelegateOnPurchaseFail(final String sku, int code)
     {
         final int lcode = code;
         Cocos2dxHelper.runOnGLThread(new Runnable() {
             @Override
             public void run() {
-            	Backend.delegateOnPurchaseFail(lcode);
+            	Backend.delegateOnPurchaseFail(sku, lcode);
             }
         });
     }
@@ -229,38 +229,24 @@ public class PurchasingObserver implements OnActivityResultListener
         });
     }
 
-    private void threadDelegateOnPurchaseSucceed(final String sku)
+    private void threadDelegateOnPurchaseSucceed(final String sku, final String orderId, final boolean restored)
     {
         Cocos2dxHelper.runOnGLThread(new Runnable() {
             @Override
             public void run() {
-            	Backend.delegateOnPurchaseSucceed(sku);
+            	Backend.delegateOnPurchaseSucceed(sku, orderId, restored);
             }
         });
     }
 
     private void threadDecrementTaskCounter()
     {
-        if (--taskCount == 0) {
-            Cocos2dxHelper.runOnGLThread(new Runnable() {
-                @Override
-                public void run() {
-                	Backend.delegateOnTransactionEnd();
-                }
-            });
-        }
+        --taskCount;
     }
 
     private void threadIncrementTaskCounter()
     {
-        if (++taskCount == 1) {
-            Cocos2dxHelper.runOnGLThread(new Runnable() {
-                @Override
-                public void run() {
-                	Backend.delegateOnTransactionStart();
-                }
-            });
-        }
+        ++taskCount;
     }
 
     private void threadDelegateItemData(final Inventory inventory)
@@ -276,7 +262,8 @@ public class PurchasingObserver implements OnActivityResultListener
                         clearTitle(details.getTitle()),
                         details.getDescription(),
                         details.getPrice(),
-                        0.0f
+                        details.getCurrencyCode(),
+                        details.getPriceValue()
                     );
                 }
             }
@@ -289,7 +276,7 @@ public class PurchasingObserver implements OnActivityResultListener
      *
      */
 
-    public void purchase(final String sku, boolean isConsumable)
+    public void purchase(final String sku)
     {
         threadIncrementTaskCounter();
 

@@ -34,10 +34,7 @@ if(AVALON_PAYMENT)
 add_definitions(-DAVALON_CONFIG_PAYMENT_ENABLED)
 set(AVALON_SRC
   ${AVALON_SRC}
-  avalon/payment/Manager.cpp
-  avalon/payment/Product.cpp
-  avalon/payment/ProductConsumable.cpp
-  avalon/platform/${PLATFORM_FOLDER}/payment/Backend.cpp
+  avalon/platform/${PLATFORM_FOLDER}/payment/payment.cpp
 )
 endif()
 

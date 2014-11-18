@@ -22,10 +22,7 @@ LOCAL_MODULE_FILENAME := libavalon
 ifneq (,$(findstring payment,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_PAYMENT_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_PAYMENT_ENABLED
-    LOCAL_SRC_FILES += avalon/payment/Manager.cpp
-    LOCAL_SRC_FILES += avalon/payment/Product.cpp
-    LOCAL_SRC_FILES += avalon/payment/ProductConsumable.cpp
-    LOCAL_SRC_FILES += avalon/platform/android/payment/Backend.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/payment/payment.cpp
 endif
 
 ifneq (,$(findstring gamecenter,$(AVALON_FEATURES)))
