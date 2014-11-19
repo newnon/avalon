@@ -4,11 +4,12 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import android.app.Activity;
-import android.graphics.PixelFormat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 import com.socdm.d.adgeneration.ADG;
 import com.socdm.d.adgeneration.ADG.AdFrameSize;
@@ -20,6 +21,7 @@ public class ADGBanner{
 	private static final Activity activity = Cocos2dxHelper.getActivity();
 	
 	private ADG m_banner = null;
+	private static RelativeLayout m_layout = null;
 	
 	final private static int kADGSP = 0;
 	final private static int kADGLARGE= 1;
@@ -124,32 +126,26 @@ public class ADGBanner{
 	
 	private void show(int x, int y, int width, int height)
 	{
-		final WindowManager wm = (WindowManager) activity.getSystemService("window");
-		
-		DisplayMetrics metrics = new DisplayMetrics();
-		wm.getDefaultDisplay().getMetrics(metrics);
-		
-		android.view.WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-		params.gravity = Gravity.TOP | Gravity.LEFT;
-		params.x = x;
-		params.y = metrics.heightPixels - y - height;
-
-		params.height = width;
-		params.width = height;
-		params.flags |= WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_SCALED;
-		params.format = PixelFormat.TRANSLUCENT;
-		params.windowAnimations = 0;
-	    
-	    wm.addView(m_banner, params);
+		if(m_layout == null)
+		{
+			m_layout = new RelativeLayout(activity);
+			activity.addContentView(m_layout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+			m_layout.setGravity(Gravity.TOP|Gravity.LEFT);
+		}
+		if(m_banner.getParent() == null)
+		{
+			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width, height);
+			params.leftMargin = x;
+			params.topMargin = m_layout.getHeight() - y - height;
+			m_layout.addView(m_banner, params);
+		}
 	}
 	private void hide()
 	{
-		final WindowManager wm = (WindowManager) activity.getSystemService("window");
-		try{
-			wm.removeView(m_banner);
-        }catch(Exception e){
-        	
-        }
+		if(m_layout != null && m_banner.getParent() != null)
+		{
+			m_layout.removeView(m_banner);
+		}
 	}
 	
 	public static ADGBanner createBannerView(String adUnitID, int size, long delegate)
