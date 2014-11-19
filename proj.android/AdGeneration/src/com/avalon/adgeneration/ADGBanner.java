@@ -4,11 +4,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import android.app.Activity;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.socdm.d.adgeneration.ADG;
@@ -169,10 +167,7 @@ public class ADGBanner{
 				break;
 			default:
 				tempSize = AdFrameSize.FREE;
-				final WindowManager wm = (WindowManager) activity.getSystemService("window");
-				DisplayMetrics metrics = new DisplayMetrics();
-				wm.getDefaultDisplay().getMetrics(metrics);
-				float DP = metrics.density;
+				float DP = activity.getResources().getDisplayMetrics().density;
 				tempSize.setSize((int)((size>>16) / DP), (int)((size & 0xFFFF) / DP));
 				break;
 		}
