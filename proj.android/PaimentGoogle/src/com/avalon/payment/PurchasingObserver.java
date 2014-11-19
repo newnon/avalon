@@ -154,7 +154,7 @@ public class PurchasingObserver implements OnActivityResultListener
                     	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
                 			break;
                     }
-                    threadDelegateOnPurchaseFail(purchase.getSku(), retCode);
+                    threadDelegateOnPurchaseFail(purchase!=null?purchase.getSku():"", retCode);
                 }
             } else if (isConsumable(purchase.getSku())) {
                 threadConsumeAsync(purchase);
