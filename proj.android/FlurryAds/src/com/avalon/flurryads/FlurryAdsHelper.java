@@ -210,7 +210,7 @@ public abstract class FlurryAdsHelper {
 				{
 					m_layout = new RelativeLayout(activity);
 					activity.addContentView(m_layout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-					m_layout.setGravity(Gravity.TOP|Gravity.LEFT);
+					m_layout.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL);
 				}
 				
 				FlurryAdsHelper.needToDisplay.remove(curSpace);
