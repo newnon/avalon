@@ -52,19 +52,15 @@ static jobject jobjectFromDictionary(const std::map<std::string,std::string> &di
     return hashMap;
 }
 
-void FlurryAds::fetchAdForSpace(const std::string &space, int x, int y, int width, int height, AdSize size)
+void FlurryAds::fetchAdForSpace(const std::string &space, AdSize size)
 {
     cocos2d::JniMethodInfo methodInfo;
 
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "fetchAdForSpace", "(Ljava/lang/String;IIIII)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "fetchAdForSpace", "(Ljava/lang/String;I)V"))
     {
         jstring jSpace = methodInfo.env->NewStringUTF(space.c_str());
-        jint jx = x;
-        jint jy = y;
-        jint jwidth = width;
-        jint jheight = height;
         jint jsize = (int)size;
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jSpace, jx, jy, jwidth, jheight, jsize);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jSpace, jsize);
         methodInfo.env->DeleteLocalRef(jSpace);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
@@ -109,19 +105,15 @@ void FlurryAds::displayAdForSpaceModally(const std::string &space)
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
 }
-void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int height, AdSize size)
+void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, AdSize size)
 {
     cocos2d::JniMethodInfo methodInfo;
 
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "fetchAndDisplayAdForSpace", "(Ljava/lang/String;IIIII)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "fetchAndDisplayAdForSpace", "(Ljava/lang/String;I)V"))
     {
         jstring jSpace = methodInfo.env->NewStringUTF(space.c_str());
-        jint jx = x;
-        jint jy = y;
-        jint jwidth = width;
-        jint jheight = height;
         jint jsize = (int)size;
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jSpace, jx, jy, jwidth, jheight, jsize);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jSpace, jsize);
         methodInfo.env->DeleteLocalRef(jSpace);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
@@ -167,7 +159,7 @@ void FlurryAds::enableTestAds(bool enable)
 {
     cocos2d::JniMethodInfo methodInfo;
 
-    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,CLASS_NAME, "enableTestAds", "(Z)V"))
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "enableTestAds", "(Z)V"))
     {
     	jboolean jenable = enable;
         methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jenable);

@@ -7,20 +7,18 @@ import java.util.concurrent.FutureTask;
 import org.cocos2dx.lib.Cocos2dxHelper;
 
 import android.app.Activity;
-import android.widget.AbsoluteLayout;
-import android.widget.LinearLayout;
+import android.view.Gravity;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RelativeLayout;
 
 import com.flurry.android.FlurryAdSize;
 import com.flurry.android.FlurryAds;
 import com.flurry.android.FlurryAdListener;
 import com.flurry.android.FlurryAdType;
 
-@SuppressWarnings("deprecation")
 public abstract class FlurryAdsHelper {
 	private static final Activity activity = Cocos2dxHelper.getActivity();
-	private static LinearLayout m_adsLayout = null;
-	private static AbsoluteLayout mBannerView = null;
+	private static RelativeLayout m_layout = null;
 	private static boolean delegateEnabled = false;
 	private static FlurryAdListener listener = null;
 	private static HashSet<String> needToDisplay = new HashSet<String>();
@@ -123,11 +121,10 @@ public abstract class FlurryAdsHelper {
     }
     public static void onDidReceiveAd(String adSpace)
     {
-    	
     	if(FlurryAdsHelper.needToDisplay.contains(adSpace))
     	{
     		FlurryAdsHelper.needToDisplay.remove(adSpace);
-    	    FlurryAds.displayAd(activity, adSpace, mBannerView);
+    	    FlurryAds.displayAd(activity, adSpace, m_layout);
     	}
     	
     	if(!delegateEnabled)
@@ -200,48 +197,32 @@ public abstract class FlurryAdsHelper {
 		});
     }
 	
-	public static void fetchAdForSpace(String space, int x,int y,int width,int height, int size)
+	public static void fetchAdForSpace(String space, int size)
     {
 		final String curSpace = space;
-		final int curX = x;
-		final int curY = y;
-		final int curWidth = width;
-		final int curHeight = height;
 		final FlurryAdSize curSize = FlurryAdSize.values()[size-1];
 		
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if (m_adsLayout == null) {
-					m_adsLayout = new LinearLayout(activity);
-					activity.addContentView(m_adsLayout, new LayoutParams(
-							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+				
+				if(m_layout == null)
+				{
+					m_layout = new RelativeLayout(activity);
+					activity.addContentView(m_layout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+					m_layout.setGravity(Gravity.TOP|Gravity.LEFT);
 				}
-
-				if (null != mBannerView) {
-					m_adsLayout.removeView(mBannerView);
-					mBannerView = null;
-				}
-				mBannerView = new AbsoluteLayout(activity);
-				m_adsLayout.addView(mBannerView);
-
-				LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) mBannerView
-						.getLayoutParams();
-				linearParams.leftMargin = curX;
-				linearParams.topMargin = curY;
-				linearParams.width = curWidth;
-				linearParams.height = curHeight;
-				mBannerView.setLayoutParams(linearParams);
+				
 				FlurryAdsHelper.needToDisplay.remove(curSpace);
-				FlurryAds.fetchAd(activity, curSpace,
-						mBannerView, curSize);
+				FlurryAds.fetchAd(activity, curSpace, m_layout, curSize);
 			}
 		});
 	}
 	
 	public static boolean adReadyForSpace(String space)
 	{
-		return FlurryAds.isAdReady(space);
+		boolean ret = FlurryAds.isAdReady(space);
+		return ret;
 	}
 	
 	public static void displayAdForSpace(String space)
@@ -251,11 +232,7 @@ public abstract class FlurryAdsHelper {
 			@Override
 			public void run() {
 				FlurryAdsHelper.needToDisplay.remove(curSpace);
-				if (null == mBannerView) {
-					return;
-				}
-				FlurryAds.displayAd(activity, curSpace,
-						mBannerView);
+				FlurryAds.displayAd(activity, curSpace, m_layout);
 			}
 		});
 	}
@@ -267,53 +244,31 @@ public abstract class FlurryAdsHelper {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if (null == mBannerView) {
-					return;
-				}
-				FlurryAds.displayAd(activity, curSpace,
-						mBannerView);
+				FlurryAdsHelper.needToDisplay.remove(curSpace);
+				FlurryAds.displayAd(activity, curSpace, m_layout);
 			}
 		});
     }
    
-	public static void fetchAndDisplayAdForSpace(String space, int x,int y,int width,int heignt, int size)
+	public static void fetchAndDisplayAdForSpace(String space, int size)
     {
 		final String curSpace = space;
-		final int curX = x;
-		final int curY = y;
-		final int curWidth = width;
-		final int curHeight = heignt;
 		final FlurryAdSize curSize = FlurryAdSize.values()[size-1];
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if (m_adsLayout == null) {
-					m_adsLayout = new LinearLayout(activity);
-					activity.addContentView(m_adsLayout, new LayoutParams(
-							LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+				if(m_layout == null)
+				{
+					m_layout = new RelativeLayout(activity);
+					activity.addContentView(m_layout, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+					m_layout.setGravity(Gravity.TOP|Gravity.LEFT);
 				}
-
-				if (null != mBannerView) {
-					m_adsLayout.removeView(mBannerView);
-					mBannerView = null;
-				}
-				mBannerView = new AbsoluteLayout(activity);
-				m_adsLayout.addView(mBannerView);
-
-				LinearLayout.LayoutParams linearParams = (LinearLayout.LayoutParams) mBannerView
-						.getLayoutParams();
-				linearParams.leftMargin = curX;
-				linearParams.topMargin = curY;
-				linearParams.width = curWidth;
-				linearParams.height = curHeight;
-				mBannerView.setLayoutParams(linearParams);
 
 				needToDisplay.add(curSpace);
-				FlurryAds.fetchAd(activity, curSpace, mBannerView, curSize);
+				FlurryAds.fetchAd(activity, curSpace, m_layout, curSize);
 			}	
 		});
     }
-    
    
 	public static void removeAdFromSpace(String space)
 	{
@@ -321,11 +276,7 @@ public abstract class FlurryAdsHelper {
 		activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				if (null == mBannerView) {
-					return;
-				}
-				FlurryAds.removeAd(activity, curSpace,
-						mBannerView);
+				FlurryAds.removeAd(activity, curSpace, m_layout);
 			}
 		});
 	}
@@ -333,6 +284,17 @@ public abstract class FlurryAdsHelper {
 	public static void setDelegate(boolean enabled)
 	{
 		delegateEnabled = enabled;
+	}
+	
+	public static void enableTestAds(boolean enabled)
+	{
+		final boolean curEnabled = enabled;
+		activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				FlurryAds.enableTestAds(curEnabled);
+			}
+		});
 	}
    
 	public static void initialize()
@@ -349,46 +311,47 @@ public abstract class FlurryAdsHelper {
 						lastType = type;
 						return FlurryAdsHelper.shouldDisplayAd(adSpace, lastType != FlurryAdType.WEB_BANNER);
 					}
+					@Override 
 					public void onAdClosed (String adSpace)
 					{
 						FlurryAdsHelper.onAdClosed(adSpace, lastType != FlurryAdType.WEB_BANNER);
 					}
-
+					@Override 
 					public void onApplicationExit (String adSpace)
 					{
 						FlurryAdsHelper.onApplicationExit(adSpace);
 					}
-
+					@Override 
 					public void onRendered (String adSpace)
 					{
 						FlurryAdsHelper.onRendered(adSpace);
 					}
-
+					@Override 
 					public void onRenderFailed (String adSpace)
 					{
 						FlurryAdsHelper.onRenderFailed(adSpace, "");
 					}
-
+					@Override 
 					public void spaceDidReceiveAd (String adSpace)
 					{
 						FlurryAdsHelper.onDidReceiveAd(adSpace);
 					}
-
+					@Override 
 					public void spaceDidFailToReceiveAd (String adSpace)
 					{
 						FlurryAdsHelper.onDidFailToReceiveAd(adSpace, "");
 					}
-
+					@Override 
 					public void onAdClicked (String adSpace)
 					{
 						FlurryAdsHelper.onAdClicked(adSpace);
 					}
-
+					@Override 
 					public void onAdOpened (String adSpace)
 					{
 						FlurryAdsHelper.onAdOpened(adSpace);
 					}
-
+					@Override 
 					public void onVideoCompleted (String adSpace)
 					{
 						FlurryAdsHelper.onVideoCompleted(adSpace);

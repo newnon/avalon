@@ -53,9 +53,7 @@
 		A50BC23118E9842F00F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC25918E99F5400F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
-		A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */; };
 		A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC27718E9A5A500F1F979 /* FlurryAd.mm */; };
-		A50BC28A18E9B2B400F1F979 /* libFlurry_4.3.2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */; };
 		A50BC28B18E9B2B400F1F979 /* Flurry.mm in Sources */ = {isa = PBXBuildFile; fileRef = A50BC28918E9B2B400F1F979 /* Flurry.mm */; };
 		A50D47E7192218E300351428 /* NotificationsAppController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5D08BCB18F7D0F000B4EBA1 /* NotificationsAppController.h */; };
 		A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1FE18E96E2800F1F979 /* Appirater.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -97,6 +95,8 @@
 		A5538E2D1A0AD6B800E949AD /* KKGAISystemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E241A0AD6B800E949AD /* KKGAISystemInfo.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A5538E2E1A0AD6B800E949AD /* KKGAI.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E251A0AD6B800E949AD /* KKGAI.h */; };
 		A5538E2F1A0AD6B800E949AD /* KKGAI.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E261A0AD6B800E949AD /* KKGAI.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A554DFC01A2489CD0014C114 /* libFlurry_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A554DFBF1A2489CD0014C114 /* libFlurry_5.4.0.a */; };
+		A554DFC21A248AAC0014C114 /* libFlurryAds_5.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A554DFC11A248AAC0014C114 /* libFlurryAds_5.4.0.a */; };
 		A55885A119A4AE4E00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A55885AA19A4AE6D00914838 /* Notifications.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BB718F6F67800B4EBA1 /* Notifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A55885B719A4AEFA00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -744,10 +744,8 @@
 		A50BC27118E9A29800F1F979 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlurryAds.h; path = avalon/FlurryAds.h; sourceTree = "<group>"; };
 		A50BC27418E9A5A500F1F979 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
 		A50BC27518E9A5A500F1F979 /* FlurryAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAds.h; sourceTree = "<group>"; };
-		A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAds_4.3.2.a; sourceTree = "<group>"; };
 		A50BC27718E9A5A500F1F979 /* FlurryAd.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FlurryAd.mm; path = avalon/platform/ios/FlurryAds/FlurryAd.mm; sourceTree = "<group>"; };
 		A50BC28718E9B2B400F1F979 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_4.3.2.a; sourceTree = "<group>"; };
 		A50BC28918E9B2B400F1F979 /* Flurry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Flurry.mm; sourceTree = "<group>"; };
 		A50BC28C18E9B2C200F1F979 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flurry.h; path = avalon/Flurry.h; sourceTree = SOURCE_ROOT; };
 		A547CFA01A06E04900E6D357 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
@@ -784,6 +782,8 @@
 		A5538E241A0AD6B800E949AD /* KKGAISystemInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAISystemInfo.m; path = avalon/platform/mac/googleanalytics/KKGAISystemInfo.m; sourceTree = "<group>"; };
 		A5538E251A0AD6B800E949AD /* KKGAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAI.h; path = avalon/platform/mac/googleanalytics/KKGAI.h; sourceTree = "<group>"; };
 		A5538E261A0AD6B800E949AD /* KKGAI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAI.m; path = avalon/platform/mac/googleanalytics/KKGAI.m; sourceTree = "<group>"; };
+		A554DFBF1A2489CD0014C114 /* libFlurry_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_5.4.0.a; sourceTree = "<group>"; };
+		A554DFC11A248AAC0014C114 /* libFlurryAds_5.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurryAds_5.4.0.a; path = "avalon/platform/ios/flurryads/FlurryAds-ios/libFlurryAds_5.4.0.a"; sourceTree = SOURCE_ROOT; };
 		A55885A919A4AE4E00914838 /* libNotifications Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libNotifications Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55885BD19A4AEFA00914838 /* libGoogleAnalytics Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGoogleAnalytics Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55885CD19A4B92600914838 /* libWeb Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libWeb Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1127,7 +1127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50BC25918E99F5400F1F979 /* Foundation.framework in Frameworks */,
-				A50BC28A18E9B2B400F1F979 /* libFlurry_4.3.2.a in Frameworks */,
+				A554DFC01A2489CD0014C114 /* libFlurry_5.4.0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,7 +1135,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A50BC27818E9A5A500F1F979 /* libFlurryAds_4.3.2.a in Frameworks */,
+				A554DFC21A248AAC0014C114 /* libFlurryAds_5.4.0.a in Frameworks */,
 				A50BC26618E9A14800F1F979 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1504,9 +1504,9 @@
 		A50BC27318E9A5A500F1F979 /* FlurryAds-ios */ = {
 			isa = PBXGroup;
 			children = (
+				A554DFC11A248AAC0014C114 /* libFlurryAds_5.4.0.a */,
 				A50BC27418E9A5A500F1F979 /* FlurryAdDelegate.h */,
 				A50BC27518E9A5A500F1F979 /* FlurryAds.h */,
-				A50BC27618E9A5A500F1F979 /* libFlurryAds_4.3.2.a */,
 			);
 			name = "FlurryAds-ios";
 			path = "avalon/platform/ios/FlurryAds/FlurryAds-ios";
@@ -1527,7 +1527,7 @@
 			isa = PBXGroup;
 			children = (
 				A50BC28718E9B2B400F1F979 /* Flurry.h */,
-				A50BC28818E9B2B400F1F979 /* libFlurry_4.3.2.a */,
+				A554DFBF1A2489CD0014C114 /* libFlurry_5.4.0.a */,
 			);
 			path = "Flurry-ios";
 			sourceTree = "<group>";
@@ -3822,6 +3822,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/avalon/platform/ios/FlurryAds/FlurryAds-ios",
+					"$(PROJECT_DIR)/avalon/platform/ios/flurryads/FlurryAds-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "FlurryAds iOS";
@@ -3838,6 +3839,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/avalon/platform/ios/FlurryAds/FlurryAds-ios",
+					"$(PROJECT_DIR)/avalon/platform/ios/flurryads/FlurryAds-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "FlurryAds iOS";

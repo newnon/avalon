@@ -11,7 +11,7 @@
 #import "FlurryAdDelegate.h"
 
 static avalon::FlurryAdsDelegate* _delegate = nullptr;
-static UIView *_bannerView = nil;
+static UIView* _bannerView;
 
 @interface InternalFlurryDelegate : NSObject<FlurryAdDelegate> {
     
@@ -139,10 +139,9 @@ static NSDictionary *nsDictionaryFromStringMap(const std::map<std::string,std::s
 }
 
 
-void FlurryAds::fetchAdForSpace(const std::string &space, int x,int y,int width,int heignt, AdSize size)
+void FlurryAds::fetchAdForSpace(const std::string &space, AdSize size)
 {
-    float scaleFactor = [UIScreen mainScreen].scale;
-    [::FlurryAds fetchAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] frame:CGRectMake(x/scaleFactor, y/scaleFactor, width/scaleFactor, heignt/scaleFactor) size:(::FlurryAdSize)size];
+    [::FlurryAds fetchAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] frame:[UIApplication sharedApplication].keyWindow.frame size:(::FlurryAdSize)size];
 }
 
 bool FlurryAds::adReadyForSpace(const std::string &space)
@@ -151,28 +150,32 @@ bool FlurryAds::adReadyForSpace(const std::string &space)
 }
 void FlurryAds::displayAdForSpace(const std::string &space)
 {
-    [::FlurryAds displayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] onView:[UIApplication sharedApplication].keyWindow];
+    if(!_bannerView)
+    {
+        _bannerView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
+    }
+    [::FlurryAds displayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] onView:_bannerView viewControllerForPresentation:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 void FlurryAds::displayAdForSpaceModally(const std::string &space)
 {
     [::FlurryAds displayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] modallyForViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
-void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, int x, int y, int width, int height, AdSize size)
+void FlurryAds::fetchAndDisplayAdForSpace(const std::string &space, AdSize size)
 {
     if(!_bannerView)
     {
-        float scaleFactor = [UIScreen mainScreen].scale;
-        _bannerView = [[UIView alloc] initWithFrame:CGRectMake(x/scaleFactor, y/scaleFactor, width/scaleFactor , height/scaleFactor)];
+        _bannerView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
         [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
-        [_bannerView release];
     }
-    [::FlurryAds fetchAndDisplayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] view:_bannerView size:(FlurryAdSize)size];
+    [::FlurryAds fetchAndDisplayAdForSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding] view:_bannerView viewController:[UIApplication sharedApplication].keyWindow.rootViewController size:(::FlurryAdSize)size];
 }
-
+    
 void FlurryAds::removeAdFromSpace(const std::string &space)
 {
     [::FlurryAds removeAdFromSpace:[NSString stringWithCString:space.c_str() encoding:NSUTF8StringEncoding]];
 }
+
 void FlurryAds::initialize()
 {
     [::FlurryAds initialize:[UIApplication sharedApplication].keyWindow.rootViewController];
