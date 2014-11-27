@@ -5,14 +5,14 @@ namespace avalon {
 
 enum class BannerScaleType
 {
-    None,
+    None = 0,
     Proportional,
     Fill
 };
     
 enum class BannerGravityType
 {
-    TopLeft,
+    TopLeft = 0,
     CenterLeft,
     BottomLeft,
     TopCenter,
@@ -40,8 +40,8 @@ class BannerDelegate
 {
 public:
     virtual void bannerReceiveAd(Banner *banner) {}
-    virtual void bannerFailedToReceiveAd(Banner *banner, AdsErrorCode error) {}
-    virtual void bannerWillLeaveApplication(Banner *banner) {}
+    virtual void bannerClick(Banner *banner) {}
+    virtual void bannerFailedToReceiveAd(Banner *banner, AdsErrorCode error, int nativeCode, const std::string &message) {}
     virtual ~BannerDelegate() {}
 };
 
@@ -50,7 +50,9 @@ class Banner
 public:
     virtual bool isReady() const = 0;
     virtual bool isVisible() const = 0;
-    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) = 0;
+    virtual bool prepare() = 0;
+    virtual bool show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) = 0;
+    virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) = 0;
     virtual void hide() = 0;
     virtual ~Banner() {}
 };
@@ -61,18 +63,25 @@ class InterstitialDelegate
 {
 public:
     virtual void interstitialReceiveAd(Interstitial *interstitial) {}
-    virtual void interstitialFailedToReceiveAd(Interstitial *interstitial, AdsErrorCode error) {}
-    virtual void interstitialWillPresentScreen(Interstitial *interstitial) {}
-    virtual void interstitialWillDismissScreen(Interstitial *interstitial) {}
-    virtual void interstitialWillLeaveApplication(Interstitial *interstitial) {}
+    virtual void interstitialFailedToReceiveAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message) {}
+    virtual void interstitialClose(Interstitial *interstitial) {}
+    virtual void interstitialClick(Interstitial *interstitial) {}
     virtual ~InterstitialDelegate() {}
 };
 
 class Interstitial
 {
 public:
+    /*!
+     * @return
+     * YES if an ad is loaded, NO otherwise. This property should always be checked
+     * before the interstitial ad is presented.
+     */
     virtual bool isReady() const = 0;
-    virtual void show() = 0;
+    virtual bool isVisible() const = 0;
+    virtual bool prepare() = 0;
+    virtual bool hide() = 0;
+    virtual bool show() = 0;
     virtual ~Interstitial() {}
 };
 
