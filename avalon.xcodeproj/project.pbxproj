@@ -27,6 +27,27 @@
 			name = "Build all libs iOS";
 			productName = "Build all libs";
 		};
+		A50FFF0F1A1B5C9900952186 /* Build all libs Mac */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = A50FFF121A1B5C9900952186 /* Build configuration list for PBXAggregateTarget "Build all libs Mac" */;
+			buildPhases = (
+			);
+			dependencies = (
+				A50FFF141A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF161A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF181A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF1A1A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF1C1A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF1E1A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF201A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF221A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF241A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF261A1B5CA800952186 /* PBXTargetDependency */,
+				A50FFF281A1B5CA800952186 /* PBXTargetDependency */,
+			);
+			name = "Build all libs Mac";
+			productName = "Build all libs Mac";
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -432,6 +453,90 @@
 			proxyType = 1;
 			remoteGlobalIDString = A50BC25F18E9A14800F1F979;
 			remoteInfo = FlurryAds;
+		};
+		A50FFF131A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A56C4821199E1DA900BF30BA;
+			remoteInfo = "GameCenter Mac";
+		};
+		A50FFF151A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A55C4D9F19A1F16C00F3449A;
+			remoteInfo = "Appirater Mac";
+		};
+		A50FFF171A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A547D0571A06E8DA00E6D357;
+			remoteInfo = "Payment Mac";
+		};
+		A50FFF191A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A55885C419A4B92600914838;
+			remoteInfo = "Web Mac";
+		};
+		A50FFF1B1A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A55885FC19A4C89000914838;
+			remoteInfo = "UI Mac";
+		};
+		A50FFF1D1A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A558859D19A4AE4E00914838;
+			remoteInfo = "Notifications Mac";
+		};
+		A50FFF1F1A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A57695A71A0E8DC3002FDCB5;
+			remoteInfo = "Ads Mac";
+		};
+		A50FFF211A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A547D0471A06E58400E6D357;
+			remoteInfo = "AdMob Mac";
+		};
+		A50FFF231A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5C1C60A1A164D450092ABC7;
+			remoteInfo = "AdGeneration Mac";
+		};
+		A50FFF251A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A55885B419A4AEFA00914838;
+			remoteInfo = "GoogleAnalytics Mac";
+		};
+		A50FFF271A1B5CA800952186 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5A7596F19249DFE00C44FBF;
+			remoteInfo = "MoPubVungleAdaptor iOS";
+		};
+		A56002961A27484F00235B77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
 		};
 		A57695B71A0E8E63002FDCB5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -3192,6 +3297,7 @@
 				A58EA778192390A4000D0B28 /* MoPub iOS */,
 				A5A7596F19249DFE00C44FBF /* MoPubVungleAdaptor iOS */,
 				A50BC24618E99DA500F1F979 /* Build all libs iOS */,
+				A50FFF0F1A1B5C9900952186 /* Build all libs Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -3545,6 +3651,66 @@
 			isa = PBXTargetDependency;
 			target = A50BC25F18E9A14800F1F979 /* FlurryAds iOS */;
 			targetProxy = A50BC28318E9A5D200F1F979 /* PBXContainerItemProxy */;
+		};
+		A50FFF141A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A56C4821199E1DA900BF30BA /* GameCenter Mac */;
+			targetProxy = A50FFF131A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF161A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A55C4D9F19A1F16C00F3449A /* Appirater Mac */;
+			targetProxy = A50FFF151A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF181A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A547D0571A06E8DA00E6D357 /* Payment Mac */;
+			targetProxy = A50FFF171A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF1A1A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A55885C419A4B92600914838 /* Web Mac */;
+			targetProxy = A50FFF191A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF1C1A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A55885FC19A4C89000914838 /* UI Mac */;
+			targetProxy = A50FFF1B1A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF1E1A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A558859D19A4AE4E00914838 /* Notifications Mac */;
+			targetProxy = A50FFF1D1A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF201A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A57695A71A0E8DC3002FDCB5 /* Ads Mac */;
+			targetProxy = A50FFF1F1A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF221A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A547D0471A06E58400E6D357 /* AdMob Mac */;
+			targetProxy = A50FFF211A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF241A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5C1C60A1A164D450092ABC7 /* AdGeneration Mac */;
+			targetProxy = A50FFF231A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF261A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A55885B419A4AEFA00914838 /* GoogleAnalytics Mac */;
+			targetProxy = A50FFF251A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A50FFF281A1B5CA800952186 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5A7596F19249DFE00C44FBF /* MoPubVungleAdaptor iOS */;
+			targetProxy = A50FFF271A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A56002951A27484F00235B77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = A56002961A27484F00235B77 /* PBXContainerItemProxy */;
 		};
 		A57695B81A0E8E63002FDCB5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
