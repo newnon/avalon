@@ -22,13 +22,10 @@ enum class GADAdNetworkExtras
     AdMob
 };
 
-class GADInterstitial
+class GADInterstitial: public Interstitial
 {
 public:
     const std::string &getAdUnitID() const { return _adUnitID; }
-    virtual bool isReady() const = 0;
-    virtual void show() = 0;
-    virtual ~GADInterstitial() {}
     
 protected:
     GADInterstitial(const std::string &adUnitID):_adUnitID(adUnitID) {}
@@ -76,17 +73,6 @@ enum class GADErrorCode
     MEDIATION_INVALID_ADSIZE,
     
 };
-    
-class GADInterstitialDelegate
-{
-public:
-    virtual void interstitialDidReceiveAd(GADInterstitial *view) {}
-    virtual void interstitialDidFailToReceiveAd(GADInterstitial *view, GADErrorCode error) {}
-    virtual void interstitialWillPresentScreen(GADInterstitial *adView) {}
-    virtual void interstitialWillDismissScreen(GADInterstitial *adView) {}
-    virtual void interstitialWillLeaveApplication(GADInterstitial *adView) {}
-    virtual ~GADInterstitialDelegate() {}
-};
 
 enum class GADAdSize
 {
@@ -102,32 +88,16 @@ enum class GADAdSize
     
 GADAdSize makeCustomGADAdSize(unsigned short width, unsigned short height);
 
-class GADBannerView
+class GADBannerView: public Banner
 {
 public:
     const std::string &getAdUnitID() const { return _adUnitID; }
     GADAdSize getAdSize() const { return _adSize; }
-    virtual bool isVisible() = 0;
-    virtual bool hasAutoRefreshed() const = 0;
-    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) = 0;
-    virtual void hide() = 0;
-    virtual ~GADBannerView() {}
     
 protected:
     GADBannerView(const std::string &adUnitID, GADAdSize size):_adUnitID(adUnitID), _adSize(size) {}
     GADAdSize _adSize;
     std::string _adUnitID;
-};
-    
-class GADBannerViewDelegate
-{
-public:
-    virtual void adViewDidReceiveAd(GADBannerView *view) {}
-    virtual void adViewDidFailToReceive(GADBannerView *view, GADErrorCode error) {}
-    virtual void adViewWillPresentScreen(GADBannerView *adView) {}
-    virtual void adViewWillDismissScreen(GADBannerView *adView) {}
-    virtual void adViewWillLeaveApplication(GADBannerView *adView) {}
-    virtual ~GADBannerViewDelegate() {}
 };
 
 class AdMob
@@ -147,14 +117,14 @@ public:
     virtual void setTagForChildDirectedTreatment(bool value) = 0;
     virtual void setKeywords(const std::vector<std::string>& keywords) = 0;
     
-    virtual std::shared_ptr<GADInterstitial> createIntestitial(const std::string &adUnitID, GADInterstitialDelegate *delegate) = 0;
-    virtual std::shared_ptr<GADBannerView> createBannerView(const std::string &adUnitID, GADAdSize size, GADBannerViewDelegate *delegate) = 0;
+    virtual GADInterstitial* createIntestitial(const std::string &adUnitID, InterstitialDelegate *delegate) = 0;
+    virtual GADBannerView* createBannerView(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate) = 0;
     
-    virtual std::vector<std::shared_ptr<GADInterstitial>> getReadyInterstitials() const = 0;
+    /*virtual std::vector<std::shared_ptr<GADInterstitial>> getReadyInterstitials() const = 0;
     virtual std::vector<std::shared_ptr<GADBannerView>> getBannerViews() const = 0;
     
     virtual void removeBanner(const GADBannerView *bannerView) = 0;
-    virtual void removeInterstitial(const GADInterstitial *interstitial) = 0;
+    virtual void removeInterstitial(const GADInterstitial *interstitial) = 0;*/
     
 protected:
     AdMob(const std::string &version):_sdkVersion(version) {}

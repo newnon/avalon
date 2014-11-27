@@ -12,7 +12,7 @@ namespace avalon {
     BOOL lastStateVisible;
 }
 
-@property (nonatomic, assign) avalon::ADBannerViewDelegate *delegate;
+@property (nonatomic, assign) avalon::BannerDelegate *delegate;
 
 - (id) initWithBannerView:(avalon::IOSADBannerView*)bannerView;
 
@@ -23,7 +23,7 @@ namespace avalon {
     avalon::IOSADInterstitialAd *_interstitial;
 }
 
-@property (nonatomic, assign) avalon::ADInterstitialAdDelegate *delegate;
+@property (nonatomic, assign) avalon::InterstitialDelegate *delegate;
 
 - (id) initWithInterstitial:(avalon::IOSADInterstitialAd*)interstitial;
 
@@ -31,55 +31,65 @@ namespace avalon {
 
 namespace avalon {
     
-class IOSADInterstitialAd:public ADInterstitialAd
+class IOSADInterstitialAd:public IADInterstitial
 {
 public:
-    IOSADInterstitialAd()
+    IOSADInterstitialAd(InterstitialDelegate *delegate):_interstitial(nullptr)
     {
-        _interstitial = [[::ADInterstitialAd alloc] init];
         _delegate = [[ADIOSInterstitialDelegate alloc] initWithInterstitial:this];
-        _interstitial.delegate = _delegate;
+        _delegate.delegate = delegate;
     }
     ~IOSADInterstitialAd()
     {
-        
+        if(_interstitial)
+            [_interstitial release];
+        [_delegate release];
     }
     void closed()
     {
         [_interstitial release];
         _interstitial = [[::ADInterstitialAd alloc] init];
-        _delegate = [[ADIOSInterstitialDelegate alloc] initWithInterstitial:this];
         _interstitial.delegate = _delegate;
     }
     void error()
     {
         [_interstitial release];
         _interstitial = [[::ADInterstitialAd alloc] init];
-        _delegate = [[ADIOSInterstitialDelegate alloc] initWithInterstitial:this];
         _interstitial.delegate = _delegate;
     }
-    virtual void setDelegate(ADInterstitialAdDelegate *delegate) override
+    virtual bool prepare() override
     {
-        _delegate.delegate = delegate;
+        if(!_interstitial)
+        {
+            _interstitial = [[::ADInterstitialAd alloc] init];
+            _interstitial.delegate = _delegate;
+            return true;
+        }
+        return false;
     }
-    virtual ADInterstitialAdDelegate* getDelegate() const override
+    virtual bool isReady() const override
     {
-        return _delegate.delegate;
-    }
-    virtual bool isLoaded() const override
-    {
+        if(!_interstitial)
+            return false;
         return _interstitial.loaded;
     }
-    virtual bool isActionInProgress() const override
+    virtual bool isVisible() const override
     {
+        if(!_interstitial)
+            return false;
         return _interstitial.actionInProgress;
     }
-    virtual void cancelAction() override
+    virtual bool hide() override
     {
+        if(!_interstitial)
+            return false;
         [_interstitial cancelAction];
+        return true;
     }
-    virtual bool presentInView(/*UIView *containerView*/) override
+    virtual bool show() override
     {
+        if(!_interstitial || !_interstitial.loaded )
+            return false;
         [_interstitial presentFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         return true;
     }
@@ -89,15 +99,15 @@ private:
     ::ADInterstitialAd *_interstitial;
 };
     
-ADInterstitialAd* ADInterstitialAd::create()
+IADInterstitial* IADInterstitial::create(InterstitialDelegate *delegate)
 {
-    return new IOSADInterstitialAd;
+    return new IOSADInterstitialAd(delegate);
 }
     
-class IOSADBannerView:public ADBannerView
+class IOSADBannerView:public IADBanner
 {
 public:
-    IOSADBannerView(ADAdType type):_type(type)
+    IOSADBannerView(ADAdType type, BannerDelegate *delegate):_type(type)
     {
         if ([::ADBannerView instancesRespondToSelector:@selector(initWithAdType:)])
         {
@@ -126,79 +136,51 @@ public:
     {
         return _type;
     }
-    virtual void setDelegate(ADBannerViewDelegate *delegate) override
-    {
-        _delegate.delegate = delegate;
-    }
-    virtual ADBannerViewDelegate* getDelegate() const override
-    {
-        return _delegate.delegate;
-    }
-    virtual bool isBannerLoaded() const override
+    virtual bool isReady() const override
     {
         return _bannerView.bannerLoaded;
     }
-    virtual bool isBannerViewActionInProgress() const override
-    {
-        return _bannerView.bannerViewActionInProgress;
-    }
-    virtual void cancelBannerViewAction() override
-    {
-        [_bannerView cancelBannerViewAction];
-    }
-    
-    virtual bool isVisible() override
+
+    virtual bool isVisible() const override
     {
         return [_bannerView isDescendantOfView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
     }
     
-    void showWithLastParams()
+    virtual bool prepare()
     {
-        show(_lastX,_lastY,_lastWidth,_lastHeight,_lastScaleType,_lastGravity);
+        return false;
     }
     
-    virtual void show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
+    void showWithLastParams()
     {
-        _lastX = x;
-        _lastY = y;
-        _lastWidth = width;
-        _lastHeight = height;
+        show(_lastRect, _lastScaleType, _lastGravity);
+    }
+    
+    virtual bool show(const CGRect &rect, BannerScaleType scaleType, BannerGravityType gravity)
+    {
+        if(!isReady())
+            return false;
+        
+        _lastRect = rect;
         _lastScaleType = scaleType;
         _lastGravity = gravity;
         
-        
         [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
-        CGRect rect = CGRectMake(x, y, width, height);
         
-        CGRect contentFrame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
-        if (contentFrame.size.width < contentFrame.size.height) {
-            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-        } else {
-            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-        }
-        
-        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
-            float scale = [[UIScreen mainScreen] scale];
-            rect.origin.x /= scale;
-            rect.origin.y /= scale;
-            rect.size.width /= scale;
-            rect.size.height /= scale;
-        }
-        
-        rect.origin.y = contentFrame.size.height - rect.size.height - rect.origin.y;
+        CGRect frame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
         float xScale = 1.0f;
         float yScale = 1.0f;
         
         switch (scaleType) {
             case BannerScaleType::Fill:
-                xScale = contentFrame.size.width / _bannerView.frame.size.width;
-                yScale = contentFrame.size.height / _bannerView.frame.size.height;
+                xScale = frame.size.width / _bannerView.frame.size.width;
+                yScale = frame.size.height / _bannerView.frame.size.height;
                 break;
                 
             case BannerScaleType::Proportional:
-                xScale = contentFrame.size.width / _bannerView.frame.size.width;
-                yScale = contentFrame.size.height / _bannerView.frame.size.height;
+                xScale = frame.size.width / _bannerView.frame.size.width;
+                yScale = frame.size.height / _bannerView.frame.size.height;
                 xScale = std::min(xScale, yScale);
                 yScale = xScale;
                 break;
@@ -250,6 +232,34 @@ public:
             default:
                 break;
         }
+        return true;
+    }
+    
+    virtual bool show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
+    {
+        CGRect rect = CGRectMake(x, y, width, height);
+        
+        CGRect frame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
+        if (frame.size.width < frame.size.height) {
+            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+        } else {
+            _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+        }
+        
+        if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES) {
+            float scale = [[UIScreen mainScreen] scale];
+            rect.origin.x /= scale;
+            rect.origin.y /= scale;
+            rect.size.width /= scale;
+            rect.size.height /= scale;
+        }
+        
+        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
+        return show(rect, scaleType, gravity);
+    }
+    virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) override
+    {
+        return show([UIApplication sharedApplication].keyWindow.frame, scaleType, gravity);
     }
     virtual void hide() override
     {
@@ -261,20 +271,16 @@ private:
     ADAdType _type;
     ADIOSBannerViewDelegate *_delegate;
     ::ADBannerView *_bannerView;
-    int _lastX;
-    int _lastY;
-    int _lastWidth;
-    int _lastHeight;
+    CGRect _lastRect;
     BannerScaleType _lastScaleType;
     BannerGravityType _lastGravity;
 };
     
-
-ADBannerView* ADBannerView::createWithAdType(ADAdType type)
+IADBanner* IADBanner::create(ADAdType type, BannerDelegate *delegate)
 {
-    return new IOSADBannerView(type);
+    return new IOSADBannerView(type, delegate);
 }
-    
+
 }
 
 @implementation ADIOSBannerViewDelegate
@@ -320,31 +326,21 @@ ADBannerView* ADBannerView::createWithAdType(ADAdType type)
         _bannerView->showWithLastParams();
 }
 
-- (void)bannerViewWillLoadAd:(ADBannerView *)banner
-{
-    if(_delegate)
-        _delegate->bannerViewWillLoadAd(_bannerView);
-}
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
     if(_delegate)
-        _delegate->bannerViewWillLoadAd(_bannerView);
+        _delegate->bannerReceiveAd(_bannerView);
 }
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
     if(_delegate)
-        _delegate->bannerViewDidFailToReceiveAdWithError(_bannerView, static_cast<avalon::ADError>(error.code));
+        _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [error.localizedDescription UTF8String]);
 }
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
     if(_delegate)
-        return _delegate->bannerViewActionShouldBegin(_bannerView, willLeave);
+        _delegate->bannerClick(_bannerView);
     return true;
-}
-- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-    if(_delegate)
-        _delegate->bannerViewActionDidFinish(_bannerView);
 }
 
 @end
@@ -365,39 +361,26 @@ ADBannerView* ADBannerView::createWithAdType(ADAdType type)
 - (void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
 {
     if(_delegate)
-        _delegate->interstitialAdDidUnload(_interstitial);
+        _delegate->interstitialClose(_interstitial);
 }
 - (void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
 {
     if(_delegate)
-        _delegate->interstitialDidFailWithError(_interstitial, static_cast<avalon::ADError>(error.code));
+        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [error.localizedDescription UTF8String]);
     _interstitial->error();
-}
-
-- (void)interstitialAdWillLoad:(ADInterstitialAd *)interstitialAd
-{
-    if(_delegate)
-        _delegate->interstitialAdWillLoad(_interstitial);
 }
 
 - (void)interstitialAdDidLoad:(ADInterstitialAd *)interstitialAd
 {
     if(_delegate)
-        _delegate->interstitialAdDidLoad(_interstitial);
+        _delegate->interstitialReceiveAd(_interstitial);
 }
 
 - (BOOL)interstitialAdActionShouldBegin:(ADInterstitialAd *)interstitialAd willLeaveApplication:(BOOL)willLeave
 {
     if(_delegate)
-        return _delegate->interstitialAdActionShouldBegin(_interstitial, willLeave);
+        _delegate->interstitialClick(_interstitial);
     return true;
-}
-
-- (void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd
-{
-    if(_delegate)
-        _delegate->interstitialAdActionDidFinish(_interstitial);
-    _interstitial->closed();
 }
 
 @end
