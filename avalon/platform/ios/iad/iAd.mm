@@ -38,6 +38,7 @@ public:
     {
         _delegate = [[ADIOSInterstitialDelegate alloc] initWithInterstitial:this];
         _delegate.delegate = delegate;
+        recreate();
     }
     ~IOSADInterstitialAd()
     {
@@ -56,16 +57,6 @@ public:
         [_interstitial release];
         _interstitial = [[::ADInterstitialAd alloc] init];
         _interstitial.delegate = _delegate;
-    }
-    virtual bool prepare() override
-    {
-        if(!_interstitial)
-        {
-            _interstitial = [[::ADInterstitialAd alloc] init];
-            _interstitial.delegate = _delegate;
-            return true;
-        }
-        return false;
     }
     virtual bool isReady() const override
     {
@@ -93,6 +84,17 @@ public:
         [_interstitial presentFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         return true;
     }
+    
+    void recreate()
+    {
+        if(_interstitial)
+        {
+            [_interstitial release];
+        }
+        _interstitial = [[::ADInterstitialAd alloc] init];
+        _interstitial.delegate = _delegate;
+    }
+    
     
 private:
     ADIOSInterstitialDelegate *_delegate;
@@ -261,9 +263,12 @@ public:
     {
         return show([UIApplication sharedApplication].keyWindow.frame, scaleType, gravity);
     }
-    virtual void hide() override
+    virtual bool hide() override
     {
+        if(!isVisible())
+            return false;
         [_bannerView removeFromSuperview];
+        return true;
     }
     
     

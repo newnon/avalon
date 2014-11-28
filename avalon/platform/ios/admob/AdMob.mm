@@ -33,7 +33,7 @@ public:
     void setKeywords(const std::vector<std::string>& keywords) override;
     
     GADInterstitial* createIntestitial(const std::string &adUnitID, InterstitialDelegate *delegate) override;
-    GADBannerView* createBannerView(const std::string &adUnitID, GADAdSize size,  BannerDelegate *delegate) override;
+    GADBannerView* createBanner(const std::string &adUnitID, GADAdSize size,  BannerDelegate *delegate) override;
     
     GADRequest* createRequest() const;
     
@@ -94,12 +94,10 @@ class IOSGADInterstitial:public GADInterstitial
 {
 public:
     
-    IOSGADInterstitial(const std::string &adUnitID, InterstitialDelegate *delegate):GADInterstitial(adUnitID),_visible(false)
+    IOSGADInterstitial(const std::string &adUnitID, InterstitialDelegate *delegate):GADInterstitial(adUnitID),_visible(false),_interstitial(nullptr)
     {
-        _interstitial = [[::GADInterstitial alloc] init];
-        _interstitial.adUnitID = [NSString stringWithCString:adUnitID.c_str() encoding:NSUTF8StringEncoding];
         _delegate = [[GADIOSInterstitialDelegate alloc] initWithDelegate:delegate andInterstitial:this];
-        _interstitial.delegate = _delegate;
+        recreate();
     }
     
     virtual bool isReady() const override
@@ -112,14 +110,6 @@ public:
         return _visible;
     }
     
-    virtual bool prepare() override
-    {
-        if([_interstitial isReady])
-            return false;
-        [_interstitial loadRequest: static_cast<IOSAdMob*>(AdMob::getInstance())->createRequest()];
-        return true;
-    }
-    
     virtual bool hide() override
     {
         return false;
@@ -129,9 +119,13 @@ public:
     {
         if(!isReady())
             return false;
-        _visible = true;
         [_interstitial presentFromRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         return true;
+    }
+    
+    void setVisible(bool value)
+    {
+        _visible = value;
     }
     
     void recreate()
@@ -143,6 +137,11 @@ public:
         _interstitial = [[::GADInterstitial alloc] init];
         _interstitial.adUnitID = [NSString stringWithCString:_adUnitID.c_str() encoding:NSUTF8StringEncoding];
         _interstitial.delegate = _delegate;
+        [_interstitial loadRequest: static_cast<IOSAdMob*>(AdMob::getInstance())->createRequest()];
+    }
+    
+    void loadAd()
+    {
         [_interstitial loadRequest: static_cast<IOSAdMob*>(AdMob::getInstance())->createRequest()];
     }
     
@@ -204,6 +203,7 @@ public:
         _bannerView.adUnitID = [NSString stringWithCString:adUnitID.c_str() encoding:NSUTF8StringEncoding];
         _delegate = [[GADIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
         _bannerView.delegate = _delegate;
+        [_bannerView loadRequest: static_cast<IOSAdMob*>(AdMob::getInstance())->createRequest()];
     }
     
     virtual ~IOSGADBannerView()
@@ -222,14 +222,6 @@ public:
     virtual bool isVisible() const override
     {
         return [_bannerView isDescendantOfView:[UIApplication sharedApplication].keyWindow];
-    }
-    
-    virtual bool prepare() override
-    {
-        if(_ready)
-            return false;
-        [_bannerView loadRequest: static_cast<IOSAdMob*>(AdMob::getInstance())->createRequest()];
-        return true;
     }
     
     bool show(const CGRect &rect, BannerScaleType scaleType, BannerGravityType gravity)
@@ -329,10 +321,17 @@ public:
     {
         return show([UIApplication sharedApplication].keyWindow.frame, scaleType, gravity);
     }
-    
-    virtual void hide() override
+    void loadAd()
     {
+        [_bannerView loadRequest: static_cast<IOSAdMob*>(AdMob::getInstance())->createRequest()];
+    }
+    
+    virtual bool hide() override
+    {
+        if(!isVisible())
+            return false;
         [_bannerView removeFromSuperview];
+        return true;
     }
     void setReady(bool value)
     {
@@ -393,7 +392,7 @@ GADInterstitial* IOSAdMob::createIntestitial(const std::string &adUnitID, Inters
     return new IOSGADInterstitial(adUnitID, delegate);
 }
     
-GADBannerView* IOSAdMob::createBannerView(const std::string &adUnitID, GADAdSize size,  BannerDelegate *delegate)
+GADBannerView* IOSAdMob::createBanner(const std::string &adUnitID, GADAdSize size,  BannerDelegate *delegate)
 {
     return new IOSGADBannerView(adUnitID, size, delegate);
 }
@@ -477,7 +476,7 @@ AdMob *AdMob::getInstance()
 {
     if(_delegate)
         _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [error.localizedDescription UTF8String]);
-    _bannerView->prepare();
+    _bannerView->loadAd();
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView
@@ -510,14 +509,20 @@ AdMob *AdMob::getInstance()
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(_interstitial,avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [[error localizedDescription] UTF8String]);
-    _interstitial->prepare();
+        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [[error localizedDescription] UTF8String]);
+    _interstitial->loadAd();
+}
+
+- (void)interstitialWillPresentScreen:(GADInterstitial *)ad
+{
+    _interstitial->setVisible(true);
 }
 
 - (void)interstitialWillDismissScreen:(GADInterstitial *)ad
 {
     if(_delegate)
         _delegate->interstitialClose(_interstitial);
+    _interstitial->setVisible(false);
     _interstitial->recreate();
 }
 

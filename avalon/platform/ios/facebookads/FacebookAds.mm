@@ -37,6 +37,7 @@ public:
     {
         _interstitial = [[::FBInterstitialAd alloc] initWithPlacementID:[NSString stringWithUTF8String:placementID.c_str()]];
         _interstitial.delegate = [[FBIOSInterstitialDelegate alloc] initWithDelegate:delegate andInterstitial:this];
+        [_interstitial loadAd];
     }
     ~FBIOSInterstitial()
     {
@@ -48,29 +49,28 @@ public:
     {
         return [_interstitial isAdValid];
     }
+    
     virtual bool isVisible() const override
     {
         return _visible;
     }
-    virtual bool prepare() override
-    {
-        if(![_interstitial isAdValid])
-        {
-            [_interstitial loadAd];
-            return true;
-        }
-        return false;
-    }
+    
     virtual bool hide() override
     {
         return false;
     }
+    
     virtual bool show() override
     {
         if(![_interstitial isAdValid])
             return false;
         _visible = [_interstitial showAdFromRootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         return _visible;
+    }
+    
+    void loadAd()
+    {
+        [_interstitial loadAd];
     }
     
     void setVisible(bool value)
@@ -111,6 +111,7 @@ public:
         
         _bannerView = [[::FBAdView alloc] initWithPlacementID:[NSString stringWithUTF8String:placementID.c_str()] adSize:bannerSize rootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
         _bannerView.delegate = [[FBIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
+        [_bannerView loadAd];
     }
     
     ~FBIOSBanner()
@@ -118,24 +119,17 @@ public:
         [_bannerView.delegate release];
         [_bannerView release];
     }
+    
     virtual bool isReady() const override
     {
         return _ready;
     }
+    
     virtual bool isVisible() const override
     {
         return [_bannerView isDescendantOfView:[UIApplication sharedApplication].keyWindow];
     };
-    virtual bool prepare() override
-    {
-        if(!_ready)
-        {
-            [_bannerView loadAd];
-            return true;
-        }
-        return false;
-    }
-    
+
     bool show(const CGRect &rect, BannerScaleType scaleType, BannerGravityType gravity)
     {
         if(!_ready)
@@ -235,9 +229,17 @@ public:
         return show([UIApplication sharedApplication].keyWindow.frame, scaleType, gravity);
     }
     
-    virtual void hide() override
+    virtual bool hide() override
     {
+        if(!isVisible())
+            return false;
         [_bannerView removeFromSuperview];
+        return true;
+    }
+    
+    void loadAd()
+    {
+        [_bannerView loadAd];
     }
     
     void setReady(bool value)
@@ -293,7 +295,6 @@ public:
     
     FBIOSAds():_version([FB_AD_SDK_VERSION UTF8String])
     {
-        [FBAdSettings addTestDevice:@"f1dfefaa375f507d56a9cf6c6cd4c17b5332b156"];
     }
     
     
@@ -335,15 +336,15 @@ FBAds *FBAds::getInstance()
         _delegate->bannerReceiveAd(_bannerView);
 }
 
-- (void)prepare
+- (void)loadAd
 {
-    _bannerView->prepare();
+    _bannerView->loadAd();
 }
 
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)error
 {
     _bannerView->setReady(false);
-    [self performSelector:@selector(prepare) withObject:nil afterDelay:0];
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:0];
     //[self performSelector:@selector(prepare)];
     if(_delegate)
         _delegate->bannerFailedToReceiveAd(_bannerView, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [[error localizedDescription] UTF8String]);
@@ -373,10 +374,10 @@ FBAds *FBAds::getInstance()
 
 - (void)interstitialAdDidClose:(FBInterstitialAd *)interstitialAd
 {
-    _interstitial->setVisible(false);
-    _interstitial->prepare();
     if(_delegate)
         _delegate->interstitialClose(_interstitial);
+    _interstitial->setVisible(false);
+    _interstitial->loadAd();
 }
 
 - (void)interstitialAdDidLoad:(FBInterstitialAd *)interstitialAd
@@ -385,9 +386,14 @@ FBAds *FBAds::getInstance()
         _delegate->interstitialReceiveAd(_interstitial);
 }
 
+- (void)loadAd
+{
+    _interstitial->loadAd();
+}
+
 - (void)interstitialAd:(FBInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
 {
-    _interstitial->prepare();
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:0];
     if(_delegate)
         _delegate->interstitialFailedToReceiveAd(_interstitial, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [[error localizedDescription] UTF8String]);
 }

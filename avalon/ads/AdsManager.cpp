@@ -6,15 +6,8 @@ namespace avalon {
 
 void BannerManager::add(Banner* banner)
 {
-    _banners.push_back(banner);
-}
-
-void BannerManager::prepare()
-{
-    for(const auto &it:_banners)
-    {
-        it->prepare();
-    }
+    if(banner)
+        _banners.push_back(banner);
 }
 
 bool BannerManager::show()
@@ -33,10 +26,6 @@ bool BannerManager::show()
                 else
                     it->show(_scaleType, _gravity);
             }
-        }
-        else
-        {
-            it->prepare();
         }
     }
     return !_needToShowBanner;
@@ -123,19 +112,8 @@ void BannerManager::bannerFailedToReceiveAd(Banner *banner, AdsErrorCode error, 
     
 void InterstitialManager::add(Interstitial* interstitial)
 {
-    _interstitials.push_back(interstitial);
-}
-
-bool InterstitialManager::prepare()
-{
-    _prevShowTime = std::chrono::steady_clock::now();
-    bool ret = false;
-    for(const auto &it:_interstitials)
-    {
-        if(it->prepare())
-            ret = true;
-    }
-    return ret;
+    if(interstitial)
+        _interstitials.push_back(interstitial);
 }
     
 bool InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
@@ -167,10 +145,6 @@ bool InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
                 _lastInterstitial = it;
             }
         }
-        else
-        {
-            it->prepare();
-        }
     }
     return ret;
 }
@@ -190,9 +164,10 @@ InterstitialManager::InterstitialManager(InterstitialDelegate *delegate)
     ,_minDelayOnSameNetwork(0)
     ,_lastInterstitial(nullptr)
     ,_interstitialCounter(0)
+    ,_prevShowTime(std::chrono::steady_clock::now())
 {
-    
 }
+    
 InterstitialManager::~InterstitialManager()
 {
     for(const auto &it:_interstitials)

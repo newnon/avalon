@@ -118,13 +118,7 @@ public:
     virtual void setKeywords(const std::vector<std::string>& keywords) = 0;
     
     virtual GADInterstitial* createIntestitial(const std::string &adUnitID, InterstitialDelegate *delegate) = 0;
-    virtual GADBannerView* createBannerView(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate) = 0;
-    
-    /*virtual std::vector<std::shared_ptr<GADInterstitial>> getReadyInterstitials() const = 0;
-    virtual std::vector<std::shared_ptr<GADBannerView>> getBannerViews() const = 0;
-    
-    virtual void removeBanner(const GADBannerView *bannerView) = 0;
-    virtual void removeInterstitial(const GADInterstitial *interstitial) = 0;*/
+    virtual GADBannerView* createBanner(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate) = 0;
     
 protected:
     AdMob(const std::string &version):_sdkVersion(version) {}

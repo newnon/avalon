@@ -50,10 +50,9 @@ class Banner
 public:
     virtual bool isReady() const = 0;
     virtual bool isVisible() const = 0;
-    virtual bool prepare() = 0;
     virtual bool show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) = 0;
     virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) = 0;
-    virtual void hide() = 0;
+    virtual bool hide() = 0;
     virtual ~Banner() {}
 };
 
@@ -79,7 +78,6 @@ public:
      */
     virtual bool isReady() const = 0;
     virtual bool isVisible() const = 0;
-    virtual bool prepare() = 0;
     virtual bool hide() = 0;
     virtual bool show() = 0;
     virtual ~Interstitial() {}
