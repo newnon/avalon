@@ -339,7 +339,7 @@ IADBanner* IADBanner::create(ADAdType type, BannerDelegate *delegate)
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
     if(_delegate)
-        _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [error.localizedDescription UTF8String]);
+        _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
 }
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
@@ -371,7 +371,7 @@ IADBanner* IADBanner::create(ADAdType type, BannerDelegate *delegate)
 - (void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
 {
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [error.localizedDescription UTF8String]);
+        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
     _interstitial->error();
 }
 

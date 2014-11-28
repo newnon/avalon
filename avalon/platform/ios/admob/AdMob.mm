@@ -472,11 +472,17 @@ AdMob *AdMob::getInstance()
     if(_delegate)
         _delegate->bannerReceiveAd(_bannerView);
 }
+
+- (void)loadAd
+{
+    _bannerView->loadAd();
+}
+
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
     if(_delegate)
-        _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [error.localizedDescription UTF8String]);
-    _bannerView->loadAd();
+        _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:10];
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView
@@ -506,11 +512,16 @@ AdMob *AdMob::getInstance()
         _delegate->interstitialReceiveAd(_interstitial);
 }
 
+- (void)loadAd
+{
+    _interstitial->loadAd();
+}
+
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [[error localizedDescription] UTF8String]);
-    _interstitial->loadAd();
+        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:10];
 }
 
 - (void)interstitialWillPresentScreen:(GADInterstitial *)ad

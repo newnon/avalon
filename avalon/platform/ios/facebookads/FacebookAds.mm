@@ -344,10 +344,10 @@ FBAds *FBAds::getInstance()
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)error
 {
     _bannerView->setReady(false);
-    [self performSelector:@selector(loadAd) withObject:nil afterDelay:0];
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:(error.code == 1001 || error.code == 1002)?60:10];
     //[self performSelector:@selector(prepare)];
     if(_delegate)
-        _delegate->bannerFailedToReceiveAd(_bannerView, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [[error localizedDescription] UTF8String]);
+        _delegate->bannerFailedToReceiveAd(_bannerView, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
 }
 @end
 
@@ -393,9 +393,9 @@ FBAds *FBAds::getInstance()
 
 - (void)interstitialAd:(FBInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
 {
-    [self performSelector:@selector(loadAd) withObject:nil afterDelay:0];
+    [self performSelector:@selector(loadAd) withObject:nil afterDelay:(error.code == 1001 || error.code == 1002)?60:10];
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(_interstitial, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, error.code, [[error localizedDescription] UTF8String]);
+        _delegate->interstitialFailedToReceiveAd(_interstitial, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
 }
 
 @end
