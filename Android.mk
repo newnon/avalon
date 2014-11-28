@@ -80,6 +80,12 @@ ifneq (,$(findstring adgeneration,$(AVALON_FEATURES)))
     LOCAL_SRC_FILES += avalon/platform/android/adgeneration/adgeneration.cpp
 endif
 
+ifneq (,$(findstring facebookads,$(AVALON_FEATURES)))
+    LOCAL_CFLAGS += -DAVALON_CONFIG_FACEBOOKADS_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_FACEBOOKADS_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/facebookads/FacebookAds.cpp
+endif
+
 ifneq (,$(findstring googleanalytics,$(AVALON_FEATURES)))
     LOCAL_CFLAGS += -DAVALON_CONFIG_GOOGLEANALYTICS_ENABLED
     LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_GOOGLEANALYTICS_ENABLED
