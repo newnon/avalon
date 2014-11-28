@@ -88,6 +88,14 @@ set(AVALON_SRC
 )
 endif()
 
+if(AVALON_ADS)
+add_definitions(-DAVALON_CONFIG_ADS_ENABLED)
+set(AVALON_SRC
+  ${AVALON_SRC}
+  avalon/ads/AdsManager.cpp
+)
+endif()
+
 if(AVALON_ADMOB)
 add_definitions(-DAVALON_CONFIG_ADMOB_ENABLED)
 set(AVALON_SRC
