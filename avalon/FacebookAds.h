@@ -1,5 +1,5 @@
-#ifndef __ADMOB_H__
-#define __ADMOB_H__
+#ifndef __FACEBOOKADS_H__
+#define __FACEBOOKADS_H__
 
 #include <string>
 #include <vector>
@@ -149,4 +149,4 @@ public:
 };
 }
 
-#endif /* __ADMOB_H__ */
+#endif /* __FACEBOOKADS_H__ */

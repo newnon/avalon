@@ -223,6 +223,10 @@ public:
             rect.size.height /= scale;
         }
         
+        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        
+        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
+        
         return show(rect, scaleType, gravity);
     }
     
