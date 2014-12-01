@@ -8,10 +8,9 @@ class FBIOSBanner;
 
 @interface FBIOSBannerViewDelegate : NSObject<FBAdViewDelegate>
 {
-    avalon::BannerDelegate *_delegate;
     avalon::FBIOSBanner *_bannerView;
 }
-- (id) initWithDelegate:(avalon::BannerDelegate*) delegate andBannerView:(avalon::FBIOSBanner*)bannerView;
+- (id) initWithBannerView:(avalon::FBIOSBanner*)bannerView;
 @end
 
 @interface FBIOSInterstitialDelegate : NSObject<FBInterstitialAdDelegate>
@@ -86,7 +85,7 @@ private:;
 class FBIOSBanner:public FBBanner
 {
 public:
-    FBIOSBanner(const std::string &placementID, FBAdSize size, BannerDelegate *delegate):FBBanner(placementID, size),_ready(false)
+    FBIOSBanner(const std::string &placementID, FBAdSize size, BannerDelegate *delegate):FBBanner(placementID, size),_ready(false),_delegate(delegate)
     {
         ::FBAdSize bannerSize;
         switch (size) {
@@ -110,7 +109,7 @@ public:
         }
         
         _bannerView = [[::FBAdView alloc] initWithPlacementID:[NSString stringWithUTF8String:placementID.c_str()] adSize:bannerSize rootViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-        _bannerView.delegate = [[FBIOSBannerViewDelegate alloc] initWithDelegate:delegate andBannerView:this];
+        _bannerView.delegate = [[FBIOSBannerViewDelegate alloc] initWithBannerView:this];
         [_bannerView loadAd];
     }
     
@@ -135,22 +134,22 @@ public:
         if(!_ready)
             return false;
         
-        [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.bounds;
         
         float xScale = 1.0f;
         float yScale = 1.0f;
         
         switch (scaleType) {
             case BannerScaleType::Fill:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = bounds.size.width / _bannerView.bounds.size.width;
+                yScale = bounds.size.height / _bannerView.bounds.size.height;
                 break;
                 
             case BannerScaleType::Proportional:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = bounds.size.width / _bannerView.bounds.size.width;
+                yScale = bounds.size.height / _bannerView.bounds.size.height;
                 xScale = std::min(xScale, yScale);
                 yScale = xScale;
                 break;
@@ -217,16 +216,16 @@ public:
             rect.size.height /= scale;
         }
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.bounds;
         
-        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
+        rect.origin.y = bounds.size.height - rect.size.height - rect.origin.y;
         
         return show(rect, scaleType, gravity);
     }
     
     virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) override
     {
-        return show([UIApplication sharedApplication].keyWindow.frame, scaleType, gravity);
+        return show([UIApplication sharedApplication].keyWindow.bounds, scaleType, gravity);
     }
     
     virtual bool hide() override
@@ -242,14 +241,37 @@ public:
         [_bannerView loadAd];
     }
     
-    void setReady(bool value)
+    void adViewDidClick()
     {
-        _ready = value;
+        if(_delegate)
+            _delegate->bannerClick(this);
+        _bannerView.hidden = YES;
+    }
+    void adViewDidFinishHandlingClick()
+    {
+        _bannerView.hidden = NO;
+    }
+    void adViewDidLoad()
+    {
+        _ready = true;
+        if(_delegate)
+            _delegate->bannerReceiveAd(this);
+    }
+    void adViewdidFailWithError(NSError *error)
+    {
+        _ready = false;
+        if(_delegate)
+            _delegate->bannerFailedToReceiveAd(this, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
+    }
+    void adViewWillLogImpression()
+    {
+        
     }
     
 private:
     bool _ready;
     ::FBAdView *_bannerView;
+    BannerDelegate *_delegate;
 };
 
 class FBIOSAds: public FBAds
@@ -312,11 +334,10 @@ FBAds *FBAds::getInstance()
 
 @implementation FBIOSBannerViewDelegate
 
-- (id) initWithDelegate:(avalon::BannerDelegate*) delegate andBannerView:(avalon::FBIOSBanner*)bannerView
+- (id) initWithBannerView:(avalon::FBIOSBanner*)bannerView
 {
     self = [super init];
     if (self) {
-        self->_delegate = delegate;
         self->_bannerView = bannerView;
     }
     
@@ -325,15 +346,17 @@ FBAds *FBAds::getInstance()
 
 - (void)adViewDidClick:(FBAdView *)adView
 {
-    if(_delegate)
-        _delegate->bannerClick(_bannerView);
+    _bannerView->adViewDidClick();
+}
+
+- (void)adViewDidFinishHandlingClick:(FBAdView *)adView
+{
+    _bannerView->adViewDidFinishHandlingClick();
 }
 
 - (void)adViewDidLoad:(FBAdView *)adView
 {
-    _bannerView->setReady(true);
-    if(_delegate)
-        _delegate->bannerReceiveAd(_bannerView);
+    _bannerView->adViewDidLoad();
 }
 
 - (void)loadAd
@@ -343,12 +366,15 @@ FBAds *FBAds::getInstance()
 
 - (void)adView:(FBAdView *)adView didFailWithError:(NSError *)error
 {
-    _bannerView->setReady(false);
+    _bannerView->adViewdidFailWithError(error);
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:(error.code == 1001 || error.code == 1002)?60:10];
-    //[self performSelector:@selector(prepare)];
-    if(_delegate)
-        _delegate->bannerFailedToReceiveAd(_bannerView, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
 }
+
+- (void)adViewWillLogImpression:(FBAdView *)adView
+{
+    _bannerView->adViewWillLogImpression();
+}
+
 @end
 
 
