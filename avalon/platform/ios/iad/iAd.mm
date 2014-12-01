@@ -120,8 +120,8 @@ public:
         }
         _delegate = [[ADIOSBannerViewDelegate alloc] initWithBannerView:this];
         _bannerView.delegate = _delegate;
-        CGRect contentFrame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
-        if (contentFrame.size.width < contentFrame.size.height) {
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
+        if (bounds.size.width < bounds.size.height) {
             _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         } else {
             _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
@@ -169,20 +169,20 @@ public:
         
         [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
         float xScale = 1.0f;
         float yScale = 1.0f;
         
         switch (scaleType) {
             case BannerScaleType::Fill:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = bounds.size.width / _bannerView.bounds.size.width;
+                yScale = bounds.size.height / _bannerView.bounds.size.height;
                 break;
                 
             case BannerScaleType::Proportional:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = bounds.size.width / _bannerView.bounds.size.width;
+                yScale = bounds.size.height / _bannerView.bounds.size.height;
                 xScale = std::min(xScale, yScale);
                 yScale = xScale;
                 break;
@@ -241,8 +241,8 @@ public:
     {
         CGRect rect = CGRectMake(x, y, width, height);
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
-        if (frame.size.width < frame.size.height) {
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
+        if (bounds.size.width < bounds.size.height) {
             _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
         } else {
             _bannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
@@ -256,12 +256,12 @@ public:
             rect.size.height /= scale;
         }
         
-        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
+        rect.origin.y = bounds.size.height - rect.size.height - rect.origin.y;
         return show(rect, scaleType, gravity);
     }
     virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) override
     {
-        return show([UIApplication sharedApplication].keyWindow.frame, scaleType, gravity);
+        return show([UIApplication sharedApplication].keyWindow.rootViewController.view.bounds, scaleType, gravity);
     }
     virtual bool hide() override
     {
@@ -386,6 +386,10 @@ IADBanner* IADBanner::create(ADAdType type, BannerDelegate *delegate)
     if(_delegate)
         _delegate->interstitialClick(_interstitial);
     return true;
+}
+
+- (void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd
+{
 }
 
 @end
