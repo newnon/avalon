@@ -2,7 +2,37 @@
 
 #import "avalon/platform/ios/appirater/Appirater/Appirater.h"
 
+@interface IOSAppiraterDelegate : NSObject<AppiraterDelegate>
+@end
+
+@implementation IOSAppiraterDelegate
+-(void)appiraterDidDisplayAlert:(Appirater *)appirater
+{
+    
+}
+-(void)appiraterDidDeclineToRate:(Appirater *)appirater
+{
+    
+}
+-(void)appiraterDidOptToRate:(Appirater *)appirater
+{
+    
+}
+-(void)appiraterDidOptToRemindLater:(Appirater *)appirater
+{
+    
+}
+-(void)appiraterWillPresentModalView:(Appirater *)appirater animated:(BOOL)animated
+{
+}
+-(void)appiraterDidDismissModalView:(Appirater *)appirater animated:(BOOL)animated
+{
+}
+@end
+
 namespace avalon {
+    
+static IOSAppiraterDelegate *delegate = nil;
 
 Appirater* Appirater::getInstance()
 {
@@ -30,9 +60,14 @@ void Appirater::userDidSignificantEvent(bool canPromptForRating)
     [::Appirater userDidSignificantEvent:canPromptForRating];
 }
 
-void Appirater::showPrompt()
+bool Appirater::tryToShowPrompt()
 {
-    [::Appirater showPrompt];
+    return [::Appirater tryToShowPrompt];
+}
+    
+void Appirater::forceShowPrompt(bool displayRateLaterButton)
+{
+    [::Appirater forceShowPrompt:displayRateLaterButton];
 }
     
 void Appirater::rateApp()
@@ -66,7 +101,7 @@ void Appirater::setTimeBeforeReminding(double value)
 
 void Appirater::setDebug(bool debug)
 {
-    [::Appirater setDebug:false];
+    [::Appirater setDebug:debug];
 }
 
 void Appirater::setDelegate(AppiraterDelegate *delegate)
@@ -91,6 +126,8 @@ void Appirater::setAlwaysUseMainBundle(bool useMainBundle)
 
 Appirater::Appirater()
 {
+    delegate = [[IOSAppiraterDelegate alloc] init];
+    [::Appirater setDelegate:delegate];
 }
 
 } // namespace avalon

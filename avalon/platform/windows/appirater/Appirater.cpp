@@ -30,9 +30,15 @@ void Appirater::userDidSignificantEvent(bool canPromptForRating)
     //[::Appirater userDidSignificantEvent:canPromptForRating];
 }
 
-void Appirater::showPrompt()
+bool Appirater::tryToShowPrompt()
 {
+	return false;
     //[::Appirater showPrompt];
+}
+
+void Appirater::forceShowPrompt(bool displayRateLaterButton)
+{
+    //
 }
     
 void Appirater::rateApp()

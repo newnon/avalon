@@ -91,8 +91,22 @@ public abstract class Appirater
         	appName = getString("app_name");
         return String.format(text, appName);
     }
+    
+    public static void rateApp()
+    {
+    	activity.runOnUiThread(new Runnable() {
+    		@Override
+    		public void run()
+    		{
+    			activity.startActivity(new Intent(
+    					Intent.ACTION_VIEW,
+    					Uri.parse(String.format(marketUrl, activity.getPackageName()))
+    					));
+    		}
+    	});
+    }
 
-    private static void showRateDialog()
+    public static void showRateDialog()
     {
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -203,16 +217,16 @@ public abstract class Appirater
             showIfNeeded();
     }
 
-    public static void showIfNeeded()
+    public static boolean showIfNeeded()
     {
         SharedPreferences prefs = getSharedPreferences();
         if (!testMode && (prefs.getBoolean(PREF_DONT_SHOW, false) || prefs.getBoolean(PREF_RATE_CLICKED, false))) {
-            return;
+            return false;
         }
 
         if (testMode) {
             showRateDialog();
-            return;
+            return true;
         }
 
         long date_firstLaunch = prefs.getLong(PREF_DATE_FIRST_LAUNCHED, 0);
@@ -224,15 +238,18 @@ public abstract class Appirater
                 long remindMillisecondsToWait = reminderDaysUntilPrompt * 24 * 60 * 60 * 1000L;
                 if (System.currentTimeMillis() >= (remindMillisecondsToWait + date_reminder_pressed)) {
                     showRateDialog();
+                    return true;
                 }
             } else {
                 long significantEventCount = prefs.getLong(PREF_SIGNIFICANT_EVENT_COUNT, 0);
                 long usesCount = prefs.getLong(PREF_USES_COUNT, 0);
                 if ((significantEventsUntilPrompt <= significantEventCount)&&(usesUntilPrompt <= usesCount)) {
                     showRateDialog();
+                    return true;
                 }
             }
         }
+        return false;
     }
 
     public static void setDebug(boolean flag)

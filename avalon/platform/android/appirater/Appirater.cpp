@@ -24,6 +24,17 @@ void callStaticVoidMethod(const char* name)
     }
 }
 
+bool callStaticBoolMethod(const char* name)
+{
+	bool ret = false;
+    cocos2d::JniMethodInfo t;
+    if (cocos2d::JniHelper::getStaticMethodInfo(t, CLASS_NAME, name, "()Z")) {
+    	ret = t.env->CallStaticBooleanMethod(t.classID, t.methodID);
+        t.env->DeleteLocalRef(t.classID);
+    }
+    return true;
+}
+
 void callStaticVoidMethodWithString(const char* name, const char* argument)
 {
     cocos2d::JniMethodInfo t;
@@ -118,14 +129,19 @@ void Appirater::userDidSignificantEvent(bool canPromptForRating)
     appirater::helper::callStaticVoidMethodWithBool("userDidSignificantEvent", canPromptForRating);
 }
 
-void Appirater::showPrompt()
+bool Appirater::tryToShowPrompt()
 {
-    appirater::helper::callStaticVoidMethod("showIfNeeded");
+    return appirater::helper::callStaticBoolMethod("showIfNeeded");
+}
+
+void Appirater::forceShowPrompt(bool displayRateLaterButton)
+{
+    appirater::helper::callStaticVoidMethod("showRateDialog");
 }
 
 void Appirater::rateApp()
 {
-	appirater::helper::callStaticVoidMethod("showRateDialog");
+	appirater::helper::callStaticVoidMethod("rateApp");
 }
 
 void Appirater::setAppId(const char *appName)
