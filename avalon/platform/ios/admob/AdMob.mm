@@ -221,7 +221,7 @@ public:
     
     virtual bool isVisible() const override
     {
-        return [_bannerView isDescendantOfView:[UIApplication sharedApplication].keyWindow];
+        return [_bannerView isDescendantOfView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
     }
     
     bool show(const CGRect &rect, BannerScaleType scaleType, BannerGravityType gravity)
@@ -229,22 +229,22 @@ public:
         if(!_ready)
             return false;
         
-        [[UIApplication sharedApplication].keyWindow addSubview:_bannerView];
+        [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
         float xScale = 1.0f;
         float yScale = 1.0f;
         
         switch (scaleType) {
             case BannerScaleType::Fill:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = bounds.size.width / _bannerView.bounds.size.width;
+                yScale = bounds.size.height / _bannerView.bounds.size.height;
                 break;
                 
             case BannerScaleType::Proportional:
-                xScale = frame.size.width / _bannerView.frame.size.width;
-                yScale = frame.size.height / _bannerView.frame.size.height;
+                xScale = bounds.size.width / _bannerView.bounds.size.width;
+                yScale = bounds.size.height / _bannerView.bounds.size.height;
                 xScale = std::min(xScale, yScale);
                 yScale = xScale;
                 break;
@@ -311,15 +311,15 @@ public:
             rect.size.height /= scale;
         }
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
-        rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
+        rect.origin.y = bounds.size.height - rect.size.height - rect.origin.y;
         return show(rect, scaleType, gravity);
     }
     
     virtual bool show(BannerScaleType scaleType, BannerGravityType gravity)
     {
-        return show([UIApplication sharedApplication].keyWindow.frame, scaleType, gravity);
+        return show([UIApplication sharedApplication].keyWindow.rootViewController.view.bounds, scaleType, gravity);
     }
     void loadAd()
     {
@@ -530,6 +530,10 @@ AdMob *AdMob::getInstance()
 }
 
 - (void)interstitialWillDismissScreen:(GADInterstitial *)ad
+{
+}
+
+- (void)interstitialDidDismissScreen:(GADInterstitial *)ad
 {
     if(_delegate)
         _delegate->interstitialClose(_interstitial);
