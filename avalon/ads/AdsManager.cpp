@@ -25,10 +25,11 @@ bool BannerManager::show()
                     it->show(_x, _y, _width, _height, _scaleType, _gravity);
                 else
                     it->show(_scaleType, _gravity);
+                return true;
             }
         }
     }
-    return !_needToShowBanner;
+    return false;
 }
 
 bool BannerManager::hide()
@@ -130,8 +131,6 @@ bool InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
         if((_interstitialCounter++ % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay))
             show = true;
     }
-    
-    bool ret = false;
 
     for(const auto &it:_interstitials)
     {
@@ -140,13 +139,13 @@ bool InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
             if(show && (_lastInterstitial != it || deltaSec>=_minDelayOnSameNetwork))
             {
                 it->show();
-                ret = true;
                 _prevShowTime = std::chrono::steady_clock::now();
                 _lastInterstitial = it;
+                return true;
             }
         }
     }
-    return ret;
+    return false;
 }
     
 void InterstitialManager::clear()
