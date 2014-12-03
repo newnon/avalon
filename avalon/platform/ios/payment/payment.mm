@@ -166,7 +166,7 @@ public:
                 managerTransaction.transactionState = TransactionState::Failed;
                 if(transaction)
                     managerTransaction.transactionIdentifier = [transaction.transactionIdentifier cStringUsingEncoding:NSASCIIStringEncoding];
-                managerTransaction.productId = id;
+                managerTransaction.productId = [externalId cStringUsingEncoding:NSASCIIStringEncoding];
                 _delegate->onPurchaseFail(managerTransaction, convertErrorToCode(error));
             }
         }];
