@@ -91,8 +91,11 @@ public:
         {
             [_interstitial release];
         }
-        _interstitial = [[::ADInterstitialAd alloc] init];
-        _interstitial.delegate = _delegate;
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad || [[[UIDevice currentDevice] systemVersion] compare:@"7.0" options:NSNumericSearch] != NSOrderedAscending)
+        {
+            _interstitial = [[::ADInterstitialAd alloc] init];
+            _interstitial.delegate = _delegate;
+        }
     }
     
     
