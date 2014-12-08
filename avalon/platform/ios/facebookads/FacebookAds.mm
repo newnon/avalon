@@ -136,7 +136,7 @@ public:
         
         [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:_bannerView];
         
-        CGRect bounds = [UIApplication sharedApplication].keyWindow.bounds;
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
         float xScale = 1.0f;
         float yScale = 1.0f;
@@ -216,7 +216,7 @@ public:
             rect.size.height /= scale;
         }
         
-        CGRect bounds = [UIApplication sharedApplication].keyWindow.bounds;
+        CGRect bounds = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
         rect.origin.y = bounds.size.height - rect.size.height - rect.origin.y;
         
@@ -225,7 +225,7 @@ public:
     
     virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) override
     {
-        return show([UIApplication sharedApplication].keyWindow.bounds, scaleType, gravity);
+        return show([UIApplication sharedApplication].keyWindow.rootViewController.view.bounds, scaleType, gravity);
     }
     
     virtual bool hide() override

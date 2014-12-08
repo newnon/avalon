@@ -28,7 +28,7 @@ public:
             rect.size.height /= scale;
         }
         
-        CGRect frame = [UIApplication sharedApplication].keyWindow.frame;
+        CGRect frame = [UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
         rect.origin.y = frame.size.height - rect.size.height - rect.origin.y;
         [_adsView setFrame:rect];
@@ -78,7 +78,7 @@ public:
                                    @"w" : @(width),
                                    @"h" : @(height)
                                    };
-        _adsView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
+        _adsView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
         
         _controller = [[ADGManagerViewController alloc] initWithAdParams :adgparam :_adsView];
         [_controller loadRequest];
