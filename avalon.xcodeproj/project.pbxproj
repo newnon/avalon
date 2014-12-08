@@ -851,7 +851,6 @@
 		A547CFB51A06E05300E6D357 /* GADCustomEventRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADCustomEventRequest.h; sourceTree = "<group>"; };
 		A547CFB71A06E05300E6D357 /* GADSearchBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchBannerView.h; sourceTree = "<group>"; };
 		A547CFB81A06E05300E6D357 /* GADSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADSearchRequest.h; sourceTree = "<group>"; };
-		A547D0091A06E25E00E6D357 /* AdMob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdMob.mm; path = avalon/platform/mac/admob/AdMob.mm; sourceTree = "<group>"; };
 		A547D0651A06E8DA00E6D357 /* libPayment Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPayment Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A547D07A1A06EEA900E6D357 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
 		A547D07B1A06EEA900E6D357 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
@@ -1670,14 +1669,6 @@
 			path = avalon/platform/mac/payment;
 			sourceTree = "<group>";
 		};
-		A547D0081A06E22400E6D357 /* Admob-mac */ = {
-			isa = PBXGroup;
-			children = (
-				A547D0091A06E25E00E6D357 /* AdMob.mm */,
-			);
-			name = "Admob-mac";
-			sourceTree = "<group>";
-		};
 		A558859C19A4AE3B00914838 /* Notifications-mac */ = {
 			isa = PBXGroup;
 			children = (
@@ -2379,7 +2370,6 @@
 		A5D3276E1900514300A65D25 /* AdMob */ = {
 			isa = PBXGroup;
 			children = (
-				A547D0081A06E22400E6D357 /* Admob-mac */,
 				A5F0C9111922343A006B8457 /* Admob-ios */,
 				A5D3276F1900515B00A65D25 /* AdMob.h */,
 			);

@@ -22,11 +22,6 @@ class FBIOSBanner;
 @end
 
 namespace avalon {
-    
-FBAdSize makeCustomFBAdSize(unsigned short width, unsigned short height)
-{
-    return static_cast<FBAdSize>(width<<16 | height);
-}
 
 class FBIOSInterstitial:public FBInterstitial
 {
@@ -99,12 +94,7 @@ public:
                 bannerSize = kFBAdSizeHeight90Banner;
                 break;
             default:
-            {
-                unsigned short width = static_cast<unsigned short>(static_cast<unsigned int>(size)>>16);
-                unsigned short height = static_cast<unsigned short>(size);
-                bannerSize.size.width = width;
-                bannerSize.size.height = height;
-            }
+                assert((false, "Banner type not recognized"));
                 break;
         }
         
@@ -344,6 +334,12 @@ FBAds *FBAds::getInstance()
     return self;
 }
 
+- (void) dealloc
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [super dealloc];
+}
+
 - (void)adViewDidClick:(FBAdView *)adView
 {
     _bannerView->adViewDidClick();
@@ -390,6 +386,12 @@ FBAds *FBAds::getInstance()
     }
     
     return self;
+}
+
+- (void) dealloc
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [super dealloc];
 }
 
 - (void)interstitialAdDidClick:(FBInterstitialAd *)interstitialAd

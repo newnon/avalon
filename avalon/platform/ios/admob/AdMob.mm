@@ -466,6 +466,12 @@ AdMob *AdMob::getInstance()
     return self;
 }
 
+- (void) dealloc
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [super dealloc];
+}
+
 - (void)adViewDidReceiveAd:(GADBannerView *)view
 {
     _bannerView->setReady(true);
@@ -504,6 +510,12 @@ AdMob *AdMob::getInstance()
     }
     
     return self;
+}
+
+- (void) dealloc
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [super dealloc];
 }
 
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad

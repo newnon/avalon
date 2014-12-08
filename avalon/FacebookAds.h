@@ -52,8 +52,6 @@ enum class FBAdSize
      */
     AdSizeHeight90Banner
 };
-    
-FBAdSize makeCustomFBAdSize(unsigned short width, unsigned short height);
 
 /*!
  @class FBAdView
