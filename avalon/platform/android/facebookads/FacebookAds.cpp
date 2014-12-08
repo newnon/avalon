@@ -1,12 +1,34 @@
 #include "avalon/FacebookAds.h"
 
+#include <jni.h>
+#include "platform/android/jni/JniHelper.h"
+#include <android/log.h>
+#include <string>
+#include <map>
+
 namespace avalon {
 class FBAndroidInterstitial;
 class FBAndroidBanner;
-    
-FBAdSize makeCustomFBAdSize(unsigned short width, unsigned short height)
+
+//com.facebook.ads.AdSettings
+const char* const HELPER_CLASS_NAME = "com/avalon/facebookads/FacebookAdsHelper";
+const char* const SETTINGS_CLASS_NAME = "com/facebook/ads/AdSettings";
+
+static jobject jobjectFromVector(const std::vector<std::string> &vector)
 {
-    return static_cast<FBAdSize>(width<<16 | height);
+    JNIEnv* env = cocos2d::JniHelper::getEnv();
+    jclass clsString = env->FindClass("java/lang/String");
+    jobjectArray stringArray = env->NewObjectArray(vector.size(), clsString, 0);
+
+    for(size_t i = 0; i < vector.size(); ++i)
+    {
+        jstring tmp = env->NewStringUTF(vector[i].c_str());
+        env->SetObjectArrayElement(stringArray, i, tmp);
+        env->DeleteLocalRef(tmp);
+    }
+
+    env->DeleteLocalRef(clsString);
+    return stringArray;
 }
 
 class FBAndroidInterstitial:public FBInterstitial
@@ -122,21 +144,49 @@ public:
 
     virtual void addTestDevice(const std::string &deviceHash) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,SETTINGS_CLASS_NAME, "addTestDevice", "(Ljava/lang/String;)V"))
+        {
+            jstring jDeviceHash = methodInfo.env->NewStringUTF(deviceHash.c_str());
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jDeviceHash);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jDeviceHash);
+        }
     }
 
     virtual void addTestDevices(const std::vector<std::string> &deviceHash) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,SETTINGS_CLASS_NAME, "addTestDevices", "(Ljava/util/Collection;)V"))
+        {
+            jobject jDevicesHash = jobjectFromVector(deviceHash);
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jDevicesHash);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jDevicesHash);
+        }
     }
 
     virtual void clearTestDevices() override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,SETTINGS_CLASS_NAME, "clearTestDevices", "()V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
     }
 
     virtual void setIsChildDirected(bool isChildDirected) override
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,SETTINGS_CLASS_NAME, "setIsChildDirected", "(Z)V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jboolean)isChildDirected);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
     }
     
-    FBAndroidAds():_version("dummy")
+    FBAndroidAds(const std::string &version):_version(version)
     {
     }
     
@@ -147,7 +197,16 @@ private:
 
 FBAds *FBAds::getInstance()
 {
-    static FBAndroidAds *instance = new FBAndroidAds();
+    std::string version;
+    cocos2d::JniMethodInfo methodInfo;
+    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "getSdkVersion", "()Ljava/lang/String;"))
+    {
+        jstring str = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        version = cocos2d::JniHelper::jstring2string(str);
+        methodInfo.env->DeleteLocalRef(str);
+    }
+    static FBAndroidAds *instance = new FBAndroidAds(version);
     return instance;
 }
     
