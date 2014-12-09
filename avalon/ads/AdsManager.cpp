@@ -34,11 +34,11 @@ bool BannerManager::show()
 
 bool BannerManager::hide()
 {
+    _needToShowBanner = false;
     if(_visibleBanner)
     {
         _visibleBanner->hide();
         _visibleBanner = nullptr;
-        _needToShowBanner = false;
         return true;
     }
     return false;
