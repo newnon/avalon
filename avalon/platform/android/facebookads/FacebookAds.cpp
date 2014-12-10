@@ -35,16 +35,49 @@ class FBAndroidInterstitial:public FBInterstitial
 {
 public:
     
-    FBAndroidInterstitial(const std::string &placementID, avalon::InterstitialDelegate *delegate):FBInterstitial(placementID),_visible(false)
+    FBAndroidInterstitial(const std::string &placementID, avalon::InterstitialDelegate *delegate):FBInterstitial(placementID),_visible(false),_interstitial(nullptr)
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createInterstitial", "(Ljava/lang/String;J)Lcom/avalon/facebookads/FacebookAdsHelper$FBInterstitialAd;"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(placementID.c_str());
+            jobject object = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jlong)this);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            _interstitial = cocos2d::JniHelper::getEnv()->NewGlobalRef(object);
+            if(_interstitial)
+                __android_log_print(ANDROID_LOG_ERROR , "test", "true");
+            else
+                __android_log_print(ANDROID_LOG_ERROR , "test", "false");
+        }
     }
     ~FBAndroidInterstitial()
     {
+        if(!_interstitial)
+            return;
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "interstitialDone", "(Lcom/avalon/facebookads/FacebookAdsHelper$FBInterstitialAd;)V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
+        cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_interstitial);
     }
     
     virtual bool isReady() const override
     {
-        return false;
+        __android_log_print(ANDROID_LOG_ERROR , "test", "isReady1");
+        if(!_interstitial)
+            return false;
+        __android_log_print(ANDROID_LOG_ERROR , "test", "isReady2");
+        bool ret = false;
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "interstitialIsReady", "(Lcom/avalon/facebookads/FacebookAdsHelper$FBInterstitialAd;)Z"))
+        {
+            ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
+        return ret;
     }
     
     virtual bool isVisible() const override
@@ -59,11 +92,15 @@ public:
     
     virtual bool show() override
     {
+        if(!_interstitial || _visible)
+            return false;
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "interstitialShow", "(Lcom/avalon/facebookads/FacebookAdsHelper$FBInterstitialAd;)Z"))
+        {
+            _visible = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
         return _visible;
-    }
-    
-    void loadAd()
-    {
     }
     
     void setVisible(bool value)
@@ -73,6 +110,7 @@ public:
     
 private:;
     bool _visible;
+    jobject _interstitial;
 };
 
 class FBAndroidBanner:public FBBanner
@@ -109,10 +147,6 @@ public:
     virtual bool hide() override
     {
         return false;
-    }
-    
-    void loadAd()
-    {
     }
     
     void setReady(bool value)
