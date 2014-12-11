@@ -32,7 +32,7 @@ bool callStaticBoolMethod(const char* name)
     	ret = t.env->CallStaticBooleanMethod(t.classID, t.methodID);
         t.env->DeleteLocalRef(t.classID);
     }
-    return true;
+    return ret;
 }
 
 void callStaticVoidMethodWithString(const char* name, const char* argument)
