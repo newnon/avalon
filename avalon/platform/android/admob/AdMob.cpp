@@ -9,28 +9,6 @@
 const char* const HELPER_CLASS_NAME = "com/avalon/admob/AdMobHelper";
 
 namespace avalon {
-class AndroidGADInterstitial;
-class AndroidGADBannerView;
-
-class AndroidAdMob : public AdMob
-{
-public:
-
-    AndroidAdMob(const std::string &version);
-    virtual ~AndroidAdMob();
-    virtual void setAdNetworkExtras(GADAdNetworkExtras network, const std::map<std::string,std::string> &extras) override;
-    virtual void setTestDevices(const std::vector<std::string>& devices) override;
-    virtual void setGender(GADGender gender) override;
-    virtual void setBirthDate(unsigned month, unsigned day, unsigned year) override;
-    virtual void setLocation(float latitude, float longitude, float accuracyInMeters) override;
-    virtual void setLocation(const std::string &location) override;
-    virtual void setTagForChildDirectedTreatment(bool value) override;
-    virtual void setKeywords(const std::vector<std::string>& keywords) override;
-
-    virtual GADInterstitial* createIntestitial(const std::string &adUnitID, InterstitialDelegate *delegate) override;
-    virtual GADBannerView* createBanner(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate) override;
-};
-
 static jobject jobjectFromDictionary(const std::map<std::string,std::string> &dictionary)
 {
     JNIEnv* env = cocos2d::JniHelper::getEnv();
@@ -82,126 +60,96 @@ static jobject jobjectFromVector(const std::vector<std::string> &vector)
 class AndroidGADInterstitial:public GADInterstitial
 {
 public:
-
-	jobject createObject(const std::string &adUnitID)
-	{
-		cocos2d::JniMethodInfo methodInfo;
-	    if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createInterstitial", "(Ljava/lang/String;)Lcom/google/android/gms/ads/InterstitialAd;"))
-		{
-			jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
-			jobject interstitial = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID);
-			methodInfo.env->DeleteLocalRef(jAdUnitID);
-			methodInfo.env->DeleteLocalRef(methodInfo.classID);
-			return interstitial;
-		}
-	    return nullptr;
-	}
-
-    AndroidGADInterstitial(const std::string &adUnitID, InterstitialDelegate *delegate):GADInterstitial(adUnitID),_interstitial(nullptr),_delegate(delegate),_visible(false)
+    AndroidGADInterstitial(const std::string &adUnitID, InterstitialDelegate *delegate):GADInterstitial(adUnitID),_interstitial(nullptr),_delegate(delegate)
     {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createInterstitial", "(Ljava/lang/String;J)Lcom/avalon/admob/AdMobHelper$AdmobInterstitialAd;"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
+            jobject object = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jlong)this);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            _interstitial = cocos2d::JniHelper::getEnv()->NewGlobalRef(object);
+        }
+    }
+
+    ~AndroidGADInterstitial()
+    {
+		if(!_interstitial)
+			return;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "interstitialDone", "(Lcom/avalon/admob/AdMobHelper$AdmobInterstitialAd;)V"))
+		{
+			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+		cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_interstitial);
     }
 
     virtual bool isReady() const override
-    {
-        if(!_interstitial)
-            return false;
-        cocos2d::JniMethodInfo methodInfo;
-        bool ret = false;
-        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "isInterstitialReady", "(Lcom/google/android/gms/ads/InterstitialAd;)Z"))
-        {
-            ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
-            methodInfo.env->DeleteLocalRef(methodInfo.classID);
-        }
-        return ret;
-    }
-
-    virtual bool isVisible() const override
 	{
-		return _visible;
-	}
-
-    virtual bool prepare() override
-	{
-		if(_interstitial && isReady())
-			return false;
 		if(!_interstitial)
-			recreate();
-		return true;
+			return false;
+		bool ret = false;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "interstitialIsReady", "(Lcom/avalon/admob/AdMobHelper$AdmobInterstitialAd;)Z"))
+		{
+			ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+		return ret;
 	}
 
-    virtual bool hide() override
+	virtual bool isVisible() const override
+	{
+		if(!_interstitial)
+			return false;
+		bool ret = false;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "interstitialIsVisible", "(Lcom/avalon/admob/AdMobHelper$AdmobInterstitialAd;)Z"))
+		{
+			ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+		return ret;
+	};
+
+	virtual bool hide() override
 	{
 		return false;
 	}
 
-    virtual bool show() override
-    {
-        if(_interstitial)
-        {
-            cocos2d::JniMethodInfo methodInfo;
-            bool ret = false;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "showInterstitial", "(Lcom/google/android/gms/ads/InterstitialAd;)V"))
-            {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
-                methodInfo.env->DeleteLocalRef(methodInfo.classID);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    void recreate()
+	virtual bool show() override
 	{
-		if(_interstitial)
+		if(!_interstitial)
+			return false;
+		bool ret = false;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "interstitialShow", "(Lcom/avalon/admob/AdMobHelper$AdmobInterstitialAd;)Z"))
 		{
-			cocos2d::JniMethodInfo methodInfo;
-			if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "addInterstitialDelegate", "(Lcom/google/android/gms/ads/InterstitialAd;J)V"))
-			{
-				methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _interstitial, (jlong)0);
-				methodInfo.env->DeleteLocalRef(methodInfo.classID);
-			}
-			cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_interstitial);
-			_interstitial = nullptr;
+			ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _interstitial);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
 		}
-		jobject object = createObject(_adUnitID.c_str());
-		_interstitial = cocos2d::JniHelper::getEnv()->NewGlobalRef(object);
+		return ret;
 	}
-
-    virtual ~AndroidGADInterstitial()
-    {
-        if(_interstitial)
-        {
-            cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "addInterstitialDelegate", "(Lcom/google/android/gms/ads/InterstitialAd;J)V"))
-            {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _interstitial, (jlong)0);
-                methodInfo.env->DeleteLocalRef(methodInfo.classID);
-            }
-            cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_interstitial);
-        }
-    }
 
     void interstitialDidReceiveAd()
     {
         if(_delegate)
             _delegate->interstitialReceiveAd(this);
     }
-    void interstitialDidFailToReceiveAd(int error)
+    void interstitialDidFailToReceiveAd(int code, int nativeCode, const std::string &message)
     {
         if(_delegate)
-            _delegate->interstitialFailedToReceiveAd(this, avalon::AdsErrorCode::INTERNAL_ERROR, error, "");
-        prepare();
+            _delegate->interstitialFailedToReceiveAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
     }
     void interstitialWillPresentScreen()
     {
-    	_visible = true;
     }
     void interstitialWillDismissScreen()
     {
         if(_delegate)
             _delegate->interstitialClose(this);
-        _visible = false;
-        recreate();
     }
     void interstitialWillLeaveApplication()
     {
@@ -212,120 +160,108 @@ public:
 private:
     jobject _interstitial;
     InterstitialDelegate *_delegate;
-    bool _visible;
 };
 
 
 class AndroidGADBannerView:public GADBannerView
 {
 public:
-	jobject createObject(const std::string &adUnitID, GADAdSize size)
-	{
-	    cocos2d::JniMethodInfo methodInfo;
-		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createBannerView", "(Ljava/lang/String;I)Lcom/google/android/gms/ads/AdView;"))
+    AndroidGADBannerView(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate):GADBannerView(adUnitID,size),_banner(nullptr),_delegate(delegate)
+    {
+    	cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "createBanner", "(Ljava/lang/String;IJ)Lcom/avalon/admob/AdMobHelper$AdmobBanner;"))
 		{
 			jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
-			jobject bannerView = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jint)size);
+			jobject object = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, (jint)size, (jlong)this);
 			methodInfo.env->DeleteLocalRef(jAdUnitID);
 			methodInfo.env->DeleteLocalRef(methodInfo.classID);
-			return bannerView;
+			_banner = cocos2d::JniHelper::getEnv()->NewGlobalRef(object);
 		}
-		return nullptr;
-	}
-
-    AndroidGADBannerView(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate):GADBannerView(adUnitID,size),_bannerView(nullptr),_delegate(delegate),_ready(false)
-    {
-    	jobject object = createObject(adUnitID, size);
-        if(object)
-        {
-            _bannerView = cocos2d::JniHelper::getEnv()->NewGlobalRef(object);
-            cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "addAdViewDelegate", "(Lcom/google/android/gms/ads/AdView;J)V"))
-            {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView, (jlong)this);
-                methodInfo.env->DeleteLocalRef(methodInfo.classID);
-            }
-        }
     }
 
     virtual ~AndroidGADBannerView()
     {
-        if(_bannerView)
+        if(!_banner)
+            return;
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "bannerDone", "(Lcom/avalon/admob/AdMobHelper$AdmobBanner;)V"))
         {
-            cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "addAdViewDelegate", "(Lcom/google/android/gms/ads/AdView;J)V"))
-            {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView, (jlong)0);
-                methodInfo.env->DeleteLocalRef(methodInfo.classID);
-            }
-            cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_bannerView);
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _banner);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
         }
-    }
-    
-    virtual bool show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
-    {
-        if(_bannerView)
-        {
-            cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "showBanner", "(Lcom/google/android/gms/ads/AdView;IIIIII)V"))
-            {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView, x, y, width, height, static_cast<int>(scaleType), static_cast<int>(gravity));
-                methodInfo.env->DeleteLocalRef(methodInfo.classID);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) override
-    {
-    	return show(0,0,0,0,scaleType,gravity);
-    }
-        
-    virtual bool hide() override
-    {
-    	if(!isVisible())
-    		return false;
-        if(_bannerView)
-        {
-            cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "hideBanner", "(Lcom/google/android/gms/ads/AdView;)V"))
-            {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _bannerView);
-                methodInfo.env->DeleteLocalRef(methodInfo.classID);
-            }
-        }
+        cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_banner);
     }
     
     virtual bool isReady() const override
-    {
-    	return _ready;
-    }
+	{
+		if(!_banner)
+			return false;
+		bool ret = false;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "bannerIsReady", "(Lcom/avalon/admob/AdMobHelper$AdmobBanner;)Z"))
+		{
+			ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _banner);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+		return ret;
+	}
 
-    virtual bool isVisible() const override
-    {
-        if(!_bannerView)
-            return false;
-        cocos2d::JniMethodInfo methodInfo;
-        bool ret = false;
-        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "isBannerVisible", "(Lcom/google/android/gms/ads/AdView;)Z"))
-        {
-            ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _bannerView);
-            methodInfo.env->DeleteLocalRef(methodInfo.classID);
-        }
-        return ret;
-    }
+	virtual bool isVisible() const override
+	{
+		if(!_banner)
+			return false;
+		bool ret = false;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "bannerIsVisible", "(Lcom/avalon/admob/AdMobHelper$AdmobBanner;)Z"))
+		{
+			ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _banner);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+		return ret;
+	};
+
+	virtual bool show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) override
+	{
+		if(!_banner)
+			return false;
+		bool ret = false;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "bannerShow", "(Lcom/avalon/admob/AdMobHelper$AdmobBanner;IIIIII)Z"))
+		{
+			ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _banner, (jint)x, (jint)y, (jint)width, (jint)height, (jint)scaleType, (jint)gravity);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+		return ret;
+	}
+
+	virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) override
+	{
+		return show(0, 0, 0, 0, scaleType, gravity);
+	}
+
+	virtual bool hide() override
+	{
+		if(!_banner)
+			return false;
+		bool ret = false;
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "bannerHide", "(Lcom/avalon/admob/AdMobHelper$AdmobBanner;)Z"))
+		{
+			ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _banner);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+		return ret;
+	}
 
     void adViewDidReceiveAd()
     {
-    	_ready = true;
         if(_delegate)
             _delegate->bannerReceiveAd(this);
     }
-    void adViewDidFailToReceive(int error)
+    void adViewDidFailToReceive(int code, int nativeCode, const std::string &message)
     {
         if(_delegate)
-            _delegate->bannerFailedToReceiveAd(this, avalon::AdsErrorCode::INTERNAL_ERROR, error, "");
+            _delegate->bannerFailedToReceiveAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
     }
     void adViewWillPresentScreen()
     {
@@ -340,97 +276,104 @@ public:
     }
 
 private:
-    jobject _bannerView;
+    jobject _banner;
     BannerDelegate *_delegate;
-    bool _ready;
 };
 
-AndroidAdMob::AndroidAdMob(const std::string &version):AdMob(version) {}
-AndroidAdMob::~AndroidAdMob() {}
+class AndroidAdMob : public AdMob
+{
+public:
 
-void AndroidAdMob::setAdNetworkExtras(GADAdNetworkExtras network, const std::map<std::string,std::string> &extras) override
-{
-	cocos2d::JniMethodInfo methodInfo;
-	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setAdNetworkExtras", "(ILjava/util/Map;)V"))
-	{
-		jobject jExtras = jobjectFromDictionary(extras);
-		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)network, jExtras);
-		methodInfo.env->DeleteLocalRef(methodInfo.classID);
-		methodInfo.env->DeleteLocalRef(jExtras);
-	}
-}
+    AndroidAdMob(const std::string &version):AdMob(version)
+    {
+    }
+    virtual ~AndroidAdMob()
+    {
 
-void AndroidAdMob::setTestDevices(const std::vector<std::string>& devices) override
-{
-	cocos2d::JniMethodInfo methodInfo;
-	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setTestDevices", "([Ljava/lang/String;)V"))
-	{
-		jobject jDevices = jobjectFromVector(devices);
-		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jDevices);
-		methodInfo.env->DeleteLocalRef(methodInfo.classID);
-		methodInfo.env->DeleteLocalRef(jDevices);
+    }
+    virtual void setAdNetworkExtras(GADAdNetworkExtras network, const std::map<std::string,std::string> &extras) override
+    {
+    	cocos2d::JniMethodInfo methodInfo;
+    	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setAdNetworkExtras", "(ILjava/util/Map;)V"))
+		{
+			jobject jExtras = jobjectFromDictionary(extras);
+			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)network, jExtras);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+			methodInfo.env->DeleteLocalRef(jExtras);
+		}
 	}
-}
+    virtual void setTestDevices(const std::vector<std::string>& devices) override
+	{
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setTestDevices", "([Ljava/lang/String;)V"))
+		{
+			jobject jDevices = jobjectFromVector(devices);
+			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jDevices);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+			methodInfo.env->DeleteLocalRef(jDevices);
+		}
+	}
+    virtual void setGender(GADGender gender) override
+	{
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setGender", "(I)V"))
+		{
+			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)gender);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+	}
+    virtual void setBirthDate(unsigned month, unsigned day, unsigned year) override
+	{
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setBirthday", "(III)V"))
+		{
+			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jint)year, (jint)month, (jint)day);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+	}
+    virtual void setLocation(float latitude, float longitude, float accuracyInMeters) override
+	{
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setLocation", "(FFF)V"))
+		{
+			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jfloat)latitude, (jfloat)longitude, (jfloat)accuracyInMeters);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
+	}
+    virtual void setLocation(const std::string &location) override
+	{
 
-void AndroidAdMob::setGender(GADGender gender) override
-{
-	cocos2d::JniMethodInfo methodInfo;
-	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setGender", "(I)V"))
-	{
-		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (int)gender);
-		methodInfo.env->DeleteLocalRef(methodInfo.classID);
 	}
-}
-void AndroidAdMob::setBirthDate(unsigned month, unsigned day, unsigned year) override
-{
-	cocos2d::JniMethodInfo methodInfo;
-	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setBirthday", "(III)V"))
+    virtual void setTagForChildDirectedTreatment(bool value) override
 	{
-		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jint)year, (jint)month, (jint)day);
-		methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		cocos2d::JniMethodInfo methodInfo;
+		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setTagForChildDirectedTreatment", "(Z)V"))
+		{
+			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jboolean)value);
+			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+		}
 	}
-}
-void AndroidAdMob::setLocation(float latitude, float longitude, float accuracyInMeters) override
-{
-	cocos2d::JniMethodInfo methodInfo;
-	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setLocation", "(FFF)V"))
-	{
-		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jfloat)latitude, (jfloat)longitude, (jfloat)accuracyInMeters);
-		methodInfo.env->DeleteLocalRef(methodInfo.classID);
-	}
-}
-void AndroidAdMob::setLocation(const std::string &location) override
-{
-}
-void AndroidAdMob::setTagForChildDirectedTreatment(bool value) override
-{
-	cocos2d::JniMethodInfo methodInfo;
-	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setTagForChildDirectedTreatment", "(Z)V"))
-	{
-		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jboolean)value);
-		methodInfo.env->DeleteLocalRef(methodInfo.classID);
-	}
-}
-void AndroidAdMob::setKeywords(const std::vector<std::string>& keywords) override
-{
-	cocos2d::JniMethodInfo methodInfo;
-	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setKeyWords", "([Ljava/lang/String;)V"))
-	{
-		jobject jKeywords = jobjectFromVector(keywords);
-		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jKeywords);
-		methodInfo.env->DeleteLocalRef(methodInfo.classID);
-		methodInfo.env->DeleteLocalRef(jKeywords);
-	}
-}
+    virtual void setKeywords(const std::vector<std::string>& keywords) override
+    {
+    	cocos2d::JniMethodInfo methodInfo;
+    	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setKeyWords", "([Ljava/lang/String;)V"))
+    	{
+    		jobject jKeywords = jobjectFromVector(keywords);
+    		methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jKeywords);
+    		methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    		methodInfo.env->DeleteLocalRef(jKeywords);
+    	}
+    }
 
-GADInterstitial* AndroidAdMob::createIntestitial(const std::string &adUnitID, InterstitialDelegate *delegate)
-{
-	return new AndroidGADInterstitial(adUnitID, delegate);
-}
-GADBannerView* AndroidAdMob::createBanner(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate)
-{
-	return new AndroidGADBannerView(adUnitID, size, delegate);
-}
+    virtual GADInterstitial* createIntestitial(const std::string &adUnitID, InterstitialDelegate *delegate) override
+	{
+		return new AndroidGADInterstitial(adUnitID, delegate);
+	}
+    virtual GADBannerView* createBanner(const std::string &adUnitID, GADAdSize size, BannerDelegate *delegate) override
+	{
+		return new AndroidGADBannerView(adUnitID, size, delegate);
+	}
+};
 
 AdMob *AdMob::getInstance()
 {
@@ -442,23 +385,23 @@ AdMob *AdMob::getInstance()
 
 extern "C" {
 
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewDidReceiveAd(JNIEnv* env, jclass clazz, jlong object)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateBannerDidReceiveAd(JNIEnv* env, jclass clazz, jlong object)
 {
     ((avalon::AndroidGADBannerView*)object)->adViewDidReceiveAd();
 }
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jint error)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateBannerDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jint code, jint nativeCode, jstring descriptrion)
 {
-    ((avalon::AndroidGADBannerView*)object)->adViewDidFailToReceive(error);
+    ((avalon::AndroidGADBannerView*)object)->adViewDidFailToReceive(code, nativeCode, cocos2d::JniHelper::jstring2string(descriptrion));
 }
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewWillPresentScreen(JNIEnv* env, jclass clazz, jlong object)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateBannerWillPresentScreen(JNIEnv* env, jclass clazz, jlong object)
 {
     ((avalon::AndroidGADBannerView*)object)->adViewWillPresentScreen();
 }
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewWillDismissScreen(JNIEnv* env, jclass clazz, jlong object)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateBannerWillDismissScreen(JNIEnv* env, jclass clazz, jlong object)
 {
     ((avalon::AndroidGADBannerView*)object)->adViewWillDismissScreen();
 }
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateAdViewWillLeaveApplication(JNIEnv* env, jclass clazz, jlong object)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateBannerWillLeaveApplication(JNIEnv* env, jclass clazz, jlong object)
 {
     ((avalon::AndroidGADBannerView*)object)->adViewWillLeaveApplication();
 }
@@ -467,9 +410,9 @@ JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialDid
 {
     ((avalon::AndroidGADInterstitial*)object)->interstitialDidReceiveAd();
 }
-JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jint error)
+JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialDidFailToReceiveAd(JNIEnv* env, jclass clazz, jlong object, jint code, jint nativeCode, jstring descriptrion)
 {
-    ((avalon::AndroidGADInterstitial*)object)->interstitialDidFailToReceiveAd(error);
+    ((avalon::AndroidGADInterstitial*)object)->interstitialDidFailToReceiveAd(code, nativeCode, cocos2d::JniHelper::jstring2string(descriptrion));
 }
 JNIEXPORT void JNICALL Java_com_avalon_admob_AdMobHelper_delegateInterstitialWillPresentScreen(JNIEnv* env, jclass clazz, jlong object)
 {
