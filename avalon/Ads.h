@@ -31,7 +31,9 @@ enum class AdsErrorCode
     NETWORK_ERROR,
     SERVER_ERROR,
     OS_VERSION_TOO_LOW,
-    TIMEOUT
+    TIMEOUT,
+    TO_FREQUENTLY,
+    MEDIATION_ERROR
 };
 
 class Banner;
