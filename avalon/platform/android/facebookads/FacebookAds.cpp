@@ -304,7 +304,6 @@ public:
     
     FBAndroidAds(const std::string &version):_version(version)
     {
-    	addTestDevice("8828aa8c06044dae3d0890ce933f24fd");
     }
     
     
