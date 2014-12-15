@@ -131,7 +131,12 @@ public abstract class AdMobHelper
 
 		    TimerTask action = new TimerTask() {
 		        public void run() {
-		        	_interstitial.loadAd(createRequest());
+		        	activity.runOnUiThread(new Runnable() {
+		                @Override
+		                public void run() {
+		                	_interstitial.loadAd(createRequest());
+		                }
+		            });
 		        }
 		    };
 
@@ -331,7 +336,12 @@ public abstract class AdMobHelper
 
 		    TimerTask action = new TimerTask() {
 		        public void run() {
-		        	_banner.loadAd(createRequest());
+		        	activity.runOnUiThread(new Runnable() {
+		                @Override
+		                public void run() {
+		                	_banner.loadAd(createRequest());
+		                }
+		            });
 		        }
 		    };
 

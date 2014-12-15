@@ -96,7 +96,12 @@ public abstract class FacebookAdsHelper
 
 		    TimerTask action = new TimerTask() {
 		        public void run() {
-		        	_interstitial.loadAd();
+		        	activity.runOnUiThread(new Runnable() {
+		                @Override
+		                public void run() {
+		                	_interstitial.loadAd();
+		                }
+		            });
 		        }
 		    };
 
@@ -253,7 +258,12 @@ public abstract class FacebookAdsHelper
 
 		    TimerTask action = new TimerTask() {
 		        public void run() {
-		        	_banner.loadAd();
+		        	activity.runOnUiThread(new Runnable() {
+		                @Override
+		                public void run() {
+		                	_banner.loadAd();
+		                }
+		            });
 		        }
 		    };
 		    _ready = false;
