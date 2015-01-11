@@ -10,7 +10,7 @@ void BannerManager::add(Banner* banner)
         _banners.push_back(banner);
 }
 
-bool BannerManager::show()
+const Banner* BannerManager::show()
 {
     _needToShowBanner = true;
     for(const auto &it:_banners)
@@ -25,23 +25,23 @@ bool BannerManager::show()
                     it->show(_x, _y, _width, _height, _scaleType, _gravity);
                 else
                     it->show(_scaleType, _gravity);
-                return true;
+                return it;
             }
         }
     }
-    return false;
+    return nullptr;
 }
 
-bool BannerManager::hide()
+const Banner* BannerManager::hide()
 {
     _needToShowBanner = false;
     if(_visibleBanner)
     {
         _visibleBanner->hide();
         _visibleBanner = nullptr;
-        return true;
+        return _visibleBanner;
     }
-    return false;
+    return nullptr;
 }
     
 void BannerManager::clear()
@@ -117,7 +117,7 @@ void InterstitialManager::add(Interstitial* interstitial)
         _interstitials.push_back(interstitial);
 }
     
-bool InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
+const Interstitial* InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
 {
     auto deltaSec = _lastInterstitial?std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - _prevShowTime).count():INT_MAX;
     bool show = false;
@@ -138,14 +138,14 @@ bool InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
         {
             if(show && (_lastInterstitial != it || deltaSec>=_minDelayOnSameNetwork))
             {
-                it->show();
                 _prevShowTime = std::chrono::steady_clock::now();
                 _lastInterstitial = it;
-                return true;
+                it->show();
+                return it;
             }
         }
     }
-    return false;
+    return nullptr;
 }
     
 void InterstitialManager::clear()

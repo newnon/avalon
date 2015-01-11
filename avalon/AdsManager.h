@@ -14,8 +14,8 @@ class BannerManager: public BannerDelegate
 public:
     void add(Banner* banner);
     
-    bool show();
-    bool hide();
+    const Banner* show();
+    const Banner* hide();
     void clear();
     
     BannerManager(BannerDelegate *delegate);
@@ -44,7 +44,7 @@ class InterstitialManager: public InterstitialDelegate
 public:
     void add(Interstitial* interstitial);
     
-    bool show(bool ignoreCounter, bool ignoreTimer);
+    const Interstitial* show(bool ignoreCounter, bool ignoreTimer);
     void clear();
     
     InterstitialManager(InterstitialDelegate *delegate);

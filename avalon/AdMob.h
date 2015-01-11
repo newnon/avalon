@@ -26,6 +26,7 @@ class GADInterstitial: public Interstitial
 {
 public:
     const std::string &getAdUnitID() const { return _adUnitID; }
+    virtual const std::string &getType() const override { static std::string type = "facebook"; return type; };
     
 protected:
     GADInterstitial(const std::string &adUnitID):_adUnitID(adUnitID) {}
@@ -93,6 +94,7 @@ class GADBannerView: public Banner
 public:
     const std::string &getAdUnitID() const { return _adUnitID; }
     GADAdSize getAdSize() const { return _adSize; }
+    virtual const std::string &getType() const override { static std::string type = "facebook"; return type; };
     
 protected:
     GADBannerView(const std::string &adUnitID, GADAdSize size):_adUnitID(adUnitID), _adSize(size) {}

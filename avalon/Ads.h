@@ -52,6 +52,7 @@ class Banner
 public:
     virtual bool isReady() const = 0;
     virtual bool isVisible() const = 0;
+    virtual const std::string &getType() const = 0;
     virtual bool show(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity) = 0;
     virtual bool show(BannerScaleType scaleType, BannerGravityType gravity) = 0;
     virtual bool hide() = 0;
@@ -80,6 +81,7 @@ public:
      */
     virtual bool isReady() const = 0;
     virtual bool isVisible() const = 0;
+    virtual const std::string &getType() const = 0;
     virtual bool hide() = 0;
     virtual bool show() = 0;
     virtual ~Interstitial() {}

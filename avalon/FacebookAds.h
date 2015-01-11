@@ -21,6 +21,7 @@ class FBInterstitial: public Interstitial
 {
 public:
     const std::string &getPlacementID() const { return _placementID; }
+    virtual const std::string &getType() const override { static std::string type = "facebook"; return type; };
     
 protected:
     FBInterstitial(const std::string &placementID):_placementID(placementID) {}
@@ -63,6 +64,7 @@ class FBBanner: public Banner
 public:
     const std::string &getPlacementID() const { return _placementID; }
     FBAdSize getAdSize() const { return _adSize; }
+    virtual const std::string &getType() const override { static std::string type = "facebook"; return type; };
     
 protected:
     FBBanner(const std::string &placementID, FBAdSize size):_placementID(placementID), _adSize(size) {}

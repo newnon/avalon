@@ -34,6 +34,7 @@ class IADInterstitial: public Interstitial
 {
 public:
     static IADInterstitial* create(InterstitialDelegate *delegate);
+    virtual const std::string &getType() const override { static std::string type = "facebook"; return type; };
 };
 
 enum class ADErrorCodes
@@ -79,6 +80,7 @@ public:
      * after initialization.
      */
     static IADBanner* create(ADAdType type, BannerDelegate *delegate);
+    virtual const std::string &getType() const override { static std::string type = "facebook"; return type; };
 };
 
 }
