@@ -111,10 +111,10 @@ void BannerManager::bannerFailedToReceiveAd(Banner *banner, AdsErrorCode error, 
         _delegate->bannerFailedToReceiveAd(banner, error, nativeCode, message);
 }
     
-void InterstitialManager::add(Interstitial* interstitial)
+void InterstitialManager::add(Interstitial* interstitial, float delay)
 {
     if(interstitial)
-        _interstitials.push_back(interstitial);
+        _interstitials.push_back(std::make_pair(interstitial, delay));
 }
     
 const Interstitial* InterstitialManager::show(bool ignoreCounter, bool ignoreTimer)
@@ -134,14 +134,14 @@ const Interstitial* InterstitialManager::show(bool ignoreCounter, bool ignoreTim
 
     for(const auto &it:_interstitials)
     {
-        if(it->isReady())
+        if(it.first->isReady())
         {
-            if(show && (_lastInterstitial != it || deltaSec>=_minDelayOnSameNetwork))
+            if(show && (_lastInterstitial != it.first || deltaSec>=it.second))
             {
                 _prevShowTime = std::chrono::steady_clock::now();
-                _lastInterstitial = it;
-                it->show();
-                return it;
+                _lastInterstitial = it.first;
+                it.first->show();
+                return it.first;
             }
         }
     }
@@ -152,15 +152,15 @@ void InterstitialManager::clear()
 {
     for(const auto &it:_interstitials)
     {
-        delete it;
+        delete it.first;
     }
+    _interstitials.clear();
 }
 
 InterstitialManager::InterstitialManager(InterstitialDelegate *delegate)
     :_delegate(delegate)
     ,_minFrequency(0)
     ,_minDelay(0)
-    ,_minDelayOnSameNetwork(0)
     ,_lastInterstitial(nullptr)
     ,_interstitialCounter(0)
     ,_prevShowTime(std::chrono::steady_clock::now())
@@ -171,7 +171,7 @@ InterstitialManager::~InterstitialManager()
 {
     for(const auto &it:_interstitials)
     {
-        delete it;
+        delete it.first;
     }
 }
 
@@ -192,16 +192,6 @@ void InterstitialManager::setMinDelay(float minDelay)
 float InterstitialManager::getMinDelay() const
 {
     return _minDelay;
-}
-
-void InterstitialManager::setMinDelayOnSameNetwork(float minDelayOnSameNetwork)
-{
-    _minDelayOnSameNetwork = minDelayOnSameNetwork;
-}
-
-float InterstitialManager::getMinDelayOnSameNetwork() const
-{
-    return _minDelayOnSameNetwork;
 }
     
 void InterstitialManager::interstitialReceiveAd(Interstitial *interstitial)

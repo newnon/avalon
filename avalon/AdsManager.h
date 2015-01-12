@@ -42,7 +42,7 @@ private:
 class InterstitialManager: public InterstitialDelegate
 {
 public:
-    void add(Interstitial* interstitial);
+    void add(Interstitial* interstitial, float delay);
     
     const Interstitial* show(bool ignoreCounter, bool ignoreTimer);
     void clear();
@@ -54,22 +54,19 @@ public:
     int getMinFrequency() const;
     void setMinDelay(float minDelay);
     float getMinDelay() const;
-    void setMinDelayOnSameNetwork(float minDelayOnSameNetwork);
-    float getMinDelayOnSameNetwork() const;
     
 private:
     virtual void interstitialReceiveAd(Interstitial *interstitial) override;
     virtual void interstitialFailedToReceiveAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message) override;
     virtual void interstitialClose(Interstitial *interstitial) override;
     virtual void interstitialClick(Interstitial *interstitial) override;
-    std::vector<Interstitial*> _interstitials;
+    std::vector<std::pair<Interstitial*,float>> _interstitials;
     InterstitialDelegate *_delegate;
     std::chrono::steady_clock::time_point _prevShowTime;
     Interstitial* _lastInterstitial;
     int _interstitialCounter;
     int _minFrequency;
     float _minDelay;
-    float _minDelayOnSameNetwork;
 };
 
 }
