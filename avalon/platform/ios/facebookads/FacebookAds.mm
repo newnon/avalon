@@ -35,6 +35,7 @@ public:
     }
     ~FBIOSInterstitial()
     {
+        [NSObject cancelPreviousPerformRequestsWithTarget:_interstitial.delegate];
         [_interstitial.delegate release];
         [_interstitial release];
     }
@@ -105,6 +106,7 @@ public:
     
     ~FBIOSBanner()
     {
+        [NSObject cancelPreviousPerformRequestsWithTarget:_bannerView.delegate];
         [_bannerView.delegate release];
         [_bannerView release];
     }

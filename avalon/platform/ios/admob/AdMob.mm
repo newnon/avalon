@@ -147,6 +147,7 @@ public:
     
     virtual ~IOSGADInterstitial()
     {
+        [NSObject cancelPreviousPerformRequestsWithTarget:_interstitial.delegate];
         _interstitial.delegate = nil;
         [_interstitial autorelease];
         [_delegate release];
@@ -208,6 +209,7 @@ public:
     
     virtual ~IOSGADBannerView()
     {
+        [NSObject cancelPreviousPerformRequestsWithTarget:_bannerView.delegate];
         [_bannerView removeFromSuperview];
         _bannerView.delegate = nil;
         [_bannerView autorelease];
