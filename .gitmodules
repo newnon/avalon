@@ -16,3 +16,6 @@ url=https://github.com/newnon/appirater.git
 [submodule "vendors/RMStore"]
 	path = vendors/RMStore
 	url = https://github.com/newnon/RMStore.git
+[submodule "vendors/Fuseboxx/ios"]
+	path = vendors/Fuseboxx/ios
+	url = https://github.com/fusepowered/FuseSDKiOS.git

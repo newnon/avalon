@@ -328,6 +328,10 @@
 		A58EA8D0192390FB000D0B28 /* MPTableViewAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A58EA833192390FB000D0B28 /* MPTableViewAdManager.m */; };
 		A58EA8D219239128000D0B28 /* MoPub.mm in Sources */ = {isa = PBXBuildFile; fileRef = A58EA8D119239128000D0B28 /* MoPub.mm */; };
 		A58EA8D519239156000D0B28 /* MoPub.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A58EA8D319239146000D0B28 /* MoPub.h */; };
+		A59003E11A6D124000AF12A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A59003F01A6D1D7100AF12A4 /* libFuseSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A59003EE1A6D1D7100AF12A4 /* libFuseSDK.a */; };
+		A59003F21A6D1DAC00AF12A4 /* Fuseboxx.mm in Sources */ = {isa = PBXBuildFile; fileRef = A59003F11A6D1DAC00AF12A4 /* Fuseboxx.mm */; };
+		A59003F41A6D1DE800AF12A4 /* Fuseboxx.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A59003F31A6D1DDD00AF12A4 /* Fuseboxx.h */; };
 		A59E86A61925E5390082E270 /* VungleInterstitialCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A59E86881925E5390082E270 /* VungleInterstitialCustomEvent.h */; };
 		A59E86A71925E5390082E270 /* VungleInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A59E86891925E5390082E270 /* VungleInterstitialCustomEvent.m */; };
 		A5A759BA19249DFE00C44FBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -647,6 +651,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A58EA8D519239156000D0B28 /* MoPub.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A59003E41A6D124000AF12A4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A59003F41A6D1DE800AF12A4 /* Fuseboxx.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1075,6 +1089,12 @@
 		A58EA837192390FB000D0B28 /* MRAID.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MRAID.bundle; sourceTree = "<group>"; };
 		A58EA8D119239128000D0B28 /* MoPub.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MoPub.mm; path = avalon/platform/ios/mopub/MoPub.mm; sourceTree = "<group>"; };
 		A58EA8D319239146000D0B28 /* MoPub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MoPub.h; path = avalon/MoPub.h; sourceTree = "<group>"; };
+		A59003E91A6D124000AF12A4 /* libFuseboxx iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFuseboxx iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A59003EC1A6D1D7100AF12A4 /* FuseSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FuseSDK.h; sourceTree = "<group>"; };
+		A59003ED1A6D1D7100AF12A4 /* libFuseAdapterAdcolony.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFuseAdapterAdcolony.a; sourceTree = "<group>"; };
+		A59003EE1A6D1D7100AF12A4 /* libFuseSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFuseSDK.a; sourceTree = "<group>"; };
+		A59003F11A6D1DAC00AF12A4 /* Fuseboxx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Fuseboxx.mm; path = avalon/platform/ios/fuseboxx/Fuseboxx.mm; sourceTree = "<group>"; };
+		A59003F31A6D1DDD00AF12A4 /* Fuseboxx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fuseboxx.h; path = avalon/Fuseboxx.h; sourceTree = "<group>"; };
 		A59E86541925E5380082E270 /* AdColonyInterstitialCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdColonyInterstitialCustomEvent.h; sourceTree = "<group>"; };
 		A59E86551925E5380082E270 /* AdColonyInterstitialCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdColonyInterstitialCustomEvent.m; sourceTree = "<group>"; };
 		A59E86571925E5380082E270 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
@@ -1336,6 +1356,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A59003DF1A6D124000AF12A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A59003E11A6D124000AF12A4 /* Foundation.framework in Frameworks */,
+				A59003F01A6D1D7100AF12A4 /* libFuseSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5A759B919249DFE00C44FBF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1428,6 +1457,7 @@
 				A56002A31A2748D000235B77 /* FacebookAds */,
 				A50BC28518E9B2B400F1F979 /* Flurry */,
 				A50BC26D18E9A1C100F1F979 /* FlurryAds */,
+				A59003EA1A6D127300AF12A4 /* Fuseboxx */,
 				A50BC22B18E96F7600F1F979 /* Web */,
 				A50BC1D718E96DEB00F1F979 /* Appirater */,
 				A50BC1BD18E9695B00F1F979 /* Paiment */,
@@ -1464,6 +1494,7 @@
 				A57695B11A0E8DC3002FDCB5 /* libAds Mac.a */,
 				A5C1C6091A164D1C0092ABC7 /* libAdGeneration iOS.a */,
 				A56002A21A27484F00235B77 /* libFacebookAds iOS.a */,
+				A59003E91A6D124000AF12A4 /* libFuseboxx iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2079,6 +2110,27 @@
 				A58EA837192390FB000D0B28 /* MRAID.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		A59003EA1A6D127300AF12A4 /* Fuseboxx */ = {
+			isa = PBXGroup;
+			children = (
+				A59003F31A6D1DDD00AF12A4 /* Fuseboxx.h */,
+				A59003F11A6D1DAC00AF12A4 /* Fuseboxx.mm */,
+				A59003EB1A6D1D7100AF12A4 /* Fuseboxx-ios */,
+			);
+			name = Fuseboxx;
+			sourceTree = "<group>";
+		};
+		A59003EB1A6D1D7100AF12A4 /* Fuseboxx-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A59003EC1A6D1D7100AF12A4 /* FuseSDK.h */,
+				A59003ED1A6D1D7100AF12A4 /* libFuseAdapterAdcolony.a */,
+				A59003EE1A6D1D7100AF12A4 /* libFuseSDK.a */,
+			);
+			name = "Fuseboxx-ios";
+			path = "avalon/platform/ios/fuseboxx/Fuseboxx-ios";
 			sourceTree = "<group>";
 		};
 		A59E86521925E5380082E270 /* AdNetworkSupport */ = {
@@ -3011,6 +3063,23 @@
 			productReference = A58EA78A192390A4000D0B28 /* libMoPub iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A59003DA1A6D124000AF12A4 /* Fuseboxx iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A59003E61A6D124000AF12A4 /* Build configuration list for PBXNativeTarget "Fuseboxx iOS" */;
+			buildPhases = (
+				A59003DD1A6D124000AF12A4 /* Sources */,
+				A59003DF1A6D124000AF12A4 /* Frameworks */,
+				A59003E41A6D124000AF12A4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fuseboxx iOS";
+			productName = Avalon;
+			productReference = A59003E91A6D124000AF12A4 /* libFuseboxx iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A5A7596F19249DFE00C44FBF /* MoPubVungleAdaptor iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5A75A1019249DFE00C44FBF /* Build configuration list for PBXNativeTarget "MoPubVungleAdaptor iOS" */;
@@ -3171,6 +3240,7 @@
 				A5D3275E1900507400A65D25 /* AdMob iOS */,
 				A5C1C5DF1A164D1C0092ABC7 /* AdGeneration iOS */,
 				A57695471A0E6DD6002FDCB5 /* iAd iOS */,
+				A59003DA1A6D124000AF12A4 /* Fuseboxx iOS */,
 				A56002941A27484F00235B77 /* FacebookAds iOS */,
 				A5ACF0351918B1E500A010A5 /* GoogleAnalytics iOS */,
 				A55885B419A4AEFA00914838 /* GoogleAnalytics Mac */,
@@ -3439,6 +3509,14 @@
 				A56C49C3199E4FAC00BF30BA /* MPMoPubNativeAdAdapter.m in Sources */,
 				A58EA843192390FB000D0B28 /* MPAdAlertGestureRecognizer.m in Sources */,
 				A58EA854192390FB000D0B28 /* MPLastResortDelegate+EventKit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A59003DD1A6D124000AF12A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A59003F21A6D1DAC00AF12A4 /* Fuseboxx.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4365,6 +4443,52 @@
 			};
 			name = Release;
 		};
+		A59003E71A6D124000AF12A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork",
+				);
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework/Versions/A",
+					"$(PROJECT_DIR)/avalon/platform/ios/fuseboxx/Fuseboxx-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Fuseboxx iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A59003E81A6D124000AF12A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork",
+				);
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework/Versions/A",
+					"$(PROJECT_DIR)/avalon/platform/ios/fuseboxx/Fuseboxx-ios",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Fuseboxx iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A5A75A1119249DFE00C44FBF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4734,6 +4858,15 @@
 			buildConfigurations = (
 				A58EA788192390A4000D0B28 /* Debug */,
 				A58EA789192390A4000D0B28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A59003E61A6D124000AF12A4 /* Build configuration list for PBXNativeTarget "Fuseboxx iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A59003E71A6D124000AF12A4 /* Debug */,
+				A59003E81A6D124000AF12A4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
