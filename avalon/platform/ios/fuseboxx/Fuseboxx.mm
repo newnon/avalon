@@ -18,13 +18,13 @@ namespace avalon {
 class IOSFuseAPI : public FuseAPI
 {
 public:
-    IOSFuseAPI()
+    IOSFuseAPI():_nativeDelegate([[IOSFuseDelegate alloc] init]),_delegate(nullptr)
     {
-        _delegate = [[IOSFuseDelegate alloc] init];
     }
-    virtual void startSession(const std::string &game_id, FuseDelegate *delegate, bool AutoRegisterForPush) override
+    virtual void startSession(const std::string &game_id, FuseDelegate *delegate, bool autoRegisterForPush) override
     {
-        [::FuseAPI startSession:[NSString stringWithUTF8String:game_id.c_str()] Delegate:_delegate AutoRegisterForPush:AutoRegisterForPush];
+        _delegate = delegate;
+        [::FuseAPI startSession:[NSString stringWithUTF8String:game_id.c_str()] Delegate:_nativeDelegate AutoRegisterForPush:autoRegisterForPush];
     }
         
     virtual void setPlatform(const std::string &game_Platform) override
@@ -34,13 +34,17 @@ public:
 
     virtual int registerEvent(const std::string &message, const std::map<std::string,std::string> &dict) override
     {
-        NSMutableDictionary *dictionary = nil;
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        for(const auto &it: dict)
+            [dictionary setObject:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.second.c_str()]];
         return [::FuseAPI registerEvent:[NSString stringWithUTF8String:message.c_str()] withDict:dictionary];
     }
 
     virtual int registerEvent(const std::string &name,const std::string &param_name, const std::string &param_value, const std::map<std::string,std::string> &variables) override
     {
-        NSMutableDictionary *dictionary = nil;
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        for(const auto &it: variables)
+            [dictionary setObject:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.second.c_str()]];
         return [::FuseAPI registerEvent:[NSString stringWithUTF8String:name.c_str()] ParameterName:[NSString stringWithUTF8String:param_name.c_str()] ParameterValue:[NSString stringWithUTF8String:param_value.c_str()] Variables:dictionary];
     }
 
@@ -48,6 +52,7 @@ public:
     {
         [::FuseAPI registerCrash:[NSException exceptionWithName:[NSString stringWithUTF8String:name.c_str()] reason:[NSString stringWithUTF8String:reason.c_str()] userInfo:nil]];
     }
+    
     virtual void registerInAppPurchase(const std::vector<uint8_t> &receipt_data, int tx_state, const std::string &price, const std::string &currency, const std::string &product_id, const std::string &tx_id) override
     {
         [::FuseAPI registerInAppPurchase:[NSData dataWithBytes:&receipt_data.front() length:receipt_data.size()] TxState:tx_state  Price:[NSString stringWithUTF8String:price.c_str()] Currency:[NSString stringWithUTF8String:currency.c_str()] ProductID:[NSString stringWithUTF8String:product_id.c_str()] TransactionID:[NSString stringWithUTF8String:tx_id.c_str()]];
@@ -365,12 +370,12 @@ public:
     
     virtual void registerLevel(int level) override
     {
-        
+        [::FuseAPI registerLevel:level];
     }
     
     virtual void registerCurrency(int currencyType, int balance) override
     {
-        
+        [::FuseAPI registerCurrency:currencyType Balance:balance];
     }
 
     virtual void registerFlurryView() override
@@ -388,17 +393,221 @@ public:
         
     }
 
-    virtual std::string getGameConfigurationValue(const std::string &key) override
+    virtual const std::string* getGameConfigurationValue(const std::string &key) override
     {
-        return "";
+        auto it = _gameConfiguration.find(key);
+        if(it != _gameConfiguration.end())
+            return &it->second;
+        return nullptr;
     }
     
     virtual const std::map<std::string,std::string>& getGameConfiguration() override
     {
         return _gameConfiguration;
     }
+    
+    void sessionStartReceived()
+    {
+        if(_delegate)
+        {
+            _delegate->sessionStartReceived();
+        }
+    }
+    void sessionLoginError(NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->sessionLoginError(static_cast<kFuseErrors>([error intValue]));
+        }
+    }
+    void timeUpdated(NSNumber* utcTimeStamp)
+    {
+        if(_delegate)
+        {
+            _delegate->timeUpdated([utcTimeStamp longLongValue]);
+        }
+    }
+    void accountLoginComplete(NSNumber* type, NSString* account_id)
+    {
+        if(_delegate)
+        {
+            _delegate->accountLoginComplete(static_cast<kFuseAccountType>([type intValue]), [account_id UTF8String]);
+        }
+    }
+    void accountLoginError(NSNumber* error, NSString* account_id)
+    {
+        if(_delegate)
+        {
+            _delegate->accountLoginError(static_cast<kFuseLoginErrors>([error intValue]), [account_id UTF8String]);
+        }
+    }
+    void notificationAction(NSString* action)
+    {
+        if(_delegate)
+        {
+            _delegate->notificationAction([action UTF8String]);
+        }
+    }
+    void notficationWillClose()
+    {
+        if(_delegate)
+        {
+            _delegate->notficationWillClose();
+        }
+    }
+    void gameConfigurationReceived()
+    {
+        NSDictionary* configuration = [::FuseAPI getGameConfiguration];
+        _gameConfiguration.clear();
+        [configuration enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+            _gameConfiguration[[key UTF8String]] = [obj UTF8String];
+        }];
+        if(_delegate)
+        {
+            _delegate->gameConfigurationReceived();
+        }
+    }
+    void friendAdded(NSString* fuse_id, NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->friendAdded([fuse_id UTF8String], static_cast<kFuseFriendErrors>([error intValue]));
+        }
+    }
+    void friendRemoved(NSString* fuse_id, NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->friendRemoved([fuse_id UTF8String], static_cast<kFuseFriendErrors>([error intValue]));
+        }
+    }
+    void friendAccepted(NSString* fuse_id, NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->friendAccepted([fuse_id UTF8String], static_cast<kFuseFriendErrors>([error intValue]));
+        }
+    }
+    void friendRejected(NSString* fuse_id, NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->friendRejected([fuse_id UTF8String], static_cast<kFuseFriendErrors>([error intValue]));
+        }
+    }
+    void friendsMigrated(NSString* fuse_id, NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->friendsMigrated([fuse_id UTF8String], static_cast<kFuseFriendErrors>([error intValue]));
+        }
+    }
+    void friendsListUpdated(NSDictionary* friendsList)
+    {
+        _friends.clear();
+        [friendsList enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+            auto &item = _friends[[key UTF8String]];
+            item.pending = [[obj objectForKey:@"pending"] intValue];
+            item.alias = [[obj objectForKey:@"alias"] UTF8String];
+            item.fuse_id = [[obj objectForKey:@"fuse_id"] UTF8String];
+        }];
+        if(_delegate)
+        {
+            _delegate->friendsListUpdated(_friends);
+        }
+    }
+    void friendsListError(NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->friendsListError(static_cast<kFuseFriendsListErrors>([error intValue]));
+        }
+    }
+    void chatListReceived(NSDictionary* messages, NSString* fuse_id)
+    {
+        _chatList.clear();
+        [messages enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+            auto &item = _chatList[[key UTF8String]];
+            item.timestamp = [[obj objectForKey:@"timestamp"] intValue];
+            item.alias = [[obj objectForKey:@"alias"] UTF8String];
+            item.message = [[obj objectForKey:@"message"] UTF8String];
+        }];
+        if(_delegate)
+        {
+            _delegate->chatListReceived(_chatList, [fuse_id UTF8String]);
+        }
+    }
+    void chatListError(NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->chatListError(static_cast<kFuseChatErrors>([error intValue]));
+        }
+    }
+    void purchaseVerification(NSNumber* verified, NSString* transactionID, NSString* originalTransactionID)
+    {
+        if(_delegate)
+        {
+            _delegate->purchaseVerification([verified intValue], [transactionID UTF8String], [originalTransactionID UTF8String]);
+        }
+    }
+    void mailListRecieved(NSDictionary* messages, NSString* fuse_id)
+    {
+        _mailList.clear();
+        [messages enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
+            auto &item = _mailList[[key UTF8String]];
+            item.timestamp = [[obj objectForKey:@"timestamp"] intValue];
+            item.alias = [[obj objectForKey:@"alias"] UTF8String];
+            item.message = [[obj objectForKey:@"message"] UTF8String];
+            item.gift_id = [[obj objectForKey:@"gift_id"] intValue];
+            item.gift_name = [[obj objectForKey:@"gift_name"] UTF8String];
+            item.gift_amount = [[obj objectForKey:@"gift_amount"] intValue];
+        }];
+        if(_delegate)
+        {
+            _delegate->mailListRecieved(_mailList, [fuse_id UTF8String]);
+        }
+    }
+    void mailListError(NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->mailListError(static_cast<kFuseMailErrors>([error intValue]));
+        }
+    }
+    void mailAcknowledged(NSNumber* message_id, NSString* fuse_id, NSNumber* request_id)
+    {
+        if(_delegate)
+        {
+            _delegate->mailAcknowledged([message_id intValue], [fuse_id UTF8String], [request_id intValue]);
+        }
+    }
+    void mailError(NSNumber* error, NSNumber* request_id)
+    {
+        if(_delegate)
+        {
+            _delegate->mailError(static_cast<kFuseMailErrors>([error intValue]), [request_id intValue]);
+        }
+    }
+    void adAvailabilityResponse(NSNumber* available, NSNumber* error)
+    {
+        if(_delegate)
+        {
+            _delegate->adAvailabilityResponse([available boolValue], static_cast<kFuseAdErrors>([error intValue]));
+        }
+    }
+    void rewardedVideoCompleted(NSString* &zoneID)
+    {
+        if(_delegate)
+        {
+            _delegate->rewardedVideoCompleted([zoneID UTF8String]);
+        }
+    }
+    
 private:
-    IOSFuseDelegate *_delegate;
+    IOSFuseDelegate *_nativeDelegate;
+    FuseDelegate* _delegate;
+           
     std::string _id;
     std::string _libraryVersion;
     std::map<std::string, FuseboxxFriendEntry> _friends;
@@ -414,3 +623,138 @@ FuseAPI& FuseAPI::getInstance()
 }
 
 }
+
+@implementation IOSFuseDelegate
+-(void) sessionStartReceived
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).sessionStartReceived();
+}
+-(void) sessionLoginError:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).sessionLoginError(_error);
+}
+
+-(void) timeUpdated:(NSNumber*)_utcTimeStamp
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).timeUpdated(_utcTimeStamp);
+}
+-(void) accountLoginComplete:(NSNumber*)_type Account:(NSString*)_account_id
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).accountLoginComplete(_type, _account_id);
+}
+
+-(void) accountLoginError:(NSNumber*)_error Account:(NSString*)_account_id
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).accountLoginError(_error, _account_id);
+}
+
+-(void) notificationAction:(NSString*)_action
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).notificationAction(_action);
+}
+
+-(void) notficationWillClose
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).notficationWillClose();
+}
+
+-(void) gameConfigurationReceived
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).gameConfigurationReceived();
+}
+
+-(void) friendAdded:(NSString*)_fuse_id Error:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).friendAdded(_fuse_id, _error);
+}
+
+-(void) friendRemoved:(NSString*)_fuse_id Error:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).friendRemoved(_fuse_id, _error);
+}
+
+-(void) friendAccepted:(NSString*)_fuse_id Error:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).friendAccepted(_fuse_id, _error);
+}
+
+-(void) friendRejected:(NSString*)_fuse_id Error:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).friendRejected(_fuse_id, _error);
+}
+
+-(void) friendsMigrated:(NSString*)_fuse_id Error:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).friendsMigrated(_fuse_id, _error);
+}
+
+-(void) friendsListUpdated:(NSDictionary*)_friendsList
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).friendsListUpdated(_friendsList);
+}
+
+-(void) friendsListError:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).friendsListError(_error);
+}
+
+-(void) chatListReceived:(NSDictionary*)_messages User:(NSString*)_fuse_id
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).chatListReceived(_messages, _fuse_id);
+}
+
+-(void) chatListError:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).chatListError(_error);
+}
+
+-(void) purchaseVerification:(NSNumber*)_verified TransactionID:(NSString*)_tx_id OriginalTransactionID:(NSString*)_o_tx_id
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).purchaseVerification(_verified, _tx_id, _o_tx_id);
+}
+
+-(void) mailListRecieved:(NSDictionary*)_messages User:(NSString*)_fuse_id
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).mailListRecieved(_messages, _fuse_id);
+}
+
+-(void) mailListError:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).mailListError(_error);
+}
+
+-(void) mailAcknowledged:(NSNumber*)_message_id User:(NSString*)_fuse_id RequestID:(NSNumber*)_request_id
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).mailAcknowledged(_message_id, _fuse_id, _request_id);
+}
+
+-(void) mailError:(NSNumber*)_error RequestID:(NSNumber*)_request_id
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).mailError(_error, _request_id);
+}
+
+-(void) adAvailabilityResponse:(NSNumber*)_available Error:(NSNumber*)_error
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).adAvailabilityResponse(_available, _error);
+}
+
+-(void) rewardedVideoCompleted:(NSString*) _zoneID
+{
+    static_cast<avalon::IOSFuseAPI&>(avalon::FuseAPI::getInstance()).rewardedVideoCompleted(_zoneID);
+}
+
+@end
+
+@implementation IOSFuseAdDelegate
+-(void) adWillClose
+{
+    
+}
+@end
+
+@implementation IOSFuseOverlayDelegate
+-(void) overlayWillClose
+{
+    
+}
+@end

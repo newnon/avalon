@@ -39,39 +39,7 @@ enum class kFuseChatErrors
     REQUEST_FAILED,       /// there was an error in establishing a connection with the server
 };
 
-enum class kFuseAddFriendErrors
-{
-    NO_ERROR = 0,
-    BAD_ID,
-    NOT_CONNECTED,
-    REQUEST_FAILED
-};
-
-enum class kFuseRemoveFriendErrors
-{
-    NO_ERROR = 0,
-    BAD_ID,
-    NOT_CONNECTED,
-    REQUEST_FAILED
-};
-
-enum class kFuseAcceptFriendErrors
-{
-    NO_ERROR = 0,
-    BAD_ID,
-    NOT_CONNECTED,
-    REQUEST_FAILED
-};
-
-enum class kFuseRejectFriendErrors
-{
-    NO_ERROR = 0,
-    BAD_ID,
-    NOT_CONNECTED,
-    REQUEST_FAILED
-};
-
-enum class kFuseMigrateFriendErrors
+enum class kFuseFriendErrors
 {
     NO_ERROR = 0,
     BAD_ID,
@@ -281,7 +249,7 @@ public:
      @see FuseAPI::addFriend: for more information on adding a friend
      @since Fuse API version 1.22
      */
-    virtual void friendAdded(const std::string &fuse_id, kFuseAddFriendErrors error) {}
+    virtual void friendAdded(const std::string &fuse_id, kFuseFriendErrors error) {}
     
     /*!
      * @brief This method indicates the result of a removal of a friend to the Fuse friends list system
@@ -309,7 +277,7 @@ public:
      @see FuseAPI::removeFriend: for more information on removing a friend
      @since Fuse API version 1.22
      */
-    virtual void friendRemoved(const std::string &fuse_id, kFuseRemoveFriendErrors error) {}
+    virtual void friendRemoved(const std::string &fuse_id, kFuseFriendErrors error) {}
     
     /*!
      * @brief This method indicates the result of a acceptance of a friend to the Fuse friends list system
@@ -337,7 +305,7 @@ public:
      @see FuseAPI::acceptFriend: for more information on accepting a friend
      @since Fuse API version 1.22
      */
-    virtual void friendAccepted(const std::string &fuse_id, kFuseAcceptFriendErrors error) {}
+    virtual void friendAccepted(const std::string &fuse_id, kFuseFriendErrors error) {}
     
     /*!
      * @brief This method indicates the result of a rejection of a friend to the Fuse friends list system
@@ -365,7 +333,7 @@ public:
      @see FuseAPI::rejectFriend: for more information on rejecting a friend
      @since Fuse API version 1.22
      */
-    virtual void friendRejected(const std::string &fuse_id, kFuseRejectFriendErrors error) {}
+    virtual void friendRejected(const std::string &fuse_id, kFuseFriendErrors error) {}
     
     /*!
      * @brief This method indicates the result of a rejection of a request to migrate friends from one account to another
@@ -393,7 +361,7 @@ public:
      @see FuseAPI::migrateFriends: for more information on migrating friends
      @since Fuse API version 1.34.1
      */
-    virtual void friendsMigrated(const std::string &fuse_id, kFuseMigrateFriendErrors error);
+    virtual void friendsMigrated(const std::string &fuse_id, kFuseFriendErrors error);
     
     /*!
      * @brief This method indicates when the friends list on the client has been updated from the server
@@ -616,7 +584,7 @@ public:
      @see FuseAPI::sendMailWithGift:Messge:GiftID:GiftAmount: for more information on sending a mail message with a gift
      @since Fuse API version 1.25
      */
-    virtual void mailError(kFuseMailErrors error, const std::string & request_id) {}
+    virtual void mailError(kFuseMailErrors error, int request_id) {}
     
     /*!
      * @brief This method is called in response to a request to check for an ad in the Fuse system
@@ -662,7 +630,7 @@ public:
      @param _zoneID [NSString *] The zone in which a rewarded video was watched in
      @since Fuse API version 1.37.0
      */
-    virtual void rewardedVideoCompleted(std::string &zoneID) {}
+    virtual void rewardedVideoCompleted(const std::string &zoneID) {}
 };
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -797,7 +765,7 @@ public:
      * @see FuseDelegate::sessionLoginError: for more information on handling errors occurred when trying to start a session
      * @param _registerForPush [BOOL] set whether startSession automatically registers for a push notification token. If _registerForPush is set to NO, you must manually call [FuseAPI registerForPushToken]
      */
-    virtual void startSession(const std::string &game_id, FuseDelegate *delegate = nullptr, bool AutoRegisterForPush = false) = 0;
+    virtual void startSession(const std::string &game_id, FuseDelegate *delegate = nullptr, bool autoRegisterForPush = false) = 0;
 
     /*!
      * @brief This method is used to describe the platform the API is running on
@@ -2690,7 +2658,7 @@ public:
      @retval [NSString*] This is the value for the corresponding key.
      @see startSession:Delegate: for information on setting up the \<FuseDelegate\>
      */
-    virtual std::string getGameConfigurationValue(const std::string &key) = 0;
+    virtual const std::string* getGameConfigurationValue(const std::string &key) = 0;
 
     /*!
      @brief This method retrieves the entire server configuration value list.
