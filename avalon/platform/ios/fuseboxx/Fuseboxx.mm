@@ -32,19 +32,19 @@ public:
         [::FuseAPI setPlatform:[NSString stringWithUTF8String:game_Platform.c_str()]];
     }
 
-    virtual int registerEvent(const std::string &message, const std::map<std::string,std::string> &dict) override
+    virtual int registerEvent(const std::string &message, const std::map<std::string,double> &dict) override
     {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         for(const auto &it: dict)
-            [dictionary setObject:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.second.c_str()]];
+            [dictionary setObject:[NSNumber numberWithDouble:it.second] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         return [::FuseAPI registerEvent:[NSString stringWithUTF8String:message.c_str()] withDict:dictionary];
     }
 
-    virtual int registerEvent(const std::string &name,const std::string &param_name, const std::string &param_value, const std::map<std::string,std::string> &variables) override
+    virtual int registerEvent(const std::string &name,const std::string &param_name, const std::string &param_value, const std::map<std::string,double> &variables) override
     {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
         for(const auto &it: variables)
-            [dictionary setObject:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.second.c_str()]];
+            [dictionary setObject:[NSNumber numberWithDouble:it.second] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         return [::FuseAPI registerEvent:[NSString stringWithUTF8String:name.c_str()] ParameterName:[NSString stringWithUTF8String:param_name.c_str()] ParameterValue:[NSString stringWithUTF8String:param_value.c_str()] Variables:dictionary];
     }
 

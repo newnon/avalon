@@ -807,7 +807,7 @@ public:
      * @param _dict [NSDictionary*] A dictionary of values associated with the event
      * @retval [int] Indicates whether the event information is valid.  Corresponds to kFuseEventErrors.
      */
-    virtual int registerEvent(const std::string &message, const std::map<std::string,std::string> &dict) = 0;
+    virtual int registerEvent(const std::string &message, const std::map<std::string,double> &dict) = 0;
 
     /*!
      * @brief This method will send a named event (with values) to the Fuse system for tracking
@@ -840,7 +840,7 @@ public:
      * @retval [int] Indicates whether the event information is valid.  Corresponds to kFuseEventErrors.
      * @since FuseAPI version 1.26
      */
-    virtual int registerEvent(const std::string &name,const std::string &param_name, const std::string &param_value, const std::map<std::string,std::string> &variables) = 0;
+    virtual int registerEvent(const std::string &name,const std::string &param_name, const std::string &param_value, const std::map<std::string,double> &variables) = 0;
 
     #pragma mark Game Crash Registration
     /*!
