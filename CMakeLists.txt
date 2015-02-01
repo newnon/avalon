@@ -133,7 +133,7 @@ add_library(avalon STATIC
 )
 
 include_directories(
-  ..
+  .
 )
 
 set_target_properties(avalon
