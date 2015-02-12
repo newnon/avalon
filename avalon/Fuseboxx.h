@@ -361,7 +361,7 @@ public:
      @see FuseAPI::migrateFriends: for more information on migrating friends
      @since Fuse API version 1.34.1
      */
-    virtual void friendsMigrated(const std::string &fuse_id, kFuseFriendErrors error);
+    virtual void friendsMigrated(const std::string &fuse_id, kFuseFriendErrors error) {}
     
     /*!
      * @brief This method indicates when the friends list on the client has been updated from the server
