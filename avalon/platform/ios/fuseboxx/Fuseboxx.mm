@@ -6,11 +6,15 @@
 @end
 
 @interface IOSFuseAdDelegate : NSObject <FuseAdDelegate> {
+    avalon::FuseAdDelegate* _delegate;
 }
+- (id) initWithDelegate:(avalon::FuseAdDelegate*)delegate;
 @end
 
 @interface IOSFuseOverlayDelegate : NSObject <FuseOverlayDelegate> {
+    avalon::FuseOverlayDelegate* _delegate;
 }
+- (id) initWithDelegate:(avalon::FuseOverlayDelegate*)delegate;
 @end
 
 namespace avalon {
@@ -18,7 +22,7 @@ namespace avalon {
 class IOSFuseAPI : public FuseAPI
 {
 public:
-    IOSFuseAPI():_nativeDelegate([[IOSFuseDelegate alloc] init]),_delegate(nullptr)
+    IOSFuseAPI():_nativeDelegate([[IOSFuseDelegate alloc] init]),_delegate(nullptr),_libraryVersion([[::FuseAPI libraryVersion] UTF8String])
     {
     }
     virtual void startSession(const std::string &game_id, FuseDelegate *delegate, bool autoRegisterForPush) override
@@ -60,12 +64,12 @@ public:
 
     virtual void showAdWithDelegate(FuseAdDelegate *delegate) override
     {
-        [::FuseAPI showAdWithDelegate:[[IOSFuseAdDelegate alloc] init]];
+        [::FuseAPI showAdWithDelegate:[[IOSFuseAdDelegate alloc] initWithDelegate:delegate]];
     }
 
     virtual void showAdWithDelegate(FuseAdDelegate *delegate, const std::string &zone) override
     {
-        [::FuseAPI showAdWithDelegate:[[IOSFuseAdDelegate alloc] init] adZone:[NSString stringWithUTF8String:zone.c_str()]];
+        [::FuseAPI showAdWithDelegate:[[IOSFuseAdDelegate alloc] initWithDelegate:delegate] adZone:[NSString stringWithUTF8String:zone.c_str()]];
     }
 
     virtual void checkAdAvailable() override
@@ -75,12 +79,12 @@ public:
 
     virtual void checkAdAvailableWithDelegate(FuseAdDelegate *delegate) override
     {
-        [::FuseAPI checkAdAvailableWithDelegate:[[IOSFuseAdDelegate alloc] init]];
+        [::FuseAPI checkAdAvailableWithDelegate:[[IOSFuseAdDelegate alloc] initWithDelegate:delegate]];
     }
     
     virtual void checkAdAvailableWithDelegate(FuseAdDelegate *delegate, const std::string &adZone) override
     {
-        [::FuseAPI checkAdAvailableWithDelegate:[[IOSFuseAdDelegate alloc] init] withAdZone:[NSString stringWithUTF8String:adZone.c_str()]];
+        [::FuseAPI checkAdAvailableWithDelegate:[[IOSFuseAdDelegate alloc] initWithDelegate:delegate] withAdZone:[NSString stringWithUTF8String:adZone.c_str()]];
     }
 
     virtual void preLoadAdForZone(const std::string &adZone) override
@@ -100,7 +104,7 @@ public:
 
     virtual void displayMoreGames(FuseOverlayDelegate *delegate) override
     {
-        [::FuseAPI displayMoreGames:[[IOSFuseOverlayDelegate alloc] init]];
+        [::FuseAPI displayMoreGames:[[IOSFuseOverlayDelegate alloc] initWithDelegate:delegate]];
     }
 
     virtual void registerGender(kFuseGender gender) override
@@ -746,15 +750,33 @@ FuseAPI& FuseAPI::getInstance()
 @end
 
 @implementation IOSFuseAdDelegate
+- (id) initWithDelegate:(avalon::FuseAdDelegate*)delegate
+{
+    self = [super init];
+    if(self)
+        _delegate = delegate;
+    return self;
+}
+
 -(void) adWillClose
 {
-    
+    if(_delegate)
+        _delegate->adWillClose();
 }
 @end
 
 @implementation IOSFuseOverlayDelegate
+- (id) initWithDelegate:(avalon::FuseOverlayDelegate*)delegate
+{
+    self = [super init];
+    if(self)
+        _delegate = delegate;
+    return self;
+}
+
 -(void) overlayWillClose
 {
-    
+    if(_delegate)
+        _delegate->overlayWillClose();
 }
 @end
