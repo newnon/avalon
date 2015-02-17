@@ -31,8 +31,6 @@ void Notifications::schedule(const std::string &message, long long time, int id,
     notification.userInfo = infoDict;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-    
-    [notification release];
 }
 
 void Notifications::cancel(int id)
@@ -68,7 +66,6 @@ std::vector<std::string> Notifications::getScheduledIds()
         ret.push_back([[notification.userInfo objectForKey:@"_id"] cStringUsingEncoding:NSUTF8StringEncoding]);
     }
     return ret;
-
 }
     
 void Notifications::setLocalNotificationsDelegate(LocalNotificationsDelegate *delegate)
@@ -234,6 +231,10 @@ void Notifications::unregisterForRemoteNotifications()
 {
     NSDictionary *launchOptions = [notification userInfo] ;
     
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    
     UILocalNotification *localNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotification)
     {
@@ -243,7 +244,6 @@ void Notifications::unregisterForRemoteNotifications()
         [dict setValue:[NSNumber numberWithBool:NO] forKey:@"remote"];
         [dict setValue:[NSDictionary dictionaryWithObjectsAndKeys:localNotification.alertBody, @"alert", [NSNumber numberWithInteger:localNotification.applicationIconBadgeNumber], @"badge", localNotification.soundName, @"sound", nil] forKey:@"aps"];
         _notificationDictionary = dict;
-        [_notificationDictionary retain];
         return;
     }
     NSDictionary *userInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -254,7 +254,6 @@ void Notifications::unregisterForRemoteNotifications()
         [dict setValue:[NSNumber numberWithBool:YES] forKey:@"remote"];
         [dict setValue:[NSNumber numberWithBool:YES] forKey:@"active"];
         _notificationDictionary = dict;
-        [_notificationDictionary retain];
         return;
     }
 }

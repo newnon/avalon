@@ -125,7 +125,7 @@
 		A55885E019A4BA9C00914838 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885DD19A4BA9C00914838 /* WebView.mm */; };
 		A55885E319A4BC9400914838 /* url.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E119A4BC9400914838 /* url.mm */; };
 		A55885E419A4BC9400914838 /* WebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E219A4BC9400914838 /* WebView.mm */; };
-		A55885E619A4BC9F00914838 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E519A4BC9F00914838 /* Notifications.mm */; };
+		A55885E619A4BC9F00914838 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E519A4BC9F00914838 /* Notifications.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A55885EA19A4BCD600914838 /* GoogleAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55885E819A4BCB800914838 /* GoogleAnalytics.mm */; };
 		A55885F419A4C87D00914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A558860119A4C89000914838 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -375,8 +375,8 @@
 		A5C1C63E1A164DCD0092ABC7 /* AdGeneration.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C1C63D1A164DCD0092ABC7 /* AdGeneration.h */; };
 		A5C1C64D1A19F6870092ABC7 /* AdGeneration.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5C1C63D1A164DCD0092ABC7 /* AdGeneration.h */; };
 		A5D08BAC18F6F5B100B4EBA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
-		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; };
-		A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */; };
+		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A5D327671900507400A65D25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5F0C91C1922343A006B8457 /* GADAdMobExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = A5F0C9121922343A006B8457 /* GADAdMobExtras.h */; };
 		A5F0C91D1922343A006B8457 /* GADAdNetworkExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = A5F0C9131922343A006B8457 /* GADAdNetworkExtras.h */; };

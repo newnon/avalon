@@ -1,10 +1,15 @@
 #include "avalon/Notifications.h"
 
-@interface NotificationChecker : NSObject
+@interface MacNotificationDelegate : NSObject<NSUserNotificationCenterDelegate>
+{
+    avalon::LocalNotificationsDelegate* _delegate;
+}
+-(id)initWithDelegate:(avalon::LocalNotificationsDelegate*) delegate;
 @end
 
 static BOOL _launchedWithNotification = NO;
 static NSDictionary *_notificationDictionary = nil;
+static MacNotificationDelegate *macDelegate = nil;
 
 static avalon::LocalNotificationsDelegate *_localNotificationsDelegate = nullptr;
 static avalon::RemoteNotificationsDelegate *_remoteNotificationsDelegate = nullptr;
@@ -13,31 +18,87 @@ namespace avalon {
     
 void Notifications::schedule(const std::string &message, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
 {
+    //Initalize new notification
+    NSUserNotification *notification = [[NSUserNotification alloc] init];
+    //Set the title of the notification
+    [notification setTitle:[[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:@"CFBundleDisplayName"]];
+    //Set the text of the notification
+    [notification setInformativeText:[NSString stringWithCString:message.c_str() encoding:NSUTF8StringEncoding]];
+    //Set the time and date on which the nofication will be deliverd (for example 20 secons later than the current date and time)
+    [notification setDeliveryDate:[NSDate dateWithTimeIntervalSince1970:time]];
+    //Set the sound, this can be either nil for no sound, NSUserNotificationDefaultSoundName for the default sound (tri-tone) and a string of a .caf file that is in the bundle (filname and extension)
+    if(sound.empty())
+        notification.soundName = NSUserNotificationDefaultSoundName;
+    else
+        notification.soundName = [NSString stringWithCString:sound.c_str() encoding:NSUTF8StringEncoding];
+    
+    notification.hasActionButton = NO;
+    
+    NSNumber* key = [NSNumber numberWithInt:id];
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:key forKey:@"_id"];
+    notification.userInfo = infoDict;
+    
+    //Get the default notification center
+    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+    //Scheldule our NSUserNotification
+    [center scheduleNotification:notification];
 }
 
 void Notifications::cancel(int id)
 {
+    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+    NSNumber* key = [NSNumber numberWithInt:id];
+    for(NSUserNotification *notification in [center scheduledNotifications]) {
+        if([[notification.userInfo objectForKey:@"_id"] isEqualToNumber:key]) {
+            [center removeScheduledNotification:notification];
+        }
+    }
 }
     
 void Notifications::cancelAll()
 {
+    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+    for(NSUserNotification *notification in [center scheduledNotifications]) {
+        [center removeScheduledNotification:notification];
+    }
+
 }
     
 bool Notifications::isScheduled(int id)
 {
+    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
+    NSNumber* key = [NSNumber numberWithInt:id];
+    for(NSUserNotification *notification in [center scheduledNotifications]) {
+        if([[notification.userInfo objectForKey:@"_id"] isEqualToNumber:key]) {
+            return true;
+        }
+    }
     return false;
 }
     
 std::vector<std::string> Notifications::getScheduledIds()
 {
+    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     std::vector<std::string> ret;
+    for(NSUserNotification *notification in [center scheduledNotifications]) {
+        ret.push_back([[notification.userInfo objectForKey:@"_id"] cStringUsingEncoding:NSUTF8StringEncoding]);
+    }
     return ret;
-
 }
     
 void Notifications::setLocalNotificationsDelegate(LocalNotificationsDelegate *delegate)
 {
+    NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
     _localNotificationsDelegate = delegate;
+    macDelegate = [[MacNotificationDelegate alloc] initWithDelegate:delegate];
+    if(delegate)
+    {
+        [center setDelegate:[[MacNotificationDelegate alloc] initWithDelegate:delegate]];
+    }
+    else
+    {
+        [center setDelegate:nil];
+    }
 }
 void Notifications::setRemoteNotificationsDelegate(RemoteNotificationsDelegate *delegate)
 {
@@ -61,66 +122,43 @@ void Notifications::unregisterForRemoteNotifications()
 {
 }
     
-    
-    
 }
 
 
-@implementation NotificationChecker
+@implementation MacNotificationDelegate
 
-+ (void)load
+-(id)initWithDelegate:(avalon::LocalNotificationsDelegate*) delegate
 {
-    [NSApplication sharedApplication].delegate = nil;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunching:)
-                                                 name: NSApplicationDidFinishLaunchingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveLocalNotification:)
-                                                 name: @"NSApplicationDidReceiveLocalNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveRemoteNotification:)
-                                                 name: @"NSApplicationDidReceiveRemoteNotification" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForeground:)
-                                                 name: NSApplicationWillBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRegisterForRemoteNotifications:)
-                                                 name: @"NSApplicationDidRegisterForRemoteNotificationsNotification" object:nil];
-}
-
-+ (void)willEnterForeground:(NSNotification *)notification
-{
-    _launchedWithNotification = NO;
-}
-
-+ (void)didRegisterForRemoteNotifications:(NSNotification *)notification
-{
-    if(_remoteNotificationsDelegate)
+    self = [super init];
+    if(self)
     {
-        std::vector<unsigned char> token;
-        std::string errorString;
-        NSData *data = [notification.userInfo objectForKey:@"data"];
-        if(data)
-        {
-            token.resize(data.length);
-            memcpy(&token.front(), data.bytes, data.length);
-        }
-        NSError *error = [notification.userInfo objectForKey:@"error"];
-        if(error)
-        {
-            errorString = [[error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding];
-        }
-        _remoteNotificationsDelegate->onRegisterForRemoteNotifications(token, errorString);
+        _delegate = delegate;
     }
+    return self;
 }
 
-+ (void)didReceiveLocalNotification:(NSNotification *)notification
+-(void) dealloc
 {
-    bool active = true;
-    if(!_launchedWithNotification && !active)
-        _launchedWithNotification = YES;
     
-    if(_localNotificationsDelegate)
+}
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didDeliverNotification:(NSUserNotification *)notification
+{
+    
+}
+
+- (void)userNotificationCenter:(NSUserNotificationCenter *)center didActivateNotification:(NSUserNotification *)notification
+{
+    if(_delegate)
     {
         std::string message;
         std::string sound;
-        unsigned badge = 0;
         std::unordered_map<std::string,std::string> userParams;
+        
+        if(notification.informativeText)
+            message = [notification.informativeText cStringUsingEncoding:NSUTF8StringEncoding];
+        if(notification.soundName)
+            sound = [notification.soundName cStringUsingEncoding:NSUTF8StringEncoding];
         
         NSEnumerator *enumerator = [notification.userInfo keyEnumerator];
         id key;
@@ -133,71 +171,15 @@ void Notifications::unregisterForRemoteNotifications()
                     userParams.insert(std::make_pair([key cStringUsingEncoding:NSUTF8StringEncoding], temp));
             }
         }
-        _localNotificationsDelegate->onLocalNotification(active, message, sound, badge, userParams);
+
+        _delegate->onLocalNotification(true, message, sound, 0, userParams);
     }
+    
 }
 
-+ (void)didReceiveRemoteNotification:(NSNotification *)notification
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification
 {
-    bool active = true;
-    if(!_launchedWithNotification && !active)
-        _launchedWithNotification = YES;
-    
-    if(_remoteNotificationsDelegate)
-    {
-        NSDictionary *userInfo = notification.userInfo;
-        std::string message;
-        std::string sound;
-        unsigned badge = 0;
-        std::unordered_map<std::string,std::string> userParams;
-        
-        NSEnumerator *enumerator = [notification.userInfo keyEnumerator];
-        id key;
-        while ((key = [enumerator nextObject])) {
-            if([key isEqualToString:@"aps"])
-            {
-                NSDictionary *apsInfo = [userInfo objectForKey:key];
-                
-                const char *pMessage = [[apsInfo objectForKey:@"alert"] cStringUsingEncoding:NSUTF8StringEncoding];
-                if (pMessage)
-                    message = pMessage;
-                
-                const char *pSound = [[apsInfo objectForKey:@"sound"] cStringUsingEncoding:NSUTF8StringEncoding];
-                if (pSound)
-                    sound = pSound;
-                
-                badge = [[apsInfo objectForKey:@"badge"] intValue];
-            }
-            else
-            {
-                id value = [notification.userInfo objectForKey:key];
-                if ([value respondsToSelector:@selector(cStringUsingEncoding:)])
-                {
-                    const char *temp =[value cStringUsingEncoding:NSUTF8StringEncoding];
-                    if(temp)
-                        userParams.insert(std::make_pair([key cStringUsingEncoding:NSUTF8StringEncoding], temp));
-                }
-            }
-        }
-        _remoteNotificationsDelegate->onRemoteNotification(active, message, sound, badge, userParams);
-    }
-}
-
-+ (void)didFinishLaunching:(NSNotification *)notification
-{
-    NSDictionary *launchOptions = [notification userInfo] ;
-    
-    NSDictionary *userInfo = [launchOptions objectForKey: NSApplicationLaunchUserNotificationKey];
-    if (userInfo)
-    {
-        _launchedWithNotification = YES;
-        NSDictionary *dict = [NSDictionary dictionaryWithDictionary:userInfo];
-        [dict setValue:[NSNumber numberWithBool:YES] forKey:@"remote"];
-        [dict setValue:[NSNumber numberWithBool:YES] forKey:@"active"];
-        _notificationDictionary = dict;
-        [_notificationDictionary retain];
-        return;
-    }
+    return YES;
 }
 
 @end
