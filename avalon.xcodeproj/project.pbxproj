@@ -334,6 +334,9 @@
 		A59003F41A6D1DE800AF12A4 /* Fuseboxx.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A59003F31A6D1DDD00AF12A4 /* Fuseboxx.h */; };
 		A59E86A61925E5390082E270 /* VungleInterstitialCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A59E86881925E5390082E270 /* VungleInterstitialCustomEvent.h */; };
 		A59E86A71925E5390082E270 /* VungleInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A59E86891925E5390082E270 /* VungleInterstitialCustomEvent.m */; };
+		A5A61D641AB087D2002A7CB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5A61D6E1AB0883F002A7CB7 /* ShareManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A61D6D1AB08835002A7CB7 /* ShareManager.h */; };
+		A5A61D711AB08A20002A7CB7 /* ShareManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5A61D701AB08A20002A7CB7 /* ShareManager.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A5A759BA19249DFE00C44FBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5A75AB91924A01F00C44FBF /* vunglepub in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A7596519249C6300C44FBF /* vunglepub */; };
 		A5A75AF21924EA7D00C44FBF /* MPCloseButtonX.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = A58EA835192390FB000D0B28 /* MPCloseButtonX.png */; };
@@ -661,6 +664,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A59003F41A6D1DE800AF12A4 /* Fuseboxx.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5A61D651AB087D2002A7CB7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A5A61D6E1AB0883F002A7CB7 /* ShareManager.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1146,9 @@
 		A59E86871925E5390082E270 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		A59E86881925E5390082E270 /* VungleInterstitialCustomEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VungleInterstitialCustomEvent.h; sourceTree = "<group>"; };
 		A59E86891925E5390082E270 /* VungleInterstitialCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VungleInterstitialCustomEvent.m; sourceTree = "<group>"; };
+		A5A61D6B1AB087D2002A7CB7 /* libShare iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libShare iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5A61D6D1AB08835002A7CB7 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareManager.h; path = avalon/ShareManager.h; sourceTree = "<group>"; };
+		A5A61D701AB08A20002A7CB7 /* ShareManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShareManager.mm; path = avalon/platform/ios/sharemanager/ShareManager.mm; sourceTree = "<group>"; };
 		A5A7596519249C6300C44FBF /* vunglepub */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = vunglepub; path = avalon/platform/ios/mopub/Networks/vunglepub.framework/vunglepub; sourceTree = "<group>"; };
 		A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMoPubVungleAdaptor iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A75A6419249F5400C44FBF /* vunglepub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vunglepub.framework; path = avalon/platform/ios/mopub/Networks/vunglepub.framework; sourceTree = "<group>"; };
@@ -1365,6 +1381,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5A61D631AB087D2002A7CB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5A61D641AB087D2002A7CB7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5A759B919249DFE00C44FBF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1446,6 +1470,7 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				A5A61D6C1AB0881D002A7CB7 /* ShareManager */,
 				A5C1C5DD1A164B2B0092ABC7 /* AdGeneration */,
 				A576958C1A0E8C41002FDCB5 /* Ads */,
 				A57695831A0E6E1F002FDCB5 /* iAd */,
@@ -1495,6 +1520,7 @@
 				A5C1C6091A164D1C0092ABC7 /* libAdGeneration iOS.a */,
 				A56002A21A27484F00235B77 /* libFacebookAds iOS.a */,
 				A59003E91A6D124000AF12A4 /* libFuseboxx iOS.a */,
+				A5A61D6B1AB087D2002A7CB7 /* libShare iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2315,6 +2341,23 @@
 			path = SDK;
 			sourceTree = "<group>";
 		};
+		A5A61D6C1AB0881D002A7CB7 /* ShareManager */ = {
+			isa = PBXGroup;
+			children = (
+				A5A61D6F1AB08A10002A7CB7 /* ShareManager-ios */,
+				A5A61D6D1AB08835002A7CB7 /* ShareManager.h */,
+			);
+			name = ShareManager;
+			sourceTree = "<group>";
+		};
+		A5A61D6F1AB08A10002A7CB7 /* ShareManager-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A5A61D701AB08A20002A7CB7 /* ShareManager.mm */,
+			);
+			name = "ShareManager-ios";
+			sourceTree = "<group>";
+		};
 		A5A75A1419249F2700C44FBF /* ThirdPartySDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -3080,6 +3123,23 @@
 			productReference = A59003E91A6D124000AF12A4 /* libFuseboxx iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5A61D5D1AB087D2002A7CB7 /* Share iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5A61D681AB087D2002A7CB7 /* Build configuration list for PBXNativeTarget "Share iOS" */;
+			buildPhases = (
+				A5A61D5E1AB087D2002A7CB7 /* Sources */,
+				A5A61D631AB087D2002A7CB7 /* Frameworks */,
+				A5A61D651AB087D2002A7CB7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Share iOS";
+			productName = Avalon;
+			productReference = A5A61D6B1AB087D2002A7CB7 /* libShare iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A5A7596F19249DFE00C44FBF /* MoPubVungleAdaptor iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5A75A1019249DFE00C44FBF /* Build configuration list for PBXNativeTarget "MoPubVungleAdaptor iOS" */;
@@ -3229,6 +3289,7 @@
 				A547D0571A06E8DA00E6D357 /* Payment Mac */,
 				A50BC22C18E9842F00F1F979 /* Web iOS */,
 				A55885C419A4B92600914838 /* Web Mac */,
+				A5A61D5D1AB087D2002A7CB7 /* Share iOS */,
 				A55885EE19A4C87D00914838 /* UI iOS */,
 				A55885FC19A4C89000914838 /* UI Mac */,
 				A50BC25218E99F5400F1F979 /* Flurry iOS */,
@@ -3517,6 +3578,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A59003F21A6D1DAC00AF12A4 /* Fuseboxx.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5A61D5E1AB087D2002A7CB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5A61D711AB08A20002A7CB7 /* ShareManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4489,6 +4558,30 @@
 			};
 			name = Release;
 		};
+		A5A61D691AB087D2002A7CB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Share iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A5A61D6A1AB087D2002A7CB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Share iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A5A75A1119249DFE00C44FBF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4867,6 +4960,15 @@
 			buildConfigurations = (
 				A59003E71A6D124000AF12A4 /* Debug */,
 				A59003E81A6D124000AF12A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5A61D681AB087D2002A7CB7 /* Build configuration list for PBXNativeTarget "Share iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5A61D691AB087D2002A7CB7 /* Debug */,
+				A5A61D6A1AB087D2002A7CB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
