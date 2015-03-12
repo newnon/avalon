@@ -1,5 +1,5 @@
 //
-//  WebView.mm
+//  ShareManager.mm
 //
 //
 
@@ -20,7 +20,7 @@
 
 - (instancetype)initWithText:(NSString *)text andLongText:(NSString *)longText andHashTag:(NSString *)hashTag andAppId:(NSString *)appId
 {
-    self =  [super init];
+    self =  [super initWithPlaceholderItem:text];
     if(self)
     {
         self->_text = text;
@@ -38,18 +38,44 @@
     }
     else if ([self.activityType isEqualToString:UIActivityTypePostToTwitter])
     {
-        return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@ #%@", _text, _appId, _hashTag];
+        if([_hashTag length] != 0)
+        {
+            if([_appId length] != 0)
+                return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@ #%@", _text, _appId, _hashTag];
+            else
+                return [NSString stringWithFormat:@"%@ #%@", _text, _hashTag];
+        }
+        else
+        {
+            if([_appId length] != 0)
+                return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@", _text, _appId];
+            else
+                return [NSString stringWithFormat:@"%@", _text];
+        }
     }
     else
     {
-        return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@ #%@", _longText, _appId, _hashTag];
+        if([_hashTag length] != 0)
+        {
+            if([_appId length] != 0)
+                return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@ #%@", _longText, _appId, _hashTag];
+            else
+                return [NSString stringWithFormat:@"%@ #%@", _longText, _hashTag];
+        }
+        else
+        {
+            if([_appId length] != 0)
+                return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@", _longText, _appId];
+            else
+                return [NSString stringWithFormat:@"%@", _longText];
+        }
     }
     return nil;
 }
 @end
 
 namespace avalon {
-    
+
 class iOSShareManager : public ShareManager
 {
 public:
@@ -106,14 +132,19 @@ public:
                                             UIActivityTypeAssignToContact,
                                             UIActivityTypeAddToReadingList,
                                             UIActivityTypeAirDrop];
+        if( [activityViewController respondsToSelector:@selector(popoverPresentationController)] )
+        {
+            // iOS8
+            activityViewController.popoverPresentationController.sourceView = UIApplication.sharedApplication.keyWindow;
+        }
         [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:activityViewController animated:YES completion:^{}];
     }
-    
+
     iOSShareManager()
     {
-        
-    }
 
+    }
+    
     virtual ~iOSShareManager()
     {
     }
@@ -122,7 +153,7 @@ private:
     std::string _appId;
     std::string _hashTag;
 };
-
+    
 ShareManager* ShareManager::getInstance()
 {
     static iOSShareManager* instance = new iOSShareManager();

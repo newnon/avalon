@@ -1148,7 +1148,7 @@
 		A59E86891925E5390082E270 /* VungleInterstitialCustomEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VungleInterstitialCustomEvent.m; sourceTree = "<group>"; };
 		A5A61D6B1AB087D2002A7CB7 /* libShare iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libShare iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A61D6D1AB08835002A7CB7 /* ShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareManager.h; path = avalon/ShareManager.h; sourceTree = "<group>"; };
-		A5A61D701AB08A20002A7CB7 /* ShareManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShareManager.mm; path = avalon/platform/ios/sharemanager/ShareManager.mm; sourceTree = "<group>"; };
+		A5A61D701AB08A20002A7CB7 /* ShareManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ShareManager.mm; path = avalon/platform/ios/share/ShareManager.mm; sourceTree = "<group>"; };
 		A5A7596519249C6300C44FBF /* vunglepub */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = vunglepub; path = avalon/platform/ios/mopub/Networks/vunglepub.framework/vunglepub; sourceTree = "<group>"; };
 		A5A75A1319249DFE00C44FBF /* libMoPubVungleAdaptor iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libMoPubVungleAdaptor iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5A75A6419249F5400C44FBF /* vunglepub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vunglepub.framework; path = avalon/platform/ios/mopub/Networks/vunglepub.framework; sourceTree = "<group>"; };

@@ -104,6 +104,12 @@ ifneq (,$(findstring ui,$(AVALON_FEATURES)))
     LOCAL_SRC_FILES += avalon/platform/android/ui/AlertNative.cpp
 endif
 
+ifneq (,$(findstring share,$(AVALON_FEATURES)))
+    LOCAL_CFLAGS += -DAVALON_CONFIG_SHARE_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_SHARE_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/share/ShareManager.cpp
+endif
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 
