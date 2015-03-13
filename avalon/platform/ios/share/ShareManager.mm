@@ -6,10 +6,10 @@
 #include "avalon/ShareManager.h"
 
 @interface ShareText :UIActivityItemProvider
-@property(nonatomic,readonly) NSString *text;
-@property(nonatomic,readonly) NSString *longText;
-@property(nonatomic,readonly) NSString *hashTag;
-@property(nonatomic,readonly) NSString *appId;
+@property(nonatomic, readonly, retain) NSString *text;
+@property(nonatomic, readonly, retain) NSString *longText;
+@property(nonatomic, readonly, retain) NSString *hashTag;
+@property(nonatomic, readonly, retain) NSString *appId;
 @end
 
 @implementation ShareText :UIActivityItemProvider
@@ -132,12 +132,18 @@ public:
                                             UIActivityTypeAssignToContact,
                                             UIActivityTypeAddToReadingList,
                                             UIActivityTypeAirDrop];
-        if( [activityViewController respondsToSelector:@selector(popoverPresentationController)] )
-        {
-            // iOS8
-            activityViewController.popoverPresentationController.sourceView = UIApplication.sharedApplication.keyWindow;
+        
+        UIViewController *rootViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+        //if iPhone
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+            [rootViewController presentViewController:activityViewController animated:YES completion:nil];
         }
-        [UIApplication.sharedApplication.keyWindow.rootViewController presentViewController:activityViewController animated:YES completion:^{}];
+        //if iPad
+        else {
+            // Change Rect to position Popover
+            UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
+            [popup presentPopoverFromRect:CGRectMake(rootViewController.view.frame.size.width/2, rootViewController.view.frame.size.height/4, 0, 0)inView:rootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        }
     }
 
     iOSShareManager()
