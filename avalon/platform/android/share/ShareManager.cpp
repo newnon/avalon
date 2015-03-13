@@ -42,7 +42,22 @@ public:
     {
     	if (succeed)
     	{
-    		share(text, longText, outputFile);
+    		cocos2d::JniMethodInfo methodInfo;
+
+    		if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,CLASS_NAME,"shareScreenshot", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"))
+    		{
+    			jstring jtext = methodInfo.env->NewStringUTF(text.c_str());
+    			jstring jlongText = methodInfo.env->NewStringUTF(longText.c_str());
+    			jstring jimage = methodInfo.env->NewStringUTF(outputFile.c_str());
+    			methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jtext, jlongText, jimage);
+    			methodInfo.env->DeleteLocalRef(jtext);
+    			methodInfo.env->DeleteLocalRef(jimage);
+    			methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    		}
+    		else
+    		{
+    			LOGD("jni:shareFile not found");
+    		}
     	}
     	else
     	{

@@ -117,6 +117,19 @@ public abstract class ShareHelper
     	_hashTag = hashTag;
     }
     
+    public static void shareScreenshot(String text, String longText, String path)
+    {
+    	// try to copy file to default share location
+    	final File inputFile = new File(path);
+    	final File tempFile = new File(activity.getCacheDir(), "share.jpg");
+    	if(inputFile.exists())
+    	{
+    		copyFile(inputFile, tempFile);
+    		inputFile.delete();
+    	}
+    	internalShareFile(text, longText, tempFile);
+    }
+    
     public static void shareFile(String text, String longText, String path)
     {
 
