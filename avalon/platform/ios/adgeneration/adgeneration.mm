@@ -78,7 +78,7 @@ public:
                                    @"w" : @(width),
                                    @"h" : @(height)
                                    };
-        _adsView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.rootViewController.view.bounds;
+        _adsView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.rootViewController.view.bounds];
         
         _controller = [[ADGManagerViewController alloc] initWithAdParams :adgparam :_adsView];
         [_controller loadRequest];
