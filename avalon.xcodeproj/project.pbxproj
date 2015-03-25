@@ -103,6 +103,12 @@
 		A547D0801A06EEA900E6D357 /* GAIEcommerceProductAction.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07C1A06EEA900E6D357 /* GAIEcommerceProductAction.h */; };
 		A547D0811A06EEA900E6D357 /* GAIEcommercePromotion.h in Headers */ = {isa = PBXBuildFile; fileRef = A547D07D1A06EEA900E6D357 /* GAIEcommercePromotion.h */; };
 		A547D08B1A06F1EE00E6D357 /* payment.mm in Sources */ = {isa = PBXBuildFile; fileRef = A547D0881A06F1EE00E6D357 /* payment.mm */; };
+		A54E28AF1AC2D1560054B412 /* libAds iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A576959A1A0E8C70002FDCB5 /* libAds iOS.a */; };
+		A54E28B01AC2D1560054B412 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A54E28BC1AC2D2160054B412 /* Chartboost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54E28BB1AC2D2160054B412 /* Chartboost.framework */; };
+		A54E28BF1AC2D2420054B412 /* C2DXChartboost_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = A54E28BE1AC2D2420054B412 /* C2DXChartboost_ios.mm */; };
+		A54E28D71AC2D37D0054B412 /* Chartboost.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A54E28BD1AC2D2330054B412 /* Chartboost.h */; };
+		A54E28D91AC2D3C90054B412 /* Chartboost in Frameworks */ = {isa = PBXBuildFile; fileRef = A54E28D81AC2D3C90054B412 /* Chartboost */; };
 		A5538E271A0AD6B800E949AD /* KKGAIDictionaryBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */; };
 		A5538E281A0AD6B800E949AD /* KKGAIDictionaryBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A5538E291A0AD6B800E949AD /* KKGAIFields.h in Headers */ = {isa = PBXBuildFile; fileRef = A5538E201A0AD6B800E949AD /* KKGAIFields.h */; };
@@ -516,6 +522,13 @@
 			remoteGlobalIDString = A5A7596F19249DFE00C44FBF;
 			remoteInfo = "MoPubVungleAdaptor iOS";
 		};
+		A54E28AB1AC2D1560054B412 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
+		};
 		A56002961A27484F00235B77 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
@@ -593,6 +606,16 @@
 			files = (
 				A5F0C94F19226130006B8457 /* Notifications.h in CopyFiles */,
 				A50D47E7192218E300351428 /* NotificationsAppController.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54E28B31AC2D1560054B412 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A54E28D71AC2D37D0054B412 /* Chartboost.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,6 +907,11 @@
 		A547D07C1A06EEA900E6D357 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
 		A547D07D1A06EEA900E6D357 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
 		A547D0881A06F1EE00E6D357 /* payment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payment.mm; sourceTree = "<group>"; };
+		A54E28B81AC2D1560054B412 /* libChartboost iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libChartboost iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54E28BB1AC2D2160054B412 /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Chartboost.framework; path = "vendors/Chartboost/chartboost-ios-sdk/Chartboost.framework"; sourceTree = "<group>"; };
+		A54E28BD1AC2D2330054B412 /* Chartboost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chartboost.h; path = avalon/Chartboost.h; sourceTree = "<group>"; };
+		A54E28BE1AC2D2420054B412 /* C2DXChartboost_ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = C2DXChartboost_ios.mm; path = avalon/platform/ios/chartboost/C2DXChartboost_ios.mm; sourceTree = "<group>"; };
+		A54E28D81AC2D3C90054B412 /* Chartboost */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Chartboost; path = "vendors/Chartboost/chartboost-ios-sdk/Chartboost.framework/Versions/A/Chartboost"; sourceTree = "<group>"; };
 		A5538E1E1A0AD6B800E949AD /* KKGAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAIDictionaryBuilder.h; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.h; sourceTree = "<group>"; };
 		A5538E1F1A0AD6B800E949AD /* KKGAIDictionaryBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KKGAIDictionaryBuilder.m; path = avalon/platform/mac/googleanalytics/KKGAIDictionaryBuilder.m; sourceTree = "<group>"; };
 		A5538E201A0AD6B800E949AD /* KKGAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KKGAIFields.h; path = avalon/platform/mac/googleanalytics/KKGAIFields.h; sourceTree = "<group>"; };
@@ -1271,6 +1299,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A54E28AE1AC2D1560054B412 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54E28BC1AC2D2160054B412 /* Chartboost.framework in Frameworks */,
+				A54E28D91AC2D3C90054B412 /* Chartboost in Frameworks */,
+				A54E28AF1AC2D1560054B412 /* libAds iOS.a in Frameworks */,
+				A54E28B01AC2D1560054B412 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A55885A019A4AE4E00914838 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1471,6 +1510,7 @@
 			isa = PBXGroup;
 			children = (
 				A5A61D6C1AB0881D002A7CB7 /* ShareManager */,
+				A54E28B91AC2D1D20054B412 /* Chartboost */,
 				A5C1C5DD1A164B2B0092ABC7 /* AdGeneration */,
 				A576958C1A0E8C41002FDCB5 /* Ads */,
 				A57695831A0E6E1F002FDCB5 /* iAd */,
@@ -1521,6 +1561,7 @@
 				A56002A21A27484F00235B77 /* libFacebookAds iOS.a */,
 				A59003E91A6D124000AF12A4 /* libFuseboxx iOS.a */,
 				A5A61D6B1AB087D2002A7CB7 /* libShare iOS.a */,
+				A54E28B81AC2D1560054B412 /* libChartboost iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1528,6 +1569,7 @@
 		A50BC17B18E962DE00F1F979 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A54E28D81AC2D3C90054B412 /* Chartboost */,
 				A57695881A0E6EA8002FDCB5 /* iAd.framework */,
 				A50BC17C18E962DE00F1F979 /* Foundation.framework */,
 				A5A75ACE1924E0E800C44FBF /* CoreFoundation.framework */,
@@ -1724,6 +1766,24 @@
 			);
 			name = "payment-mac";
 			path = avalon/platform/mac/payment;
+			sourceTree = "<group>";
+		};
+		A54E28B91AC2D1D20054B412 /* Chartboost */ = {
+			isa = PBXGroup;
+			children = (
+				A54E28BD1AC2D2330054B412 /* Chartboost.h */,
+				A54E28BA1AC2D1DD0054B412 /* Chartboost-ios */,
+			);
+			name = Chartboost;
+			sourceTree = "<group>";
+		};
+		A54E28BA1AC2D1DD0054B412 /* Chartboost-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A54E28BE1AC2D2420054B412 /* C2DXChartboost_ios.mm */,
+				A54E28BB1AC2D2160054B412 /* Chartboost.framework */,
+			);
+			name = "Chartboost-ios";
 			sourceTree = "<group>";
 		};
 		A558859C19A4AE3B00914838 /* Notifications-mac */ = {
@@ -2897,6 +2957,24 @@
 			productReference = A547D0651A06E8DA00E6D357 /* libPayment Mac.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A54E28A91AC2D1560054B412 /* Chartboost iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A54E28B51AC2D1560054B412 /* Build configuration list for PBXNativeTarget "Chartboost iOS" */;
+			buildPhases = (
+				A54E28AC1AC2D1560054B412 /* Sources */,
+				A54E28AE1AC2D1560054B412 /* Frameworks */,
+				A54E28B31AC2D1560054B412 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A54E28AA1AC2D1560054B412 /* PBXTargetDependency */,
+			);
+			name = "Chartboost iOS";
+			productName = Avalon;
+			productReference = A54E28B81AC2D1560054B412 /* libChartboost iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A558859D19A4AE4E00914838 /* Notifications Mac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A55885A619A4AE4E00914838 /* Build configuration list for PBXNativeTarget "Notifications Mac" */;
@@ -3303,6 +3381,7 @@
 				A57695471A0E6DD6002FDCB5 /* iAd iOS */,
 				A59003DA1A6D124000AF12A4 /* Fuseboxx iOS */,
 				A56002941A27484F00235B77 /* FacebookAds iOS */,
+				A54E28A91AC2D1560054B412 /* Chartboost iOS */,
 				A5ACF0351918B1E500A010A5 /* GoogleAnalytics iOS */,
 				A55885B419A4AEFA00914838 /* GoogleAnalytics Mac */,
 				A58EA778192390A4000D0B28 /* MoPub iOS */,
@@ -3389,6 +3468,14 @@
 				A547D08B1A06F1EE00E6D357 /* payment.mm in Sources */,
 				A5081F221A0BFE460082FBB2 /* RMStore.m in Sources */,
 				A5081EC71A0BFE460082FBB2 /* RMStoreKeychainPersistence.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A54E28AC1AC2D1560054B412 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A54E28BF1AC2D2420054B412 /* C2DXChartboost_ios.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3707,6 +3794,11 @@
 			isa = PBXTargetDependency;
 			target = A5A7596F19249DFE00C44FBF /* MoPubVungleAdaptor iOS */;
 			targetProxy = A50FFF271A1B5CA800952186 /* PBXContainerItemProxy */;
+		};
+		A54E28AA1AC2D1560054B412 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = A54E28AB1AC2D1560054B412 /* PBXContainerItemProxy */;
 		};
 		A56002951A27484F00235B77 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4140,6 +4232,46 @@
 			};
 			name = Release;
 		};
+		A54E28B61AC2D1560054B412 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/Chartboost/chartboost-ios-sdk",
+				);
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/Chartboost/chartboost-ios-sdk/Chartboost.framework/Versions/A",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Chartboost iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A54E28B71AC2D1560054B412 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/Chartboost/chartboost-ios-sdk",
+				);
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/Chartboost/chartboost-ios-sdk/Chartboost.framework/Versions/A",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Chartboost iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A55885A719A4AE4E00914838 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4516,17 +4648,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Avalon.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk",
-					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork",
-				);
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
-					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework/Versions/A",
 					"$(PROJECT_DIR)/avalon/platform/ios/fuseboxx/Fuseboxx-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -4539,17 +4664,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/Avalon.dst;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk",
-					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork",
-				);
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
-					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework/Versions/A",
 					"$(PROJECT_DIR)/avalon/platform/ios/fuseboxx/Fuseboxx-ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -4668,7 +4786,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
 					"$(PROJECT_DIR)/avalon/platform/ios/adgeneration/AdGeneration",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -4689,7 +4806,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
 					"$(PROJECT_DIR)/avalon/platform/ios/adgeneration/AdGeneration",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -4843,6 +4959,15 @@
 			buildConfigurations = (
 				A547D0631A06E8DA00E6D357 /* Debug */,
 				A547D0641A06E8DA00E6D357 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A54E28B51AC2D1560054B412 /* Build configuration list for PBXNativeTarget "Chartboost iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A54E28B61AC2D1560054B412 /* Debug */,
+				A54E28B71AC2D1560054B412 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

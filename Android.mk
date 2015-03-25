@@ -110,6 +110,13 @@ ifneq (,$(findstring share,$(AVALON_FEATURES)))
     LOCAL_SRC_FILES += avalon/platform/android/share/ShareManager.cpp
 endif
 
+ifneq (,$(findstring chartboost,$(AVALON_FEATURES)))
+    LOCAL_CFLAGS += -DAVALON_CONFIG_CHARTBOOST_ENABLED
+    LOCAL_EXPORT_CFLAGS += -DAVALON_CONFIG_CHARTBOOST_ENABLED
+    LOCAL_SRC_FILES += avalon/platform/android/chartboost/ChartboostJni.cpp
+    LOCAL_SRC_FILES += avalon/platform/android/chartboost/Chartboost_android.cpp
+endif
+
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)
 
