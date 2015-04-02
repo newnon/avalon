@@ -79,42 +79,42 @@ namespace avalon {
 class iOSShareManager : public ShareManager
 {
 public:
-    virtual void setAppId(const std::string& appId)
+    virtual void setAppId(const std::string& appId) override
     {
         _appId = appId;
     }
     
-    virtual void setHashTag(const std::string& hashTag)
+    virtual void setHashTag(const std::string& hashTag) override
     {
         _hashTag = hashTag;
     }
 
-    virtual void share(const std::string& text, const std::string& image)
+    virtual void share(const std::string& text, const std::string& image) override
     {
-        share(text, text, image.empty()?nil:[UIImage imageNamed:[NSString stringWithUTF8String:image.c_str()]]);
+        share(text, text, image.empty()?nil:[UIImage imageNamed:[NSString stringWithUTF8String:image.c_str()]], false);
     }
     
-    virtual void share(const std::string& text, const std::string& longText, const std::string& image)
+    virtual void share(const std::string& text, const std::string& longText, const std::string& image) override
     {
-        share(text, longText, image.empty()?nil:[UIImage imageNamed:[NSString stringWithUTF8String:image.c_str()]]);
+        share(text, longText, image.empty()?nil:[UIImage imageNamed:[NSString stringWithUTF8String:image.c_str()]], false);
     }
     
-    virtual void shareScreenshot(const std::string& text)
+    virtual void shareScreenshot(const std::string& text) override
     {
         shareScreenshot(text, text);
     }
 
-    virtual void shareScreenshot(const std::string& text, const std::string& longText)
+    virtual void shareScreenshot(const std::string& text, const std::string& longText) override
     {
         UIWindow *window = UIApplication.sharedApplication.keyWindow;
         UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, UIScreen.mainScreen.scale);
         [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
         UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        share(text, longText, image);
+        share(text, longText, image, false);
     }
     
-    void share(const std::string& text, const std::string& longText, UIImage *image)
+    void share(const std::string& text, const std::string& longText, UIImage *image, bool simple)
     {
         ShareText *shareText = nil;
         if(!text.empty())
@@ -144,6 +144,11 @@ public:
             UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
             [popup presentPopoverFromRect:CGRectMake(rootViewController.view.frame.size.width/2, rootViewController.view.frame.size.height/4, 0, 0)inView:rootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         }
+    }
+    
+    virtual void shareString(const std::string& text) override
+    {
+        share(text, text, nullptr, true);
     }
 
     iOSShareManager()

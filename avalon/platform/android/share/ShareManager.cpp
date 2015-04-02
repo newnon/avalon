@@ -81,6 +81,7 @@ public:
     	    jstring jimage = methodInfo.env->NewStringUTF(image.c_str());
     	    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jtext, jlongText, jimage);
     	    methodInfo.env->DeleteLocalRef(jtext);
+    	    methodInfo.env->DeleteLocalRef(jlongText);
     	    methodInfo.env->DeleteLocalRef(jimage);
     	    methodInfo.env->DeleteLocalRef(methodInfo.classID);
     	}
@@ -89,6 +90,24 @@ public:
     	    LOGD("jni:shareFile not found");
     	}
     }
+    
+    virtual void shareString(const std::string& text) override
+    {
+        cocos2d::JniMethodInfo methodInfo;
+
+    	if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo,CLASS_NAME,"shareString", "(Ljava/lang/String;)V"))
+    	{
+    		jstring jtext = methodInfo.env->NewStringUTF(text.c_str());
+    	    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jtext);
+    	    methodInfo.env->DeleteLocalRef(jtext);
+    	    methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    	}
+    	else
+    	{
+    	    LOGD("jni:shareFile not found");
+    	}
+    }
+
     
     AndroidShareManager()
     {

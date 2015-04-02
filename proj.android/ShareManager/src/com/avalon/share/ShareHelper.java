@@ -146,4 +146,16 @@ public abstract class ShareHelper
     	}
     	internalShareFile(text, longText, tempFile);
     }
+    
+    public static void shareString(String text)
+    {
+    	// create an intent, so the user can choose which application he/she wants to use to share this file
+    	final Intent intent = ShareCompat.IntentBuilder.from(activity)
+    			.setText(text)
+    			//.setChooserTitle(R.string.share_title)
+    			.createChooserIntent()
+    			.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+
+    	activity.startActivity(intent);
+    }
 }

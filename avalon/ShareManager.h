@@ -47,6 +47,11 @@ public:
      */
     virtual void shareScreenshot(const std::string& text, const std::string& longText) = 0;
     
+    /*
+     Share your string without adding anything.
+     */
+    virtual void shareString(const std::string& text) = 0;
+    
     virtual ~ShareManager() {}
 };
 
