@@ -33,8 +33,10 @@
 
 - (id)item {
     if ([self.activityType isEqualToString:UIActivityTypeMail] || [self.activityType isEqualToString:UIActivityTypeMessage])
-    {
-        return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@", _text, _appId];
+    {   if([_appId length] != 0)
+            return [NSString stringWithFormat:@"%@ https://itunes.apple.com/app/id%@", _text, _appId];
+        else
+            return [NSString stringWithFormat:@"%@", _text];
     }
     else if ([self.activityType isEqualToString:UIActivityTypePostToTwitter])
     {
@@ -117,13 +119,23 @@ public:
     void share(const std::string& text, const std::string& longText, UIImage *image, bool simple)
     {
         ShareText *shareText = nil;
-        if(!text.empty())
-        {
-            shareText = [ShareText textWithText:[NSString stringWithUTF8String:text.c_str()] andLongText:[NSString stringWithUTF8String:longText.c_str()] andHashTag:[NSString stringWithUTF8String:_hashTag.c_str()] andAppId:[NSString stringWithUTF8String:_appId.c_str()]];
-        }
         NSMutableArray* dataToShare = [NSMutableArray array];
-        if(shareText)
-            [dataToShare addObject:shareText];
+        if(simple)
+        {
+            shareText = [ShareText textWithText:[NSString stringWithUTF8String:text.c_str()] andLongText:[NSString stringWithUTF8String:longText.c_str()] andHashTag:nil andAppId:nil];
+            if(shareText)
+                [dataToShare addObject:shareText];
+        }
+        else
+        {
+            
+            if(!text.empty())
+            {
+                shareText = [ShareText textWithText:[NSString stringWithUTF8String:text.c_str()] andLongText:[NSString stringWithUTF8String:longText.c_str()] andHashTag:[NSString stringWithUTF8String:_hashTag.c_str()] andAppId:[NSString stringWithUTF8String:_appId.c_str()]];
+                if(shareText)
+                    [dataToShare addObject:shareText];
+            }
+        }
         if(image)
             [dataToShare addObject:image];
         UIActivityViewController* activityViewController = [[UIActivityViewController alloc] initWithActivityItems:dataToShare applicationActivities:nil];
