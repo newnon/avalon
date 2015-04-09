@@ -157,10 +157,6 @@ static GameCenterIos* instance = nil;
 
 - (BOOL)showScores
 {
-    if (![GKLocalPlayer localPlayer].isAuthenticated) {
-        return NO;
-    }
-
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
 
