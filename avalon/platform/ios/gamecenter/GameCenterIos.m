@@ -67,10 +67,6 @@ static GameCenterIos* instance = nil;
 
 - (BOOL)showGameCenter
 {
-    if (![GKLocalPlayer localPlayer].isAuthenticated) {
-        return NO;
-    }
-    
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
     
@@ -95,10 +91,6 @@ static GameCenterIos* instance = nil;
 
 - (BOOL)showAchievements
 {
-    if (![GKLocalPlayer localPlayer].isAuthenticated) {
-        return NO;
-    }
-    
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
 
