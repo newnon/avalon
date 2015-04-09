@@ -146,16 +146,15 @@ public:
                                             UIActivityTypeAirDrop];
         
         UIViewController *rootViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
-        //if iPhone
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-            [rootViewController presentViewController:activityViewController animated:YES completion:nil];
+        
+        NSArray *vComp = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+        if ([[vComp objectAtIndex:0] intValue] >= 8) {
+            NSLog(@"ISN: iOS8 detected");
+            UIPopoverPresentationController *presentationController = [activityViewController popoverPresentationController];
+            presentationController.sourceView = rootViewController.view;
         }
-        //if iPad
-        else {
-            // Change Rect to position Popover
-            UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityViewController];
-            [popup presentPopoverFromRect:CGRectMake(rootViewController.view.frame.size.width/2, rootViewController.view.frame.size.height/4, 0, 0)inView:rootViewController.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        }
+        
+        [rootViewController presentViewController:activityViewController animated:YES completion:nil];
     }
     
     virtual void shareString(const std::string& text) override
