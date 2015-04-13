@@ -14,17 +14,31 @@ namespace avalon {
 
 void DDNAProductBuilder::setRealCurrency(const std::string &type, int amount)
 {
-        
+    _data["realCurrency"] = amount;
 }
     
 void DDNAProductBuilder::addVirtualCurrency(const std::string &type, int amount, const std::string &name)
 {
-        
+    DNAValueVector& vector = _data.insert(std::pair<std::string, DNAValue>("virtualCurrencies", DNAValue(DNAValueVector()))).first->second.asValueVector();
+    DNAValueMap object;
+    DNAValueMap virtualCurrency;
+    virtualCurrency["virtualCurrencyAmount"] = amount;
+    virtualCurrency["virtualCurrencyName"] = name;
+    virtualCurrency["virtualCurrencyType"] = type;
+    object["virtualCurrency"] = std::move(virtualCurrency);
+    vector.push_back(DNAValue(std::move(object)));
 }
     
 void DDNAProductBuilder::addItem(const std::string &type, int amount, const std::string &name)
 {
-        
+    DNAValueVector& vector = _data.insert(std::pair<std::string, DNAValue>("items", DNAValue(DNAValueVector()))).first->second.asValueVector();
+    DNAValueMap object;
+    DNAValueMap item;
+    item["itemType"] = type;
+    item["itemAmount"] = amount;
+    item["itemName"] = name;
+    object["item"] = std::move(item);
+    vector.push_back(DNAValue(std::move(object)));
 }
     
 const DNAValueMap& DDNAProductBuilder::DDNAProductBuilder::dictionary() const
@@ -35,20 +49,20 @@ const DNAValueMap& DDNAProductBuilder::DDNAProductBuilder::dictionary() const
     
 void DDNAEventBuilder::setString(const std::string &value, const std::string &key)
 {
-        
+    _data[key] = value;
 }
 void DDNAEventBuilder::setInteger(int value, const std::string &key)
 {
-        
+    _data[key] = value;
 }
 void DDNAEventBuilder::setBoolean(bool value, const std::string &key)
 {
-    
+    _data[key] = value;
 }
 //void DDNAEventBuilder::setTimestamp(NSDate *value, const std::string &key)
 void DDNAEventBuilder::setDictionary(const DNAValueMap &value, const std::string &key)
 {
-    
+    _data[key] = value;
 }
 const DNAValueMap& DDNAEventBuilder::dictionary() const
 {
@@ -606,6 +620,56 @@ void DNAValue::reset(Type type)
     _type = type;
 }
     
+static id valueToId(const DNAValue &value)
+{
+    switch (value.getType()) {
+        case DNAValue::Type::INTEGER:
+            return [NSNumber numberWithInt:value.asInt()];
+            break;
+            
+        case DNAValue::Type::FLOAT:
+            return [NSNumber numberWithFloat:value.asFloat()];
+            break;
+            
+        case DNAValue::Type::DOUBLE:
+            return [NSNumber numberWithDouble:value.asDouble()];
+            break;
+            
+        case DNAValue::Type::BOOLEAN:
+            return [NSNumber numberWithBool:value.asBool()];
+            break;
+            
+        case DNAValue::Type::STRING:
+            return [NSString stringWithUTF8String:value.asString().c_str()];
+            break;
+            
+        case DNAValue::Type::VECTOR:
+        {
+            NSMutableArray * array = [NSMutableArray array];
+            const DNAValueVector &vector = value.asValueVector();
+            for(const auto &it:vector)
+                [array addObject:valueToId(it)];
+            return array;
+        }
+            break;
+            
+        case DNAValue::Type::MAP:
+        {
+            NSMutableDictionary * dictionary = [NSMutableDictionary dictionary];
+            const DNAValueMap &map = value.asValueMap();
+            for(const auto &it:map)
+                [dictionary setObject:valueToId(it.second) forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            return dictionary;
+        }
+            break;
+            
+        default:
+            return nil;
+            break;
+    }
+}
+
+    
 class iOSDDNASettings: public DDNASettings
 {
 public:
@@ -821,65 +885,6 @@ public:
         [_sdk recordEvent:[NSString stringWithUTF8String:eventName.c_str()]];
     }
     
-    /*
-     DNAValue::Type::INTEGER:
-     FLOAT,
-     DOUBLE,
-     BOOLEAN,
-     STRING,
-     VECTOR,
-     MAP
-*/
-    
-    id valueToId(const DNAValue &value)
-    {
-        switch (value.getType()) {
-            case DNAValue::Type::INTEGER:
-                return [NSNumber numberWithInt:value.asInt()];
-                break;
-                
-            case DNAValue::Type::FLOAT:
-                return [NSNumber numberWithFloat:value.asFloat()];
-                break;
-            
-            case DNAValue::Type::DOUBLE:
-                return [NSNumber numberWithDouble:value.asDouble()];
-                break;
-                
-            case DNAValue::Type::BOOLEAN:
-                return [NSNumber numberWithBool:value.asBool()];
-                break;
-                
-            case DNAValue::Type::STRING:
-                return [NSString stringWithUTF8String:value.asString().c_str()];
-                break;
-                
-            case DNAValue::Type::VECTOR:
-                {
-                    NSMutableArray * array = [NSMutableArray array];
-                    const DNAValueVector &vector = value.asValueVector();
-                    for(const auto &it:vector)
-                        [array addObject:valueToId(it)];
-                    return array;
-                }
-                break;
-                
-            case DNAValue::Type::MAP:
-                {
-                    NSMutableDictionary * dictionary = [NSMutableDictionary dictionary];
-                    const DNAValueMap &map = value.asValueMap();
-                    for(const auto &it:map)
-                        [dictionary setObject:valueToId(it.second) forKey:[NSString stringWithUTF8String:it.first.c_str()]];
-                    return dictionary;
-                }
-                break;
-                
-            default:
-                return nil;
-                break;
-        }
-    }
-
     virtual void recordEvent(const std::string &eventName, const DNAValueMap &eventParams) override
     {
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
