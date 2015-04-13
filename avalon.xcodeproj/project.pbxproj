@@ -338,23 +338,22 @@
 		A59003F01A6D1D7100AF12A4 /* libFuseSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A59003EE1A6D1D7100AF12A4 /* libFuseSDK.a */; };
 		A59003F21A6D1DAC00AF12A4 /* Fuseboxx.mm in Sources */ = {isa = PBXBuildFile; fileRef = A59003F11A6D1DAC00AF12A4 /* Fuseboxx.mm */; };
 		A59003F41A6D1DE800AF12A4 /* Fuseboxx.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A59003F31A6D1DDD00AF12A4 /* Fuseboxx.h */; };
-		A597D3011ADBDACE001C8E9C /* ShareManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5A61D701AB08A20002A7CB7 /* ShareManager.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		A597D3031ADBDACE001C8E9C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
-		A597D3051ADBDACE001C8E9C /* ShareManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5A61D6D1AB08835002A7CB7 /* ShareManager.h */; };
-		A597D3271ADBDBC6001C8E9C /* DDNAClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D30D1ADBDBC6001C8E9C /* DDNAClientInfo.m */; };
-		A597D3281ADBDBC6001C8E9C /* DDNAEngageArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D30F1ADBDBC6001C8E9C /* DDNAEngageArchive.m */; };
-		A597D3291ADBDBC6001C8E9C /* DDNAEventBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3111ADBDBC6001C8E9C /* DDNAEventBuilder.m */; };
-		A597D32A1ADBDBC6001C8E9C /* DDNAEventStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3131ADBDBC6001C8E9C /* DDNAEventStore.m */; };
-		A597D32B1ADBDBC7001C8E9C /* DDNALog.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3151ADBDBC6001C8E9C /* DDNALog.m */; };
-		A597D32C1ADBDBC7001C8E9C /* DDNAPlayerPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3171ADBDBC6001C8E9C /* DDNAPlayerPrefs.m */; };
-		A597D32D1ADBDBC7001C8E9C /* DDNAPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3191ADBDBC6001C8E9C /* DDNAPopup.m */; };
-		A597D32E1ADBDBC7001C8E9C /* DDNAProductBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D31B1ADBDBC6001C8E9C /* DDNAProductBuilder.m */; };
-		A597D32F1ADBDBC7001C8E9C /* DDNASDK+Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D31D1ADBDBC6001C8E9C /* DDNASDK+Transaction.m */; };
-		A597D3301ADBDBC7001C8E9C /* DDNASDK.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D31F1ADBDBC6001C8E9C /* DDNASDK.m */; };
-		A597D3311ADBDBC7001C8E9C /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3211ADBDBC6001C8E9C /* DDNASettings.m */; };
-		A597D3321ADBDBC7001C8E9C /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3241ADBDBC6001C8E9C /* NSDictionary+Helpers.m */; };
-		A597D3331ADBDBC7001C8E9C /* NSString+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3261ADBDBC6001C8E9C /* NSString+Helpers.m */; };
-		A597D3361ADBDC3E001C8E9C /* DeltaDNA.mm in Sources */ = {isa = PBXBuildFile; fileRef = A597D3351ADBDC3E001C8E9C /* DeltaDNA.mm */; };
+		A597D3271ADBDBC6001C8E9C /* DDNAClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D30D1ADBDBC6001C8E9C /* DDNAClientInfo.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3281ADBDBC6001C8E9C /* DDNAEngageArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D30F1ADBDBC6001C8E9C /* DDNAEngageArchive.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3291ADBDBC6001C8E9C /* DDNAEventBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3111ADBDBC6001C8E9C /* DDNAEventBuilder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D32A1ADBDBC6001C8E9C /* DDNAEventStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3131ADBDBC6001C8E9C /* DDNAEventStore.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D32B1ADBDBC7001C8E9C /* DDNALog.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3151ADBDBC6001C8E9C /* DDNALog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D32C1ADBDBC7001C8E9C /* DDNAPlayerPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3171ADBDBC6001C8E9C /* DDNAPlayerPrefs.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D32D1ADBDBC7001C8E9C /* DDNAPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3191ADBDBC6001C8E9C /* DDNAPopup.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D32E1ADBDBC7001C8E9C /* DDNAProductBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D31B1ADBDBC6001C8E9C /* DDNAProductBuilder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D32F1ADBDBC7001C8E9C /* DDNASDK+Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D31D1ADBDBC6001C8E9C /* DDNASDK+Transaction.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3301ADBDBC7001C8E9C /* DDNASDK.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D31F1ADBDBC6001C8E9C /* DDNASDK.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3311ADBDBC7001C8E9C /* DDNASettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3211ADBDBC6001C8E9C /* DDNASettings.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3321ADBDBC7001C8E9C /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3241ADBDBC6001C8E9C /* NSDictionary+Helpers.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3331ADBDBC7001C8E9C /* NSString+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = A597D3261ADBDBC6001C8E9C /* NSString+Helpers.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3361ADBDC3E001C8E9C /* DeltaDNA.mm in Sources */ = {isa = PBXBuildFile; fileRef = A597D3351ADBDC3E001C8E9C /* DeltaDNA.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A597D3561ADC2127001C8E9C /* DeltaDNA.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A597D3341ADBDBF0001C8E9C /* DeltaDNA.h */; };
 		A59E86A61925E5390082E270 /* VungleInterstitialCustomEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A59E86881925E5390082E270 /* VungleInterstitialCustomEvent.h */; };
 		A59E86A71925E5390082E270 /* VungleInterstitialCustomEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A59E86891925E5390082E270 /* VungleInterstitialCustomEvent.m */; };
 		A5A61D641AB087D2002A7CB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
@@ -713,7 +712,7 @@
 			dstPath = "include/$(PROJECT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				A597D3051ADBDACE001C8E9C /* ShareManager.h in CopyFiles */,
+				A597D3561ADC2127001C8E9C /* DeltaDNA.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,7 +1162,7 @@
 		A59003EE1A6D1D7100AF12A4 /* libFuseSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFuseSDK.a; sourceTree = "<group>"; };
 		A59003F11A6D1DAC00AF12A4 /* Fuseboxx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Fuseboxx.mm; path = avalon/platform/ios/fuseboxx/Fuseboxx.mm; sourceTree = "<group>"; };
 		A59003F31A6D1DDD00AF12A4 /* Fuseboxx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fuseboxx.h; path = avalon/Fuseboxx.h; sourceTree = "<group>"; };
-		A597D3091ADBDACE001C8E9C /* libDeltaDna.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeltaDna.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A597D3091ADBDACE001C8E9C /* libDeltaDna iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libDeltaDna iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A597D30C1ADBDBC6001C8E9C /* DDNAClientInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAClientInfo.h; sourceTree = "<group>"; };
 		A597D30D1ADBDBC6001C8E9C /* DDNAClientInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNAClientInfo.m; sourceTree = "<group>"; };
 		A597D30E1ADBDBC6001C8E9C /* DDNAEngageArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNAEngageArchive.h; sourceTree = "<group>"; };
@@ -1628,7 +1627,7 @@
 				A59003E91A6D124000AF12A4 /* libFuseboxx iOS.a */,
 				A5A61D6B1AB087D2002A7CB7 /* libShare iOS.a */,
 				A54E28B81AC2D1560054B412 /* libChartboost iOS.a */,
-				A597D3091ADBDACE001C8E9C /* libDeltaDna.a */,
+				A597D3091ADBDACE001C8E9C /* libDeltaDna iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3327,7 +3326,7 @@
 			);
 			name = "DeltaDna iOS";
 			productName = Avalon;
-			productReference = A597D3091ADBDACE001C8E9C /* libDeltaDna.a */;
+			productReference = A597D3091ADBDACE001C8E9C /* libDeltaDna iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A5A61D5D1AB087D2002A7CB7 /* Share iOS */ = {
@@ -3806,7 +3805,6 @@
 				A597D32D1ADBDBC7001C8E9C /* DDNAPopup.m in Sources */,
 				A597D3291ADBDBC6001C8E9C /* DDNAEventBuilder.m in Sources */,
 				A597D3331ADBDBC7001C8E9C /* NSString+Helpers.m in Sources */,
-				A597D3011ADBDACE001C8E9C /* ShareManager.mm in Sources */,
 				A597D32C1ADBDBC7001C8E9C /* DDNAPlayerPrefs.m in Sources */,
 				A597D32B1ADBDBC7001C8E9C /* DDNALog.m in Sources */,
 				A597D3361ADBDC3E001C8E9C /* DeltaDNA.mm in Sources */,
@@ -4835,7 +4833,7 @@
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = DeltaDna;
+				PRODUCT_NAME = "DeltaDna iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -4847,7 +4845,7 @@
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = DeltaDna;
+				PRODUCT_NAME = "DeltaDna iOS";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
