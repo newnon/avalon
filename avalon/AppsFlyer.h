@@ -18,10 +18,10 @@ namespace avalon {
 class AppsFlyerTrackerDelegate
 {
 public:
-    virtual void onConversionDataReceived(NSDictionary* installData) {};
-    virtual void onConversionDataRequestFailure(NSError *error) {};
-    virtual void onAppOpenAttribution(NSDictionary* attributionData) {};
-    virtual void onAppOpenAttributionFailure(NSError *error) {};
+    virtual void onConversionDataReceived(const utils::ValueMap &installData) {};
+    virtual void onConversionDataRequestFailure(int code, const std::string &message) {};
+    virtual void onAppOpenAttribution(const utils::ValueMap &attributionData) {};
+    virtual void onAppOpenAttributionFailure(int code, const std::string &message) {};
 };
 
 class AppsFlyerTracker
@@ -179,8 +179,8 @@ public:
                                                const std::string &productIdentifier,
                                                double price,
                                                const std::string &currency,
-                                               std::function<void(NSDictionary *response)> &successCallback,
-                                               std::function<void(NSError *error, id reponse)> failedCallback) = 0;
+                                               std::function<void(const utils::ValueMap &response)> &successCallback,
+                                               std::function<void(int code, const std::string &message)> failedCallback) = 0;
 
     /* 
      * This method returns AppsFLyer's internal user ID (unique for your app)

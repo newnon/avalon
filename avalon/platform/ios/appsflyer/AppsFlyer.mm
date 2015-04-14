@@ -215,8 +215,8 @@ public:
                                                const std::string &productIdentifier,
                                                double price,
                                                const std::string &currency,
-                                               std::function<void(NSDictionary *response)> &successCallback,
-                                               std::function<void(NSError *error, id reponse)> failedCallback) override
+                                               std::function<void(const utils::ValueMap &response)> &successCallback,
+                                               std::function<void(int code, const std::string &message)> failedCallback) override
     {
         [[::AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:[NSString stringWithUTF8String:eventNameIfSuucceed.c_str()]
                                                         eventNameIfFailed:[NSString stringWithUTF8String:failedEventName.c_str()]
