@@ -1,123 +1,16 @@
 //
-//  DeltaDNASDK.h
-//  DeltaDNASDK
-//
-//  Created by David White on 18/07/2014.
-//  Copyright (c) 2014 deltadna. All rights reserved.
+//  DeltaDNA.h
+//  DeltaDNA
 //
 
-/*#import <Foundation/Foundation.h>
-#import "DDNASettings.h"
-#import "DDNAEventBuilder.h"
-#import "DDNAPopup.h"*/
+#ifndef AVALON_DELTADNA_H
+#define AVALON_DELTADNA_H
 
+#include "avalon/utils/dictionary.h"
 #include <string>
 #include <functional>
-#include <vector>
-#include <unordered_map>
-#include <memory>
 
 namespace avalon {
-    
-class DNAValue;
-
-typedef std::vector<DNAValue> DNAValueVector;
-typedef std::unordered_map<std::string, DNAValue> DNAValueMap;
-
-class DNAValue
-{
-public:
-    static const DNAValue Null;
-    
-    DNAValue();
-    explicit DNAValue(int v);
-    explicit DNAValue(float v);
-    explicit DNAValue(double v);
-    explicit DNAValue(bool v);
-    explicit DNAValue(const char* v);
-    explicit DNAValue(const std::string& v);
-    
-    explicit DNAValue(const DNAValueVector& v);
-    explicit DNAValue(DNAValueVector&& v);
-    
-    explicit DNAValue(const DNAValueMap& v);
-    explicit DNAValue(DNAValueMap&& v);
-    
-    DNAValue(const DNAValue& other);
-    DNAValue(DNAValue&& other);
-    ~DNAValue();
-    
-    // assignment operator
-    DNAValue& operator= (const DNAValue& other);
-    DNAValue& operator= (DNAValue&& other);
-    
-    DNAValue& operator= (int v);
-    DNAValue& operator= (float v);
-    DNAValue& operator= (double v);
-    DNAValue& operator= (bool v);
-    DNAValue& operator= (const char* v);
-    DNAValue& operator= (const std::string& v);
-    
-    DNAValue& operator= (const DNAValueVector& v);
-    DNAValue& operator= (DNAValueVector&& v);
-    
-    DNAValue& operator= (const DNAValueMap& v);
-    DNAValue& operator= (DNAValueMap&& v);
-    
-    // equal operator
-    bool operator!= (const DNAValue& v);
-    bool operator!= (const DNAValue& v) const;
-    bool operator== (const DNAValue& v);
-    bool operator== (const DNAValue& v) const;
-    
-    int asInt() const;
-    float asFloat() const;
-    double asDouble() const;
-    bool asBool() const;
-    std::string asString() const;
-    
-    DNAValueVector& asValueVector();
-    const DNAValueVector& asValueVector() const;
-    
-    DNAValueMap& asValueMap();
-    const DNAValueMap& asValueMap() const;;
-    
-    inline bool isNull() const { return _type == Type::NONE; }
-    
-    enum class Type
-    {
-        NONE = 0,
-        INTEGER,
-        FLOAT,
-        DOUBLE,
-        BOOLEAN,
-        STRING,
-        VECTOR,
-        MAP
-    };
-    
-    inline Type getType() const { return _type; };
-    
-    std::string getDescription();
-    
-private:
-    void clear();
-    void reset(Type type);
-    
-    union
-    {
-        int intVal;
-        float floatVal;
-        double doubleVal;
-        bool boolVal;
-        
-        std::string* strVal;
-        DNAValueVector* vectorVal;
-        DNAValueMap* mapVal;
-    }_field;
-    
-    Type _type;
-};
 
 class DDNASettings
 {
@@ -204,10 +97,10 @@ public:
     void setRealCurrency(const std::string &type, int amount);
     void addVirtualCurrency(const std::string &type, int amount, const std::string &name);
     void addItem(const std::string &type, int amount, const std::string &name);
-    const DNAValueMap& dictionary() const;
+    const utils::ValueMap& dictionary() const;
     
 private:
-    DNAValueMap _data;
+    utils::ValueMap _data;
 };
 
 class DDNAEventBuilder
@@ -217,11 +110,11 @@ public:
     void setInteger(int value, const std::string &key);
     void setBoolean(bool value, const std::string &key);
     //void setTimestamp(NSDate *value, const std::string &key);
-    void setDictionary(const DNAValueMap &value, const std::string &key);
-    const DNAValueMap& dictionary() const;
+    void setDictionary(const utils::ValueMap &value, const std::string &key);
+    const utils::ValueMap& dictionary() const;
     
 private:
-    DNAValueMap _data;
+    utils::ValueMap _data;
 };
 
 class DeltaDNA
@@ -339,7 +232,7 @@ public:
      @param eventName The name of the event schema.
      @param eventParam A dictionary of event parameters.
      */
-    virtual void recordEvent(const std::string &eventName, const DNAValueMap &eventParams) = 0;
+    virtual void recordEvent(const std::string &eventName, const utils::ValueMap &eventParams) = 0;
 
     /**
      Records an event with event parameters built from the DDNAEventBuilder helper
@@ -354,7 +247,7 @@ public:
      
      @abstract Block type for the callback from an Engage request.
      */
-    typedef std::function<void(const DNAValueMap &engageResponse)> DDNAEngagementResponseBlock;
+    typedef std::function<void(const utils::ValueMap &engageResponse)> DDNAEngagementResponseBlock;
 
     /**
      Makes an Engage call for a decision point.  If the decision point is
@@ -372,7 +265,7 @@ public:
      @param callback The block to call once Engage returns.
      */
     virtual void requestEngagement(const std::string &decisionPoint,
-                                   const DNAValueMap &engageParams,
+                                   const utils::ValueMap &engageParams,
                                    const DDNAEngagementResponseBlock &callback) = 0;
 
     /**
@@ -382,7 +275,7 @@ public:
      @param imagePopup An object that conforms to the @c DDNAPopup protocol that can handle the response.
      */
     virtual void requestImageMessage(const std::string &decisionPoint,
-                                     const DNAValueMap &engageParams,
+                                     const utils::ValueMap &engageParams,
                                      DDNAPopup *popup) = 0;
 
     /**
@@ -393,14 +286,14 @@ public:
      @param callbackBlock A block that is called with the full engage response for custom behaviour.
      */
     virtual void requestImageMessage(const std::string &decisionPoint,
-                                     const DNAValueMap &engageParams,
+                                     const utils::ValueMap &engageParams,
                                      DDNAPopup *popup,
                                      const DDNAEngagementResponseBlock &callback) = 0;
 
     /**
      Records receiving a push notification.  Call from @c application:didFinishLaunchingWithOptions and @c application:didReceiveRemoteNotification so we can track the open rate of your notifications.  It is safe to call this method before @c startWithEnvironmentKey:collectURL:engageURL, the event will be queued.
      */
-    virtual void recordPushNotification(const DNAValueMap &pushNotification, bool didLaunch) = 0;
+    virtual void recordPushNotification(const utils::ValueMap &pushNotification, bool didLaunch) = 0;
 
     /**
      Sends recorded events to deltaDNA.  The default SDK behaviour is to call this
@@ -422,3 +315,5 @@ public:
 };
 
 }
+
+#endif //AVALON_DELTADNA_H

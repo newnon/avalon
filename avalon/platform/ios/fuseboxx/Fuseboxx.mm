@@ -600,7 +600,7 @@ public:
             _delegate->adAvailabilityResponse([available boolValue], static_cast<kFuseAdErrors>([error intValue]));
         }
     }
-    void rewardedVideoCompleted(NSString* &zoneID)
+    void rewardedVideoCompleted(NSString* zoneID)
     {
         if(_delegate)
         {

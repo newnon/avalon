@@ -73,7 +73,7 @@ C2DXCBClickError const C2DXCBClickErrorInternal         = CBClickErrorInternal;
 
 #pragma mark - Create & Destroy
     
-static avalon::Chartboost* s_pChartboost = NULL;
+static avalon::Chartboost* s_pChartboost = nullptr;
 
 Chartboost* Chartboost::getInstance()
 {
@@ -96,7 +96,7 @@ void Chartboost::purgeChartboost()
 {
     delete s_pChartboost;
     s_pChartboost = nullptr;
-    [s_pDelegateBridge dealloc];
+    s_pDelegateBridge = nil;
 }
 
 #pragma mark - Interstitial Methods

@@ -20,9 +20,6 @@
 
     NSString* buttonTitle = [alertView buttonTitleAtIndex:buttonIndex];
     delegate(buttonIndex, [buttonTitle UTF8String]);
-
-    [self release];
-    [alertView release];
 }
 @end
 #endif

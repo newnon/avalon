@@ -67,9 +67,9 @@ public:
     ~IOSManager()
     {
         [RMStore defaultStore].transactionPersistor = nil;
-        [_transactionPersistor release];
+        _transactionPersistor = nil;
         [RMStore defaultStore].receiptVerificator = nil;
-        [_receiptVerificator release];
+        _receiptVerificator = nil;
     }
     virtual void addProduct(const std::string &id, const std::string &productIdentifier, bool consumable) override
     {
@@ -218,7 +218,7 @@ public:
         
         _started = true;
         
-        NSMutableSet* productsIds = [[[NSMutableSet alloc] init] autorelease];
+        NSMutableSet* productsIds = [[NSMutableSet alloc] init];
         for (const auto& product : _products)
         {
             [productsIds addObject:[NSString stringWithUTF8String:product.productIdentifier.c_str()]];
@@ -233,7 +233,7 @@ public:
                     continue;
                 }
                 
-                NSNumberFormatter* numberFormatter = [[[NSNumberFormatter alloc] init] autorelease];
+                NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
                 [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
                 [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
                 

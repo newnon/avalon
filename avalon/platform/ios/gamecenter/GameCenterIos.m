@@ -94,7 +94,7 @@ static GameCenterIos* instance = nil;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
 
-    GKAchievementViewController* gkController = [[[GKAchievementViewController alloc] init] autorelease];
+    GKAchievementViewController* gkController = [[GKAchievementViewController alloc] init];
     gkController.achievementDelegate = self;
 
     [rootViewController presentModalViewController:gkController animated:YES];
@@ -103,7 +103,7 @@ static GameCenterIos* instance = nil;
 
 - (void)postAchievement:(const char*)idName percent:(NSNumber*)percentComplete showBanner:(BOOL)show
 {
-    GKAchievement* achievement = [[[GKAchievement alloc] init] autorelease];
+    GKAchievement* achievement = [[GKAchievement alloc] init];
     achievement.identifier = [NSString stringWithUTF8String:idName];
     achievement.percentComplete = [percentComplete doubleValue];
     achievement.showsCompletionBanner = show;
@@ -160,7 +160,7 @@ static GameCenterIos* instance = nil;
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     UIViewController *rootViewController = window.rootViewController;
 
-    GKLeaderboardViewController* gkController = [[[GKLeaderboardViewController alloc] init] autorelease];
+    GKLeaderboardViewController* gkController = [[GKLeaderboardViewController alloc] init];
     gkController.timeScope = GKLeaderboardTimeScopeAllTime;
     gkController.leaderboardDelegate = self;
 
@@ -170,7 +170,7 @@ static GameCenterIos* instance = nil;
 
 - (void)postScore:(const char*)idName score:(NSNumber*)score;
 {
-    GKScore* gkScore = [[[GKScore alloc] init] autorelease];
+    GKScore* gkScore = [[GKScore alloc] init];
     gkScore.category = [NSString stringWithUTF8String:idName];
     gkScore.value = [score longLongValue];
     gkScore.shouldSetDefaultLeaderboard = YES;
@@ -217,9 +217,9 @@ static GameCenterIos* instance = nil;
 
     NSMutableDictionary* data = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:savePath]) {
-        data = [[[NSMutableDictionary alloc] initWithContentsOfFile:savePath] autorelease];
+        data = [[NSMutableDictionary alloc] initWithContentsOfFile:savePath];
     } else {
-        data = [[[NSMutableDictionary alloc] init] autorelease];
+        data = [[NSMutableDictionary alloc] init];
     }
 
     NSNumber* oldValue = [data objectForKey:key];
@@ -247,7 +247,7 @@ static GameCenterIos* instance = nil;
     for (NSString* key in data) {
         NSNumber* number = [data objectForKey:key];
 
-        GKAchievement* achievement = [[[GKAchievement alloc] init] autorelease];
+        GKAchievement* achievement = [[GKAchievement alloc] init];
         achievement.identifier = key;
         achievement.percentComplete = [number doubleValue];
         achievement.showsCompletionBanner = YES;
@@ -271,9 +271,9 @@ static GameCenterIos* instance = nil;
 
     NSMutableDictionary* data = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:savePath]) {
-        data = [[[NSMutableDictionary alloc] initWithContentsOfFile:savePath] autorelease];
+        data = [[NSMutableDictionary alloc] initWithContentsOfFile:savePath];
     } else {
-        data = [[[NSMutableDictionary alloc] init] autorelease];
+        data = [[NSMutableDictionary alloc] init];
     }
 
     NSNumber* lowValue = nil;
@@ -282,7 +282,7 @@ static GameCenterIos* instance = nil;
         lowData = [data objectForKey:scoresArchiveKeyLow];
         lowValue = [lowData objectForKey:key];
     } else {
-        lowData = [[[NSMutableDictionary alloc] init] autorelease];
+        lowData = [[NSMutableDictionary alloc] init];
     }
 
     NSNumber* highValue = nil;
@@ -291,7 +291,7 @@ static GameCenterIos* instance = nil;
         highData = [data objectForKey:scoresArchiveKeyHigh];
         highValue = [highData objectForKey:key];
     } else {
-        highData = [[[NSMutableDictionary alloc] init] autorelease];
+        highData = [[NSMutableDictionary alloc] init];
     }
 
     // we don't have anything cached yet => cache as new high
@@ -334,7 +334,7 @@ static GameCenterIos* instance = nil;
         for (NSString* key in lowOrHighData) {
             NSNumber* number = [lowOrHighData objectForKey:key];
 
-            GKScore* gkScore = [[[GKScore alloc] init] autorelease];
+            GKScore* gkScore = [[GKScore alloc] init];
             gkScore.category = key;
             gkScore.value = [number longLongValue];
             gkScore.shouldSetDefaultLeaderboard = YES;
