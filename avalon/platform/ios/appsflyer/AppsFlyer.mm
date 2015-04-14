@@ -81,92 +81,92 @@ class iOSAppsFlyerTracker: public AppsFlyerTracker
 public:
     virtual std::string getCustomerUserID() const override
     {
-        return "";
+        return [[::AppsFlyerTracker sharedTracker].customerUserID UTF8String];
     }
 
     virtual void setCustomerUserID(const std::string &customerUserID) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].customerUserID = [NSString stringWithUTF8String:customerUserID.c_str()];
     }
 
     virtual std::string getAppsFlyerDevKey() const override
     {
-        return "";
+        return [[::AppsFlyerTracker sharedTracker].appsFlyerDevKey UTF8String];
     }
 
     virtual void setAppsFlyerDevKey(const std::string &appsFlyerDevKey) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].appsFlyerDevKey = [NSString stringWithUTF8String:appsFlyerDevKey.c_str()];
     }
 
     virtual std::string getAppleAppID() const override
     {
-        return "";
+        return [[::AppsFlyerTracker sharedTracker].appleAppID UTF8String];
     }
 
     virtual void setAppleAppID(const std::string &appleAppID) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].appleAppID = [NSString stringWithUTF8String:appleAppID.c_str()];
     }
 
     virtual std::string getCurrencyCode() const override
     {
-        return "";
+        return [[::AppsFlyerTracker sharedTracker].currencyCode UTF8String];
     }
 
     virtual void setCurrencyCode(const std::string &currencyCode) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].currencyCode = [NSString stringWithUTF8String:currencyCode.c_str()];
     }
     
     virtual bool getHTTPS() const override
     {
-        return false;
+        return [::AppsFlyerTracker sharedTracker].isHTTPS;
     }
 
     virtual void setHTTPS(bool value) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].isHTTPS = value;
     }
     
     virtual bool getDisableAppleAdSupportTracking() const override
     {
-        return false;
+        return [::AppsFlyerTracker sharedTracker].disableAppleAdSupportTracking;
     }
 
     virtual void setDisableAppleAdSupportTracking(bool value) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].disableAppleAdSupportTracking = value;
     }
 
     virtual bool getIsDebug() const override
     {
-        return false;
+        return [::AppsFlyerTracker sharedTracker].isDebug;
     }
 
     virtual void setIsDebug(bool value) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].isDebug = value;
     }
 
     virtual bool getDeviceTrackingDisabled() const override
     {
-        return false;
+        return [::AppsFlyerTracker sharedTracker].deviceTrackingDisabled;
     }
 
     virtual void setDeviceTrackingDisabled(bool value) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].deviceTrackingDisabled = value;
     }
     
     virtual bool getDisableIAdTracking() const override
     {
-        return false;
+        return [::AppsFlyerTracker sharedTracker].disableIAdTracking;
     }
 
     virtual void setDisableIAdTracking(bool value) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].disableIAdTracking = value;
     }
 
     virtual AppsFlyerTrackerDelegate* getDelegate() const override
@@ -181,27 +181,32 @@ public:
     
     virtual bool getUseReceiptValidationSandbox() const override
     {
-        return false;
+        return [::AppsFlyerTracker sharedTracker].useReceiptValidationSandbox;
     }
 
     virtual void setUseReceiptValidationSandbox(bool value) override
     {
-        
+        [::AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = value;
     }
 
     virtual void trackAppLaunch() override
     {
-        
+        [[::AppsFlyerTracker sharedTracker] trackAppLaunch];
     }
     
     virtual void trackEvent(const std::string &eventName, const std::string &value) override
     {
-        
+        [[::AppsFlyerTracker sharedTracker] trackEvent:[NSString stringWithUTF8String:eventName.c_str()] withValue:[NSString stringWithUTF8String:value.c_str()]];
     }
 
     virtual void trackEvent(const std::string &eventName, const utils::ValueMap &values) override
     {
-        
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+        for(const auto &it:values)
+        {
+            [dictionary setObject:valueToId(it.second) forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        }
+        [[::AppsFlyerTracker sharedTracker] trackEvent:[NSString stringWithUTF8String:eventName.c_str()] withValues:dictionary];
     }
 
     virtual void validateAndTrackInAppPurchase(const std::string &eventNameIfSuucceed,
@@ -213,13 +218,24 @@ public:
                                                std::function<void(NSDictionary *response)> &successCallback,
                                                std::function<void(NSError *error, id reponse)> failedCallback) override
     {
-        
+        [[::AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:[NSString stringWithUTF8String:eventNameIfSuucceed.c_str()]
+                                                        eventNameIfFailed:[NSString stringWithUTF8String:failedEventName.c_str()]
+                                                                withValue:[NSString stringWithUTF8String:value.c_str()]
+                                                              withProduct:[NSString stringWithUTF8String:productIdentifier.c_str()]
+                                                                    price:[[NSDecimalNumber alloc] initWithDouble:price]
+                                                                 currency:[NSString stringWithUTF8String:currency.c_str()]
+                                                                  success:^(NSDictionary *response) {
+                                                                      //
+                                                                  }
+                                                                  failure:^(NSError *error, id reponse) {
+                                                                      //
+                                                                  }];
     }
 
     
     virtual std::string getAppsFlyerUID() const override
     {
-        return "";
+        return [[[::AppsFlyerTracker sharedTracker] getAppsFlyerUID] UTF8String];
     }
 };
     
