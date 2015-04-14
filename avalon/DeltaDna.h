@@ -6,7 +6,7 @@
 #ifndef AVALON_DELTADNA_H
 #define AVALON_DELTADNA_H
 
-#include "avalon/utils/dictionary.h"
+#include "avalon/dictionary.h"
 #include <string>
 #include <functional>
 
