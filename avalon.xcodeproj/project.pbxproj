@@ -991,7 +991,7 @@
 		A57695B11A0E8DC3002FDCB5 /* libAds Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAds Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A58883081ADC597300B32AC7 /* libUtils iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUtils iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A588830B1ADC59C100B32AC7 /* dictionary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dictionary.cpp; path = avalon/utils/dictionary.cpp; sourceTree = "<group>"; };
-		A588830C1ADC59C100B32AC7 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dictionary.h; path = avalon/utils/dictionary.h; sourceTree = "<group>"; };
+		A588830C1ADC59C100B32AC7 /* dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dictionary.h; path = avalon/dictionary.h; sourceTree = "<group>"; };
 		A588830E1ADC5A0700B32AC7 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = utils.h; path = avalon/platform/ios/utils/utils.h; sourceTree = "<group>"; };
 		A588830F1ADC5A0700B32AC7 /* utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = utils.mm; path = avalon/platform/ios/utils/utils.mm; sourceTree = "<group>"; };
 		A588834E1ADC5CBB00B32AC7 /* libAppsFlyer iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAppsFlyer iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };

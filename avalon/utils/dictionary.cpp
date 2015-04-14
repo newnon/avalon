@@ -2,7 +2,7 @@
 //  dictionary.cpp
 //
 
-#include "dictionary.h"
+#include "avalon/dictionary.h"
 #include <float.h>
 #include <assert.h>
 #include <sstream>

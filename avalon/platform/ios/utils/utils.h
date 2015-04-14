@@ -3,7 +3,7 @@
 //
 //
 
-#include "avalon/utils/dictionary.h"
+#include "avalon/dictionary.h"
 
 namespace avalon {
 namespace utils {

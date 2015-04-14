@@ -5,7 +5,7 @@
 #ifndef AVALON_APPSFLYER_H
 #define AVALON_APPSFLYER_H
 
-#include "avalon/utils/dictionary.h"
+#include "avalon/dictionary.h"
 #include <string>
 #include <functional>
 
