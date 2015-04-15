@@ -114,7 +114,7 @@ static GameCenterMac* instance = nil;
 
 - (void)postAchievement:(const char*)idName percent:(NSNumber*)percentComplete showBanner:(BOOL)show
 {
-    GKAchievement* achievement = [[[GKAchievement alloc] init] autorelease];
+    GKAchievement* achievement = [[GKAchievement alloc] init];
     achievement.identifier = [NSString stringWithUTF8String:idName];
     achievement.percentComplete = [percentComplete doubleValue];
     achievement.showsCompletionBanner = show;
@@ -186,7 +186,7 @@ static GameCenterMac* instance = nil;
 
 - (void)postScore:(const char*)idName score:(NSNumber*)score;
 {
-    GKScore* gkScore = [[[GKScore alloc] init] autorelease];
+    GKScore* gkScore = [[GKScore alloc] init];
     gkScore.category = [NSString stringWithUTF8String:idName];
     gkScore.value = [score longLongValue];
     gkScore.shouldSetDefaultLeaderboard = YES;
@@ -231,9 +231,9 @@ static GameCenterMac* instance = nil;
 
     NSMutableDictionary* data = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:savePath]) {
-        data = [[[NSMutableDictionary alloc] initWithContentsOfFile:savePath] autorelease];
+        data = [[NSMutableDictionary alloc] initWithContentsOfFile:savePath];
     } else {
-        data = [[[NSMutableDictionary alloc] init] autorelease];
+        data = [[NSMutableDictionary alloc] init];
     }
 
     NSNumber* oldValue = [data objectForKey:key];
@@ -261,7 +261,7 @@ static GameCenterMac* instance = nil;
     for (NSString* key in data) {
         NSNumber* number = [data objectForKey:key];
 
-        GKAchievement* achievement = [[[GKAchievement alloc] init] autorelease];
+        GKAchievement* achievement = [[GKAchievement alloc] init];
         achievement.identifier = key;
         achievement.percentComplete = [number doubleValue];
         achievement.showsCompletionBanner = YES;
@@ -285,9 +285,9 @@ static GameCenterMac* instance = nil;
 
     NSMutableDictionary* data = nil;
     if ([[NSFileManager defaultManager] fileExistsAtPath:savePath]) {
-        data = [[[NSMutableDictionary alloc] initWithContentsOfFile:savePath] autorelease];
+        data = [[NSMutableDictionary alloc] initWithContentsOfFile:savePath];
     } else {
-        data = [[[NSMutableDictionary alloc] init] autorelease];
+        data = [[NSMutableDictionary alloc] init];
     }
 
     NSNumber* lowValue = nil;
@@ -296,7 +296,7 @@ static GameCenterMac* instance = nil;
         lowData = [data objectForKey:scoresArchiveKeyLow];
         lowValue = [lowData objectForKey:key];
     } else {
-        lowData = [[[NSMutableDictionary alloc] init] autorelease];
+        lowData = [[NSMutableDictionary alloc] init];
     }
 
     NSNumber* highValue = nil;
@@ -305,7 +305,7 @@ static GameCenterMac* instance = nil;
         highData = [data objectForKey:scoresArchiveKeyHigh];
         highValue = [highData objectForKey:key];
     } else {
-        highData = [[[NSMutableDictionary alloc] init] autorelease];
+        highData = [[NSMutableDictionary alloc] init];
     }
 
     // we don't have anything cached yet => cache as new high
@@ -348,7 +348,7 @@ static GameCenterMac* instance = nil;
         for (NSString* key in lowOrHighData) {
             NSNumber* number = [lowOrHighData objectForKey:key];
 
-            GKScore* gkScore = [[[GKScore alloc] init] autorelease];
+            GKScore* gkScore = [[GKScore alloc] init];
             gkScore.category = key;
             gkScore.value = [number longLongValue];
             gkScore.shouldSetDefaultLeaderboard = YES;
