@@ -86,7 +86,7 @@ Value idTovalue(id value)
         NSDictionary *val = (NSDictionary*)value;
         __block ValueMap map;
         [val enumerateKeysAndObjectsUsingBlock:^(id key, id val, BOOL* stop) {
-            map[std::string([[key stringValue] UTF8String])] = idTovalue(val);
+            map[std::string([key UTF8String])] = idTovalue(val);
         }];
         return Value(map);
     }

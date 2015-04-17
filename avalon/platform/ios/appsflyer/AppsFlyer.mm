@@ -285,7 +285,7 @@ AppsFlyerTracker* AppsFlyerTracker::getInstance()
 {
     __block avalon::utils::ValueMap cinstallData;
     [installData enumerateKeysAndObjectsUsingBlock:^(id key, id val, BOOL* stop) {
-        cinstallData[std::string([[key stringValue] UTF8String])] = avalon::utils::idTovalue(val);
+        cinstallData[std::string([key UTF8String])] = avalon::utils::idTovalue(val);
     }];
     _delegate->onConversionDataReceived(cinstallData);
 }
