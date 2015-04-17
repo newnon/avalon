@@ -14,6 +14,14 @@
 #include "avalon/platform/ios/utils/utils.h"
 #import "AppsFlyerTracker.h"
 
+@interface IOSAppsFlyerTracker : NSObject<AppsFlyerTrackerDelegate>
+- (instancetype) initWithDelegate:(avalon::AppsFlyerTrackerDelegate*) delegate;
+- (void) onConversionDataReceived:(NSDictionary*) installData;
+- (void) onConversionDataRequestFailure:(NSError *)error;
+- (void) onAppOpenAttribution:(NSDictionary*) attributionData;
+- (void) onAppOpenAttributionFailure:(NSError *)error;
+@end
+
 namespace avalon {
 const std::string AppsFlyerTracker::EventLevelAchieved = "af_level_achieved";
 const std::string AppsFlyerTracker::EventAddPaymentInfo = "af_add_payment_info";
@@ -176,7 +184,16 @@ public:
 
     virtual void setDelegate(AppsFlyerTrackerDelegate *delegate) override
     {
-        
+        if(delegate)
+        {
+            _delegate = [[IOSAppsFlyerTracker alloc] initWithDelegate:delegate];
+            [::AppsFlyerTracker sharedTracker].delegate  = _delegate;
+        }
+        else
+        {
+            _delegate = nil;
+            [::AppsFlyerTracker sharedTracker].delegate = nil;
+        }
     }
     
     virtual bool getUseReceiptValidationSandbox() const override
@@ -237,6 +254,9 @@ public:
     {
         return [[[::AppsFlyerTracker sharedTracker] getAppsFlyerUID] UTF8String];
     }
+    
+private:
+    IOSAppsFlyerTracker *_delegate = nil;
 };
     
     
@@ -247,3 +267,42 @@ AppsFlyerTracker* AppsFlyerTracker::getInstance()
 }
 
 }
+
+@implementation IOSAppsFlyerTracker
+{
+   avalon::AppsFlyerTrackerDelegate *_delegate;
+}
+- (instancetype) initWithDelegate:(avalon::AppsFlyerTrackerDelegate*) delegate
+{
+    IOSAppsFlyerTracker *ret = [super init];
+    if(ret)
+    {
+        _delegate = delegate;
+    }
+    return self;
+}
+- (void) onConversionDataReceived:(NSDictionary*) installData
+{
+    __block avalon::utils::ValueMap cinstallData;
+    [installData enumerateKeysAndObjectsUsingBlock:^(id key, id val, BOOL* stop) {
+        cinstallData[std::string([[key stringValue] UTF8String])] = avalon::utils::idTovalue(val);
+    }];
+    _delegate->onConversionDataReceived(cinstallData);
+}
+- (void) onConversionDataRequestFailure:(NSError *)error
+{
+    _delegate->onAppOpenAttributionFailure((int)error.code, [error.localizedDescription UTF8String]);
+}
+- (void) onAppOpenAttribution:(NSDictionary*) attributionData
+{
+    __block avalon::utils::ValueMap cattributionData;
+    [attributionData enumerateKeysAndObjectsUsingBlock:^(id key, id val, BOOL* stop) {
+        cattributionData[std::string([[key stringValue] UTF8String])] = avalon::utils::idTovalue(val);
+    }];
+    _delegate->onAppOpenAttribution(cattributionData);
+}
+- (void) onAppOpenAttributionFailure:(NSError *)error
+{
+    _delegate->onAppOpenAttributionFailure((int)error.code, [error.localizedDescription UTF8String]);
+}
+@end

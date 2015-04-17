@@ -22,6 +22,7 @@ public:
     virtual void onConversionDataRequestFailure(int code, const std::string &message) {};
     virtual void onAppOpenAttribution(const utils::ValueMap &attributionData) {};
     virtual void onAppOpenAttributionFailure(int code, const std::string &message) {};
+    virtual ~AppsFlyerTrackerDelegate() {}
 };
 
 class AppsFlyerTracker
@@ -191,6 +192,8 @@ public:
      * In case you want to track deep linking, call this method from your delegate's openURL method with refferer.
      */
     //virtual void handleOpenURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication withAnnotaion:(id) annotation;
+    
+    virtual ~AppsFlyerTracker() {}
 
 };
 
