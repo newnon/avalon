@@ -151,6 +151,7 @@ public abstract class ShareHelper
     {
     	// create an intent, so the user can choose which application he/she wants to use to share this file
     	final Intent intent = ShareCompat.IntentBuilder.from(activity)
+    			.setType("text/plain")
     			.setText(text)
     			//.setChooserTitle(R.string.share_title)
     			.createChooserIntent()
