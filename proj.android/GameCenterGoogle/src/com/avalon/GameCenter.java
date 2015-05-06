@@ -2,6 +2,8 @@ package com.avalon;
 
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
@@ -66,7 +68,23 @@ public abstract class GameCenter
 
     public static boolean showAchievements()
     {
-        if (!isloggedIn()) {
+    	if (!isloggedIn()) {
+        	activity.runOnUiThread(new Runnable() {
+                public void run() {
+                	AlertDialog.Builder alert = new AlertDialog.Builder(Cocos2dxHelper.getActivity());
+       			 	//alert.setTitle("Error");
+                	alert.setMessage("Authentication is required. You need to sign into your Google Account.");
+
+                	alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                		public void onClick(DialogInterface dialog, int which) {
+                			// Do nothing but close the dialog
+                			dialog.dismiss();
+                		}
+                	});
+
+                	alert.create().show();
+                }
+            });
             return false;
         }
         
@@ -105,6 +123,22 @@ public abstract class GameCenter
     public static boolean showScores()
     {
         if (!isloggedIn()) {
+        	activity.runOnUiThread(new Runnable() {
+                public void run() {
+                	AlertDialog.Builder alert = new AlertDialog.Builder(Cocos2dxHelper.getActivity());
+       			 	//alert.setTitle("Error");
+                	alert.setMessage("Authentication is required. You need to sign into your Google Account.");
+
+                	alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                		public void onClick(DialogInterface dialog, int which) {
+                			// Do nothing but close the dialog
+                			dialog.dismiss();
+                		}
+                	});
+
+                	alert.create().show();
+                }
+            });
             return false;
         }
         
