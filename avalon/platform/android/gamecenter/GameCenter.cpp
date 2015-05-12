@@ -99,7 +99,7 @@ void GameCenter::logout()
 
 bool GameCenter::isLoggedIn()
 {
-    return helper::gamecenter::callStaticBoolMethod("isLoggedIn");
+    return helper::gamecenter::callStaticBoolMethod("isloggedIn");
 }
 
 bool GameCenter::showGameCenter()
