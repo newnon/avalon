@@ -32,6 +32,7 @@ struct Transaction
     std::string transactionIdentifier;
     TransactionState transactionState;
     std::string productId;
+    std::vector<unsigned char> receipt;
 };
 
 enum class ManagerDelegateErrors
@@ -50,6 +51,9 @@ class ManagerDelegate
 public:
     virtual void onServiceStarted() {};
     
+    virtual void onRequestProductsSucceed() = 0;
+    virtual void onRequestProductsFail() = 0;
+    
     virtual void onPurchaseSucceed(const Transaction &transaction) = 0;
     virtual void onPurchaseFail(const Transaction &transaction, ManagerDelegateErrors error) = 0;
     
@@ -64,6 +68,8 @@ public:
     
     virtual void addProduct(const std::string &id, const std::string &productIdentifier, bool consumable) = 0;
     virtual void addProduct(const Product &product) = 0;
+    virtual void clearProducts() = 0;
+    virtual void requestProductsData() = 0;
     
     virtual void setDelegate(ManagerDelegate *delegate) = 0;
     virtual ManagerDelegate *getDelegate() const = 0;

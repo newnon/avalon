@@ -85,6 +85,24 @@ public:
         _products.push_back(product);
     }
 
+    virtual void clearProducts() override
+    {
+    	_products.clear();
+    	backend::helper::callStaticVoidMethod("clearItemDataRequest");
+    }
+
+    virtual void requestProductsData() override
+    {
+    	for (const auto& row : getProducts()) {
+            backend::helper::callStaticVoidMethodWithStringAndBool(
+                "addItemDataRequest",
+                row.productIdentifier.c_str(),
+                row.consumable
+            );
+        }
+        backend::helper::callStaticVoidMethod("startItemDataRequest");
+    }
+
     virtual void setDelegate(ManagerDelegate *delegate) override
     {
         _delegate = delegate;
@@ -244,17 +262,9 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onInitialized(JNIEnv* env
 	Manager *globalManager = Manager::getInstance();
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
 
-    if (globalManager) {
-        for (auto& row : globalManager->getProducts()) {
-
-            backend::helper::callStaticVoidMethodWithStringAndBool(
-                "addItemDataRequest",
-                row.productIdentifier.c_str(),
-                row.consumable
-            );
-        }
+    if (globalManager && globalManager->getDelegate()) {
+    	globalManager->getDelegate()->onServiceStarted();
     }
-    backend::helper::callStaticVoidMethod("startItemDataRequest");
 }
 
 JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onItemData(JNIEnv* env, jclass clazz, jstring jProductId, jstring jName, jstring jDesc, jstring jPriceStr, jstring jCurrencyCode, jfloat jprice)

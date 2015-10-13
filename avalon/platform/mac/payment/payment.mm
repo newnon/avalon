@@ -80,6 +80,61 @@ public:
         _products.push_back(product);
     }
     
+    virtual void clearProducts() override
+    {
+        _products.clear();
+    }
+    
+    virtual void requestProductsData() override
+    {
+        NSMutableSet* productsIds = [[NSMutableSet alloc] init];
+        for (const auto& product : _products)
+        {
+            [productsIds addObject:[NSString stringWithUTF8String:product.productIdentifier.c_str()]];
+        }
+        
+        [[RMStore defaultStore] requestProducts:productsIds success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
+            for (SKProduct* skProduct in products) {
+                const char* productId = [[skProduct productIdentifier] cStringUsingEncoding:NSASCIIStringEncoding];
+                Product* avProduct = getProductByProductIdentifier(productId);
+                if (avProduct == NULL) {
+                    NSLog(@"[Payment] productsRequest: Product not found on our side - productId: %s", productId);
+                    continue;
+                }
+                
+                NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+                [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+                [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                
+                avProduct->price = [[skProduct price] floatValue];
+                [numberFormatter setLocale:skProduct.priceLocale];
+                avProduct->localizedPrice = [[numberFormatter stringFromNumber:skProduct.price] UTF8String];
+                
+                NSString *currencyCode = [skProduct.priceLocale objectForKey:NSLocaleCurrencyCode];
+                if(currencyCode != NULL) {
+                    avProduct->currencyCode = [currencyCode UTF8String];
+                }
+                NSString* localizedName = [skProduct localizedTitle];
+                if (localizedName != NULL) {
+                    avProduct->localizedName = [localizedName UTF8String];
+                }
+                NSString* localizedDescription = [skProduct localizedDescription];
+                if (localizedDescription != NULL) {
+                    avProduct->localizedDescription = [localizedDescription UTF8String];
+                }
+            }
+            
+            if (_delegate) {
+                _delegate->onRequestProductsSucceed();
+            }
+        } failure:^(NSError *error) {
+            if (_delegate) {
+                _delegate->onRequestProductsFail();
+            }
+        }];
+
+    }
+    
     virtual void setDelegate(ManagerDelegate *delegate) override
     {
         _delegate = delegate;
@@ -212,51 +267,11 @@ public:
             return;
         }
         
-        _started = true;
-        
-        NSMutableSet* productsIds = [[NSMutableSet alloc] init];
-        for (const auto& product : _products)
-        {
-            [productsIds addObject:[NSString stringWithUTF8String:product.productIdentifier.c_str()]];
+        if (_delegate) {
+            _delegate->onServiceStarted();
         }
         
-        [[RMStore defaultStore] requestProducts:productsIds success:^(NSArray *products, NSArray *invalidProductIdentifiers) {
-            for (SKProduct* skProduct in products) {
-                const char* productId = [[skProduct productIdentifier] cStringUsingEncoding:NSASCIIStringEncoding];
-                Product* avProduct = getProductByProductIdentifier(productId);
-                if (avProduct == NULL) {
-                    NSLog(@"[Payment] productsRequest: Product not found on our side - productId: %s", productId);
-                    continue;
-                }
-                
-                NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-                [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
-                [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-                
-                avProduct->price = [[skProduct price] floatValue];
-                [numberFormatter setLocale:skProduct.priceLocale];
-                avProduct->localizedPrice = [[numberFormatter stringFromNumber:skProduct.price] UTF8String];
-                
-                NSString *currencyCode = [skProduct.priceLocale objectForKey:NSLocaleCurrencyCode];
-                if(currencyCode != NULL) {
-                    avProduct->currencyCode = [currencyCode UTF8String];
-                }
-                NSString* localizedName = [skProduct localizedTitle];
-                if (localizedName != NULL) {
-                    avProduct->localizedName = [localizedName UTF8String];
-                }
-                NSString* localizedDescription = [skProduct localizedDescription];
-                if (localizedDescription != NULL) {
-                    avProduct->localizedDescription = [localizedDescription UTF8String];
-                }
-            }
-            
-            if (_delegate) {
-                _delegate->onServiceStarted();
-            }
-        } failure:^(NSError *error) {
-        }];
-        
+        _started = true;
     }
     
     virtual void stopService() override

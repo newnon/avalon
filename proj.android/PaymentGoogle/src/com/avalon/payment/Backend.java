@@ -47,6 +47,11 @@ public class Backend
     {
         pendingItemData.put(productId, isConsumable);
     }
+    
+    public static void clearItemDataRequest()
+    {
+    	pendingItemData.clear();
+    }
 
     public static void startItemDataRequest()
     {
