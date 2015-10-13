@@ -3,19 +3,21 @@
 
 #include <string>
 #include <vector>
+#include <cstdint>
 
 namespace avalon {
 namespace payment {
 
 struct Product
 {
-    Product():consumable(false),price(0.0f) {}
+    Product():consumable(false), price(0.0f), data(0) {}
     std::string id;
     std::string productIdentifier;
     std::string localizedName;
     std::string localizedDescription;
     std::string localizedPrice;
     std::string currencyCode;
+    std::intptr_t data;
     bool consumable;
     float price;
 };
