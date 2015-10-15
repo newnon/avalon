@@ -89,7 +89,7 @@ unsigned Notifications::getBadgeNumber()
     
 void Notifications::registerForRemoteNotification()
 {
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
 }
     
 void Notifications::unregisterForRemoteNotifications()
