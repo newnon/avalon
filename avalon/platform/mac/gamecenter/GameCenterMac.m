@@ -367,8 +367,15 @@ static GameCenterMac* instance = nil;
 
 - (NSString*)getGameCenterSavePath:(NSString*)postfix
 {
-    NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    return [NSString stringWithFormat:@"%@/avalon.gamecenter.%@.cache",[paths objectAtIndex:0],postfix];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *bundleName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:bundleName];
+    BOOL isDir = NO;
+    NSError *error = nil;
+    if (! [[NSFileManager defaultManager] fileExistsAtPath:documentsDirectory isDirectory:&isDir] && isDir == NO) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:NO attributes:nil error:&error];
+    }
+    return [NSString stringWithFormat:@"%@/avalon.gamecenter.%@.cache",documentsDirectory,postfix];
 }
 
 - (void)registerForAuthenticationNotification
