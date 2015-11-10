@@ -86,7 +86,7 @@ public:
 		cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_interstitial);
     }
 
-    virtual bool isReady() const override
+    bool isReady() const
 	{
 		if(!_interstitial)
 			return false;
@@ -100,7 +100,7 @@ public:
 		return ret;
 	}
 
-	virtual bool isVisible() const override
+	bool isVisible() const
 	{
 		if(!_interstitial)
 			return false;
@@ -113,6 +113,17 @@ public:
 		}
 		return ret;
 	};
+
+	virtual State getState() const override
+	{
+		if(!_interstitial)
+			return State::INITIALIZING;
+		if(isVisible())
+			return State::ACTIVE;
+		if(isReady())
+			return State::READY;
+		return State::LOADING;
+	}
 
 	virtual bool hide() override
 	{
@@ -136,25 +147,27 @@ public:
     void interstitialDidReceiveAd()
     {
         if(_delegate)
-            _delegate->interstitialReceiveAd(this);
+            _delegate->interstitialDidLoadAd(this);
     }
     void interstitialDidFailToReceiveAd(int code, int nativeCode, const std::string &message)
     {
         if(_delegate)
-            _delegate->interstitialFailedToReceiveAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
+            _delegate->interstitialDidFailLoadAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
     }
     void interstitialWillPresentScreen()
     {
+    	if(_delegate)
+    		_delegate->interstitialWillShow(this);
     }
     void interstitialWillDismissScreen()
     {
         if(_delegate)
-            _delegate->interstitialClose(this);
+            _delegate->interstitialDidHide(this);
     }
     void interstitialWillLeaveApplication()
     {
         if(_delegate)
-            _delegate->interstitialClick(this);
+            _delegate->interstitialUserInteraction(this, true);
     }
 
 private:
@@ -256,23 +269,27 @@ public:
     void adViewDidReceiveAd()
     {
         if(_delegate)
-            _delegate->bannerReceiveAd(this);
+            _delegate->bannerDidLoadAd(this);
     }
     void adViewDidFailToReceive(int code, int nativeCode, const std::string &message)
     {
         if(_delegate)
-            _delegate->bannerFailedToReceiveAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
+            _delegate->bannerDidFailLoadAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
     }
     void adViewWillPresentScreen()
     {
+    	if(_delegate)
+    		_delegate->bannerWillEnterModalMode(this);
     }
     void adViewWillDismissScreen()
     {
+    	if(_delegate)
+    		_delegate->bannerDidLeaveModalMode(this);
     }
     void adViewWillLeaveApplication()
     {
         if(_delegate)
-            _delegate->bannerClick(this);
+            _delegate->bannerWillLeaveApplication(this);
     }
 
 private:

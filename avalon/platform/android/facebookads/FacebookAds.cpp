@@ -57,7 +57,7 @@ public:
         cocos2d::JniHelper::getEnv()->DeleteGlobalRef(_interstitial);
     }
     
-    virtual bool isReady() const override
+    bool isReady() const
     {
         if(!_interstitial)
             return false;
@@ -71,7 +71,7 @@ public:
         return ret;
     }
     
-    virtual bool isVisible() const override
+    bool isVisible() const
 	{
 		if(!_interstitial)
 			return false;
@@ -85,6 +85,17 @@ public:
 		return ret;
 	};
     
+    virtual State getState() const override
+    {
+		if(!_interstitial)
+			return State::INITIALIZING;
+		if(isVisible())
+			return State::ACTIVE;
+		if(isReady())
+			return State::READY;
+		return State::LOADING;
+    }
+
     virtual bool hide() override
     {
         return false;
@@ -107,22 +118,22 @@ public:
     virtual void interstitialReceiveAd()
     {
     	if(_delegate)
-    	    _delegate->interstitialReceiveAd(this);
+    	    _delegate->interstitialDidLoadAd(this);
     }
     virtual void interstitialFailedToReceiveAd(int code, int nativeCode, const std::string &message)
     {
     	if(_delegate)
-    	    _delegate->interstitialFailedToReceiveAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
+    	    _delegate->interstitialDidFailLoadAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
     }
     virtual void interstitialClose()
     {
     	if(_delegate)
-    	    _delegate->interstitialClose(this);
+    	    _delegate->interstitialDidHide(this);
     }
     virtual void interstitialClick()
     {
     	if(_delegate)
-    	    _delegate->interstitialClick(this);
+    	    _delegate->interstitialUserInteraction(this, true);
     }
 
 private:;
@@ -223,17 +234,17 @@ public:
     virtual void bannerReceiveAd()
     {
     	if(_delegate)
-    		_delegate->bannerReceiveAd(this);
+    		_delegate->bannerDidLoadAd(this);
     }
     virtual void bannerClick()
     {
     	if(_delegate)
-    	    _delegate->bannerClick(this);
+    	    _delegate->bannerWillLeaveApplication(this);
     }
     virtual void bannerFailedToReceiveAd(int code, int nativeCode, const std::string &message)
     {
     	if(_delegate)
-    	    _delegate->bannerFailedToReceiveAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
+    	    _delegate->bannerDidFailLoadAd(this, static_cast<avalon::AdsErrorCode>(code), nativeCode, message);
     }
 private:
     jobject _banner;

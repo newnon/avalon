@@ -1,0 +1,145 @@
+(+) - new feature
+(-) - functional removal
+(!) - bugfix
+
+////////////////////////////////////////////////////////////////////////////////////
+- AdClient for iOS version 1.4.1
+ (!) Minor improvements
+
+- AdClient for iOS version 1.4.0
+ (+) Manual ad loading added for banners (see [ACBannerView loadAd] method)
+ (+) ACAdError class added
+ (+) ACBannerView delegate's
+    -(void)acBannerViewDidFailLoadAd:(ACBannerView *)acBannerView changed to
+    changed to
+    -(void)acBannerViewDidFailLoadAd:(ACBannerView *)acBannerView withError:(NSObject *)error
+ (+) ACInterstitialView delegate's
+    -(void)acInterstitialViewDidFailLoadAd:(ACInterstitialView *)acInterstitialView changed to
+    changed to
+    -(void)acInterstitialViewDidFailLoadAd:(ACInterstitialView *)acInterstitialView withError:(NSObject *)error
+
+- AdClient for iOS version 1.3.4
+ (+) Amazon Ads SDK for iOS supported
+ (!) Google Mobile Ads SDK 6.12.0 checked
+
+- AdClient for iOS version 1.3.3
+ (!) iOS 8 compatibility check
+ (!) Bugfixes and improvements
+ 
+- AdClient for iOS version 1.3.2
+ (+) 300x50, 300x250, 728x90 banner's sizes added
+ (!) Google Mobile Ads SDK 6.11.1 checked
+
+- AdClient for iOS version 1.3.1
+ (!) Stability improvements
+ (+) Epom as Mobile & Application Network feature implemented
+ (!) Epom native banners double click/impression fix
+ 
+
+- AdClient for iOS version 1.3.0
+ (!) ACBannerView now keeps weak reference to parent UIViewController
+ 
+
+- AdClient for iOS version 1.2.9
+ (!) minor code refactoring !!! WARNING !!! Delegates' method names have been changed
+ (+) ACBannerView does not send ad requests ads anymore while is inactive or hidden
+ (+) ACBannerViewDelegate now can be notified about ad load state changes
+ (!) ACBannerView hides if network is unreachable
+ (!) InMobi 4.1.0 checked
+ (!) mOcean 3.1.2 checked (YOC/Mojiva)
+ (!) Google AdMob 6.8.0 checked
+ (!) TapIt 3.0.10 checked
+ (!) WapStart +1 2.1.3 checked
+ (!) iSoma 6.0.1 checked
+ (!) MobFox 5.0.0 checked
+ (!) InnerActive 2.0.7 checked
+ (!) Millennial Media 5.1.1 checked
+ (!) iOS 7.1 checked
+
+- AdClient for iOS version 1.2.8
+ (+) minor improvements for iOS 7
+ (+) MobFox 4.1.6 integrated
+
+- AdClient SDK for iOS version 1.2.7
+ (+) Added "no-impression" support
+
+- AdClient SDK for iOS version 1.2.6
+ (+) InnerActive iOS SDK 1.1.7 checked
+ (+) Smaato iSoma.framework 6.0.0 checked
+  
+- AdClient SDK for iOS version 1.2.5
+ (+) Added options for customizing banner or interstitials behavior
+
+- AdClient SDK for iOS version 1.2.4
+ (!) Minor internal client-server communication bugfix
+ 
+- AdClient SDK for iOS version 1.2.3
+ (!) Fix of the bug, related with continiuous location manager usage
+ 
+- AdClient SDK for iOS version 1.2.2
+ (!) bugfixes
+ (!) Compatibility with the latest advertisers' libraries checked
+ (+) Custom parameters for ad requesting added
+
+- AdClient SDK for iOS version 1.2.1
+ (!) MRAID support minor improvements
+
+- AdClient SDK for iOS version 1.2.0
+ (!) Changed way of device unique identifier generation
+ (!) Interface classes name changes ACView -> ACBannerView and vice versa
+ (+) Added class ACInterstitialView for displaying interstitial ads
+ (!) Console log level optioning moved to ACUtil class
+
+- AdClient SDK for iOS version 1.1.2
+ (!) Fix for SDK's access to location api
+
+- AdClient SDK for iOS version 1.1.1
+ (+) Added support for armv7s architecture
+ (-) Dropped support for armv6 architecture
+ (!) Compatibility with the latest external dependencies checked
+
+- AdClient SDK for iOS version 1.1.0
+ (+) AdClient iOS SDK is MRAID v1.0 compliant now
+ (+) Smaato iOS SDK supported
+ (+) Mojiva iOS SDK integrated
+ (+) SmartMad iOS SDK supported
+ (!) Bugfixes and improvements
+
+- AdClient SDK for iOS version 1.0.7
+ (-) TapJoy SDK removal
+ (!) Impressions wrong counting fix
+ 
+- AdClient SDK for iOS version 1.0.6
+ (!) assert failures fix
+ (+) InnerActive iOS SDK version 1.1.4 supported and is required as minimal
+
+- AdClient SDK for iOS version 1.0.5
+ (!) iAd multiple ad state notification (caused crash) fix
+ (!) "-weak_library /usr/lib/libSystem.B.dylib" linker flag is not needed now for pre iOS 4.0 firmwares
+ (+) More debug info for logging has been added
+
+- AdClient SDK for iOS version 1.0.4
+ (!) Compatibility check with updated MillennialMedia SDK 4.6.0 (now its available)
+ (+) WapStart +1 integrated
+ (+) TapJoy integrated
+ (!) Major stability and memory usage improvements
+
+- AdClient SDK for iOS version 1.0.3
+ (+) TapIt supported
+ (!) Bugfixes and improvements
+
+- AdClient SDK for iOS version 1.0.2
+ (!) UDID is replaced with SHA1 of MAC address for internal requests
+
+- AdClient SDK for iOS version 1.0.1
+ (!) iOS version 3.0 compatibility support
+
+- AdClient SDK for iOS version 1.0.0
+ initial release
+ (+) Google AdMob supported
+ (+) InMobi supported
+ (+) JumpTap supported
+ (+) Inneractive  supported
+ (+) MillennialMedia supported, but is not available due to unstable behavior
+ (+) YocPerformance integrated
+ (+) iAd supported

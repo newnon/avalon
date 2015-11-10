@@ -24,9 +24,9 @@ public:
     void setBannerParams(int x, int y, int width, int height, BannerScaleType scaleType, BannerGravityType gravity);
     
 private:
-    virtual void bannerReceiveAd(Banner *banner) override;
-    virtual void bannerClick(Banner *banner) override;
-    virtual void bannerFailedToReceiveAd(Banner *banner, AdsErrorCode error, int nativeCode, const std::string &message) override;
+    virtual void bannerDidLoadAd(Banner *banner) override;
+    virtual void bannerUserInteraction(Banner *banner) override;
+    virtual void bannerDidFailLoadAd(Banner *banner, AdsErrorCode error, int nativeCode, const std::string &message) override;
     std::vector<Banner*> _banners;
     bool _needToShowBanner;
     int _x;
@@ -56,10 +56,9 @@ public:
     float getMinDelay() const;
     
 private:
-    virtual void interstitialReceiveAd(Interstitial *interstitial) override;
-    virtual void interstitialFailedToReceiveAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message) override;
-    virtual void interstitialClose(Interstitial *interstitial) override;
-    virtual void interstitialClick(Interstitial *interstitial) override;
+    virtual void interstitialDidLoadAd(Interstitial *interstitial) override;
+    virtual void interstitialDidFailLoadAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message) override;
+    virtual void interstitialUserInteraction(Interstitial *interstitial, bool willLeaveApplication) override;
     std::vector<std::pair<Interstitial*,float>> _interstitials;
     InterstitialDelegate *_delegate;
     std::chrono::steady_clock::time_point _prevShowTime;

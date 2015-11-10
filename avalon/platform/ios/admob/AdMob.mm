@@ -100,14 +100,20 @@ public:
         recreate();
     }
     
-    virtual bool isReady() const override
+    virtual State getState() const override
     {
-        return [_interstitial isReady] && ![_interstitial hasBeenUsed];
+        if([_interstitial hasBeenUsed])
+            return State::DONE;
+        if(_visible)
+            return State::ACTIVE;
+        if([_interstitial isReady])
+            return State::READY;
+        return State::LOADING;
     }
     
-    virtual bool isVisible() const override
+    bool isReady() const
     {
-        return _visible;
+        return [_interstitial isReady] && ![_interstitial hasBeenUsed];
     }
     
     virtual bool hide() override
@@ -478,7 +484,7 @@ AdMob *AdMob::getInstance()
 {
     _bannerView->setReady(true);
     if(_delegate)
-        _delegate->bannerReceiveAd(_bannerView);
+        _delegate->bannerDidLoadAd(_bannerView);
 }
 
 - (void)loadAd
@@ -486,17 +492,35 @@ AdMob *AdMob::getInstance()
     _bannerView->loadAd();
 }
 
+- (void)adViewWillPresentScreen:(GADBannerView *)adView
+{
+    if(_delegate)
+        _delegate->bannerUserInteraction(_bannerView);
+}
+
+- (void)adViewWillDismissScreen:(GADBannerView *)adView
+{
+    if(_delegate)
+        _delegate->bannerWillEnterModalMode(_bannerView);
+}
+
+- (void)adViewDidDismissScreen:(GADBannerView *)adView
+{
+    if(_delegate)
+        _delegate->bannerDidLeaveModalMode(_bannerView);
+}
+
 - (void)adView:(GADBannerView *)view didFailToReceiveAdWithError:(GADRequestError *)error
 {
     if(_delegate)
-        _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
+        _delegate->bannerDidFailLoadAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:10];
 }
 
 - (void)adViewWillLeaveApplication:(GADBannerView *)adView
 {
     if(_delegate)
-        _delegate->bannerClick(_bannerView);
+        _delegate->bannerWillLeaveApplication(_bannerView);
 }
 
 @end
@@ -523,7 +547,7 @@ AdMob *AdMob::getInstance()
 - (void)interstitialDidReceiveAd:(GADInterstitial *)ad
 {
     if(_delegate)
-        _delegate->interstitialReceiveAd(_interstitial);
+        _delegate->interstitialDidLoadAd(_interstitial);
 }
 
 - (void)loadAd
@@ -534,13 +558,15 @@ AdMob *AdMob::getInstance()
 - (void)interstitial:(GADInterstitial *)ad didFailToReceiveAdWithError:(GADRequestError *)error
 {
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
+        _delegate->interstitialDidFailLoadAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:10];
 }
 
 - (void)interstitialWillPresentScreen:(GADInterstitial *)ad
 {
     _interstitial->setVisible(true);
+    if(_delegate)
+        _delegate->interstitialWillShow(_interstitial);
 }
 
 - (void)interstitialWillDismissScreen:(GADInterstitial *)ad
@@ -550,7 +576,7 @@ AdMob *AdMob::getInstance()
 - (void)interstitialDidDismissScreen:(GADInterstitial *)ad
 {
     if(_delegate)
-        _delegate->interstitialClose(_interstitial);
+        _delegate->interstitialDidHide(_interstitial);
     _interstitial->setVisible(false);
     _interstitial->recreate();
 }
@@ -558,7 +584,7 @@ AdMob *AdMob::getInstance()
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)ad
 {
     if(_delegate)
-        _delegate->interstitialClick(_interstitial);
+        _delegate->interstitialUserInteraction(_interstitial, true);
 }
 @end
 

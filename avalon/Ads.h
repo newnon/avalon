@@ -41,9 +41,34 @@ class Banner;
 class BannerDelegate
 {
 public:
-    virtual void bannerReceiveAd(Banner *banner) {}
-    virtual void bannerClick(Banner *banner) {}
-    virtual void bannerFailedToReceiveAd(Banner *banner, AdsErrorCode error, int nativeCode, const std::string &message) {}
+    
+    // Notification: Banner ad started loading.
+    virtual void bannerDidStartLoadAd(Banner *banner) {}
+    
+    // Notification: Banner ad failed to load.
+    virtual void bannerDidFailLoadAd(Banner *banner, AdsErrorCode error, int nativeCode, const std::string &message) {}
+    
+    // Notification: Banner ad successfully loaded.
+    virtual void bannerDidLoadAd(Banner *banner) {}
+    
+    // Notification: Ad provided by Banner will be shown
+    virtual void bannerWillShowAd(Banner *banner) {}
+    
+    // Notification: Ad provided by Banner is shown
+    virtual void bannerDidShowAd(Banner *banner) {};
+    
+    // Notification: Ad provided by Banner has been clicked
+    virtual void bannerUserInteraction(Banner *banner) {}
+    
+    // Notification: Ad provided by Banner will enter modal mode when opening embedded screen view controller
+    virtual void bannerWillEnterModalMode(Banner *banner) {}
+    
+    // Notification: Ad provided by Banner did leave modal mode
+    virtual void bannerDidLeaveModalMode(Banner *banner) {}
+    
+    // Notification: Ad provided by Banner causes to leave application to navigate to Safari, iTunes, etc.
+    virtual void bannerWillLeaveApplication(Banner *banner) {}
+
     virtual ~BannerDelegate() {}
 };
 
@@ -64,23 +89,43 @@ class Interstitial;
 class InterstitialDelegate
 {
 public:
-    virtual void interstitialReceiveAd(Interstitial *interstitial) {}
-    virtual void interstitialFailedToReceiveAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message) {}
-    virtual void interstitialClose(Interstitial *interstitial) {}
-    virtual void interstitialClick(Interstitial *interstitial) {}
+    // Notification: Interstitial ad started loading. State is changed to Loading.
+    virtual void interstitialDidStartLoadAd(Interstitial *interstitial) {}
+    
+    // Notification: Interstitial ad failed to load. State is changed to Failed.
+    // Error code/type is output to debug console
+    virtual void interstitialDidFailLoadAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message) {}
+    
+    // Notification: Interstitial ad successfully loaded. State is changed to Ready.
+    virtual void interstitialDidLoadAd(Interstitial *interstitial) {}
+    
+    // Notification: Interstitial ad starts to display ad. State is changed to Active.
+    virtual void interstitialWillShow(Interstitial *interstitial) {}
+    
+    // Notification: Interstitial ad finished to display ad. State is changed to Done.
+    virtual void interstitialDidHide(Interstitial *interstitial) {}
+    
+    // Notification: User has interacted with ad provided by ACInterstitialView. Optional is application leaving to navigate to Safari, iTunes, etc
+    virtual void interstitialUserInteraction(Interstitial *interstitial, bool willLeaveApplication) {}
+
     virtual ~InterstitialDelegate() {}
 };
 
 class Interstitial
 {
 public:
-    /*!
-     * @return
-     * YES if an ad is loaded, NO otherwise. This property should always be checked
-     * before the interstitial ad is presented.
-     */
-    virtual bool isReady() const = 0;
-    virtual bool isVisible() const = 0;
+    
+    enum class State
+    {
+        INITIALIZING,
+        LOADING,
+        FAILED,
+        READY,
+        ACTIVE,
+        DONE
+    };
+    
+    virtual State getState() const = 0;
     virtual const std::string &getType() const = 0;
     virtual bool hide() = 0;
     virtual bool show() = 0;

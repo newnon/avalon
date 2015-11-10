@@ -143,6 +143,20 @@
 		A56002AA1A274D0400235B77 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56002A91A274D0400235B77 /* FBAudienceNetwork.framework */; };
 		A56002C81A27C99600235B77 /* FacebookAds.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A56002C61A274E7B00235B77 /* FacebookAds.h */; };
 		A56002CE1A27CAA900235B77 /* FBAudienceNetwork in Frameworks */ = {isa = PBXBuildFile; fileRef = A56002CD1A27CAA900235B77 /* FBAudienceNetwork */; };
+		A5674CB91BF1E480002300F2 /* libAds iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A576959A1A0E8C70002FDCB5 /* libAds iOS.a */; };
+		A5674CBA1BF1E480002300F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5674CE81BF1E642002300F2 /* ACAdError.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE01BF1E642002300F2 /* ACAdError.h */; };
+		A5674CE91BF1E642002300F2 /* ACBannerView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE11BF1E642002300F2 /* ACBannerView.h */; };
+		A5674CEA1BF1E642002300F2 /* ACBannerViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE21BF1E642002300F2 /* ACBannerViewDelegate.h */; };
+		A5674CEB1BF1E642002300F2 /* ACEnumerations.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE31BF1E642002300F2 /* ACEnumerations.h */; };
+		A5674CEC1BF1E642002300F2 /* ACInterstitialView.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE41BF1E642002300F2 /* ACInterstitialView.h */; };
+		A5674CED1BF1E642002300F2 /* ACInterstitialViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE51BF1E642002300F2 /* ACInterstitialViewDelegate.h */; };
+		A5674CEE1BF1E642002300F2 /* ACUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE61BF1E642002300F2 /* ACUtils.h */; };
+		A5674CEF1BF1E642002300F2 /* ACVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674CE71BF1E642002300F2 /* ACVersion.h */; };
+		A5674D091BF1E668002300F2 /* libadclient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5674CFC1BF1E668002300F2 /* libadclient.a */; };
+		A5674D0B1BF1E6A1002300F2 /* Epom.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5674D0A1BF1E6A1002300F2 /* Epom.mm */; };
+		A5674D0D1BF1E6C5002300F2 /* Epom.h in Headers */ = {isa = PBXBuildFile; fileRef = A5674D0C1BF1E6C5002300F2 /* Epom.h */; };
+		A5674D0E1BF1E71B002300F2 /* Epom.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5674D0C1BF1E6C5002300F2 /* Epom.h */; };
 		A56C4826199E1DA900BF30BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A56C4831199E1E1B00BF30BA /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A56C482E199E1E1B00BF30BA /* GameCenter.mm */; };
 		A56C4832199E1E1B00BF30BA /* GameCenterMac.m in Sources */ = {isa = PBXBuildFile; fileRef = A56C4830199E1E1B00BF30BA /* GameCenterMac.m */; };
@@ -529,6 +543,13 @@
 			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
 			remoteInfo = "Ads iOS";
 		};
+		A5674CB51BF1E480002300F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
+		};
 		A57695B71A0E8E63002FDCB5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
@@ -643,6 +664,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A56002C81A27C99600235B77 /* FacebookAds.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5674CD81BF1E480002300F2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A5674D0E1BF1E71B002300F2 /* Epom.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,6 +997,18 @@
 		A56002A91A274D0400235B77 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = "vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework"; sourceTree = "<group>"; };
 		A56002C61A274E7B00235B77 /* FacebookAds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookAds.h; path = avalon/FacebookAds.h; sourceTree = "<group>"; };
 		A56002CD1A27CAA900235B77 /* FBAudienceNetwork */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBAudienceNetwork; path = "vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework/Versions/A/FBAudienceNetwork"; sourceTree = "<group>"; };
+		A5674CDD1BF1E480002300F2 /* libEpom iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEpom iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5674CE01BF1E642002300F2 /* ACAdError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACAdError.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACAdError.h; sourceTree = SOURCE_ROOT; };
+		A5674CE11BF1E642002300F2 /* ACBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACBannerView.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACBannerView.h; sourceTree = SOURCE_ROOT; };
+		A5674CE21BF1E642002300F2 /* ACBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACBannerViewDelegate.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACBannerViewDelegate.h; sourceTree = SOURCE_ROOT; };
+		A5674CE31BF1E642002300F2 /* ACEnumerations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEnumerations.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACEnumerations.h; sourceTree = SOURCE_ROOT; };
+		A5674CE41BF1E642002300F2 /* ACInterstitialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACInterstitialView.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACInterstitialView.h; sourceTree = SOURCE_ROOT; };
+		A5674CE51BF1E642002300F2 /* ACInterstitialViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACInterstitialViewDelegate.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACInterstitialViewDelegate.h; sourceTree = SOURCE_ROOT; };
+		A5674CE61BF1E642002300F2 /* ACUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACUtils.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACUtils.h; sourceTree = SOURCE_ROOT; };
+		A5674CE71BF1E642002300F2 /* ACVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACVersion.h; path = avalon/platform/ios/epom/Epom/include/AdClient/ACVersion.h; sourceTree = SOURCE_ROOT; };
+		A5674CFC1BF1E668002300F2 /* libadclient.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libadclient.a; path = avalon/platform/ios/epom/Epom/lib/libadclient.a; sourceTree = "<group>"; };
+		A5674D0A1BF1E6A1002300F2 /* Epom.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Epom.mm; path = avalon/platform/ios/epom/Epom.mm; sourceTree = "<group>"; };
+		A5674D0C1BF1E6C5002300F2 /* Epom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Epom.h; path = avalon/Epom.h; sourceTree = "<group>"; };
 		A56C482C199E1DA900BF30BA /* libGameCenter Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGameCenter Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56C482E199E1E1B00BF30BA /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GameCenter.mm; path = avalon/platform/mac/gamecenter/GameCenter.mm; sourceTree = "<group>"; };
 		A56C482F199E1E1B00BF30BA /* GameCenterMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCenterMac.h; path = avalon/platform/mac/gamecenter/GameCenterMac.h; sourceTree = "<group>"; };
@@ -1409,6 +1452,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5674CB81BF1E480002300F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5674CB91BF1E480002300F2 /* libAds iOS.a in Frameworks */,
+				A5674D091BF1E668002300F2 /* libadclient.a in Frameworks */,
+				A5674CBA1BF1E480002300F2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A56C4825199E1DA900BF30BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1580,6 +1633,7 @@
 				A517E09A1ADC6A1D008BCC7B /* AppsFlyer */,
 				A54E28B91AC2D1D20054B412 /* Chartboost */,
 				A597D30A1ADBDB03001C8E9C /* DeltaDna */,
+				A5674CDE1BF1E506002300F2 /* Epom */,
 				A56002A31A2748D000235B77 /* FacebookAds */,
 				A50BC28518E9B2B400F1F979 /* Flurry */,
 				A50BC26D18E9A1C100F1F979 /* FlurryAds */,
@@ -1629,6 +1683,7 @@
 				A597D3091ADBDACE001C8E9C /* libDeltaDna iOS.a */,
 				A58883081ADC597300B32AC7 /* libUtils iOS.a */,
 				A588834E1ADC5CBB00B32AC7 /* libAppsFlyer iOS.a */,
+				A5674CDD1BF1E480002300F2 /* libEpom iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1929,6 +1984,32 @@
 				A56002A71A274C8800235B77 /* FacebookAds.mm */,
 			);
 			name = "FacebookAds-ios";
+			sourceTree = "<group>";
+		};
+		A5674CDE1BF1E506002300F2 /* Epom */ = {
+			isa = PBXGroup;
+			children = (
+				A5674D0C1BF1E6C5002300F2 /* Epom.h */,
+				A5674CDF1BF1E517002300F2 /* Epom-ios */,
+			);
+			name = Epom;
+			sourceTree = "<group>";
+		};
+		A5674CDF1BF1E517002300F2 /* Epom-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A5674D0A1BF1E6A1002300F2 /* Epom.mm */,
+				A5674CE01BF1E642002300F2 /* ACAdError.h */,
+				A5674CE11BF1E642002300F2 /* ACBannerView.h */,
+				A5674CE21BF1E642002300F2 /* ACBannerViewDelegate.h */,
+				A5674CE31BF1E642002300F2 /* ACEnumerations.h */,
+				A5674CE41BF1E642002300F2 /* ACInterstitialView.h */,
+				A5674CE51BF1E642002300F2 /* ACInterstitialViewDelegate.h */,
+				A5674CE61BF1E642002300F2 /* ACUtils.h */,
+				A5674CE71BF1E642002300F2 /* ACVersion.h */,
+				A5674CFC1BF1E668002300F2 /* libadclient.a */,
+			);
+			name = "Epom-ios";
 			sourceTree = "<group>";
 		};
 		A56C482D199E1DD400BF30BA /* gamecenter-mac */ = {
@@ -2748,6 +2829,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5674CBC1BF1E480002300F2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5674D0D1BF1E6C5002300F2 /* Epom.h in Headers */,
+				A5674CEC1BF1E642002300F2 /* ACInterstitialView.h in Headers */,
+				A5674CE91BF1E642002300F2 /* ACBannerView.h in Headers */,
+				A5674CEA1BF1E642002300F2 /* ACBannerViewDelegate.h in Headers */,
+				A5674CED1BF1E642002300F2 /* ACInterstitialViewDelegate.h in Headers */,
+				A5674CEF1BF1E642002300F2 /* ACVersion.h in Headers */,
+				A5674CEB1BF1E642002300F2 /* ACEnumerations.h in Headers */,
+				A5674CE81BF1E642002300F2 /* ACAdError.h in Headers */,
+				A5674CEE1BF1E642002300F2 /* ACUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A56C4839199E1F1C00BF30BA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3172,6 +3269,25 @@
 			productReference = A56002A21A27484F00235B77 /* libFacebookAds iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5674CB31BF1E480002300F2 /* Epom iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5674CDA1BF1E480002300F2 /* Build configuration list for PBXNativeTarget "Epom iOS" */;
+			buildPhases = (
+				A5674CB61BF1E480002300F2 /* Sources */,
+				A5674CB81BF1E480002300F2 /* Frameworks */,
+				A5674CBC1BF1E480002300F2 /* Headers */,
+				A5674CD81BF1E480002300F2 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5674CB41BF1E480002300F2 /* PBXTargetDependency */,
+			);
+			name = "Epom iOS";
+			productName = Avalon;
+			productReference = A5674CDD1BF1E480002300F2 /* libEpom iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A56C4821199E1DA900BF30BA /* GameCenter Mac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A56C4829199E1DA900BF30BA /* Build configuration list for PBXNativeTarget "GameCenter Mac" */;
@@ -3497,6 +3613,7 @@
 				A58883351ADC5CBB00B32AC7 /* AppsFlyer iOS */,
 				A54E28A91AC2D1560054B412 /* Chartboost iOS */,
 				A597D2FF1ADBDACE001C8E9C /* DeltaDna iOS */,
+				A5674CB31BF1E480002300F2 /* Epom iOS */,
 				A56002941A27484F00235B77 /* FacebookAds iOS */,
 				A50BC25218E99F5400F1F979 /* Flurry iOS */,
 				A50BC25F18E9A14800F1F979 /* FlurryAds iOS */,
@@ -3649,6 +3766,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A56002A81A274C8800235B77 /* FacebookAds.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5674CB61BF1E480002300F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5674D0B1BF1E6A1002300F2 /* Epom.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3941,6 +4066,11 @@
 			isa = PBXTargetDependency;
 			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
 			targetProxy = A56002961A27484F00235B77 /* PBXContainerItemProxy */;
+		};
+		A5674CB41BF1E480002300F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = A5674CB51BF1E480002300F2 /* PBXContainerItemProxy */;
 		};
 		A57695B81A0E8E63002FDCB5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -4585,6 +4715,38 @@
 			};
 			name = Release;
 		};
+		A5674CDB1BF1E480002300F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/epom/Epom/lib",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Epom iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A5674CDC1BF1E480002300F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/epom/Epom/lib",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "Epom iOS";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		A56C482A199E1DA900BF30BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5219,6 +5381,15 @@
 			buildConfigurations = (
 				A56002A01A27484F00235B77 /* Debug */,
 				A56002A11A27484F00235B77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5674CDA1BF1E480002300F2 /* Build configuration list for PBXNativeTarget "Epom iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5674CDB1BF1E480002300F2 /* Debug */,
+				A5674CDC1BF1E480002300F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

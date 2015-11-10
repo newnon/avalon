@@ -84,10 +84,10 @@ BannerManager::~BannerManager()
     }
 }
 
-void BannerManager::bannerReceiveAd(Banner *banner)
+void BannerManager::bannerDidLoadAd(Banner *banner)
 {
     if(_delegate)
-        _delegate->bannerReceiveAd(banner);
+        _delegate->bannerDidLoadAd(banner);
     if(_needToShowBanner)
     {
         _visibleBanner = banner;
@@ -99,16 +99,16 @@ void BannerManager::bannerReceiveAd(Banner *banner)
     }
 }
 
-void BannerManager::bannerClick(Banner *banner)
+void BannerManager::bannerUserInteraction(Banner *banner)
 {
     if(_delegate)
-        _delegate->bannerClick(banner);
+        _delegate->bannerUserInteraction(banner);
 }
 
-void BannerManager::bannerFailedToReceiveAd(Banner *banner, AdsErrorCode error, int nativeCode, const std::string &message)
+void BannerManager::bannerDidFailLoadAd(Banner *banner, AdsErrorCode error, int nativeCode, const std::string &message)
 {
     if(_delegate)
-        _delegate->bannerFailedToReceiveAd(banner, error, nativeCode, message);
+        _delegate->bannerDidFailLoadAd(banner, error, nativeCode, message);
 }
     
 void InterstitialManager::add(Interstitial* interstitial, float delay)
@@ -134,7 +134,7 @@ const Interstitial* InterstitialManager::show(bool ignoreCounter, bool ignoreTim
 
     for(const auto &it:_interstitials)
     {
-        if(it.first->isReady())
+        if(it.first->getState() == Interstitial::State::READY)
         {
             if(show && (_lastInterstitial != it.first || deltaSec>=it.second))
             {
@@ -194,30 +194,23 @@ float InterstitialManager::getMinDelay() const
     return _minDelay;
 }
     
-void InterstitialManager::interstitialReceiveAd(Interstitial *interstitial)
+void InterstitialManager::interstitialDidLoadAd(Interstitial *interstitial)
 {
     if(_delegate)
-        _delegate->interstitialReceiveAd(interstitial);
+        _delegate->interstitialDidLoadAd(interstitial);
 }
     
-void InterstitialManager::interstitialFailedToReceiveAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message)
+void InterstitialManager::interstitialDidFailLoadAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message)
 {
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(interstitial, error, nativeCode, message);
+        _delegate->interstitialDidFailLoadAd(interstitial, error, nativeCode, message);
 }
     
-void InterstitialManager::interstitialClose(Interstitial *interstitial)
+void InterstitialManager::interstitialUserInteraction(Interstitial *interstitial, bool willLeaveApplication)
 {
     if(_delegate)
-        _delegate->interstitialClose(interstitial);;
+        _delegate->interstitialUserInteraction(interstitial, willLeaveApplication);;
 }
-    
-void InterstitialManager::interstitialClick(Interstitial *interstitial)
-{
-    if(_delegate)
-        _delegate->interstitialClick(interstitial);
-}
-
 
 }
 #endif /* AVALON_CONFIG_ADS_ENABLED */

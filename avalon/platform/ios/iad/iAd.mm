@@ -58,13 +58,25 @@ public:
         _interstitial = [[::ADInterstitialAd alloc] init];
         _interstitial.delegate = _delegate;
     }
-    virtual bool isReady() const override
+    
+    virtual State getState() const override
+    {
+        if(!_interstitial)
+            return State::INITIALIZING;
+        if(_interstitial.loaded)
+            return State::READY;
+        if(_interstitial.actionInProgress)
+            return State::ACTIVE;
+        return State::LOADING;
+    }
+    
+    bool isReady() const
     {
         if(!_interstitial)
             return false;
         return _interstitial.loaded;
     }
-    virtual bool isVisible() const override
+    bool isVisible() const
     {
         if(!_interstitial)
             return false;
@@ -337,18 +349,29 @@ IADBanner* IADBanner::create(ADAdType type, BannerDelegate *delegate)
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
     if(_delegate)
-        _delegate->bannerReceiveAd(_bannerView);
+        _delegate->bannerDidLoadAd(_bannerView);
 }
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
     if(_delegate)
-        _delegate->bannerFailedToReceiveAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
+        _delegate->bannerDidFailLoadAd(_bannerView, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
 }
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
     if(_delegate)
-        _delegate->bannerClick(_bannerView);
+    {
+        _delegate->bannerUserInteraction(_bannerView);
+        _delegate->bannerWillEnterModalMode(_bannerView);
+        if(willLeave)
+            _delegate->bannerWillLeaveApplication(_bannerView);
+    }
     return true;
+}
+
+- (void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    if(_delegate)
+        _delegate->bannerDidLeaveModalMode(_bannerView);
 }
 
 @end
@@ -369,30 +392,38 @@ IADBanner* IADBanner::create(ADAdType type, BannerDelegate *delegate)
 - (void)interstitialAdDidUnload:(ADInterstitialAd *)interstitialAd
 {
     if(_delegate)
-        _delegate->interstitialClose(_interstitial);
+        _delegate->interstitialDidHide(_interstitial);
 }
+
+
 - (void)interstitialAd:(ADInterstitialAd *)interstitialAd didFailWithError:(NSError *)error
 {
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
-    _interstitial->error();
+        _delegate->interstitialDidFailLoadAd(_interstitial, avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [error.localizedDescription UTF8String]);
+}
+
+- (void)interstitialAdWillLoad:(ADInterstitialAd *)interstitialAd
+{
+    
 }
 
 - (void)interstitialAdDidLoad:(ADInterstitialAd *)interstitialAd
 {
     if(_delegate)
-        _delegate->interstitialReceiveAd(_interstitial);
+        _delegate->interstitialDidLoadAd(_interstitial);
 }
 
 - (BOOL)interstitialAdActionShouldBegin:(ADInterstitialAd *)interstitialAd willLeaveApplication:(BOOL)willLeave
 {
     if(_delegate)
-        _delegate->interstitialClick(_interstitial);
-    return true;
+        _delegate->interstitialUserInteraction(_interstitial, willLeave);
+    return YES;
 }
 
 - (void)interstitialAdActionDidFinish:(ADInterstitialAd *)interstitialAd
 {
+    if(_delegate)
+        _delegate->interstitialDidHide(_interstitial);
 }
 
 @end

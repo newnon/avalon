@@ -40,14 +40,16 @@ public:
         [_interstitial release];
     }
     
-    virtual bool isReady() const override
+    virtual State getState() const override
     {
-        return [_interstitial isAdValid];
+        if([_interstitial isAdValid])
+            return State::READY;
+        return State::LOADING;
     }
     
-    virtual bool isVisible() const override
+    bool isReady() const
     {
-        return _visible;
+        return [_interstitial isAdValid];
     }
     
     virtual bool hide() override
@@ -236,24 +238,26 @@ public:
     void adViewDidClick()
     {
         if(_delegate)
-            _delegate->bannerClick(this);
+            _delegate->bannerUserInteraction(this);
         _bannerView.hidden = YES;
     }
     void adViewDidFinishHandlingClick()
     {
+        if(_delegate)
+            _delegate->bannerDidLeaveModalMode(this);
         _bannerView.hidden = NO;
     }
     void adViewDidLoad()
     {
         _ready = true;
         if(_delegate)
-            _delegate->bannerReceiveAd(this);
+            _delegate->bannerDidLoadAd(this);
     }
     void adViewdidFailWithError(NSError *error)
     {
         _ready = false;
         if(_delegate)
-            _delegate->bannerFailedToReceiveAd(this, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
+            _delegate->bannerDidFailLoadAd(this, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
     }
     void adViewWillLogImpression()
     {
@@ -399,13 +403,13 @@ FBAds *FBAds::getInstance()
 - (void)interstitialAdDidClick:(FBInterstitialAd *)interstitialAd
 {
     if(_delegate)
-        _delegate->interstitialClick(_interstitial);
+        _delegate->interstitialUserInteraction(_interstitial, true);
 }
 
 - (void)interstitialAdDidClose:(FBInterstitialAd *)interstitialAd
 {
     if(_delegate)
-        _delegate->interstitialClose(_interstitial);
+        _delegate->interstitialDidHide(_interstitial);
     _interstitial->setVisible(false);
     _interstitial->loadAd();
 }
@@ -413,7 +417,7 @@ FBAds *FBAds::getInstance()
 - (void)interstitialAdDidLoad:(FBInterstitialAd *)interstitialAd
 {
     if(_delegate)
-        _delegate->interstitialReceiveAd(_interstitial);
+        _delegate->interstitialDidLoadAd(_interstitial);
 }
 
 - (void)loadAd
@@ -425,7 +429,7 @@ FBAds *FBAds::getInstance()
 {
     [self performSelector:@selector(loadAd) withObject:nil afterDelay:(error.code == 1001 || error.code == 1002)?60:10];
     if(_delegate)
-        _delegate->interstitialFailedToReceiveAd(_interstitial, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
+        _delegate->interstitialDidFailLoadAd(_interstitial, error.code == 1001?avalon::AdsErrorCode::NO_FILL:avalon::AdsErrorCode::INTERNAL_ERROR, (int)error.code, [[error localizedDescription] UTF8String]);
 }
 
 @end
