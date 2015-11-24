@@ -259,7 +259,7 @@ public:
         }];
     }
     
-    virtual void startService(const std::string &data)
+    virtual void startService(const std::string &data) override
     {
         if(_started)
         {
