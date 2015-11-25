@@ -127,6 +127,7 @@ public:
     
     virtual State getState() const = 0;
     virtual const std::string &getType() const = 0;
+    virtual int getReward() const { return 0; };
     virtual bool hide() = 0;
     virtual bool show() = 0;
     virtual ~Interstitial() {}

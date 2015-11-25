@@ -26,7 +26,7 @@ class GADInterstitial: public Interstitial
 {
 public:
     const std::string &getAdUnitID() const { return _adUnitID; }
-    virtual const std::string &getType() const override { static std::string type = "facebook"; return type; };
+    virtual const std::string &getType() const override { static std::string type = "admob"; return type; };
     
 protected:
     GADInterstitial(const std::string &adUnitID):_adUnitID(adUnitID) {}

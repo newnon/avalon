@@ -128,9 +128,11 @@ const Interstitial* InterstitialManager::show(bool ignoreCounter, bool ignoreTim
     }
     else
     {
-        if((_interstitialCounter++ % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay))
+        if((_minFrequency == 0)||((_interstitialCounter % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay)))
             show = true;
     }
+    
+    ++_interstitialCounter;
 
     for(const auto &it:_interstitials)
     {
@@ -141,6 +143,34 @@ const Interstitial* InterstitialManager::show(bool ignoreCounter, bool ignoreTim
                 _prevShowTime = std::chrono::steady_clock::now();
                 _lastInterstitial = it.first;
                 it.first->show();
+                return it.first;
+            }
+        }
+    }
+    return nullptr;
+}
+    
+const Interstitial* InterstitialManager::getReadyInterstitial(bool ignoreCounter, bool ignoreTimer) const
+{
+    auto deltaSec = _lastInterstitial?std::chrono::duration_cast<std::chrono::seconds>(std::chrono::steady_clock::now() - _prevShowTime).count():INT_MAX;
+    bool show = false;
+    if(ignoreCounter)
+    {
+        if(ignoreTimer || deltaSec>=_minDelay)
+            show = true;
+    }
+    else
+    {
+        if((_minFrequency == 0)||((_interstitialCounter % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay)))
+            show = true;
+    }
+    
+    for(const auto &it:_interstitials)
+    {
+        if(it.first->getState() == Interstitial::State::READY)
+        {
+            if(show && (_lastInterstitial != it.first || deltaSec>=it.second))
+            {
                 return it.first;
             }
         }

@@ -45,6 +45,7 @@ public:
     void add(Interstitial* interstitial, float delay);
     
     const Interstitial* show(bool ignoreCounter, bool ignoreTimer);
+    const Interstitial* getReadyInterstitial(bool ignoreCounter, bool ignoreTimer) const;
     void clear();
     
     InterstitialManager(InterstitialDelegate *delegate);
