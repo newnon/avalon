@@ -109,7 +109,7 @@ public:
     virtual void interstitialUserInteraction(Interstitial *interstitial, bool willLeaveApplication) {}
     
     // Notification: User was rewarded
-    virtual void interstitialReward(Interstitial *interstitial, const std::string &curency, int amount) {}
+    virtual void interstitialReward(Interstitial *interstitial, const std::string &token, const std::string &curency, int amount) {}
 
     virtual ~InterstitialDelegate() {}
 };
