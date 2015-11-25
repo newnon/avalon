@@ -107,6 +107,9 @@ public:
     
     // Notification: User has interacted with ad provided by ACInterstitialView. Optional is application leaving to navigate to Safari, iTunes, etc
     virtual void interstitialUserInteraction(Interstitial *interstitial, bool willLeaveApplication) {}
+    
+    // Notification: User was rewarded
+    virtual void interstitialReward(Interstitial *interstitial, const std::string &curency, int amount) {}
 
     virtual ~InterstitialDelegate() {}
 };
