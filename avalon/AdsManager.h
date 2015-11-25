@@ -60,6 +60,10 @@ private:
     virtual void interstitialDidLoadAd(Interstitial *interstitial) override;
     virtual void interstitialDidFailLoadAd(Interstitial *interstitial, AdsErrorCode error, int nativeCode, const std::string &message) override;
     virtual void interstitialUserInteraction(Interstitial *interstitial, bool willLeaveApplication) override;
+    virtual void interstitialDidStartLoadAd(Interstitial *interstitial) override;
+    virtual void interstitialWillShow(Interstitial *interstitial) override;
+    virtual void interstitialDidHide(Interstitial *interstitial) override;
+    virtual void interstitialReward(Interstitial *interstitial, const std::string &token, const std::string &curency, int amount) override;
     std::vector<std::pair<Interstitial*,float>> _interstitials;
     InterstitialDelegate *_delegate;
     std::chrono::steady_clock::time_point _prevShowTime;

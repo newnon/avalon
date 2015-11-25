@@ -241,6 +241,28 @@ void InterstitialManager::interstitialUserInteraction(Interstitial *interstitial
     if(_delegate)
         _delegate->interstitialUserInteraction(interstitial, willLeaveApplication);;
 }
+    
+void InterstitialManager::interstitialDidStartLoadAd(Interstitial *interstitial)
+{
+    if(_delegate)
+        _delegate->interstitialDidStartLoadAd(interstitial);
+}
+void InterstitialManager::interstitialWillShow(Interstitial *interstitial)
+{
+    if(_delegate)
+        _delegate->interstitialWillShow(interstitial);
+}
+void InterstitialManager::interstitialDidHide(Interstitial *interstitial)
+{
+    if(_delegate)
+        _delegate->interstitialDidHide(interstitial);
+}
+
+void InterstitialManager::interstitialReward(Interstitial *interstitial, const std::string &token, const std::string &curency, int amount)
+{
+    if(_delegate)
+        _delegate->interstitialReward(interstitial, token, curency, amount);
+}
 
 }
 #endif /* AVALON_CONFIG_ADS_ENABLED */
