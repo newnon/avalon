@@ -128,7 +128,7 @@ const Interstitial* InterstitialManager::show(bool ignoreCounter, bool ignoreTim
     }
     else
     {
-        if((_minFrequency == 0)||((_interstitialCounter % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay)))
+        if((_minFrequency == 0 || _interstitialCounter % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay))
             show = true;
     }
     
@@ -161,7 +161,7 @@ const Interstitial* InterstitialManager::getReadyInterstitial(bool ignoreCounter
     }
     else
     {
-        if((_minFrequency == 0)||((_interstitialCounter % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay)))
+        if((_minFrequency == 0 || _interstitialCounter % _minFrequency == 0)&&(ignoreTimer || deltaSec>=_minDelay))
             show = true;
     }
     
