@@ -18,6 +18,9 @@ public:
     
     virtual const std::string &getTrackerId() const = 0;
     
+    virtual bool getAllowIDFACollection() const = 0;
+    virtual void setAllowIDFACollection(bool value) = 0;
+    
     virtual void setScreenName(const std::string &name) = 0;
     virtual void setCustomDimension(int index, const std::string &name) = 0;
     virtual void setCustomMetric(int index, float value) = 0;

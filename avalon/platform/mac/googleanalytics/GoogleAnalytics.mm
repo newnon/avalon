@@ -36,6 +36,16 @@ public:
     {
         return _trackerId;
     }
+    
+    virtual bool getAllowIDFACollection() const override
+    {
+        return _allowIDFACollection;
+    }
+    
+    virtual void setAllowIDFACollection(bool value) override
+    {
+        _allowIDFACollection = value;
+    }
 
     virtual void setScreenName(const std::string &name) override
     {
@@ -118,7 +128,7 @@ public:
         [_tracker send:[builder build]];
     }
 
-    MacGAITracker(const std::string &trackerId, id<GAITracker> tracker):_tracker(tracker),_trackerId(trackerId)
+    MacGAITracker(const std::string &trackerId, id<GAITracker> tracker):_tracker(tracker),_trackerId(trackerId),_allowIDFACollection(false)
     {
         [_tracker retain];
     }
@@ -134,6 +144,7 @@ private:
     }
     std::string _trackerId;
     id<GAITracker> _tracker;
+    bool _allowIDFACollection;
 };
     
 void GoogleAnalytics::setDispatchInterval(int value)

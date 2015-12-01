@@ -29,7 +29,15 @@ public:
     {
         return _trackerId;
     }
-
+    
+    virtual bool getAllowIDFACollection() const override
+    {
+        return false;
+    }
+    
+    virtual void setAllowIDFACollection(bool value) override
+    {
+    }
     virtual void setScreenName(const std::string &name) override
     {
     }

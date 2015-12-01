@@ -22,6 +22,7 @@ public abstract class GoogleAnalyticsHelper
 	private static final GoogleAnalytics _analytics = GoogleAnalytics.getInstance(activity);
 	private static HashMap<String,Tracker> _trackers = new HashMap<String,Tracker>();
 	private static double _sampleRate = 100.0;
+	private static boolean _allowIDFACollection = false;
 	private static UncaughtExceptionHandler _uncaughtExceptionHandler = null;
 	private static UncaughtExceptionHandler _defaultExceptionHandler = null;
 	private static HashMap<Tracker,SparseArray<String>> _customDimensions = new HashMap<Tracker,SparseArray<String>>();
@@ -59,6 +60,17 @@ public abstract class GoogleAnalyticsHelper
     public static void setScreenName(Tracker tracker, String name)
     {
     	tracker.setScreenName(name);
+    }
+    
+    public static boolean getAllowIDFACollection(Tracker tracker)
+    {
+    	return (boolean) _allowIDFACollection;
+    }
+    
+    public static void setAllowIDFACollection(Tracker tracker, boolean value)
+    {
+    	_allowIDFACollection = value;
+    	tracker.enableAdvertisingIdCollection(value);
     }
     
     public static void setCustomDimension(Tracker tracker, int index, String value)

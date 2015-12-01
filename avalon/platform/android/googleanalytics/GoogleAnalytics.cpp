@@ -82,6 +82,34 @@ public:
     {
         return _trackerId;
     }
+    
+    virtual bool getAllowIDFACollection() const override
+    {
+        bool ret = false;
+        if(_tracker)
+        {
+            cocos2d::JniMethodInfo methodInfo;
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "getAllowIDFACollection", "(Lcom/google/android/gms/analytics/Tracker;)Z"))
+            {
+                ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, _tracker);
+                methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            }
+        }
+        return ret;
+    }
+    
+    virtual void setAllowIDFACollection(bool value) override
+    {
+        if(_tracker)
+        {
+            cocos2d::JniMethodInfo methodInfo;
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setAllowIDFACollection", "(Lcom/google/android/gms/analytics/Tracker;Z)V"))
+            {
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, (jboolean)value);
+                methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            }
+        }
+    }
 
     virtual void setScreenName(const std::string &name) override
     {
