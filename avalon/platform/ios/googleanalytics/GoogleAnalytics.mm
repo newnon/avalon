@@ -75,7 +75,7 @@ public:
     
     virtual void sendAppView() override
     {
-        [_tracker send:[[GAIDictionaryBuilder createAppView] build]];
+        [_tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     }
 
     virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value) override
