@@ -24,6 +24,15 @@ public:
     {
         _products.push_back(product);
     }
+
+	virtual void clearProducts() override
+	{
+		_products.clear();
+	}
+	virtual void requestProductsData() override
+	{
+
+	}
     
     virtual void setDelegate(ManagerDelegate *delegate) override
     {

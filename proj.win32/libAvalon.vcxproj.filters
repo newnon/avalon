@@ -85,10 +85,7 @@
     <ClCompile Include="..\avalon\platform\windows\ui\AlertNative.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\avalon\platform\windows\web\url.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\avalon\platform\windows\web\WebView.cpp">
+    <ClCompile Include="..\avalon\ads\AdsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
