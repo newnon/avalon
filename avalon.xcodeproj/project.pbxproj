@@ -410,6 +410,8 @@
 		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; };
 		A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */; };
 		A5D327671900507400A65D25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5E8BB011C21664A00476C19 /* FacebookAds.mm in Sources */ = {isa = PBXBuildFile; fileRef = A56002A71A274C8800235B77 /* FacebookAds.mm */; };
+		A5E8BB041C21664A00476C19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5F0C91C1922343A006B8457 /* GADAdMobExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = A5F0C9121922343A006B8457 /* GADAdMobExtras.h */; };
 		A5F0C91D1922343A006B8457 /* GADAdNetworkExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = A5F0C9131922343A006B8457 /* GADAdNetworkExtras.h */; };
 		A5F0C91E1922343A006B8457 /* GADAdSize.h in Headers */ = {isa = PBXBuildFile; fileRef = A5F0C9141922343A006B8457 /* GADAdSize.h */; };
@@ -613,6 +615,13 @@
 			remoteGlobalIDString = A5D3275E1900507400A65D25;
 			remoteInfo = AdMob;
 		};
+		A5E8BAFF1C21664A00476C19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -799,6 +808,15 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A5C1C64D1A19F6870092ABC7 /* AdGeneration.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5E8BB071C21664A00476C19 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,6 +1337,8 @@
 		A5D3276D1900507400A65D25 /* libAdMob iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAdMob iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D3276F1900515B00A65D25 /* AdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdMob.h; path = avalon/AdMob.h; sourceTree = "<group>"; };
 		A5D327861900EEA700A65D25 /* AdMob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdMob.mm; path = ../AdMob.mm; sourceTree = "<group>"; };
+		A5E8BB0C1C21664A00476C19 /* libFacebook iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFacebook iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5E8BB0E1C2166BA00476C19 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Facebook.h; path = avalon/Facebook.h; sourceTree = "<group>"; };
 		A5F0C9121922343A006B8457 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
 		A5F0C9131922343A006B8457 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
 		A5F0C9141922343A006B8457 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
@@ -1593,6 +1613,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E8BB021C21664A00476C19 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E8BB041C21664A00476C19 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1634,6 +1662,7 @@
 				A54E28B91AC2D1D20054B412 /* Chartboost */,
 				A597D30A1ADBDB03001C8E9C /* DeltaDna */,
 				A5674CDE1BF1E506002300F2 /* Epom */,
+				A5E8BB0D1C21668C00476C19 /* Facebook */,
 				A56002A31A2748D000235B77 /* FacebookAds */,
 				A50BC28518E9B2B400F1F979 /* Flurry */,
 				A50BC26D18E9A1C100F1F979 /* FlurryAds */,
@@ -1684,6 +1713,7 @@
 				A58883081ADC597300B32AC7 /* libUtils iOS.a */,
 				A588834E1ADC5CBB00B32AC7 /* libAppsFlyer iOS.a */,
 				A5674CDD1BF1E480002300F2 /* libEpom iOS.a */,
+				A5E8BB0C1C21664A00476C19 /* libFacebook iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2732,6 +2762,14 @@
 			name = AdMob;
 			sourceTree = "<group>";
 		};
+		A5E8BB0D1C21668C00476C19 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				A5E8BB0E1C2166BA00476C19 /* Facebook.h */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
 		A5F0C9111922343A006B8457 /* Admob-ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -3554,6 +3592,24 @@
 			productReference = A5D3276D1900507400A65D25 /* libAdMob iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5E8BAFD1C21664A00476C19 /* Facebook iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5E8BB091C21664A00476C19 /* Build configuration list for PBXNativeTarget "Facebook iOS" */;
+			buildPhases = (
+				A5E8BB001C21664A00476C19 /* Sources */,
+				A5E8BB021C21664A00476C19 /* Frameworks */,
+				A5E8BB071C21664A00476C19 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5E8BAFE1C21664A00476C19 /* PBXTargetDependency */,
+			);
+			name = "Facebook iOS";
+			productName = Avalon;
+			productReference = A5E8BB0C1C21664A00476C19 /* libFacebook iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3614,6 +3670,7 @@
 				A54E28A91AC2D1560054B412 /* Chartboost iOS */,
 				A597D2FF1ADBDACE001C8E9C /* DeltaDna iOS */,
 				A5674CB31BF1E480002300F2 /* Epom iOS */,
+				A5E8BAFD1C21664A00476C19 /* Facebook iOS */,
 				A56002941A27484F00235B77 /* FacebookAds iOS */,
 				A50BC25218E99F5400F1F979 /* Flurry iOS */,
 				A50BC25F18E9A14800F1F979 /* FlurryAds iOS */,
@@ -3989,6 +4046,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E8BB001C21664A00476C19 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E8BB011C21664A00476C19 /* FacebookAds.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -4116,6 +4181,11 @@
 			isa = PBXTargetDependency;
 			target = A5D3275E1900507400A65D25 /* AdMob iOS */;
 			targetProxy = A5D327881900F06900A65D25 /* PBXContainerItemProxy */;
+		};
+		A5E8BAFE1C21664A00476C19 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = A5E8BAFF1C21664A00476C19 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -5239,6 +5309,50 @@
 			};
 			name = Release;
 		};
+		A5E8BB0A1C21664A00476C19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork",
+				);
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework/Versions/A",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A5E8BB0B1C21664A00476C19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork",
+				);
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/admob/Admob-ios",
+					"$(PROJECT_DIR)/vendors/FaceBook/facebook-ios-sdk/FBAudienceNetwork/FBAudienceNetwork.framework/Versions/A",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5526,6 +5640,15 @@
 			buildConfigurations = (
 				A5D3276B1900507400A65D25 /* Debug */,
 				A5D3276C1900507400A65D25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5E8BB091C21664A00476C19 /* Build configuration list for PBXNativeTarget "Facebook iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5E8BB0A1C21664A00476C19 /* Debug */,
+				A5E8BB0B1C21664A00476C19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
