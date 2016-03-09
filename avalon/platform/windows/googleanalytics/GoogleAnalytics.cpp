@@ -45,7 +45,7 @@ public:
     virtual void setCustomDimension(int index, const std::string &value) override
     {
     }
-    virtual void setCustomMetric(int index, float value) override
+    virtual void setCustomMetric(int index, double value) override
     {
     }
     

@@ -78,6 +78,7 @@
 		A517E0A61ADD2548008BCC7B /* dictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A588830C1ADC59C100B32AC7 /* dictionary.h */; };
 		A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1FE18E96E2800F1F979 /* Appirater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A531BEF719A1F1B2003D87A3 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55C4D9119A1EBA000F3449A /* Appirater.mm */; };
+		A542DD8A1C905DF900B66F58 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A542DD891C905DF900B66F58 /* libAdIdAccess.a */; };
 		A543087C1A1AABBB001D7746 /* payment.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1CB18E9699B00F1F979 /* payment.h */; };
 		A543087D1A1AABC7001D7746 /* payment.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1CB18E9699B00F1F979 /* payment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A547CFA31A06E04900E6D357 /* GADInAppPurchase.h in Headers */ = {isa = PBXBuildFile; fileRef = A547CFA01A06E04900E6D357 /* GADInAppPurchase.h */; };
@@ -941,6 +942,7 @@
 		A517E09E1ADC6A58008BCC7B /* libAppsFlyerLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppsFlyerLib.a; sourceTree = "<group>"; };
 		A517E0A01ADC6AA4008BCC7B /* AppsFlyer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppsFlyer.h; path = avalon/AppsFlyer.h; sourceTree = "<group>"; };
 		A517E0A31ADC762D008BCC7B /* AppsFlyer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppsFlyer.mm; path = avalon/platform/ios/appsflyer/AppsFlyer.mm; sourceTree = SOURCE_ROOT; };
+		A542DD891C905DF900B66F58 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdIdAccess.a; path = vendors/google/googleAnalytics/ios/libAdIdAccess.a; sourceTree = SOURCE_ROOT; };
 		A547CFA01A06E04900E6D357 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
 		A547CFA11A06E04900E6D357 /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
 		A547CFA21A06E04900E6D357 /* GADModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADModules.h; sourceTree = "<group>"; };
@@ -1560,6 +1562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5ACF0391918B1E500A010A5 /* Foundation.framework in Frameworks */,
+				A542DD8A1C905DF900B66F58 /* libAdIdAccess.a in Frameworks */,
 				A5F0C9361922356B006B8457 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2770,6 +2773,7 @@
 				A5F0C92D1922356B006B8457 /* GAITrackedViewController.h */,
 				A5F0C92E1922356B006B8457 /* GAITracker.h */,
 				A5F0C92F1922356B006B8457 /* libGoogleAnalyticsServices.a */,
+				A542DD891C905DF900B66F58 /* libAdIdAccess.a */,
 			);
 			name = "googleAnalytics-ios";
 			path = "avalon/platform/ios/googleAnalytics/googleAnalytics-ios";
@@ -5118,6 +5122,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/avalon/platform/ios/googleAnalytics/googleAnalytics-ios",
+					"$(PROJECT_DIR)/vendors/google/googleAnalytics/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GoogleAnalytics iOS";
@@ -5134,6 +5139,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/avalon/platform/ios/googleAnalytics/googleAnalytics-ios",
+					"$(PROJECT_DIR)/vendors/google/googleAnalytics/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GoogleAnalytics iOS";

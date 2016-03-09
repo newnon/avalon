@@ -63,9 +63,9 @@ public:
     {
         [_tracker set:[::GAIFields customDimensionForIndex:index] value:[NSString stringWithCString:value.c_str() encoding:NSUTF8StringEncoding]];
     }
-    virtual void setCustomMetric(int index, float value) override
+    virtual void setCustomMetric(int index, double value) override
     {
-        [_tracker set:[::GAIFields customMetricForIndex:index] value:[NSString stringWithFormat:@"%f", value]];
+        [_tracker set:[::GAIFields customMetricForIndex:index] value:[NSString stringWithFormat:@"%lf", value]];
     }
     
     virtual void setNewSession() override

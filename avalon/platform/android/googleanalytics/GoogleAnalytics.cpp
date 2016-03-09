@@ -140,14 +140,14 @@ public:
             }
         }
     }
-    virtual void setCustomMetric(int index, float value) override
+    virtual void setCustomMetric(int index, double value) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setCustomMetric", "(Lcom/google/android/gms/analytics/Tracker;IF)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "setCustomMetric", "(Lcom/google/android/gms/analytics/Tracker;ID)V"))
             {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, (jint)index, (jfloat)value);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, (jint)index, (jdouble)value);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }

@@ -23,7 +23,7 @@ public:
     
     virtual void setScreenName(const std::string &name) = 0;
     virtual void setCustomDimension(int index, const std::string &name) = 0;
-    virtual void setCustomMetric(int index, float value) = 0;
+    virtual void setCustomMetric(int index, double value) = 0;
     virtual void setNewSession() = 0;
     
     virtual void sendAppView() = 0;
