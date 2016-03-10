@@ -45,6 +45,7 @@ public:
     virtual void setCustomDimension(int index, const std::string &value) override
     {
     }
+    
     virtual void setCustomMetric(int index, double value) override
     {
     }
@@ -97,6 +98,7 @@ private:
 void GoogleAnalytics::setDispatchInterval(int value)
 {
 }
+
 int GoogleAnalytics::getDispatchInterval() const
 {
     return 0;
@@ -105,6 +107,7 @@ int GoogleAnalytics::getDispatchInterval() const
 void GoogleAnalytics::setTrackUncaughtExceptions(bool value)
 {
 }
+
 bool GoogleAnalytics::getTrackUncaughtExceptions() const
 {
     return false;
@@ -113,6 +116,7 @@ bool GoogleAnalytics::getTrackUncaughtExceptions() const
 void GoogleAnalytics::setDryRun(bool value)
 {
 }
+
 bool GoogleAnalytics::getDryRun() const
 {
     return false;
@@ -121,6 +125,7 @@ bool GoogleAnalytics::getDryRun() const
 void GoogleAnalytics::setOptOut(bool value)
 {
 }
+
 bool GoogleAnalytics::getOptOut() const
 {
     return false;
@@ -170,6 +175,10 @@ void GoogleAnalytics::dispatch()
 bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
 {
     return false;
+}
+
+void GoogleAnalytics::sendHitsInBackground() 
+{
 }
     
 void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)

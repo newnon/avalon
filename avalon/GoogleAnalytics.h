@@ -78,6 +78,7 @@ public:
     
     void dispatch();
     bool dispatchAndWait(int maxTimeSeconds);
+    void sendHitsInBackground();
     
     void setLogLevel(GoogleAnalyticsLogLevel logLevel);
     GoogleAnalyticsLogLevel getLogLevel() const;

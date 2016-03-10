@@ -180,6 +180,7 @@ bool GoogleAnalytics::getDryRun() const
 void GoogleAnalytics::setOptOut(bool value)
 {
 }
+
 bool GoogleAnalytics::getOptOut() const
 {
     return false;
@@ -250,6 +251,10 @@ bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
         [NSThread sleepForTimeInterval:0.1];
     }
     return true;
+}
+
+void GoogleAnalytics::sendHitsInBackground() 
+{
 }
     
 void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)

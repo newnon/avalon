@@ -152,6 +152,7 @@ void GoogleAnalytics::setDispatchInterval(int value)
 {
     [GAI sharedInstance].dispatchInterval = value;
 }
+
 int GoogleAnalytics::getDispatchInterval() const
 {
     return [GAI sharedInstance].dispatchInterval;
@@ -161,6 +162,7 @@ void GoogleAnalytics::setTrackUncaughtExceptions(bool value)
 {
     [GAI sharedInstance].trackUncaughtExceptions = value;
 }
+
 bool GoogleAnalytics::getTrackUncaughtExceptions() const
 {
     return [GAI sharedInstance].trackUncaughtExceptions;
@@ -170,6 +172,7 @@ void GoogleAnalytics::setDryRun(bool value)
 {
     [GAI sharedInstance].dryRun = value;
 }
+
 bool GoogleAnalytics::getDryRun() const
 {
     return [GAI sharedInstance];
@@ -249,6 +252,32 @@ bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
         [NSThread sleepForTimeInterval:0.1];
     }
     return true;
+}
+
+void GoogleAnalytics::sendHitsInBackground() 
+{
+    __block BOOL taskExpired = NO;
+    
+    __block UIBackgroundTaskIdentifier taskId =
+    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        taskExpired = YES;
+    }];
+    
+    if (taskId == UIBackgroundTaskInvalid) {
+        return;
+    }
+    __block void(^dispatchHandler)(GAIDispatchResult) = [^(GAIDispatchResult result) {
+        // Send hits until no hits are left, a dispatch error occurs, or
+        // the background task expires.
+        if (result == kGAIDispatchGood && !taskExpired) {
+            [[GAI sharedInstance] dispatchWithCompletionHandler:dispatchHandler];
+        } else {
+            [[UIApplication sharedApplication] endBackgroundTask:taskId];
+            [dispatchHandler release];
+        }
+    } copy];
+    
+    [[GAI sharedInstance] dispatchWithCompletionHandler:dispatchHandler];
 }
     
 void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)

@@ -83,7 +83,7 @@ public abstract class GoogleAnalyticsHelper
     	}
     	dimensions.put(index, value);
     }
-    public static void setCustomMetric(Tracker tracker, int index, float value)
+    public static void setCustomMetric(Tracker tracker, int index, double value)
     {
     	SparseArray<Float> metrics = _customMetrics.get(tracker);
     	if(metrics == null)
@@ -91,7 +91,7 @@ public abstract class GoogleAnalyticsHelper
     		metrics = new SparseArray<Float>();
     		_customMetrics.put(tracker, metrics);
     	}
-    	metrics.put(index, value);
+    	metrics.put(index, (float)value);
     }
     
     public static void setNewSession(Tracker tracker)
