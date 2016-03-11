@@ -37,6 +37,7 @@
     <ClCompile Include="..\avalon\platform\windows\googleanalytics\GoogleAnalytics.cpp" />
     <ClCompile Include="..\avalon\platform\windows\notifications\Notifications.cpp" />
     <ClCompile Include="..\avalon\platform\windows\payment\payment.cpp" />
+    <ClCompile Include="..\avalon\platform\windows\systeminfo\SystemInfo.cpp" />
     <ClCompile Include="..\avalon\platform\windows\ui\AlertNative.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
