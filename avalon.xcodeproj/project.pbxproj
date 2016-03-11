@@ -76,6 +76,12 @@
 		A517E0A41ADC762D008BCC7B /* AppsFlyer.mm in Sources */ = {isa = PBXBuildFile; fileRef = A517E0A31ADC762D008BCC7B /* AppsFlyer.mm */; };
 		A517E0A51ADD167F008BCC7B /* AppsFlyer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A517E0A01ADC6AA4008BCC7B /* AppsFlyer.h */; };
 		A517E0A61ADD2548008BCC7B /* dictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A588830C1ADC59C100B32AC7 /* dictionary.h */; };
+		A52BB1521C92CF5900AC2799 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A52BB1601C92CFDC00AC2799 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A52BB1671C92D01F00AC2799 /* SystemInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = A52BB15A1C92CFC600AC2799 /* SystemInfo.h */; };
+		A52BB1681C92D02D00AC2799 /* SystemInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = A52BB15A1C92CFC600AC2799 /* SystemInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A52BB16C1C92D18500AC2799 /* SystemInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = A52BB16B1C92D18500AC2799 /* SystemInfo.mm */; };
+		A52BB16E1C92D19800AC2799 /* SystemInfo.mm in Sources */ = {isa = PBXBuildFile; fileRef = A52BB16D1C92D19800AC2799 /* SystemInfo.mm */; };
 		A531BEF619A1F1A7003D87A3 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1FE18E96E2800F1F979 /* Appirater.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A531BEF719A1F1B2003D87A3 /* Appirater.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55C4D9119A1EBA000F3449A /* Appirater.mm */; };
 		A542DD8A1C905DF900B66F58 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A542DD891C905DF900B66F58 /* libAdIdAccess.a */; };
@@ -638,6 +644,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A52BB1531C92CF5900AC2799 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PROJECT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				A52BB1671C92D01F00AC2799 /* SystemInfo.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A54E28B31AC2D1560054B412 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -942,6 +958,11 @@
 		A517E09E1ADC6A58008BCC7B /* libAppsFlyerLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAppsFlyerLib.a; sourceTree = "<group>"; };
 		A517E0A01ADC6AA4008BCC7B /* AppsFlyer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppsFlyer.h; path = avalon/AppsFlyer.h; sourceTree = "<group>"; };
 		A517E0A31ADC762D008BCC7B /* AppsFlyer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppsFlyer.mm; path = avalon/platform/ios/appsflyer/AppsFlyer.mm; sourceTree = SOURCE_ROOT; };
+		A52BB1581C92CF5900AC2799 /* libSystemInfo iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libSystemInfo iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52BB15A1C92CFC600AC2799 /* SystemInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SystemInfo.h; path = avalon/SystemInfo.h; sourceTree = "<group>"; };
+		A52BB1661C92CFDC00AC2799 /* libSystemInfo Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libSystemInfo Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A52BB16B1C92D18500AC2799 /* SystemInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SystemInfo.mm; path = avalon/platform/mac/systeminfo/SystemInfo.mm; sourceTree = "<group>"; };
+		A52BB16D1C92D19800AC2799 /* SystemInfo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = SystemInfo.mm; path = avalon/platform/ios/systeminfo/SystemInfo.mm; sourceTree = "<group>"; };
 		A542DD891C905DF900B66F58 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdIdAccess.a; path = vendors/google/googleAnalytics/ios/libAdIdAccess.a; sourceTree = SOURCE_ROOT; };
 		A547CFA01A06E04900E6D357 /* GADInAppPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchase.h; sourceTree = "<group>"; };
 		A547CFA11A06E04900E6D357 /* GADInAppPurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInAppPurchaseDelegate.h; sourceTree = "<group>"; };
@@ -1384,6 +1405,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A52BB1511C92CF5900AC2799 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52BB1521C92CF5900AC2799 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A52BB15F1C92CFDC00AC2799 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52BB1601C92CFDC00AC2799 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A547D05C1A06E8DA00E6D357 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1629,6 +1666,7 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				A52BB1591C92CF9A00AC2799 /* SystemInfo */,
 				A5C1C5DD1A164B2B0092ABC7 /* AdGeneration */,
 				A5D3276E1900514300A65D25 /* AdMob */,
 				A576958C1A0E8C41002FDCB5 /* Ads */,
@@ -1687,6 +1725,8 @@
 				A58883081ADC597300B32AC7 /* libUtils iOS.a */,
 				A588834E1ADC5CBB00B32AC7 /* libAppsFlyer iOS.a */,
 				A5674CDD1BF1E480002300F2 /* libEpom iOS.a */,
+				A52BB1581C92CF5900AC2799 /* libSystemInfo iOS.a */,
+				A52BB1661C92CFDC00AC2799 /* libSystemInfo Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1834,6 +1874,32 @@
 			);
 			name = "appsflyer-ios";
 			path = "avalon/platform/ios/appsflyer/appsflyer-ios";
+			sourceTree = "<group>";
+		};
+		A52BB1591C92CF9A00AC2799 /* SystemInfo */ = {
+			isa = PBXGroup;
+			children = (
+				A52BB16A1C92D14100AC2799 /* SystemInfo-mac */,
+				A52BB1691C92D13200AC2799 /* SystemInfo-ios */,
+				A52BB15A1C92CFC600AC2799 /* SystemInfo.h */,
+			);
+			name = SystemInfo;
+			sourceTree = "<group>";
+		};
+		A52BB1691C92D13200AC2799 /* SystemInfo-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A52BB16D1C92D19800AC2799 /* SystemInfo.mm */,
+			);
+			name = "SystemInfo-ios";
+			sourceTree = "<group>";
+		};
+		A52BB16A1C92D14100AC2799 /* SystemInfo-mac */ = {
+			isa = PBXGroup;
+			children = (
+				A52BB16B1C92D18500AC2799 /* SystemInfo.mm */,
+			);
+			name = "SystemInfo-mac";
 			sourceTree = "<group>";
 		};
 		A547CFA61A06E05300E6D357 /* Add-ons */ = {
@@ -2782,6 +2848,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		A52BB1611C92CFDC00AC2799 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52BB1681C92D02D00AC2799 /* SystemInfo.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A531BEF519A1F19E003D87A3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -3132,6 +3206,40 @@
 			name = "FlurryAds iOS";
 			productName = Avalon;
 			productReference = A50BC26B18E9A14800F1F979 /* libFlurryAds iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A52BB14E1C92CF5900AC2799 /* SystemInfo iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A52BB1551C92CF5900AC2799 /* Build configuration list for PBXNativeTarget "SystemInfo iOS" */;
+			buildPhases = (
+				A52BB14F1C92CF5900AC2799 /* Sources */,
+				A52BB1511C92CF5900AC2799 /* Frameworks */,
+				A52BB1531C92CF5900AC2799 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SystemInfo iOS";
+			productName = Avalon;
+			productReference = A52BB1581C92CF5900AC2799 /* libSystemInfo iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		A52BB15B1C92CFDC00AC2799 /* SystemInfo Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A52BB1631C92CFDC00AC2799 /* Build configuration list for PBXNativeTarget "SystemInfo Mac" */;
+			buildPhases = (
+				A52BB15C1C92CFDC00AC2799 /* Sources */,
+				A52BB15F1C92CFDC00AC2799 /* Frameworks */,
+				A52BB1611C92CFDC00AC2799 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SystemInfo Mac";
+			productName = Avalon;
+			productReference = A52BB1661C92CFDC00AC2799 /* libSystemInfo Mac.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		A547D0571A06E8DA00E6D357 /* Payment Mac */ = {
@@ -3634,6 +3742,8 @@
 				A50BC1AB18E9635400F1F979 /* Payment iOS */,
 				A547D0571A06E8DA00E6D357 /* Payment Mac */,
 				A5A61D5D1AB087D2002A7CB7 /* Share iOS */,
+				A52BB14E1C92CF5900AC2799 /* SystemInfo iOS */,
+				A52BB15B1C92CFDC00AC2799 /* SystemInfo Mac */,
 				A55885EE19A4C87D00914838 /* UI iOS */,
 				A55885FC19A4C89000914838 /* UI Mac */,
 				A58882F11ADC597300B32AC7 /* Utils iOS */,
@@ -3698,6 +3808,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				A50BC27918E9A5A500F1F979 /* FlurryAd.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A52BB14F1C92CF5900AC2799 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52BB16E1C92D19800AC2799 /* SystemInfo.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A52BB15C1C92CFDC00AC2799 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A52BB16C1C92D18500AC2799 /* SystemInfo.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4456,6 +4582,66 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A52BB1561C92CF5900AC2799 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A52BB1571C92CF5900AC2799 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		A52BB1641C92CFDC00AC2799 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_GAMECENTER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A52BB1651C92CFDC00AC2799 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					AVALON_CONFIG_GAMECENTER_ENABLED,
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5316,6 +5502,24 @@
 			buildConfigurations = (
 				A50FFF101A1B5C9900952186 /* Debug */,
 				A50FFF111A1B5C9900952186 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A52BB1551C92CF5900AC2799 /* Build configuration list for PBXNativeTarget "SystemInfo iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A52BB1561C92CF5900AC2799 /* Debug */,
+				A52BB1571C92CF5900AC2799 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A52BB1631C92CFDC00AC2799 /* Build configuration list for PBXNativeTarget "SystemInfo Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A52BB1641C92CFDC00AC2799 /* Debug */,
+				A52BB1651C92CFDC00AC2799 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
