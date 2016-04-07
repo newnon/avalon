@@ -12,6 +12,7 @@ option(AVALON_GOOGLEANALYTICS "googleanalytics" OFF)
 option(AVALON_MOPUB "mopub" OFF)
 option(AVALON_UI "ui" OFF)
 option(AVALON_ADS "ads" OFF)
+option(AVALON_SYSTEMINFO "systeminfo" OFF)
 
 if(NOT MSVC)# all gcc
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -125,6 +126,14 @@ add_definitions(-DAVALON_CONFIG_UI_ENABLED)
 set(AVALON_SRC
   ${AVALON_SRC}
   avalon/platform/${PLATFORM_FOLDER}/ui/AlertNative.cpp
+)
+endif()
+
+if(AVALON_SYSTEMINFO)
+add_definitions(-DAVALON_CONFIG_SYSTEMINFO_ENABLED)
+set(AVALON_SRC
+  ${AVALON_SRC}
+  avalon/platform/${PLATFORM_FOLDER}/systeminfo/SystemInfo.cpp
 )
 endif()
 
