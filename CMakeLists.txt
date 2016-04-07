@@ -28,6 +28,8 @@ else()
 endif()
 elseif(ANDROID)# Android
   set(PLATFORM_FOLDER android)
+elseif(EMSCRIPTEN)# Emscripten
+  set(PLATFORM_FOLDER emcc)
 endif()
 
 set(AVALON_SRC avalon/empty.cpp)
