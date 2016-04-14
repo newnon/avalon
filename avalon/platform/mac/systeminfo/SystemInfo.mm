@@ -25,7 +25,7 @@ std::string SystemInfo::getDeviceModel()
         sysctlbyname("hw.model", model, &len, NULL, 0);
         std::string ret = model;
         free(model);
-        return model;
+        return ret;
     }
     
     return "Apple Computer"; //incase model name can't be read
