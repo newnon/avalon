@@ -168,7 +168,7 @@ public:
             managerTransaction.productId = id;
             _delegate->onPurchaseFail(managerTransaction, ManagerDelegateErrors::PRODUCT_UNKNOWN);
         }
-        std::string buyitemscript = std::string("BuyItem('") + productToPurchase->id + std::string("')");
+        std::string buyitemscript = std::string("VKSocialObject.BuyItem('") + productToPurchase->id + std::string("')");
         emscripten_run_script(buyitemscript.c_str());
 
     }
