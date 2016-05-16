@@ -86,6 +86,8 @@ public:
     virtual void startService(const std::string &data) = 0;
     virtual void stopService() = 0;
     virtual bool isStarted() const = 0;
+    
+    virtual void setCurrentLocale(const std::string& locale) { };
 };
 
 } //payment

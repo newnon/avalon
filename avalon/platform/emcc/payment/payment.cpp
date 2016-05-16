@@ -3,7 +3,6 @@
 #include "emscripten.h"
 #include "../cocos2d/external/json/document.h"
 
-
 namespace avalon {
 namespace payment {
 
@@ -67,9 +66,11 @@ public:
             printf("parse error json \n*\n  %d, %d \n*\n", json.GetParseError(), json.GetErrorOffset());
             return;
         }
-       
+
+        auto& currency = json["currency"];
         auto& items = json["items"];
-   //     printf("parse error json %d items  ok \n", items.Size());
+        // printf("parse error json %d items  ok \n", items.Size());
+        // printf("parse json currency en %s, ru %s \n", currency["en"].GetString(), currency["ru"].GetString());
 
         if (items.IsArray())
         {
@@ -77,16 +78,19 @@ public:
             {
                 auto& item = items[i];
 
-   //             printf("parse  json item %s \n", item["ID"].GetString());
+                // printf("parse  json item %s \n", item["ID"].GetString());
 
                 for (auto &product : _products)
                 {
-//                    printf("parse  json item %s == %s \n", product.productIdentifier.c_str(), item["ID"].GetString());
+                    // printf("parse  json item %s == %s \n", product.productIdentifier.c_str(), item["ID"].GetString());
+
                     if (product.productIdentifier == std::string(std::string("pokerist_test.") + std::string(item["ID"].GetString())))
                     {
-//                        printf("parse  json item  == !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n");
-                        product.localizedName = std::string(item["ID"].GetString());
-                        product.localizedPrice = std::string(item["Price"].GetString());
+                        auto &localKey = item["LocaleKey"];
+                        product.localizedName = std::string(localKey[_currentLocale.c_str()].GetString());
+                        product.localizedPrice = currency[_currentLocale.c_str()].GetString() + std::to_string(static_cast<int>(product.price));
+
+                        // printf("!!!!!!!!!!! parse json item  == en %s, ru %s \n", localKey["en"].GetString(), localKey["ru"].GetString());
                     }
                 }
 
@@ -244,11 +248,17 @@ public:
     {
         return _started;
     }
+
+    void setCurrentLocale(const std::string& locale) override
+    {
+        _currentLocale = locale;
+    }
     
 private:
     std::vector<Product> _products;
     ManagerDelegate *_delegate;
     bool _started;
+    std::string _currentLocale;
 };
 
 Manager *Manager::getInstance()
