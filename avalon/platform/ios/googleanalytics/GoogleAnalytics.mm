@@ -249,7 +249,7 @@ bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
             NSLog(@"GoogleAnalytics failed dispatchAndWait");
             break;
         }
-        [NSThread sleepForTimeInterval:0.1];
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
     return true;
 }
