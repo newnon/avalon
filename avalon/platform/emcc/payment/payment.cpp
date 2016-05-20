@@ -84,7 +84,16 @@ public:
                 {
                     // printf("parse  json item %s == %s \n", product.productIdentifier.c_str(), item["ID"].GetString());
 
-                    if (product.productIdentifier == std::string(std::string("pokerist_test.") + std::string(item["ID"].GetString())))
+                    std::string server;
+                    auto findPos = product.productIdentifier.rfind(".");
+                    if (findPos != std::string::npos)
+                    {
+                        server = product.productIdentifier.substr(0, findPos + 1);
+                    }
+
+                    const std::string &productIdentifier = server + std::string(item["ID"].GetString());
+
+                    if (product.productIdentifier == productIdentifier)
                     {
                         auto &localKey = item["LocaleKey"];
                         product.localizedName = std::string(localKey[_currentLocale.c_str()].GetString());
