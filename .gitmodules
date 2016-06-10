@@ -4,9 +4,6 @@
 [submodule "vendors/appirater-ios"]
 	path = vendors/appirater-ios
 url=https://github.com/newnon/appirater.git
-[submodule "vendors/google/marketbilling"]
-	path = vendors/google/marketbilling
-	url = https://code.google.com/p/marketbilling/
 [submodule "vendors/mopub/androd"]
 	path = vendors/mopub/androd
 	url = https://github.com/newnon/mopub-android-sdk.git
