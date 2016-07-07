@@ -193,6 +193,7 @@ public:
             Transaction managerTransaction;
             managerTransaction.transactionState = TransactionState::Purchased;
             managerTransaction.productId = std::string(item_id);
+            managerTransaction.transactionIdentifier = order_id;
             std::string order_s = std::string(order_id);
             std::copy(order_s.begin(), order_s.end(), std::back_inserter(managerTransaction.receipt));
             _delegate->onPurchaseSucceed(managerTransaction);
