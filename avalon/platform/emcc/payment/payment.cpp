@@ -71,6 +71,11 @@ public:
         auto& items = json["items"];
         // printf("parse error json %d items  ok \n", items.Size());
         // printf("parse json currency en %s, ru %s \n", currency["en"].GetString(), currency["ru"].GetString());
+        
+        for (auto &product : _products)
+        {
+            product.localizedPrice = currency[_currentLocale.c_str()].GetString() + std::to_string(static_cast<int>(product.price));
+        }
 
         if (items.IsArray())
         {
@@ -97,7 +102,6 @@ public:
                     {
                         auto &localKey = item["LocaleKey"];
                         product.localizedName = std::string(localKey[_currentLocale.c_str()].GetString());
-                        product.localizedPrice = currency[_currentLocale.c_str()].GetString() + std::to_string(static_cast<int>(product.price));
 
                         // printf("!!!!!!!!!!! parse json item  == en %s, ru %s \n", localKey["en"].GetString(), localKey["ru"].GetString());
                     }
