@@ -51,6 +51,7 @@ public class PurchasingObserver implements OnActivityResultListener
         mHelper.enableDebugLogging(true);
         mHelper.startSetup(mSetupFinishedListener);
         Cocos2dxHelper.addOnActivityResultListener(this);
+        threadDelegateOnServiceStarted();
     }
 
     protected void finalize()
@@ -107,16 +108,18 @@ public class PurchasingObserver implements OnActivityResultListener
         public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
             if (result.isFailure()) {
                 Log.e(TAG, "onQueryInventoryFinished failed: " + result);
+                threadDelegateRequestFail();
                 return;
             }
 
             if (inventory.getAllDetailsSkus().isEmpty()) {
                 Log.e(TAG, "onQueryInventoryFinished failed: Not a single detail returned! Google Play configured?");
+                threadDelegateRequestFail();
                 return;
             }
 
             threadDelegateItemData(inventory);
-            threadDelegateOnServiceStarted();
+            threadDelegateRequestSucces();
 
             for (String sku : inventory.getAllOwnedSkus()) {
                 if (isConsumable(sku)) {
@@ -247,6 +250,26 @@ public class PurchasingObserver implements OnActivityResultListener
     private void threadIncrementTaskCounter()
     {
         ++taskCount;
+    }
+    
+    private void threadDelegateRequestFail()
+    {
+        Cocos2dxHelper.runOnGLThread(new Runnable() {
+            @Override
+            public void run() {
+                Backend.onRequestProductsResult(false);
+            }
+        });
+    }
+    
+    private void threadDelegateRequestSucces()
+    {
+        Cocos2dxHelper.runOnGLThread(new Runnable() {
+            @Override
+            public void run() {
+                Backend.onRequestProductsResult(true);
+            }
+        });
     }
 
     private void threadDelegateItemData(final Inventory inventory)

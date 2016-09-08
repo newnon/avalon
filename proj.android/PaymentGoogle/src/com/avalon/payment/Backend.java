@@ -75,6 +75,7 @@ public class Backend
     public static native void delegateOnPurchaseFail(String productId, int code);
     public static native void onItemData(String productId, String name, String desc, String priceStr, String curencyCode, float price);
     public static native void onInitialized();
+    public static native void onRequestProductsResult(boolean succes);
 
     /**
      *

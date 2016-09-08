@@ -275,6 +275,10 @@ public:
             return;
         }
         
+        if (_delegate) {
+            _delegate->onServiceStarted();
+        }
+        
         _started = true;
     }
     

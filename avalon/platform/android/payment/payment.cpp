@@ -295,6 +295,19 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onItemData(JNIEnv* env, j
     product->price = (float)jprice;
 }
 
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_onRequestProductsResult(JNIEnv* env, jclass clazz, jboolean succes)
+{
+	AndroidManager *globalManager = static_cast<AndroidManager*>(Manager::getInstance());
+    AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
+    
+    if (globalManager && globalManager->getDelegate()) {
+    	if(succes)
+    	    globalManager->getDelegate()->onRequestProductsSucceed();
+    	else
+    	    globalManager->getDelegate()->onRequestProductsFail();
+    }
+}
+
 
 } // extern "C"
 
