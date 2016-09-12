@@ -35,6 +35,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -85,11 +86,7 @@ public class IabHelper {
 
     // Is an asynchronous operation in progress?
     // (only one at a time can be in progress)
-    boolean mAsyncInProgress = false;
-
-    // (for logging/debugging)
-    // if mAsyncInProgress == true, what asynchronous operation is in progress?
-    String mAsyncOperation = "";
+    AtomicInteger mAsynccounter = new AtomicInteger(0);
 
     // Context we were passed during initialization
     Context mContext;
@@ -370,13 +367,14 @@ public class IabHelper {
                         OnIabPurchaseFinishedListener listener, String extraData) {
         checkNotDisposed();
         checkSetupDone("launchPurchaseFlow");
-        flagStartAsync("launchPurchaseFlow");
+        final String operation = "launchPurchaseFlow";
+        flagStartAsync(operation);
         IabResult result;
 
         if (itemType.equals(ITEM_TYPE_SUBS) && !mSubscriptionsSupported) {
             IabResult r = new IabResult(IABHELPER_SUBSCRIPTIONS_NOT_AVAILABLE,
                     "Subscriptions are not available.");
-            flagEndAsync();
+            flagEndAsync(operation);
             if (listener != null) listener.onIabPurchaseFinished(r, null);
             return;
         }
@@ -387,7 +385,7 @@ public class IabHelper {
             int response = getResponseCodeFromBundle(buyIntentBundle);
             if (response != BILLING_RESPONSE_RESULT_OK) {
                 logError("Unable to buy item, Error response: " + getResponseDesc(response));
-                flagEndAsync();
+                flagEndAsync(operation);
                 result = new IabResult(response, "Unable to buy item");
                 if (listener != null) listener.onIabPurchaseFinished(result, null);
                 return;
@@ -406,7 +404,7 @@ public class IabHelper {
         catch (SendIntentException e) {
             logError("SendIntentException while launching purchase flow for sku " + sku);
             e.printStackTrace();
-            flagEndAsync();
+            flagEndAsync(operation);
 
             result = new IabResult(IABHELPER_SEND_INTENT_FAILED, "Failed to send intent.");
             if (listener != null) listener.onIabPurchaseFinished(result, null);
@@ -414,7 +412,7 @@ public class IabHelper {
         catch (RemoteException e) {
             logError("RemoteException while launching purchase flow for sku " + sku);
             e.printStackTrace();
-            flagEndAsync();
+            flagEndAsync(operation);
 
             result = new IabResult(IABHELPER_REMOTE_EXCEPTION, "Remote exception while starting purchase flow");
             if (listener != null) listener.onIabPurchaseFinished(result, null);
@@ -442,7 +440,7 @@ public class IabHelper {
         checkSetupDone("handleActivityResult");
 
         // end of async purchase operation that started on launchPurchaseFlow
-        flagEndAsync();
+        flagEndAsync("handleActivityResult");
 
         if (data == null) {
             logError("Null data in IAB activity result.");
@@ -608,7 +606,8 @@ public class IabHelper {
         final Handler handler = new Handler();
         checkNotDisposed();
         checkSetupDone("queryInventory");
-        flagStartAsync("refresh inventory");
+        final String operation = "refresh inventory";
+        flagStartAsync(operation);
         (new Thread(new Runnable() {
             public void run() {
                 IabResult result = new IabResult(BILLING_RESPONSE_RESULT_OK, "Inventory refresh successful.");
@@ -620,7 +619,7 @@ public class IabHelper {
                     result = ex.getResult();
                 }
 
-                flagEndAsync();
+                flagEndAsync(operation);
 
                 final IabResult result_f = result;
                 final Inventory inv_f = inv;
@@ -816,17 +815,13 @@ public class IabHelper {
     }
 
     void flagStartAsync(String operation) {
-        if (mAsyncInProgress) throw new IllegalStateException("Can't start async operation (" +
-                operation + ") because another async operation(" + mAsyncOperation + ") is in progress.");
-        mAsyncOperation = operation;
-        mAsyncInProgress = true;
+        mAsynccounter.incrementAndGet();
         logDebug("Starting async operation: " + operation);
     }
 
-    void flagEndAsync() {
-        logDebug("Ending async operation: " + mAsyncOperation);
-        mAsyncOperation = "";
-        mAsyncInProgress = false;
+    void flagEndAsync(String operation) {
+        logDebug("Ending async operation: " + operation);
+        mAsynccounter.decrementAndGet();
     }
 
 
@@ -968,7 +963,8 @@ public class IabHelper {
                               final OnConsumeFinishedListener singleListener,
                               final OnConsumeMultiFinishedListener multiListener) {
         final Handler handler = new Handler();
-        flagStartAsync("consume");
+        final String operation = "consume";
+        flagStartAsync(operation);
         (new Thread(new Runnable() {
             public void run() {
                 final List<IabResult> results = new ArrayList<IabResult>();
@@ -982,7 +978,7 @@ public class IabHelper {
                     }
                 }
 
-                flagEndAsync();
+                flagEndAsync(operation);
                 if (!mDisposed && singleListener != null) {
                     handler.post(new Runnable() {
                         public void run() {
