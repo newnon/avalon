@@ -50,5 +50,10 @@ std::string SystemInfo::getOSVersion()
 #endif
     return [OSVersion cStringUsingEncoding:NSUTF8StringEncoding];
 }
+    
+bool SystemInfo::isTablet()
+{
+    return true;
+}
 
 } // namespace avalon

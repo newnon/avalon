@@ -19,6 +19,7 @@ public:
     static std::string getDeviceModel();
     static std::string getIDFA();
     static std::string getOSVersion();
+    static bool isTablet();
 };
     
 }

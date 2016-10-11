@@ -56,4 +56,9 @@ std::string SystemInfo::getOSVersion()
     return [[UIDevice currentDevice].systemVersion cStringUsingEncoding:NSUTF8StringEncoding];
 }
     
+bool SystemInfo::isTablet()
+{
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+}
+    
 } // namespace avalon

@@ -28,4 +28,9 @@ std::string SystemInfo::getOSVersion()
     return "";
 }
 
+bool SystemInfo::isTablet()
+{
+    return true;
+}
+
 } // namespace avalon

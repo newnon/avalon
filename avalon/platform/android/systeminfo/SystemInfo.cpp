@@ -4,6 +4,10 @@
 //
 
 #include "avalon/SystemInfo.h"
+#include <jni.h>
+#include "platform/android/jni/JniHelper.h"
+
+const char* const CLASS_NAME = "com/avalon/systeminfo/SystemInfoHelper";
 
 namespace avalon {
 
@@ -15,17 +19,22 @@ SystemInfo::CarierInfo SystemInfo::getCarierInfo()
 
 std::string SystemInfo::getDeviceModel()
 {
-    return "";
+    return JniHelper::callStaticStringMethod(CLASS_NAME, "getDeviceModel");
 }
 
 std::string SystemInfo::getIDFA()
 {
-    return "";
+    return JniHelper::callStaticStringMethod(CLASS_NAME, "getIDFA");
 }
 
 std::string SystemInfo::getOSVersion()
 {
-    return "";
+    return JniHelper::callStaticStringMethod(CLASS_NAME, "getOSVersion");
+}
+
+bool SystemInfo::isTablet()
+{
+    return JniHelper::callStaticBooleanMethod(CLASS_NAME, "isTablet");
 }
 
 } // namespace avalon
