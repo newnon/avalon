@@ -25,12 +25,38 @@ package com.avalon.systeminfo;
 import org.cocos2dx.lib.Cocos2dxHelper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 
 public abstract class SystemInfoHelper
 {
 	private static final Activity activity = Cocos2dxHelper.getActivity();
+    
+    public static String getCarrierName()
+    {
+        TelephonyManager telephonyManager = (TelephonyManager)activity.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getNetworkOperatorName();
+	}
+	
+	public static String getIsoCountryCode()
+    {
+        TelephonyManager telephonyManager = (TelephonyManager)activity.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getSimCountryIso();
+	}
+	
+	public static String getMobileCountryCode()
+    {
+        TelephonyManager telephonyManager = (TelephonyManager)activity.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getSimOperator().substring(0,2);
+	}
+	
+	public static String getMobileNetworkCode()
+    {
+        TelephonyManager telephonyManager = (TelephonyManager)activity.getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getSimOperator().substring(3);
+	}
 	
     public static String getDeviceModel()
     {

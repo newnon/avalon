@@ -14,27 +14,31 @@ namespace avalon {
 SystemInfo::CarierInfo SystemInfo::getCarierInfo()
 {
     CarierInfo ret;
+    ret.carrierName = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getCarrierName");
+    ret.isoCountryCode = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getIsoCountryCode ");
+    ret.mobileCountryCode = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getMobileCountryCode"); 
+    ret.mobileNetworkCode = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getMobileNetworkCode");
     return ret;
 }
 
 std::string SystemInfo::getDeviceModel()
 {
-    return JniHelper::callStaticStringMethod(CLASS_NAME, "getDeviceModel");
+    return cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getDeviceModel");
 }
 
 std::string SystemInfo::getIDFA()
 {
-    return JniHelper::callStaticStringMethod(CLASS_NAME, "getIDFA");
+    return cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getIDFA");
 }
 
 std::string SystemInfo::getOSVersion()
 {
-    return JniHelper::callStaticStringMethod(CLASS_NAME, "getOSVersion");
+    return cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getOSVersion");
 }
 
 bool SystemInfo::isTablet()
 {
-    return JniHelper::callStaticBooleanMethod(CLASS_NAME, "isTablet");
+    return cocos2d::JniHelper::callStaticBooleanMethod(CLASS_NAME, "isTablet");
 }
 
 } // namespace avalon
