@@ -185,8 +185,11 @@ public:
             managerTransaction.productId = id;
             _delegate->onPurchaseFail(managerTransaction, ManagerDelegateErrors::PRODUCT_UNKNOWN);
         }
-        std::string buyitemscript = std::string("SocialObject.buyItem('") + productToPurchase->id + std::string("')");
-        emscripten_run_script(buyitemscript.c_str());
+        EM_ASM_({ SocialObject.buyItem($0); }
+        		, productToPurchase->localizedName.c_str()
+        		, productToPurchase->localizedDescription.c_str()
+        		, productToPurchase->id.c_str()
+        		, productToPurchase->price);
 
     }
     
