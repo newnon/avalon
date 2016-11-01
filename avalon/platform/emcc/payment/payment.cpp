@@ -28,13 +28,13 @@ public:
     }
     virtual void addProduct(const Product &product) override
     {
-        printf("addProduct\n");
+        //printf("addProduct\n");
         _products.push_back(product);
     }
 
     virtual void clearProducts() override
     {
-        printf("getProducts\n");
+        //printf("getProducts\n");
         _products.clear();
     }
 
@@ -43,7 +43,7 @@ public:
 
         emscripten_async_wget_data("shop.json", 0, extLoadProductsData, extFailProductsData);
 
-        printf("requestProductsData\n");
+        //printf("requestProductsData\n");
     }
 
     void failProductsData(void* arg)
@@ -56,14 +56,14 @@ public:
         char * json_data = new char[len + 1];
         memcpy(json_data, ptr, len);
         json_data[len] = 0;
-        printf("parse json .........  %d \n",  len);
+        //printf("parse json .........  %d \n",  len);
 
         rapidjson::Document json;
         std::string content = std::string((char *)ptr);
         json.Parse(json_data);
         if (json.HasParseError())
         {
-            printf("parse error json \n*\n  %d, %d \n*\n", json.GetParseError(), json.GetErrorOffset());
+            //printf("parse error json \n*\n  %d, %d \n*\n", json.GetParseError(), json.GetErrorOffset());
             return;
         }
 
