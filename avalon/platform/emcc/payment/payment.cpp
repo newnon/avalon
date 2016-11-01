@@ -189,6 +189,7 @@ public:
         		, productToPurchase->localizedName.c_str()
         		, productToPurchase->localizedDescription.c_str()
         		, productToPurchase->id.c_str()
+        		, productToPurchase->productIdentifier.c_str()
         		, productToPurchase->price);
 
     }
