@@ -9,13 +9,13 @@ namespace payment {
 void extFailProductsData(void* arg);
 void extLoadProductsData(void* arg, void* ptr, int len);
 
-class WindowsManager:public Manager
+class EmscriptenManager:public Manager
 {
 public:
-    WindowsManager():_delegate(nullptr)
+    EmscriptenManager():_delegate(nullptr)
     {
     }
-    ~WindowsManager()
+    ~EmscriptenManager()
     {
     }
     virtual void addProduct(const std::string &id, const std::string &productIdentifier, bool consumable) override
@@ -72,9 +72,23 @@ public:
         // printf("parse error json %d items  ok \n", items.Size());
         // printf("parse json currency en %s, ru %s \n", currency["en"].GetString(), currency["ru"].GetString());
         
+        std::vector<std::string> keys;
+        
         for (auto &product : _products)
         {
-            product.localizedPrice = currency[_currentLocale.c_str()].GetString() + std::to_string(static_cast<int>(product.price));
+        	const auto &currentCurrency = currency[_currentLocale.c_str()];
+        	if(currentCurrency.IsArray())
+        	{
+				for(rapidjson::SizeType i=0; i<currentCurrency.Size(); ++i)
+				{
+					keys.emplace_back(currentCurrency[i].GetString());
+				}
+        	}
+        	else
+        	{
+            	keys.emplace_back(currentCurrency.GetString());
+            }
+            product.localizedPrice = getLocalizedPrice(static_cast<int>(product.price), keys);
         }
 
         if (items.IsArray())
@@ -159,22 +173,22 @@ public:
         return nullptr;
     }
     
-
-
-    void External_SendMessage(const char *arg1)
+    std::string getLocalizedPrice(int count, const std::vector<std::string> &strings)
     {
-        
-            EM_ASM_ARGS(
-            {
-                var messageStr = Pointer_stringify($0);
-              
-                alert(messageStr);
-
-
-            }, arg1);
-        
+    	int countMod100 = count % 100;
+    	int countMod10 = count % 10;
+    	int result = 0;
+    	if(countMod100 >= 5 && countMod100 <= 20)
+    		result = 0;
+    	else if(countMod10 == 1)
+    		result = 1;
+    	else if(countMod10 >= 2 && countMod10 <= 4)
+    		result = 2;
+    	if(result >= strings.size())
+    		result = 0;
+    	return std::to_string(count) + " " + strings[result];
     }
-
+    
     virtual void purchase(const std::string &id) override
     {
         const avalon::payment::Product* productToPurchase = getProduct(id);
@@ -281,38 +295,38 @@ private:
 
 Manager *Manager::getInstance()
 {
-    static WindowsManager *manager = nullptr;
+    static EmscriptenManager *manager = nullptr;
     if(!manager)
     {
-        manager = new WindowsManager();
+        manager = new EmscriptenManager();
     }
     return manager;
 }
 
 void extFailProductsData(void* arg)
 {
-    ((WindowsManager*)Manager::getInstance())->failProductsData(arg);
+    ((EmscriptenManager*)Manager::getInstance())->failProductsData(arg);
 }
 
 void extLoadProductsData(void* arg, void* ptr, int len)
 {
-    ((WindowsManager*)Manager::getInstance())->loadProductsData(arg, ptr, len);
+    ((EmscriptenManager*)Manager::getInstance())->loadProductsData(arg, ptr, len);
 }
 
 extern "C" {
     int EMSCRIPTEN_KEEPALIVE extOnOrderSuccess(const char * order_id, const char * item_id)
     {
-       ((WindowsManager*) Manager::getInstance())->onPurchaseSucceed(order_id, item_id);
+       ((EmscriptenManager*) Manager::getInstance())->onPurchaseSucceed(order_id, item_id);
        return 0;
     }    
     int EMSCRIPTEN_KEEPALIVE extOnOrderFail(char * error_id, char * item_id)
     {
-        ((WindowsManager*)Manager::getInstance())->onPurchaseFailed(error_id, item_id);
+        ((EmscriptenManager*)Manager::getInstance())->onPurchaseFailed(error_id, item_id);
         return 0;
     }
     int EMSCRIPTEN_KEEPALIVE extOnOrderCancel( char * item_id)
     {
-        ((WindowsManager*)Manager::getInstance())->onPurchaseCanceled(item_id);
+        ((EmscriptenManager*)Manager::getInstance())->onPurchaseCanceled(item_id);
         return 0;
     }
 }
