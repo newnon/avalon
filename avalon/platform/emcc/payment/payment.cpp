@@ -91,7 +91,7 @@ public:
         
         for (auto &product : _products)
         {
-            product.localizedPrice = getLocalizedPrice(static_cast<int>(product.price), keys);
+            product.localizedPrice = getLocalizedPrice(product.price, keys);
         }
 
         if (items.IsArray())
@@ -169,10 +169,16 @@ public:
         return nullptr;
     }
     
-    std::string getLocalizedPrice(int count, const std::vector<std::string> &strings)
+    std::string getLocalizedPrice(float price, const std::vector<std::string> &strings)
     {
     	if(strings.empty())
-    		return std::to_string(count) + " " + _currency;
+		{
+			char temp[256] = {0};
+			sprintf(temp, "%.2g", price);
+			std::string priceStr = temp;
+			return priceStr + " " + _currency;
+		}
+    	int count = static_cast<int>(price);
     	int countMod100 = count % 100;
     	int countMod10 = count % 10;
     	int result = 0;
