@@ -12,7 +12,7 @@ void extLoadProductsData(void* arg, void* ptr, int len);
 class EmscriptenManager:public Manager
 {
 public:
-    EmscriptenManager():_delegate(nullptr)
+    EmscriptenManager():_delegate(nullptr),_currency(emscripten_run_script_string("SocialObject.getCurrency()"))
     {
     }
     ~EmscriptenManager()
@@ -73,21 +73,24 @@ public:
         // printf("parse json currency en %s, ru %s \n", currency["en"].GetString(), currency["ru"].GetString());
         
         std::vector<std::string> keys;
-        
-        for (auto &product : _products)
+        if(currency.IsObject())
         {
-        	const auto &currentCurrency = currency[_currentLocale.c_str()];
-        	if(currentCurrency.IsArray())
-        	{
+			const auto &currentCurrency = currency[_currentLocale.c_str()];
+			if(currentCurrency.IsArray())
+			{
 				for(rapidjson::SizeType i=0; i<currentCurrency.Size(); ++i)
 				{
 					keys.emplace_back(currentCurrency[i].GetString());
 				}
-        	}
-        	else
-        	{
-            	keys.emplace_back(currentCurrency.GetString());
-            }
+			}
+			else if(currentCurrency.IsString())
+			{
+				keys.emplace_back(currentCurrency.GetString());
+			}
+		}
+        
+        for (auto &product : _products)
+        {
             product.localizedPrice = getLocalizedPrice(static_cast<int>(product.price), keys);
         }
 
@@ -168,6 +171,8 @@ public:
     
     std::string getLocalizedPrice(int count, const std::vector<std::string> &strings)
     {
+    	if(strings.empty())
+    		return std::to_string(count) + " " + _currency;
     	int countMod100 = count % 100;
     	int countMod10 = count % 10;
     	int result = 0;
@@ -284,6 +289,7 @@ private:
     ManagerDelegate *_delegate;
     bool _started;
     std::string _currentLocale;
+    std::string _currency;
 };
 
 Manager *Manager::getInstance()
