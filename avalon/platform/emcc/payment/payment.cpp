@@ -67,15 +67,15 @@ public:
             return;
         }
 
-        auto& currency = json["currency"];
-        auto& items = json["items"];
+        const auto& currency = json.FindMember("currency");
+        const auto& items = json["items"];
         // printf("parse error json %d items  ok \n", items.Size());
         // printf("parse json currency en %s, ru %s \n", currency["en"].GetString(), currency["ru"].GetString());
         
         std::vector<std::string> keys;
-        if(currency.IsObject())
+        if(currency != json.MemberEnd())
         {
-			const auto &currentCurrency = currency[_currentLocale.c_str()];
+			const auto &currentCurrency = currency->value[_currentLocale.c_str()];
 			if(currentCurrency.IsArray())
 			{
 				for(rapidjson::SizeType i=0; i<currentCurrency.Size(); ++i)
