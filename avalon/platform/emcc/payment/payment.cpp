@@ -92,6 +92,7 @@ public:
         for (auto &product : _products)
         {
             product.localizedPrice = getLocalizedPrice(product.price, keys);
+            product.currencyCode = _currency;
         }
 
         if (items.IsArray())
