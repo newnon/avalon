@@ -145,6 +145,7 @@ add_library(avalon STATIC
 
 include_directories(
   .
+  ../cocos2d/cocos
 )
 
 set_target_properties(avalon
