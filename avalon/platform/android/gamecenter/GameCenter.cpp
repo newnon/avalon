@@ -14,7 +14,7 @@ namespace avalon {
 namespace helper {
 namespace gamecenter {
 
-const char* const CLASS_NAME = "com/avalon/GameCenter";
+const char* const CLASS_NAME = "com/avalon/gamecenter/GameCenter";
 
 void callStaticVoidMethod(const char* name)
 {

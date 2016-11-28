@@ -7,7 +7,7 @@
 #include <map>
 
 const char* const CLASS_NAME = "com/google/android/gms/analytics/Tracker";
-const char* const HELPER_CLASS_NAME = "com/avalon/GoogleAnalytics/GoogleAnalyticsHelper";
+const char* const HELPER_CLASS_NAME = "com/avalon/googleanalytics/GoogleAnalyticsHelper";
 
 namespace avalon {
 
