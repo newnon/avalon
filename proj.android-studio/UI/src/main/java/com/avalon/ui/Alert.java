@@ -33,7 +33,7 @@ class OnClick implements DialogInterface.OnClickListener
     }
 }
 
-class Alert
+public class Alert
 {
     private static HashMap<Integer, String> buttons = new HashMap<Integer, String>();
     private static final String TAG = "avalon.ui.Alert";

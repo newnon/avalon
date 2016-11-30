@@ -26,7 +26,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class Notifications{
@@ -147,7 +146,7 @@ public class Notifications{
 		
 		Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(),
 				context.getResources().getIdentifier("icon", "drawable", context.getPackageName()));
-		NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+		Notification.Builder builder = new Notification.Builder(context);
 		builder.setContentTitle(context.getString(context.getResources().getIdentifier("app_name", "string", context.getPackageName())));
 		builder.setContentText(message);
 		builder.setSmallIcon(context.getResources().getIdentifier("icon", "drawable", context.getPackageName()));

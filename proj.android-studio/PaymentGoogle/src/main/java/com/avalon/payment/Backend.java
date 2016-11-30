@@ -3,8 +3,6 @@ package com.avalon.payment;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.avalon.payment.PurchasingObserver;
-
 public class Backend
 {
     private static PurchasingObserver mPurchaseObserver = null;
