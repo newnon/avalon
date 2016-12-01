@@ -20,7 +20,7 @@ import com.avalon.payment.Backend;
 
 public class PurchasingObserver implements OnActivityResultListener
 {
-    static final String TAG = "avalon.payment.PurchasingObserverGoogle";
+    static final String TAG = "avalon_payment_google";
     static final int RC_REQUEST = 10001;
     Activity activity = Cocos2dxHelper.getActivity();
     public static String base64EncodedPublicKey = "";
@@ -54,12 +54,12 @@ public class PurchasingObserver implements OnActivityResultListener
         threadDelegateOnServiceStarted();
     }
 
-    protected void finalize()
-    {
+    protected void finalize() throws Throwable {
         if (mHelper != null) {
             mHelper.dispose();
         }
         mHelper = null;
+        super.finalize();
     }
 
     private boolean isConsumable(String sku)

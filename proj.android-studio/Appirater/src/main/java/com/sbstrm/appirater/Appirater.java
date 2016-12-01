@@ -82,7 +82,7 @@ public abstract class Appirater
         String text = activity.getResources().getString(rId);
 
         //app_name
-        if ((idName == "appirator_app_title")||(idName == "app_name")) {
+        if (idName.equals("appirator_app_title") || idName.equals("app_name")) {
             return text;
         }
 
