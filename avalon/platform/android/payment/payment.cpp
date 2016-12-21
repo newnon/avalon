@@ -215,7 +215,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnServiceStarted(
     }
 }
 
-JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed(JNIEnv* env, jclass clazz, jstring jProductId, jstring jOrderId, jboolean jRestored)
+JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed(JNIEnv* env, jclass clazz, jstring jProductId, jstring jOrderId, jstring jToken, jboolean jRestored)
 {
 	AndroidManager *globalManager = static_cast<AndroidManager*>(Manager::getInstance());
     AVALON_ASSERT_MSG(globalManager, "globalManager should be already set");
@@ -225,6 +225,8 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed
     }
 
     std::string productId = cocos2d::JniHelper::jstring2string(jProductId);
+    std::string token = cocos2d::JniHelper::jstring2string(jToken);
+    std::string orderId = cocos2d::JniHelper::jstring2string(jOrderId);
     const Product* product = globalManager->getProductByProductIdentifier(productId.c_str());
 
     if (globalManager->getDelegate()) {
@@ -232,12 +234,16 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed
     	if(product)
     	{
     		managerTransaction.productId = product->productIdentifier;
-    		managerTransaction.transactionState = jRestored?TransactionState::Purchased:TransactionState::Restored;
+            managerTransaction.transactionIdentifier = orderId;
+            managerTransaction.receipt = std::vector<unsigned char>(token.begin(), token.end());
+            managerTransaction.transactionState = jRestored?TransactionState::Purchased:TransactionState::Restored;
     		globalManager->getDelegate()->onPurchaseSucceed(managerTransaction);
     	}
     	else
     	{
     		managerTransaction.productId = productId;
+            managerTransaction.transactionIdentifier = orderId;
+            managerTransaction.receipt = std::vector<unsigned char>(token.begin(), token.end());
     		managerTransaction.transactionState = TransactionState::Failed;
     		globalManager->getDelegate()->onPurchaseFail(managerTransaction, ManagerDelegateErrors::PRODUCT_UNKNOWN);
     	}

@@ -125,7 +125,7 @@ public class PurchasingObserver implements OnActivityResultListener
                 if (isConsumable(sku)) {
                     threadConsumeAsync(inventory.getPurchase(sku));
                 } else {
-                    threadDelegateOnPurchaseSucceed(sku, inventory.getPurchase(sku).getOrderId(), true);
+                    threadDelegateOnPurchaseSucceed(sku, inventory.getPurchase(sku).getOrderId(), inventory.getPurchase(sku).getToken(), true);
                 }
             }
 
@@ -162,7 +162,7 @@ public class PurchasingObserver implements OnActivityResultListener
             } else if (isConsumable(purchase.getSku())) {
                 threadConsumeAsync(purchase);
             } else {
-                threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), false);
+                threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), purchase.getToken(), false);
             }
 
             threadDecrementTaskCounter();
@@ -178,7 +178,7 @@ public class PurchasingObserver implements OnActivityResultListener
                 return;
             }
 
-            threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), false);
+            threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), purchase.getToken(), false);
             if (checkTaskCountOnConsumeFinished) {
                 threadDecrementTaskCounter();
             }
@@ -232,12 +232,12 @@ public class PurchasingObserver implements OnActivityResultListener
         });
     }
 
-    private void threadDelegateOnPurchaseSucceed(final String sku, final String orderId, final boolean restored)
+    private void threadDelegateOnPurchaseSucceed(final String sku, final String orderId, final String token, final boolean restored)
     {
         Cocos2dxHelper.runOnGLThread(new Runnable() {
             @Override
             public void run() {
-            	Backend.delegateOnPurchaseSucceed(sku, orderId, restored);
+            	Backend.delegateOnPurchaseSucceed(sku, orderId, token, restored);
             }
         });
     }
