@@ -15,7 +15,7 @@ SystemInfo::CarierInfo SystemInfo::getCarierInfo()
 {
     CarierInfo ret;
     ret.carrierName = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getCarrierName");
-    ret.isoCountryCode = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getIsoCountryCode ");
+    ret.isoCountryCode = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getIsoCountryCode");
     ret.mobileCountryCode = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getMobileCountryCode"); 
     ret.mobileNetworkCode = cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getMobileNetworkCode");
     return ret;

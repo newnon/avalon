@@ -1,4 +1,4 @@
-package com.avalon;
+package com.avalon.gamecenter;
 
 import android.preference.PreferenceManager.OnActivityResultListener;
 import android.util.Log;

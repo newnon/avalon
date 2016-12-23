@@ -1,4 +1,4 @@
-package com.avalon;
+package com.avalon.gamecenter;
 
 import java.util.EnumSet;
 
