@@ -1,4 +1,4 @@
-package com.avalon.GoogleAnalytics;
+package com.avalon.googleanalytics;
 
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
