@@ -247,10 +247,10 @@ void Notifications::unregisterForRemoteNotifications()
     if (localNotification)
     {
         _launchedWithNotification = YES;
-        NSDictionary *dict = [NSDictionary dictionaryWithDictionary:notification.userInfo];
-        [dict setValue:[NSNumber numberWithBool:YES] forKey:@"active"];
-        [dict setValue:[NSNumber numberWithBool:NO] forKey:@"remote"];
-        [dict setValue:[NSDictionary dictionaryWithObjectsAndKeys:localNotification.alertBody, @"alert", [NSNumber numberWithInteger:localNotification.applicationIconBadgeNumber], @"badge", localNotification.soundName, @"sound", nil] forKey:@"aps"];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:notification.userInfo];
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"active"];
+        [dict setObject:[NSNumber numberWithBool:NO] forKey:@"remote"];
+        [dict setObject:[NSDictionary dictionaryWithObjectsAndKeys:localNotification.alertBody, @"alert", [NSNumber numberWithInteger:localNotification.applicationIconBadgeNumber], @"badge", localNotification.soundName, @"sound", nil] forKey:@"aps"];
         _notificationDictionary = dict;
         return;
     }
@@ -258,9 +258,9 @@ void Notifications::unregisterForRemoteNotifications()
     if (userInfo)
     {
         _launchedWithNotification = YES;
-        NSDictionary *dict = [NSDictionary dictionaryWithDictionary:userInfo];
-        [dict setValue:[NSNumber numberWithBool:YES] forKey:@"remote"];
-        [dict setValue:[NSNumber numberWithBool:YES] forKey:@"active"];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userInfo];
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"remote"];
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"active"];
         _notificationDictionary = dict;
         return;
     }
