@@ -12,7 +12,7 @@ void extLoadProductsData(void* arg, void* ptr, int len);
 class EmscriptenManager:public Manager
 {
 public:
-    EmscriptenManager():_delegate(nullptr),_currency(emscripten_run_script_string("SocialObject.getCurrency()"))
+    EmscriptenManager():_delegate(nullptr),_currency(emscripten_run_script_string("LoaderObject.getCurrency()"))
     {
     }
     ~EmscriptenManager()
