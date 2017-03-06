@@ -36,6 +36,11 @@ std::string SystemInfo::getOSVersion()
     return cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getOSVersion");
 }
 
+std::string SystemInfo::getBundleId()
+{
+    return cocos2d::JniHelper::callStaticStringMethod(CLASS_NAME, "getBundleId");
+}
+
 bool SystemInfo::isTablet()
 {
     return cocos2d::JniHelper::callStaticBooleanMethod(CLASS_NAME, "isTablet");

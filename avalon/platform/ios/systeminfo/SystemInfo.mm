@@ -56,6 +56,11 @@ std::string SystemInfo::getOSVersion()
     return [[UIDevice currentDevice].systemVersion cStringUsingEncoding:NSUTF8StringEncoding];
 }
     
+std::string SystemInfo::getBundleId()
+{
+    return [[[NSBundle mainBundle] bundleIdentifier] UTF8String];
+}
+    
 bool SystemInfo::isTablet()
 {
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;

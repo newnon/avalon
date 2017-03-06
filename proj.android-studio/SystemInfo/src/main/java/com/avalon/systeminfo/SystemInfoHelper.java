@@ -68,6 +68,11 @@ public abstract class SystemInfoHelper
 		return manufacturer + " " + model;
     }
     
+    public static String getBundleId()
+    {
+		return activity.getPackageName();
+    }
+    
     public static String getIDFA()
     {
     	return "";
