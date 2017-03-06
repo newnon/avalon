@@ -169,7 +169,7 @@ public:
     {
     }
 
-    virtual void startService(const std::string &data)
+    virtual void startService(const std::string &data) override
     {
     	backend::helper::callStaticVoidMethodWithString("initialize",data.c_str());
     }

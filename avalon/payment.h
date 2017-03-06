@@ -10,7 +10,7 @@ namespace payment {
 
 struct Product
 {
-    Product():consumable(false), price(0.0f), data(0) {}
+    Product():data(0), consumable(false), price(0.0f) {}
     std::string id;
     std::string productIdentifier;
     std::string localizedName;
