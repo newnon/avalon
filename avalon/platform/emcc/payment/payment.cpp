@@ -204,7 +204,7 @@ public:
             managerTransaction.productId = id;
             _delegate->onPurchaseFail(managerTransaction, ManagerDelegateErrors::PRODUCT_UNKNOWN);
         }
-        EM_ASM_({ SocialObject.buyItem(Pointer_stringify($0), Pointer_stringify($1), Pointer_stringify($2), Pointer_stringify($3), $4); }
+        EM_ASM_({ LoaderObject.buyItem(Pointer_stringify($0), Pointer_stringify($1), Pointer_stringify($2), Pointer_stringify($3), $4); }
         		, productToPurchase->localizedName.c_str()
         		, productToPurchase->localizedDescription.c_str()
         		, productToPurchase->id.c_str()
