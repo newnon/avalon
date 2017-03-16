@@ -279,11 +279,11 @@ void GoogleAnalytics::endSession()
 
 GoogleAnalytics::GoogleAnalytics():_defaultTracker(nullptr)
 {
-    
+    [[GAI sharedInstance] startDispatching];
 }
 GoogleAnalytics::~GoogleAnalytics()
 {
-    
+    [[GAI sharedInstance] pauseDispatching];
 }
 
 }

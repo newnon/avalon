@@ -311,11 +311,11 @@ static NSString *const KKGoogleAnalyticsErrorDomain = @"KKGoogleAnalyticsErrorDo
         return;
     }
     NSMutableString *payload = [NSMutableString string];
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [payload appendFormat:@"%@\n", [obj valueForKey:@"text"]];
-    }];
+    for(NSUInteger idx = 0; idx<array.count;++idx) {
+        [payload appendFormat:idx<(array.count-1)?@"%@\n":@"%@", [[array objectAtIndex:idx] valueForKey:@"text"]];
+    }
     
-    NSURL *URL = [NSURL URLWithString:@"http://www.google-analytics.com/collect"];
+    NSURL *URL = [NSURL URLWithString:@"https://www.google-analytics.com/collect"];
     NSMutableURLRequest *HTTPRequest = [NSMutableURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
     [HTTPRequest setHTTPMethod:@"POST"];
     [HTTPRequest setHTTPBody:[payload dataUsingEncoding:NSUTF8StringEncoding]];
