@@ -4246,6 +4246,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/";
 			};
 			name = Debug;
@@ -4284,6 +4285,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -4301,7 +4303,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4317,7 +4318,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4333,7 +4333,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Appirater iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4349,7 +4348,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Appirater iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4374,7 +4372,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4399,7 +4396,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4429,7 +4425,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Flurry iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4445,7 +4440,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Flurry iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4462,7 +4456,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "FlurryAds iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4479,7 +4472,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "FlurryAds iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4506,7 +4498,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4519,7 +4510,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4536,7 +4526,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4553,7 +4542,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4574,7 +4562,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4592,7 +4579,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Payment Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4613,7 +4599,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Chartboost iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4634,7 +4619,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Chartboost iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4648,7 +4632,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Notifications Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4661,7 +4644,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Notifications Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4674,7 +4656,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GoogleAnalytics Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4687,7 +4668,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GoogleAnalytics Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4699,7 +4679,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "UI iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4711,7 +4690,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "UI iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4724,7 +4702,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "UI Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4736,7 +4713,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "UI Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4753,7 +4729,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Appirater Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4770,7 +4745,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Appirater Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4792,7 +4766,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "FacebookAds iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4814,7 +4787,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "FacebookAds iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4830,7 +4802,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Epom iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4846,7 +4817,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Epom iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4863,7 +4833,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GameCenter Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4880,7 +4849,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GameCenter Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4896,7 +4864,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iAd iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4912,7 +4879,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iAd iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4931,7 +4897,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Ads iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4950,7 +4915,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Ads iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4966,7 +4930,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Ads Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -4979,7 +4942,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Ads Mac";
 				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -4992,7 +4954,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Utils iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5005,7 +4966,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Utils iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5022,7 +4982,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "AppsFlyer iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5039,7 +4998,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "AppsFlyer iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5059,7 +5017,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MoPub iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5079,7 +5036,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MoPub iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5096,7 +5052,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Fuseboxx iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5113,7 +5068,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Fuseboxx iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5126,7 +5080,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "DeltaDna iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5139,7 +5092,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "DeltaDna iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5152,7 +5104,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Share iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5165,7 +5116,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Share iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5186,7 +5136,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MoPubVungleAdaptor iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5207,7 +5156,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MoPubVungleAdaptor iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5224,7 +5172,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GoogleAnalytics iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5241,7 +5188,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "GoogleAnalytics iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5261,7 +5207,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "AdGeneration iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5281,7 +5226,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "AdGeneration iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5294,7 +5238,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Notifications iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5307,7 +5250,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "Notifications iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -5323,7 +5265,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "AdMob iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -5339,7 +5280,6 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "AdMob iOS";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
