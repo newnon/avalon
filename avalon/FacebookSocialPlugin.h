@@ -8,6 +8,7 @@
 
 #include "SocialPlugin.h"
 
+namespace avalon {
 class FacebookSocialPlugin : public SocialPlugin
 {
 public:
@@ -23,3 +24,4 @@ public:
     
     virtual void setLoginBehavior(LoginBehavior type) = 0;
 };
+}

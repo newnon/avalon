@@ -11,7 +11,8 @@
 
 #include "SocialPlugin.h"
 #include <map>
-    
+
+namespace avalon {
 template <class T>
 class PlatformSocialPermission:public SocialPermission {
 public:
@@ -80,6 +81,6 @@ SocialPermissionsHelper<TestPermission> testPermissionsHelper({{SocialPermission
  
 GenderHelper testGenderHelper("m", "f", "");
 */
-
+}
 
 #endif /* SocialPluginHelpers_h */

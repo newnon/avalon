@@ -14,6 +14,7 @@
 #import "FacebookSocialPlugin.h"
 #import "SocialPluginHelpers.h"
 
+namespace avalon {
 class FacebookSocialPluginIOS : public FacebookSocialPlugin
 {
     enum class FacebookPermissionType
@@ -339,4 +340,5 @@ FacebookSocialPlugin &FacebookSocialPlugin::getInstance()
 {
     static FacebookSocialPluginIOS facebook;
     return facebook;
+}
 }

@@ -14,6 +14,7 @@
 #include <functional>
 #include <utility>
 
+namespace avalon {
 class SocialPermission
 {
 public:
@@ -188,6 +189,6 @@ public:
 protected:
     virtual ~SocialPlugin() {}
 };
-
+}
 
 #endif /* SocialPlugin_h */
