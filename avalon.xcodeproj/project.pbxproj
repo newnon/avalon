@@ -279,6 +279,22 @@
 		A5F0C94F19226130006B8457 /* Notifications.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BB718F6F67800B4EBA1 /* Notifications.h */; };
 		A5F0C9511922614A006B8457 /* AdMob.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D3276F1900515B00A65D25 /* AdMob.h */; };
 		A5F0C9531922615B006B8457 /* GoogleAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */; };
+		D87F76151EA4DE34005187B4 /* FacebookSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */; };
+		D87F76161EA4DE34005187B4 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
+		D87F76171EA4DE34005187B4 /* SocialPluginHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */; };
+		D87F761D1EA4DE6D005187B4 /* AdMob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D327861900EEA700A65D25 /* AdMob.mm */; };
+		D87F76201EA4DE6D005187B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		D87F76321EA4DE90005187B4 /* FacebookSocialPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D87F762D1EA4DE8F005187B4 /* FacebookSocialPlugin.mm */; };
+		D87F763B1EA4DF2A005187B4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76371EA4DF2A005187B4 /* Bolts.framework */; };
+		D87F763C1EA4DF2A005187B4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76381EA4DF2A005187B4 /* FBSDKCoreKit.framework */; };
+		D87F763D1EA4DF2A005187B4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76391EA4DF2A005187B4 /* FBSDKLoginKit.framework */; };
+		D87F763E1EA4DF2A005187B4 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F763A1EA4DF2A005187B4 /* FBSDKShareKit.framework */; };
+		D87F76401EA4DFFC005187B4 /* FBSDKCoreKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F763F1EA4DFFC005187B4 /* FBSDKCoreKit */; };
+		D87F76421EA4E024005187B4 /* Bolts in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76411EA4E024005187B4 /* Bolts */; };
+		D87F76441EA4E033005187B4 /* FBSDKLoginKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76431EA4E033005187B4 /* FBSDKLoginKit */; };
+		D87F76461EA4E042005187B4 /* FBSDKShareKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76451EA4E042005187B4 /* FBSDKShareKit */; };
+		D87F764A1EA4E6F0005187B4 /* FacebookSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */; };
+		D87F764B1EA4E6F0005187B4 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -456,6 +472,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A5D3275E1900507400A65D25;
 			remoteInfo = AdMob;
+		};
+		D87F761B1EA4DE6D005187B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -975,6 +998,19 @@
 		A5F0C92D1922356B006B8457 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		A5F0C92E1922356B006B8457 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		A5F0C92F1922356B006B8457 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookSocialPlugin.h; path = avalon/FacebookSocialPlugin.h; sourceTree = "<group>"; };
+		D87F76131EA4DE34005187B4 /* SocialPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialPlugin.h; path = avalon/SocialPlugin.h; sourceTree = "<group>"; };
+		D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialPluginHelpers.h; path = avalon/SocialPluginHelpers.h; sourceTree = "<group>"; };
+		D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFacebook iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D87F762D1EA4DE8F005187B4 /* FacebookSocialPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FacebookSocialPlugin.mm; path = avalon/platform/ios/facebook/FacebookSocialPlugin.mm; sourceTree = "<group>"; };
+		D87F76371EA4DF2A005187B4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		D87F76381EA4DF2A005187B4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		D87F76391EA4DF2A005187B4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		D87F763A1EA4DF2A005187B4 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		D87F763F1EA4DFFC005187B4 /* FBSDKCoreKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBSDKCoreKit; path = "avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKCoreKit.framework/FBSDKCoreKit"; sourceTree = "<group>"; };
+		D87F76411EA4E024005187B4 /* Bolts */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Bolts; path = "avalon/platform/ios/facebook/facebook-ios-sdk/Bolts.framework/Bolts"; sourceTree = "<group>"; };
+		D87F76431EA4E033005187B4 /* FBSDKLoginKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBSDKLoginKit; path = "avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKLoginKit.framework/FBSDKLoginKit"; sourceTree = "<group>"; };
+		D87F76451EA4E042005187B4 /* FBSDKShareKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBSDKShareKit; path = "avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKShareKit.framework/FBSDKShareKit"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1248,6 +1284,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D87F761E1EA4DE6D005187B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87F76461EA4E042005187B4 /* FBSDKShareKit in Frameworks */,
+				D87F76441EA4E033005187B4 /* FBSDKLoginKit in Frameworks */,
+				D87F76421EA4E024005187B4 /* Bolts in Frameworks */,
+				D87F76401EA4DFFC005187B4 /* FBSDKCoreKit in Frameworks */,
+				D87F763C1EA4DF2A005187B4 /* FBSDKCoreKit.framework in Frameworks */,
+				D87F763D1EA4DF2A005187B4 /* FBSDKLoginKit.framework in Frameworks */,
+				D87F763E1EA4DF2A005187B4 /* FBSDKShareKit.framework in Frameworks */,
+				D87F76201EA4DE6D005187B4 /* Foundation.framework in Frameworks */,
+				D87F763B1EA4DF2A005187B4 /* Bolts.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1281,6 +1333,7 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				D87F76111EA4DE10005187B4 /* Facebook */,
 				A52BB1591C92CF9A00AC2799 /* SystemInfo */,
 				A5C1C5DD1A164B2B0092ABC7 /* AdGeneration */,
 				A5D3276E1900514300A65D25 /* AdMob */,
@@ -1342,6 +1395,7 @@
 				A5674CDD1BF1E480002300F2 /* libEpom iOS.a */,
 				A52BB1581C92CF5900AC2799 /* libSystemInfo iOS.a */,
 				A52BB1661C92CFDC00AC2799 /* libSystemInfo Mac.a */,
+				D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1349,6 +1403,10 @@
 		A50BC17B18E962DE00F1F979 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D87F76451EA4E042005187B4 /* FBSDKShareKit */,
+				D87F76431EA4E033005187B4 /* FBSDKLoginKit */,
+				D87F76411EA4E024005187B4 /* Bolts */,
+				D87F763F1EA4DFFC005187B4 /* FBSDKCoreKit */,
 				A54E28D81AC2D3C90054B412 /* Chartboost */,
 				A57695881A0E6EA8002FDCB5 /* iAd.framework */,
 				A50BC17C18E962DE00F1F979 /* Foundation.framework */,
@@ -2460,6 +2518,38 @@
 			path = "avalon/platform/ios/googleAnalytics/googleAnalytics-ios";
 			sourceTree = "<group>";
 		};
+		D87F76111EA4DE10005187B4 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				D87F76181EA4DE42005187B4 /* Facebook-ios */,
+				D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */,
+				D87F76131EA4DE34005187B4 /* SocialPlugin.h */,
+				D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
+		D87F76181EA4DE42005187B4 /* Facebook-ios */ = {
+			isa = PBXGroup;
+			children = (
+				D87F76361EA4DF2A005187B4 /* facebook-ios-sdk */,
+				D87F762D1EA4DE8F005187B4 /* FacebookSocialPlugin.mm */,
+			);
+			name = "Facebook-ios";
+			sourceTree = "<group>";
+		};
+		D87F76361EA4DF2A005187B4 /* facebook-ios-sdk */ = {
+			isa = PBXGroup;
+			children = (
+				D87F76371EA4DF2A005187B4 /* Bolts.framework */,
+				D87F76381EA4DF2A005187B4 /* FBSDKCoreKit.framework */,
+				D87F76391EA4DF2A005187B4 /* FBSDKLoginKit.framework */,
+				D87F763A1EA4DF2A005187B4 /* FBSDKShareKit.framework */,
+			);
+			name = "facebook-ios-sdk";
+			path = "avalon/platform/ios/facebook/facebook-ios-sdk";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2701,6 +2791,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D87F76171EA4DE34005187B4 /* SocialPluginHelpers.h in Headers */,
+				D87F76161EA4DE34005187B4 /* SocialPlugin.h in Headers */,
+				D87F76151EA4DE34005187B4 /* FacebookSocialPlugin.h in Headers */,
 				A5C1C63E1A164DCD0092ABC7 /* AdGeneration.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2710,6 +2803,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5F0C9511922614A006B8457 /* AdMob.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D87F76221EA4DE6D005187B4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87F764A1EA4E6F0005187B4 /* FacebookSocialPlugin.h in Headers */,
+				D87F764B1EA4E6F0005187B4 /* SocialPlugin.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3256,6 +3358,24 @@
 			productReference = A5D3276D1900507400A65D25 /* libAdMob iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		D87F76191EA4DE6D005187B4 /* Facebook iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D87F76241EA4DE6D005187B4 /* Build configuration list for PBXNativeTarget "Facebook iOS" */;
+			buildPhases = (
+				D87F761C1EA4DE6D005187B4 /* Sources */,
+				D87F761E1EA4DE6D005187B4 /* Frameworks */,
+				D87F76221EA4DE6D005187B4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D87F761A1EA4DE6D005187B4 /* PBXTargetDependency */,
+			);
+			name = "Facebook iOS";
+			productName = Avalon;
+			productReference = D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3337,6 +3457,7 @@
 				A55885EE19A4C87D00914838 /* UI iOS */,
 				A55885FC19A4C89000914838 /* UI Mac */,
 				A58882F11ADC597300B32AC7 /* Utils iOS */,
+				D87F76191EA4DE6D005187B4 /* Facebook iOS */,
 				A50BC24618E99DA500F1F979 /* Build all libs iOS */,
 				A50FFF0F1A1B5C9900952186 /* Build all libs Mac */,
 			);
@@ -3709,6 +3830,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D87F761C1EA4DE6D005187B4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D87F761D1EA4DE6D005187B4 /* AdMob.mm in Sources */,
+				D87F76321EA4DE90005187B4 /* FacebookSocialPlugin.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3836,6 +3966,11 @@
 			isa = PBXTargetDependency;
 			target = A5D3275E1900507400A65D25 /* AdMob iOS */;
 			targetProxy = A5D327881900F06900A65D25 /* PBXContainerItemProxy */;
+		};
+		D87F761A1EA4DE6D005187B4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = D87F761B1EA4DE6D005187B4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4961,6 +5096,44 @@
 			};
 			name = Release;
 		};
+		D87F76251EA4DE6D005187B4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk";
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKCoreKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/Bolts.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKLoginKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKShareKit.framework",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D87F76261EA4DE6D005187B4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk";
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKCoreKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/Bolts.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKLoginKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKShareKit.framework",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5266,6 +5439,15 @@
 			buildConfigurations = (
 				A5D3276B1900507400A65D25 /* Debug */,
 				A5D3276C1900507400A65D25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D87F76241EA4DE6D005187B4 /* Build configuration list for PBXNativeTarget "Facebook iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D87F76251EA4DE6D005187B4 /* Debug */,
+				D87F76261EA4DE6D005187B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
