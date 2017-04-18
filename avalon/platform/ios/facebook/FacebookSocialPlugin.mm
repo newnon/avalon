@@ -191,7 +191,7 @@ public:
                          }
                          else if ([key isEqualToString:@"gender"])
                          {
-                             profile.gender = _genderHelper.fromString([object UTF8String]);
+                             profile.gender = _genderHelper.toGender([object UTF8String]);
                          }
                          else if ([key isEqualToString:@"picture"])
                          {
@@ -320,7 +320,7 @@ private:
     std::vector<SocialPermission> _publishPermissions;
     
     SocialProfile _emptyProfile;
-    GenderHelper _genderHelper;
+    GenderHelper<std::string> _genderHelper;
 
     SocialPermissionsHelper<FacebookPermission> _facebookPermissionsHelper;
 };

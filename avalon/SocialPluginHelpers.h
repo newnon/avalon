@@ -43,22 +43,23 @@ private:
 template <class T>
 const std::string SocialPermissionsHelper<T>::empty;
 
+template <class T>
 class GenderHelper
 {
 public:
-    GenderHelper(const std::string &male, const std::string &female, const std::string &unknown)
+    GenderHelper(const T &male, const T &female, const T &unknown)
     {
-        _stringToValue[male] = SocialProfile::Gender::MALE;
-        _stringToValue[female] = SocialProfile::Gender::FEMALE;
-        _stringToValue[unknown] = SocialProfile::Gender::UNKNOWN;
+        _toGenderMap[male] = SocialProfile::Gender::MALE;
+        _toGenderMap[female] = SocialProfile::Gender::FEMALE;
+        _toGenderMap[unknown] = SocialProfile::Gender::UNKNOWN;
     }
-    SocialProfile::Gender fromString(const std::string &value) const
+    SocialProfile::Gender toGender(const T &value) const
     {
-        auto it = _stringToValue.find(value);
-        return it == _stringToValue.end()?SocialProfile::Gender::OTHER:it->second;
+        auto it = _toGenderMap.find(value);
+        return it == _toGenderMap.end()?SocialProfile::Gender::OTHER:it->second;
     }
 private:
-    std::map<std::string, SocialProfile::Gender> _stringToValue;
+    std::map<T, SocialProfile::Gender> _toGenderMap;
 };
 
 /* Sample code
