@@ -27,6 +27,7 @@ package com.avalon.facebook;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
@@ -35,29 +36,57 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
 import org.cocos2dx.lib.Cocos2dxHelper;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 //
-public class FacebookHelper {
+public class FacebookHelper
+{
+    private enum ErrorType {SUCEESS, USER_CANCEL, ERROR}
+
     private static final String TAG = "C2DXFacebook";
     private static Cocos2dxActivity s_activity = (Cocos2dxActivity)Cocos2dxHelper.getActivity();
     private static CallbackManager callbackManager;
 
-    public static native void delegateOnLogin(String token);
+    public static native void delegateOnLogin(int errorType, String token, String errorText,
+                                              String[] grantedReadPermissions, String[] grantedPublishPermissions, String[] deniedPermissions);
 
-    private static void threadDelegateOnLogin(final String token)
+    public static native void delegateOnMyProfile(int preferedPictureSize, String[] keys, String[] values);
+
+    private static void threadDelegateOnLogin(final ErrorType errorType, final String token, final String errorText,
+                                              final String[] grantedReadPermissions, final String[] grantedPublishPermissions, final String[] deniedPermissions)
     {
         Cocos2dxHelper.runOnGLThread(new Runnable() {
             @Override
             public void run() {
-                FacebookHelper.delegateOnLogin(token);
+                FacebookHelper.delegateOnLogin(errorType.ordinal(), token, errorText,
+                        grantedReadPermissions, grantedPublishPermissions, deniedPermissions);
+            }
+        });
+    }
+
+    private static void threadDelegateOnMyProfile(final int preferedPictureSize, final String[] keys, final String[] values)
+    {
+        Cocos2dxHelper.runOnGLThread(new Runnable() {
+            @Override
+            public void run() {
+                FacebookHelper.delegateOnMyProfile(preferedPictureSize, keys, values);
             }
         });
     }
@@ -73,27 +102,63 @@ public class FacebookHelper {
     {
         callbackManager = CallbackManager.Factory.create();
 
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        // App code
-                        threadDelegateOnLogin(loginResult.getAccessToken().getToken());
-                    }
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>()
+        {
+            @Override public void onSuccess(LoginResult loginResult)
+            {
+                ArrayList<String> grantedReadPermission = new ArrayList<String>();
+                ArrayList<String> grantedPublishPermission = new ArrayList<String>();
 
-                    @Override
-                    public void onCancel() {
-                        // App code
-                    }
+                for (String it : loginResult.getRecentlyGrantedPermissions())
+                {
+                    Method method = null;
+                    try
+                    {
+                        method = LoginManager.class.getDeclaredMethod("isPublishPermission", new Class[]{String.class});
 
-                    @Override
-                    public void onError(FacebookException exception) {
-                        // App code
+                        if (method != null)
+                        {
+                            method.setAccessible(true);
+                            boolean value = (boolean)method.invoke(LoginManager.class, it);
+                            if (value == true)
+                            {
+                                grantedPublishPermission.add(it);
+                            }
+                            else
+                            {
+                                grantedReadPermission.add(it);
+                            }
+                        }
                     }
-                });
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
 
-        Cocos2dxHelper.addOnActivityResultListener(new PreferenceManager.OnActivityResultListener(){
-            @Override
-            public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+                String[] grantedReadPermissions = grantedReadPermission.toArray(new String[0]);
+                String[] grantedPublishPermissions = grantedPublishPermission.toArray(new String[0]);
+                String[] deniedPermissions = loginResult.getRecentlyDeniedPermissions().toArray(new String[0]);
+                threadDelegateOnLogin(ErrorType.SUCEESS, loginResult.getAccessToken().getToken(), "", grantedReadPermissions, grantedPublishPermissions, deniedPermissions);
+            }
+
+            @Override public void onCancel()
+            {
+                String[] empty = {};
+                threadDelegateOnLogin(ErrorType.USER_CANCEL, "", "", empty, empty, empty);
+            }
+
+            @Override public void onError(FacebookException exception)
+            {
+                String[] empty = {};
+                threadDelegateOnLogin(ErrorType.ERROR, "", exception.toString(), empty, empty, empty);
+            }
+        });
+
+        Cocos2dxHelper.addOnActivityResultListener(new PreferenceManager.OnActivityResultListener()
+        {
+            @Override public boolean onActivityResult(int requestCode, int resultCode, Intent data)
+            {
                 callbackManager.onActivityResult(requestCode, resultCode, data);
                 return true;
             }
@@ -107,7 +172,7 @@ public class FacebookHelper {
 
     public static void requestPublishPermissions(String[] permissions)
     {
-        LoginManager.getInstance().logInWithReadPermissions(s_activity, Arrays.asList(permissions));
+        LoginManager.getInstance().logInWithPublishPermissions(s_activity, Arrays.asList(permissions));
     }
 
     public static void logout()
@@ -122,4 +187,80 @@ public class FacebookHelper {
         return false;
     }
 
+    public static String getUserID()
+    {
+        return AccessToken.getCurrentAccessToken().getUserId();
+    }
+
+    public static String getAccessToken()
+    {
+        return AccessToken.getCurrentAccessToken().getToken();
+    }
+
+    public static void setLoginBehavior(int loginType)
+    {
+        LoginBehavior type = LoginBehavior.NATIVE_WITH_FALLBACK;
+        switch (loginType)
+        {
+            case 2:
+                type = LoginBehavior.WEB_ONLY;
+                break;
+            case 4:
+                type = LoginBehavior.WEB_VIEW_ONLY;
+                break;
+            default:
+                type = LoginBehavior.NATIVE_WITH_FALLBACK;
+                break;
+        }
+
+        LoginManager.getInstance().setLoginBehavior(type);
+    }
+
+    public static void getMyProfile(String fields, final int preferedPictureSize)
+    {
+        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback()
+        {
+            @Override public void onCompleted(JSONObject object, GraphResponse response)
+            {
+                ArrayList<String> keys = new ArrayList<String>();
+                ArrayList<String> values = new ArrayList<String>();
+
+                for (int i = 0; i < object.names().length(); ++i)
+                {
+                    String name = null;
+                    try {
+                        name = object.names().getString(i);
+                        keys.add(name);
+
+                        String value = object.getString(name);
+
+                        if (name.equalsIgnoreCase("picture"))
+                        {
+                            JSONObject picture = object.getJSONObject(name);
+                            JSONObject data = picture.getJSONObject("data");
+                            values.add(data.getString("url"));
+                        }
+                        else
+                        {
+                            values.add(value);
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+
+                String[] stringKeys = keys.toArray(new String[0]);
+                String[] stringValues = values.toArray(new String[0]);
+                threadDelegateOnMyProfile(preferedPictureSize, stringKeys, stringValues);
+            }
+        });
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", fields);
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
 }

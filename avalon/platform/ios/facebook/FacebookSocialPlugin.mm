@@ -151,7 +151,7 @@ public:
     {
         if (isLoggedIn())
         {
-            std::string fields = "id,first_name,picture,last_name,middle_name,email,gender,birthday,age_range,installed";
+            std::string fields = "id,first_name,picture,last_name,middle_name,email,gender,birthday";
             for (const auto &it : additionalFields)
             {
                 fields += "," + it;
@@ -195,7 +195,9 @@ public:
                          }
                          else if ([key isEqualToString:@"picture"])
                          {
-                             profile.pictureUrl = preferedPictureSize == 0 ? [object UTF8String] : "";
+                             id data = [object objectForKey:@"data"];
+                             id url = [data objectForKey:@"url"];
+                             profile.pictureUrl = preferedPictureSize == 0 ? [url UTF8String] : "";
                          }
                          else
                          {
