@@ -23,7 +23,7 @@ class VKSocialPluginIOS : public VKSocialPlugin
 public:
     VKSocialPluginIOS()
     : _permissionsHelper({{SocialPermission::Type::PUBLIC_PROFILE, ""}, {SocialPermission::Type::EMAIL, "email"}, {SocialPermission::Type::FRIENDS, "friends"}})
-    , _genderHelper("male", "female", "")
+    , _genderHelper(2, 1, 0)
     {
         NSString *VKAppID  = [[NSBundle mainBundle].infoDictionary objectForKey:@"VKAppID"];
         [VKSdk initializeWithAppId:VKAppID];
@@ -63,13 +63,16 @@ public:
         
         [VKSdk wakeUpSession:permissionArray completeBlock:^(VKAuthorizationState state, NSError *error) {
             if (state == VKAuthorizationAuthorized) {
-                _delegate->onLogin({SocialPluginDelegate::Error::Type::UNDEFINED, (int)state, [error.description UTF8String]}, "", localPermissions, {});
+                if(_delegate)
+                    _delegate->onLogin({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""}, [[VKSdk accessToken].accessToken UTF8String], localPermissions, {});
+                getMyProfile(160, {});
             } if (state == VKAuthorizationInitialized) {
                 [VKSdk authorize:permissionArray];
             }
             else if (error) {
                 _readPermissions.clear();
-                _delegate->onLogin({SocialPluginDelegate::Error::Type::UNDEFINED, (int)state, [error.description UTF8String]}, "", {}, {});
+                if(_delegate)
+                    _delegate->onLogin({SocialPluginDelegate::Error::Type::UNDEFINED, (int)state, [error.description UTF8String]}, "", {}, {});
             } 
         }];
         
@@ -174,9 +177,89 @@ public:
             
             [profileReq executeWithResultBlock:^(VKResponse * response) {
                 NSLog(@"Json result: %@", response.json);
+                
+                NSDictionary *result = (NSDictionary*)[response.json objectAtIndex:0];
+                
                 SocialProfile profile;
+                profile.birthDay = std::numeric_limits<long long>::min();
+                
+                for (id key in result)
+                {
+                    id object = [result objectForKey:key];
+                    
+                    if ([key isEqualToString:@"id"])
+                    {
+                        profile.uid = [[object stringValue] UTF8String];
+                    }
+                    else if ([key isEqualToString:@"first_name"])
+                    {
+                        profile.firstName = [object UTF8String];
+                    }
+                    else if ([key isEqualToString:@"last_name"])
+                    {
+                        profile.lastName = [object UTF8String];
+                    }
+                    else if ([key isEqualToString:@"nickname"])
+                    {
+                        profile.nickName = [object UTF8String];
+                    }
+                    else if ([key isEqualToString:@"email"])
+                    {
+                        profile.email = [object UTF8String];
+                    }
+                    else if ([key isEqualToString:@"sex"])
+                    {
+                        profile.gender = _genderHelper.toGender([object intValue]);
+                    }
+                    else if ([key isEqualToString:@"photo_50"])
+                    {
+                        profile.pictureUrl = [object UTF8String];
+                    }
+                    else if ([key isEqualToString:@"photo_100"])
+                    {
+                        profile.pictureUrl = [object UTF8String];
+                    }
+                    else if ([key isEqualToString:@"photo_200"])
+                    {
+                        profile.pictureUrl = [object UTF8String];
+                    }
+                    else if ([key isEqualToString:@"bdate"])
+                    {
+                    }
+                    else
+                    {
+                        if ([object isKindOfClass:[NSArray class]] || [object isKindOfClass:[NSDictionary class]])
+                        {
+                            BOOL ret = [NSJSONSerialization isValidJSONObject:object];
+                            if(ret)
+                            {
+                                NSError *error = nil;
+                                NSData *data = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:&error];
+                                if(!error)
+                                {
+                                    std::string value(static_cast<const char*>(data.bytes), data.length);
+                                    profile.otherValue.emplace_back([key UTF8String], value);
+                                }
+                            }
+                        }
+                        else if ([object isKindOfClass:[NSString class]])
+                        {
+                            profile.otherValue.emplace_back([key UTF8String], [object UTF8String]);
+                        }
+                        else if ([object isKindOfClass:[NSNumber class]])
+                        {
+                            profile.otherValue.emplace_back([key UTF8String], [[object stringValue] UTF8String]);
+                        }
+                        else
+                        {
+                            NSLog(@"Wrong type for object %@ by key %@", object, key);
+                        }
+                    }
+                }
+                
                 if (_delegate)
                     _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""}, profile);
+                
             } errorBlock:^(NSError * error) {
                 if (_delegate)
                     _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::UNDEFINED, static_cast<int>(error.code), [error.description UTF8String]}, _emptyProfile);
@@ -229,6 +312,7 @@ public:
             {
                 SocialPluginDelegate::Error socialError = {SocialPluginDelegate::Error::Type::SUCCESS, 0, ""};
                 _delegate->onLogin(socialError, token, _readPermissions, {});
+                getMyProfile(160, {});
             }
         }
     }
@@ -241,7 +325,7 @@ private:
     std::vector<SocialPermission> _publishPermissions;
     
     SocialProfile _emptyProfile;
-    GenderHelper _genderHelper;
+    GenderHelper<int> _genderHelper;
 
     SocialPermissionsHelper<VKPermission> _permissionsHelper;
 };

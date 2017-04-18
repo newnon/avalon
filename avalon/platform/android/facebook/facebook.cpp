@@ -125,7 +125,7 @@ namespace avalon {
                     }
                     else if (key == "gender")
                     {
-                        profile.gender = _genderHelper.fromString(value);
+                        profile.gender = _genderHelper.toGender(value);
                     }
                     else if (key == "picture")
                     {
@@ -359,7 +359,7 @@ namespace avalon {
         std::vector<SocialPermission> _publishPermissions;
 
         SocialProfile _emptyProfile;
-        GenderHelper _genderHelper;
+        GenderHelper<std::string> _genderHelper;
     };
 
     FacebookSocialPlugin &FacebookSocialPlugin::getInstance()

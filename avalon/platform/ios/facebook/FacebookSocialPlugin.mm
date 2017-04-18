@@ -19,7 +19,10 @@ class FacebookSocialPluginIOS : public FacebookSocialPlugin
 {
 public:
     FacebookSocialPluginIOS()
-    : _facebookPermissionsHelper({{SocialPermission::Type::PUBLIC_PROFILE, "public_profile"}, {SocialPermission::Type::EMAIL, "email"}, {SocialPermission::Type::FRIENDS, "user_friends"}})
+    : _facebookPermissionsHelper({
+        {SocialPermission::Type::PUBLIC_PROFILE, "public_profile"},
+        {SocialPermission::Type::EMAIL, "email"},
+        {SocialPermission::Type::FRIENDS, "user_friends"}})
     , _genderHelper("male", "female", "")
     {
         _loginManager = [[FBSDKLoginManager alloc] init];
@@ -191,7 +194,7 @@ public:
                          }
                          else if ([key isEqualToString:@"gender"])
                          {
-                             profile.gender = _genderHelper.fromString([object UTF8String]);
+                             profile.gender = _genderHelper.toGender([object UTF8String]);
                          }
                          else if ([key isEqualToString:@"picture"])
                          {
@@ -322,7 +325,7 @@ private:
     std::vector<SocialPermission> _publishPermissions;
     
     SocialProfile _emptyProfile;
-    GenderHelper _genderHelper;
+    GenderHelper<std::string> _genderHelper;
 
     SocialPermissionsHelper<FacebookPermission> _facebookPermissionsHelper;
 };
