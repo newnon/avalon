@@ -17,11 +17,6 @@
 namespace avalon {
 class FacebookSocialPluginIOS : public FacebookSocialPlugin
 {
-    enum class FacebookPermissionType
-    {
-        NONE = 0,
-    };
-
 public:
     FacebookSocialPluginIOS()
     : _facebookPermissionsHelper({{SocialPermission::Type::PUBLIC_PROFILE, "public_profile"}, {SocialPermission::Type::EMAIL, "email"}, {SocialPermission::Type::FRIENDS, "user_friends"}})
@@ -245,7 +240,7 @@ public:
                  else
                  {
                      if (_delegate)
-                         _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::UNDEFINED, error.code, [error.description UTF8String]}, _emptyProfile);
+                         _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::UNDEFINED, static_cast<int>(error.code), [error.description UTF8String]}, _emptyProfile);
                  }
              }];
         }
@@ -267,41 +262,37 @@ public:
 private:
     void proccessLogin(FBSDKLoginManagerLoginResult *result, NSError *error, bool isPublish)
     {
-        if (_delegate)
+        if (isPublish)
+            _publishPermissions.clear();
+        else
+            _readPermissions.clear();
+            
+        std::vector<SocialPermission> declinedPermissions;
+        std::vector<SocialPermission> grantedPermissions;
+        
+        for (id permision in result.grantedPermissions)
         {
             if (isPublish)
-                _publishPermissions.clear();
+                _publishPermissions.emplace_back(_facebookPermissionsHelper.fromString([permision UTF8String]));
             else
-                _readPermissions.clear();
-                
-            std::vector<SocialPermission> declinedPermissions;
-            std::vector<SocialPermission> grantedPermissions;
-            
-            for (id permision in result.grantedPermissions)
-            {
-                if (isPublish)
-                {
-                    _publishPermissions.emplace_back(_facebookPermissionsHelper.fromString([permision UTF8String]));
-                }
-                else
-                {
-                    _readPermissions.emplace_back(_facebookPermissionsHelper.fromString([permision UTF8String]));
-                }
-            }
-            
-            grantedPermissions.assign(_publishPermissions.begin(), _publishPermissions.end());
-            grantedPermissions.insert(grantedPermissions.end(), _readPermissions.begin(), _readPermissions.end());
+                _readPermissions.emplace_back(_facebookPermissionsHelper.fromString([permision UTF8String]));
+        }
+        
+        grantedPermissions.assign(_publishPermissions.begin(), _publishPermissions.end());
+        grantedPermissions.insert(grantedPermissions.end(), _readPermissions.begin(), _readPermissions.end());
 
-            for (id permision in result.declinedPermissions)
-            {
-                declinedPermissions.emplace_back(_facebookPermissionsHelper.fromString([permision UTF8String]));
-            }
+        for (id permision in result.declinedPermissions)
+        {
+            declinedPermissions.emplace_back(_facebookPermissionsHelper.fromString([permision UTF8String]));
+        }
 
-            const std::string &token = result.token ? [result.token.tokenString UTF8String] : "";
-            
+        const std::string &token = result.token ? [result.token.tokenString UTF8String] : "";
+        
+        if(_delegate)
+        {
             if (error)
             {
-                SocialPluginDelegate::Error socialError = {SocialPluginDelegate::Error::Type::UNDEFINED, error.code, [error.description UTF8String]};
+                SocialPluginDelegate::Error socialError = {SocialPluginDelegate::Error::Type::UNDEFINED, static_cast<int>(error.code), [error.description UTF8String]};
                 _delegate->onLogin(socialError, token, grantedPermissions, declinedPermissions);
             }
             else
@@ -321,7 +312,6 @@ private:
     }
     
 private:
-    using FacebookPermission = PlatformSocialPermission<FacebookPermissionType>;
     
     FBSDKLoginManager *_loginManager = nil;
     SocialPluginDelegate *_delegate = nullptr;

@@ -13,14 +13,6 @@
 #include <map>
 
 namespace avalon {
-template <class T>
-class PlatformSocialPermission:public SocialPermission {
-public:
-    typedef T Type;
-    PlatformSocialPermission(SocialPermission::Type type):SocialPermission(type) {}
-    PlatformSocialPermission(T type):SocialPermission(SocialPermission::Type::PLATFORM, static_cast<int>(type)) {}
-    PlatformSocialPermission(SocialPermission permission):SocialPermission(permission.getType(), permission.getPlatformType()) {}
-};
 
 template <class T>
 class SocialPermissionsHelper
