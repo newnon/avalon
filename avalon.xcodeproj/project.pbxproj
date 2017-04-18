@@ -270,6 +270,13 @@
 		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; };
 		A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */; };
 		A5D327671900507400A65D25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5E989E91EA5FE0B003EB302 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5E989ED1EA5FE0B003EB302 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
+		A5E989F41EA5FEBB003EB302 /* VKSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E989F31EA5FEBB003EB302 /* VKSocialPlugin.h */; };
+		A5E989FA1EA5FEEB003EB302 /* VKSdkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E989F71EA5FEEB003EB302 /* VKSdkFramework.framework */; };
+		A5E989FB1EA5FEEB003EB302 /* VKSocialPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5E989F91EA5FEEB003EB302 /* VKSocialPlugin.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		A5E98A201EA61BCD003EB302 /* VKSdkResources.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = A5E989F81EA5FEEB003EB302 /* VKSdkResources.bundle */; };
+		A5E98A231EA62479003EB302 /* VKSdkFramework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E989FC1EA60177003EB302 /* VKSdkFramework */; };
 		A5F0C9251922343A006B8457 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0C91B1922343A006B8457 /* libGoogleAdMobAds.a */; };
 		A5F0C9271922353E006B8457 /* GoogleAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5F0C9261922353E006B8457 /* GoogleAnalytics.mm */; };
 		A5F0C9361922356B006B8457 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5F0C92F1922356B006B8457 /* libGoogleAnalyticsServices.a */; };
@@ -282,9 +289,8 @@
 		D87F76151EA4DE34005187B4 /* FacebookSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */; };
 		D87F76161EA4DE34005187B4 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
 		D87F76171EA4DE34005187B4 /* SocialPluginHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */; };
-		D87F761D1EA4DE6D005187B4 /* AdMob.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D327861900EEA700A65D25 /* AdMob.mm */; };
 		D87F76201EA4DE6D005187B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
-		D87F76321EA4DE90005187B4 /* FacebookSocialPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D87F762D1EA4DE8F005187B4 /* FacebookSocialPlugin.mm */; };
+		D87F76321EA4DE90005187B4 /* FacebookSocialPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D87F762D1EA4DE8F005187B4 /* FacebookSocialPlugin.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D87F763B1EA4DF2A005187B4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76371EA4DF2A005187B4 /* Bolts.framework */; };
 		D87F763C1EA4DF2A005187B4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76381EA4DF2A005187B4 /* FBSDKCoreKit.framework */; };
 		D87F763D1EA4DF2A005187B4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76391EA4DF2A005187B4 /* FBSDKLoginKit.framework */; };
@@ -473,6 +479,13 @@
 			remoteGlobalIDString = A5D3275E1900507400A65D25;
 			remoteInfo = AdMob;
 		};
+		A5E989DD1EA5FE0B003EB302 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
+		};
 		D87F761B1EA4DE6D005187B4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
@@ -524,6 +537,16 @@
 				A5A75B021924EF1100C44FBF /* vg_button_close.png in CopyFiles */,
 				A5A75B031924EF1100C44FBF /* vg_button_mute_plain.png in CopyFiles */,
 				A5A75B041924EF1100C44FBF /* vg_button_mute_selected.png in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5E98A1F1EA61BB3003EB302 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = MainBundleAssets;
+			dstSubfolderSpec = 16;
+			files = (
+				A5E98A201EA61BCD003EB302 /* VKSdkResources.bundle in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,6 +1003,12 @@
 		A5D3276D1900507400A65D25 /* libAdMob iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAdMob iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D3276F1900515B00A65D25 /* AdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdMob.h; path = avalon/AdMob.h; sourceTree = "<group>"; };
 		A5D327861900EEA700A65D25 /* AdMob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdMob.mm; path = ../AdMob.mm; sourceTree = "<group>"; };
+		A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVkontakte iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5E989F31EA5FEBB003EB302 /* VKSocialPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKSocialPlugin.h; path = avalon/VKSocialPlugin.h; sourceTree = "<group>"; };
+		A5E989F71EA5FEEB003EB302 /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VKSdkFramework.framework; sourceTree = "<group>"; };
+		A5E989F81EA5FEEB003EB302 /* VKSdkResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = VKSdkResources.bundle; sourceTree = "<group>"; };
+		A5E989F91EA5FEEB003EB302 /* VKSocialPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = VKSocialPlugin.mm; path = avalon/platform/ios/vkontakte/VKSocialPlugin.mm; sourceTree = "<group>"; };
+		A5E989FC1EA60177003EB302 /* VKSdkFramework */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = VKSdkFramework; path = "avalon/platform/ios/vkontakte/vk-ios-sdk/VKSdkFramework.framework/VKSdkFramework"; sourceTree = "<group>"; };
 		A5F0C9121922343A006B8457 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
 		A5F0C9131922343A006B8457 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
 		A5F0C9141922343A006B8457 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
@@ -1284,6 +1313,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E989E11EA5FE0B003EB302 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E98A231EA62479003EB302 /* VKSdkFramework in Frameworks */,
+				A5E989E91EA5FE0B003EB302 /* Foundation.framework in Frameworks */,
+				A5E989FA1EA5FEEB003EB302 /* VKSdkFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D87F761E1EA4DE6D005187B4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1333,6 +1372,7 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
+				A5E989F21EA5FE48003EB302 /* Vkontakte */,
 				D87F76111EA4DE10005187B4 /* Facebook */,
 				A52BB1591C92CF9A00AC2799 /* SystemInfo */,
 				A5C1C5DD1A164B2B0092ABC7 /* AdGeneration */,
@@ -1396,6 +1436,7 @@
 				A52BB1581C92CF5900AC2799 /* libSystemInfo iOS.a */,
 				A52BB1661C92CFDC00AC2799 /* libSystemInfo Mac.a */,
 				D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */,
+				A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1403,6 +1444,7 @@
 		A50BC17B18E962DE00F1F979 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5E989FC1EA60177003EB302 /* VKSdkFramework */,
 				D87F76451EA4E042005187B4 /* FBSDKShareKit */,
 				D87F76431EA4E033005187B4 /* FBSDKLoginKit */,
 				D87F76411EA4E024005187B4 /* Bolts */,
@@ -2474,6 +2516,34 @@
 			name = AdMob;
 			sourceTree = "<group>";
 		};
+		A5E989F21EA5FE48003EB302 /* Vkontakte */ = {
+			isa = PBXGroup;
+			children = (
+				A5E989F51EA5FEC2003EB302 /* Vkontakte-ios */,
+				A5E989F31EA5FEBB003EB302 /* VKSocialPlugin.h */,
+			);
+			name = Vkontakte;
+			sourceTree = "<group>";
+		};
+		A5E989F51EA5FEC2003EB302 /* Vkontakte-ios */ = {
+			isa = PBXGroup;
+			children = (
+				A5E989F61EA5FEEB003EB302 /* vk-ios-sdk */,
+				A5E989F91EA5FEEB003EB302 /* VKSocialPlugin.mm */,
+			);
+			name = "Vkontakte-ios";
+			sourceTree = "<group>";
+		};
+		A5E989F61EA5FEEB003EB302 /* vk-ios-sdk */ = {
+			isa = PBXGroup;
+			children = (
+				A5E989F71EA5FEEB003EB302 /* VKSdkFramework.framework */,
+				A5E989F81EA5FEEB003EB302 /* VKSdkResources.bundle */,
+			);
+			name = "vk-ios-sdk";
+			path = "avalon/platform/ios/vkontakte/vk-ios-sdk";
+			sourceTree = "<group>";
+		};
 		A5F0C9111922343A006B8457 /* Admob-ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -2803,6 +2873,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5F0C9511922614A006B8457 /* AdMob.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5E989EB1EA5FE0B003EB302 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E989ED1EA5FE0B003EB302 /* SocialPlugin.h in Headers */,
+				A5E989F41EA5FEBB003EB302 /* VKSocialPlugin.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3358,6 +3437,25 @@
 			productReference = A5D3276D1900507400A65D25 /* libAdMob iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5E989DB1EA5FE0B003EB302 /* Vkontakte iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5E989EE1EA5FE0B003EB302 /* Build configuration list for PBXNativeTarget "Vkontakte iOS" */;
+			buildPhases = (
+				A5E989DE1EA5FE0B003EB302 /* Sources */,
+				A5E989E11EA5FE0B003EB302 /* Frameworks */,
+				A5E989EB1EA5FE0B003EB302 /* Headers */,
+				A5E98A1F1EA61BB3003EB302 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5E989DC1EA5FE0B003EB302 /* PBXTargetDependency */,
+			);
+			name = "Vkontakte iOS";
+			productName = Avalon;
+			productReference = A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		D87F76191EA4DE6D005187B4 /* Facebook iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D87F76241EA4DE6D005187B4 /* Build configuration list for PBXNativeTarget "Facebook iOS" */;
@@ -3460,6 +3558,7 @@
 				D87F76191EA4DE6D005187B4 /* Facebook iOS */,
 				A50BC24618E99DA500F1F979 /* Build all libs iOS */,
 				A50FFF0F1A1B5C9900952186 /* Build all libs Mac */,
+				A5E989DB1EA5FE0B003EB302 /* Vkontakte iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -3830,11 +3929,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E989DE1EA5FE0B003EB302 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E989FB1EA5FEEB003EB302 /* VKSocialPlugin.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D87F761C1EA4DE6D005187B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D87F761D1EA4DE6D005187B4 /* AdMob.mm in Sources */,
 				D87F76321EA4DE90005187B4 /* FacebookSocialPlugin.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3967,6 +4073,11 @@
 			target = A5D3275E1900507400A65D25 /* AdMob iOS */;
 			targetProxy = A5D327881900F06900A65D25 /* PBXContainerItemProxy */;
 		};
+		A5E989DC1EA5FE0B003EB302 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = A5E989DD1EA5FE0B003EB302 /* PBXContainerItemProxy */;
+		};
 		D87F761A1EA4DE6D005187B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
@@ -4026,7 +4137,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4054,7 +4165,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
@@ -4071,7 +4182,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -4094,7 +4205,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
@@ -4107,7 +4218,6 @@
 		A50BC19D18E962DE00F1F979 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4122,7 +4232,6 @@
 		A50BC19E18E962DE00F1F979 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4137,7 +4246,6 @@
 		A50BC1A818E9634600F1F979 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4152,7 +4260,6 @@
 		A50BC1A918E9634600F1F979 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4167,7 +4274,6 @@
 		A50BC1B118E9635400F1F979 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4191,7 +4297,6 @@
 		A50BC1B218E9635400F1F979 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4305,7 +4410,6 @@
 		A52BB1561C92CF5900AC2799 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4317,7 +4421,6 @@
 		A52BB1571C92CF5900AC2799 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4329,7 +4432,6 @@
 		A52BB1641C92CFDC00AC2799 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4345,7 +4447,6 @@
 		A52BB1651C92CFDC00AC2799 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4361,7 +4462,6 @@
 		A547D0631A06E8DA00E6D357 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4381,7 +4481,6 @@
 		A547D0641A06E8DA00E6D357 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = AVALON_CONFIG_PAYMENT_ENABLED;
@@ -4398,7 +4497,6 @@
 		A54E28B61AC2D1560054B412 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4418,7 +4516,6 @@
 		A54E28B71AC2D1560054B412 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4438,7 +4535,6 @@
 		A55885A719A4AE4E00914838 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4451,7 +4547,6 @@
 		A55885A819A4AE4E00914838 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				OTHER_LDFLAGS = "-ObjC";
@@ -4532,7 +4627,6 @@
 		A55C4DAA19A1F16C00F3449A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4548,7 +4642,6 @@
 		A55C4DAB19A1F16C00F3449A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4636,7 +4729,6 @@
 		A56C482A199E1DA900BF30BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4652,7 +4744,6 @@
 		A56C482B199E1DA900BF30BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -4761,7 +4852,6 @@
 		A58883061ADC597300B32AC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4773,7 +4863,6 @@
 		A58883071ADC597300B32AC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4785,7 +4874,6 @@
 		A588834C1ADC5CBB00B32AC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4801,7 +4889,6 @@
 		A588834D1ADC5CBB00B32AC7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4855,7 +4942,6 @@
 		A59003E71A6D124000AF12A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4871,7 +4957,6 @@
 		A59003E81A6D124000AF12A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4887,7 +4972,6 @@
 		A597D3071ADBDACE001C8E9C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4899,7 +4983,6 @@
 		A597D3081ADBDACE001C8E9C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4911,7 +4994,6 @@
 		A5A61D691AB087D2002A7CB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4923,7 +5005,6 @@
 		A5A61D6A1AB087D2002A7CB7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4975,6 +5056,7 @@
 		A5ACF0471918B1E500A010A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -4991,6 +5073,7 @@
 		A5ACF0481918B1E500A010A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -5045,7 +5128,6 @@
 		A5D08BB118F6F5B100B4EBA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -5057,7 +5139,6 @@
 		A5D08BB218F6F5B100B4EBA1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/Avalon.dst;
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
@@ -5093,6 +5174,46 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "AdMob iOS";
+			};
+			name = Release;
+		};
+		A5E989EF1EA5FE0B003EB302 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/avalon/platform/ios/vkontakte/vk-ios-sdk";
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKCoreKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/Bolts.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKLoginKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKShareKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/vkontakte/vk-ios-sdk/VKSdkFramework.framework",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A5E989F01EA5FE0B003EB302 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/avalon/platform/ios/vkontakte/vk-ios-sdk";
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKCoreKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/Bolts.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKLoginKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKShareKit.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/vkontakte/vk-ios-sdk/VKSdkFramework.framework",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -5439,6 +5560,15 @@
 			buildConfigurations = (
 				A5D3276B1900507400A65D25 /* Debug */,
 				A5D3276C1900507400A65D25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5E989EE1EA5FE0B003EB302 /* Build configuration list for PBXNativeTarget "Vkontakte iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5E989EF1EA5FE0B003EB302 /* Debug */,
+				A5E989F01EA5FE0B003EB302 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
