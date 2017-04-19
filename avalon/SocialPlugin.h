@@ -59,6 +59,18 @@ struct SocialProfile
         FEMALE,
         OTHER
     };
+    
+    struct BirthDate
+    {
+        BirthDate():day(0),month(0),year(0) {};
+        BirthDate(int day, int month, int year):day(day),month(month),year(year){}
+        BirthDate(int fromAge, int toAge):day(0),month(0),year(0),ageRange(fromAge, toAge){}
+        int day;
+        int month;
+        int year;
+        std::pair<int,int> ageRange;
+    };
+    
     std::string uid;
     std::string firstName;
     std::string lastName;
@@ -66,7 +78,7 @@ struct SocialProfile
     std::string nickName;
     std::string pictureUrl;
     std::string email;
-    long long birthDay;
+    BirthDate birthDate;
     Gender gender;
     std::vector<std::pair<std::string, std::string>> otherValue;
 };
@@ -99,9 +111,9 @@ public:
     
     virtual void onLogin(Error error, const std::string& token, const std::vector<SocialPermission>& grantedPermissions, const std::vector<SocialPermission>& declinedPermissions) = 0;
     virtual void onLogout(Error error) = 0;
-    virtual void onGetMyProfile(Error error, const SocialProfile &profiles) = 0;
-    virtual void onGetProfiles(Error error, const std::vector<SocialProfile> &profiles) = 0;
-    virtual void onAppFriends(Error error, const std::vector<SocialProfile> &friends) = 0;
+    virtual void onGetMyProfile(Error error, void *userData, const SocialProfile &profiles) = 0;
+    virtual void onGetProfiles(Error error, void *userData, const std::vector<SocialProfile> &profiles) = 0;
+    virtual void onAppFriends(Error error, void *userData, const std::vector<SocialProfile> &friends) = 0;
     
     ~SocialPluginDelegate(){}
 };
@@ -178,7 +190,7 @@ public:
      * @preferedPictureSize preffered user picture size 0 for default
      * @additionalFields social newwork specified additionla fields
      */
-    virtual void getMyProfile(int preferedPictureSize = 0, const std::vector<std::string> &additionalFields = {}) = 0;
+    virtual void getMyProfile(int preferedPictureSize = 0, void *userData = nullptr, const std::vector<std::string> &additionalFields = {}) = 0;
     
     /**
      * @brief get users profiles
@@ -186,14 +198,14 @@ public:
      * @preferedPictureSize preffered user picture size in pixels 0 for default
      * @additionalFields social newwork specified additionla fields
      */
-    virtual void getProfiles(const std::vector<std::string> &userIds, int preferedPictureSize = 0, const std::vector<std::string> &additionalFields = {}) = 0;
+    virtual void getProfiles(const std::vector<std::string> &userIds, void *userData = nullptr, int preferedPictureSize = 0, const std::vector<std::string> &additionalFields = {}) = 0;
     
     /**
      * @brief get friends that alredy have installed this app
      * @preferedPictureSize preffered user picture size in pixels 0 for default
      * @additionalFields social newwork specified additionla fields
      */
-    virtual void getAppFriends(int preferedPictureSize = 0, const std::vector<std::string> &additionalFields = {}) = 0;
+    virtual void getAppFriends(int preferedPictureSize = 0, void *userData = nullptr, const std::vector<std::string> &additionalFields = {}) = 0;
     
 protected:
     virtual ~SocialPlugin() {}
