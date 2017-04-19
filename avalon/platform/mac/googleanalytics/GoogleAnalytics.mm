@@ -130,11 +130,11 @@ public:
 
     MacGAITracker(const std::string &trackerId, id<GAITracker> tracker):_tracker(tracker),_trackerId(trackerId),_allowIDFACollection(false)
     {
-        [_tracker retain];
+//        [_tracker retain];
     }
     ~MacGAITracker()
     {
-        [_tracker release];
+//        [_tracker release];
     }
     
 private:

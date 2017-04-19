@@ -14,6 +14,7 @@ option(AVALON_UI "ui" OFF)
 option(AVALON_ADS "ads" OFF)
 option(AVALON_SYSTEMINFO "systeminfo" OFF)
 option(AVALON_FACEBOOK "facebook" OFF)
+option(AVALON_VKONTAKTE "vkontakte" OFF)
 
 if(NOT MSVC)# all gcc
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -145,6 +146,14 @@ add_definitions(-DAVALON_CONFIG_FACEBOOK_ENABLED)
 set(AVALON_SRC
   ${AVALON_SRC}
   avalon/platform/${PLATFORM_FOLDER}/facebook/facebook.cpp
+)
+endif()
+
+if(AVALON_VKONTAKTE)
+add_definitions(-DAVALON_CONFIG_VKONTAKTE_ENABLED)
+set(AVALON_SRC
+  ${AVALON_SRC}
+  avalon/platform/${PLATFORM_FOLDER}/vkontakte/VKSocialPlugin.cpp
 )
 endif()
 
