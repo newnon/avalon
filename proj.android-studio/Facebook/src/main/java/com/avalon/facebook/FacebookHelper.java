@@ -67,7 +67,7 @@ public class FacebookHelper
     public static native void delegateOnLogin(int errorType, String token, String errorText,
                                               String[] grantedReadPermissions, String[] grantedPublishPermissions, String[] deniedPermissions);
 
-    public static native void delegateOnMyProfile(int preferedPictureSize, String[] keys, String[] values);
+    public static native void delegateOnMyProfile(int preferedPictureSize, long userData, String[] keys, String[] values);
 
     private static void threadDelegateOnLogin(final ErrorType errorType, final String token, final String errorText,
                                               final String[] grantedReadPermissions, final String[] grantedPublishPermissions, final String[] deniedPermissions)
@@ -81,12 +81,12 @@ public class FacebookHelper
         });
     }
 
-    private static void threadDelegateOnMyProfile(final int preferedPictureSize, final String[] keys, final String[] values)
+    private static void threadDelegateOnMyProfile(final int preferedPictureSize, final long userData, final String[] keys, final String[] values)
     {
         Cocos2dxHelper.runOnGLThread(new Runnable() {
             @Override
             public void run() {
-                FacebookHelper.delegateOnMyProfile(preferedPictureSize, keys, values);
+                FacebookHelper.delegateOnMyProfile(preferedPictureSize, userData, keys, values);
             }
         });
     }
@@ -216,7 +216,7 @@ public class FacebookHelper
         LoginManager.getInstance().setLoginBehavior(type);
     }
 
-    public static void getMyProfile(String fields, final int preferedPictureSize)
+    public static void getMyProfile(String fields, final int preferedPictureSize, final long userData)
     {
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback()
         {
@@ -254,7 +254,7 @@ public class FacebookHelper
 
                 String[] stringKeys = keys.toArray(new String[0]);
                 String[] stringValues = values.toArray(new String[0]);
-                threadDelegateOnMyProfile(preferedPictureSize, stringKeys, stringValues);
+                threadDelegateOnMyProfile(preferedPictureSize, userData, stringKeys, stringValues);
             }
         });
 

@@ -10,6 +10,27 @@
 const char* const HELPER_CLASS_NAME = "com/avalon/facebook/FacebookHelper";
 
 namespace avalon {
+
+    static std::vector<std::string> split(const char *str, char c)
+    {
+        std::vector<std::string> result;
+
+        if (str && *str != '\0')
+        {
+            do
+            {
+                const char *begin = str;
+
+                while(*str != c && *str)
+                    str++;
+
+                result.push_back(std::string(begin, str));
+            } while (0 != *str++);
+        }
+
+        return result;
+    }
+
     static jobject jobjectFromDictionary(const std::map<std::string, std::string> &dictionary) {
         JNIEnv *env = cocos2d::JniHelper::getEnv();
         jclass mapClass = env->FindClass("java/util/HashMap");
@@ -92,12 +113,11 @@ namespace avalon {
             }
         }
 
-        void onMyProfile(int preferedPictureSize, const std::vector<std::string> &keys, const std::vector<std::string> &values)
+        void onMyProfile(int preferedPictureSize, void *userData, const std::vector<std::string> &keys, const std::vector<std::string> &values)
         {
             if (_delegate)
             {
                 SocialProfile profile;
-                profile.birthDay = std::numeric_limits<long long>::min();
                 for (int i = 0; i < keys.size(); ++i)
                 {
                     const std::string &key = keys.at(i);
@@ -131,6 +151,16 @@ namespace avalon {
                     {
                         profile.pictureUrl = preferedPictureSize == 0 ? value : "";
                     }
+                    else if (key == "birthday")
+                    {
+                        std::vector<std::string> parts = split(value.c_str(), '/');
+                        if(parts.size() == 1)
+                            profile.birthDate = SocialProfile::BirthDate(0, 0, std::stoi(parts[0]));
+                        if(parts.size() == 2)
+                            profile.birthDate = SocialProfile::BirthDate(std::stoi(parts[1]), std::stoi(parts[0]), 0);
+                        else if(parts.size() == 3)
+                            profile.birthDate = SocialProfile::BirthDate(std::stoi(parts[1]), std::stoi(parts[0]), std::stoi(parts[2]));
+                    }
                     else
                     {
                         profile.otherValue.emplace_back(key, value);
@@ -143,7 +173,7 @@ namespace avalon {
                     profile.pictureUrl = "https://graph.facebook.com/" + profile.uid + "/picture?width=" + size + "&height=" + size;
                 }
 
-                _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""}, profile);
+                _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""}, userData, profile);
             }
         }
 
@@ -315,7 +345,7 @@ namespace avalon {
             return _publishPermissions;
         }
 
-        virtual void getMyProfile(int preferedPictureSize, const std::vector<std::string> &additionalFields) override
+        virtual void getMyProfile(int preferedPictureSize, void *userData, const std::vector<std::string> &additionalFields) override
         {
             if (isLoggedIn())
             {
@@ -329,10 +359,10 @@ namespace avalon {
                 }
 
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getMyProfile", "(Ljava/lang/String;I)V"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getMyProfile", "(Ljava/lang/String;IJ)V"));
                 {
                     jstring jFields = methodInfo.env->NewStringUTF(fields.c_str());
-                    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jFields, preferedPictureSize);
+                    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jFields, preferedPictureSize, (jlong)userData);
                     methodInfo.env->DeleteLocalRef(methodInfo.classID);
                     methodInfo.env->DeleteLocalRef(jFields);
                 }
@@ -340,15 +370,15 @@ namespace avalon {
             else
             {
                 if (_delegate)
-                    _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::NO_LOGIN, 0, ""}, _emptyProfile);
+                    _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::NO_LOGIN, 0, ""}, userData, _emptyProfile);
             }
         }
 
-        virtual void getProfiles(const std::vector<std::string> &userIds, int preferedPictureSize, const std::vector<std::string> &additionalFields) override
+        virtual void getProfiles(const std::vector<std::string> &userIds, void *userData, int preferedPictureSize, const std::vector<std::string> &additionalFields) override
         {
         }
 
-        virtual void getAppFriends(int preferedPictureSize, const std::vector<std::string> &additionalFields) override
+        virtual void getAppFriends(int preferedPictureSize, void *userData, const std::vector<std::string> &additionalFields) override
         {
         }
 
@@ -407,7 +437,7 @@ Java_com_avalon_facebook_FacebookHelper_delegateOnLogin(JNIEnv *env, jclass claz
 }
 
 JNIEXPORT void JNICALL
-Java_com_avalon_facebook_FacebookHelper_delegateOnMyProfile(JNIEnv *env, jclass clazz, jint preferedPictureSize, jobjectArray keys, jobjectArray values)
+Java_com_avalon_facebook_FacebookHelper_delegateOnMyProfile(JNIEnv *env, jclass clazz, jint preferedPictureSize, jlong userData, jobjectArray keys, jobjectArray values)
 {
     avalon::FacebookSocialPluginAndroid &facebook = static_cast<avalon::FacebookSocialPluginAndroid&>(avalon::FacebookSocialPlugin::getInstance());
 
@@ -429,6 +459,6 @@ Java_com_avalon_facebook_FacebookHelper_delegateOnMyProfile(JNIEnv *env, jclass 
         env->DeleteLocalRef(value);
     }
 
-    facebook.onMyProfile(preferedPictureSize, keysVector, valuesVector);
+    facebook.onMyProfile(preferedPictureSize, (void*)userData, keysVector, valuesVector);
 }
 }
