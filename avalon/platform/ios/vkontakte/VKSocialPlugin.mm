@@ -167,6 +167,12 @@ public:
         return "";
     }
     
+    virtual std::string getAppId() const override
+    {
+        NSString *appId = [[NSBundle mainBundle].infoDictionary objectForKey:@"VKAppID"];
+        return [appId UTF8String];
+    }
+    
     virtual std::vector<SocialPermission> getReadPermissionList() const override
     {
         return _readPermissions;

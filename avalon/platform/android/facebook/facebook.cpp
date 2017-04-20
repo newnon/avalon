@@ -97,6 +97,9 @@ namespace avalon {
 
                 if (errorType == 0)
                 {
+                    if(_debug)
+                        __android_log_print(ANDROID_LOG_DEBUG, "avalon_FacebookSocialPlugin", "FacebookSocialPlugin::onLogin is success");
+
                     SocialPluginDelegate::Error socialError = {SocialPluginDelegate::Error::Type::SUCCESS, 0, ""};
                     _delegate->onLogin(socialError, token, allGrantedPermissions, declinedPermissions);
                 }
@@ -104,11 +107,18 @@ namespace avalon {
                 {
                     SocialPluginDelegate::Error socialError = {SocialPluginDelegate::Error::Type::USER_CANCEL, 0, errorText};
                     _delegate->onLogin(socialError, token, allGrantedPermissions, declinedPermissions);
+
+                    if(_debug)
+                        __android_log_print(ANDROID_LOG_DEBUG, "avalon_FacebookSocialPlugin", "FacebookSocialPlugin::onLogin user canceled");
+
                 }
                 else
                 {
                     SocialPluginDelegate::Error socialError = {SocialPluginDelegate::Error::Type::UNDEFINED, 0, errorText};
                     _delegate->onLogin(socialError, token, allGrantedPermissions, declinedPermissions);
+
+                    if(_debug)
+                        __android_log_print(ANDROID_LOG_DEBUG, "avalon_VKSocialPlugin", "VKSocialPlugin::onLogin failed with error message: %s", errorText.c_str());
                 }
             }
         }
@@ -240,8 +250,11 @@ namespace avalon {
 
         virtual void requestReadPermissions(const std::vector<SocialPermission> &permissions) override
         {
+            if(_debug)
+                __android_log_print(ANDROID_LOG_DEBUG, "avalon_FacebookSocialPlugin", "FacebookSocialPlugin::requestReadPermission start call method");
+
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "requestReadPermissions", "([Ljava/lang/String;)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "requestReadPermissions", "([Ljava/lang/String;Z)V"))
             {
                 std::vector<std::string> stringPermissions;
                 for (const auto &it : permissions)
@@ -250,7 +263,7 @@ namespace avalon {
                 }
 
                 jobject jStringPermissions = jobjectFromVector(stringPermissions);
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jStringPermissions);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jStringPermissions, (jboolean)_debug);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
                 methodInfo.env->DeleteLocalRef(jStringPermissions);
             }
@@ -258,8 +271,11 @@ namespace avalon {
 
         virtual void requestPublishPermissions(const std::vector<SocialPermission> &permissions) override
         {
+            if(_debug)
+                __android_log_print(ANDROID_LOG_DEBUG, "avalon_FacebookSocialPlugin", "FacebookSocialPlugin::requestPublishPermissions start call method");
+
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "requestPublishPermissions", "([Ljava/lang/String;)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "requestPublishPermissions", "([Ljava/lang/String;Z)V"))
             {
                 std::vector<std::string> stringPermissions;
                 for (const auto &it : permissions)
@@ -268,7 +284,7 @@ namespace avalon {
                 }
 
                 jobject jStringPermissions = jobjectFromVector(stringPermissions);
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jStringPermissions);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jStringPermissions, (jboolean)_debug);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
                 methodInfo.env->DeleteLocalRef(jStringPermissions);
             }
@@ -276,12 +292,15 @@ namespace avalon {
 
         virtual void logout() override
         {
+            if(_debug)
+                __android_log_print(ANDROID_LOG_DEBUG, "avalon_FacebookSocialPlugin", "FacebookSocialPlugin::logout logged state: %s", isLoggedIn()? "true" : "false");
+
             if (!isLoggedIn())
             {
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "logout", "()V"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "logout", "(Z)V"));
                 {
-                    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+                    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jboolean)_debug);
                     methodInfo.env->DeleteLocalRef(methodInfo.classID);
                 }
 
@@ -308,7 +327,7 @@ namespace avalon {
             if (isLoggedIn())
             {
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getUserID", "()(Ljava/lang/String;"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getUserID", "()Ljava/lang/String;"));
                 {
                     jstring jValue = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
                     std::string userId = cocos2d::JniHelper::jstring2string(jValue);
@@ -327,7 +346,7 @@ namespace avalon {
             if (isLoggedIn())
             {
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAccessToken", "()(Ljava/lang/String;"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAccessToken", "()Ljava/lang/String;"));
                 {
                     jstring jValue = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
                     std::string userId = cocos2d::JniHelper::jstring2string(jValue);
@@ -337,6 +356,22 @@ namespace avalon {
                     return userId;
                 }
             }
+            return "";
+        }
+
+        virtual std::string getAppId() const override
+        {
+            cocos2d::JniMethodInfo methodInfo;
+            if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAppId", "()Ljava/lang/String;"));
+            {
+                jstring jValue = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
+                std::string appId = cocos2d::JniHelper::jstring2string(jValue);
+
+                methodInfo.env->DeleteLocalRef(jValue);
+                methodInfo.env->DeleteLocalRef(methodInfo.classID);
+                return appId;
+            }
+
             return "";
         }
 
@@ -363,11 +398,14 @@ namespace avalon {
                     }
                 }
 
+                if(_debug)
+                    __android_log_print(ANDROID_LOG_DEBUG, "avalon_FacebookSocialPlugin", "FacebookSocialPlugin::getMyProfile start call method");
+
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getMyProfile", "(Ljava/lang/String;IJ)V"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getMyProfile", "(Ljava/lang/String;IJZ)V"));
                 {
                     jstring jFields = methodInfo.env->NewStringUTF(fields.c_str());
-                    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jFields, preferedPictureSize, (jlong)userData);
+                    methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jFields, preferedPictureSize, (jlong)userData, (jboolean)_debug);
                     methodInfo.env->DeleteLocalRef(methodInfo.classID);
                     methodInfo.env->DeleteLocalRef(jFields);
                 }

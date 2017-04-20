@@ -181,6 +181,11 @@ public:
      * @brief get AccessToken
      */
     virtual std::string getAccessToken() const = 0;
+
+    /**
+     * @brief get Application Id
+     */
+    virtual std::string getAppId() const = 0;
     
     /**
      * @brief get read permissoin list

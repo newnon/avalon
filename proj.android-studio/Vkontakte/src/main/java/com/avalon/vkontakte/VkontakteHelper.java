@@ -128,14 +128,20 @@ public class VkontakteHelper
         });
     }
 
-    public static void requestReadPermissions(String[] permissions)
+    public static void requestReadPermissions(String[] permissions, boolean debug)
     {
         VKSdk.login(s_activity, permissions);
+
+        if (debug)
+            Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::requestReadPermissions with permissions: " + Arrays.toString(permissions));
     }
 
-    public static void logout()
+    public static void logout(boolean debug)
     {
         VKSdk.logout();
+
+        if (debug)
+            Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::logout is success");
     }
 
     public static boolean isLoggedIn()
@@ -157,13 +163,26 @@ public class VkontakteHelper
         return "";
     }
 
-    public static void getMyProfile(String fields, final long userData)
+    public static String getAppId()
     {
+        int appId = s_activity.getResources().getIdentifier(VKSdk.SDK_APP_ID, "integer", s_activity.getPackageName());
+        String appIdStr = s_activity.getResources().getString(appId);
+        return appIdStr;
+    }
+
+    public static void getMyProfile(String fields, final long userData, final boolean debug)
+    {
+        if (debug)
+            Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::getMyProfile request user fields: " + fields);
+
         VKRequest request = VKApi.users().get(VKParameters.from(VKApiConst.USER_ID, getUserID(), VKApiConst.FIELDS, fields));
         request.executeWithListener(new VKRequest.VKRequestListener()
         {
             @Override public void onComplete(VKResponse response)
             {
+                if (debug)
+                    Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::getMyProfile is completed with response: " + response.json.toString());
+
                 try
                 {
                     ArrayList<String> keys = new ArrayList<String>();
@@ -189,15 +208,24 @@ public class VkontakteHelper
                 catch (Exception e)
                 {
                     e.printStackTrace();
+
+                    if (debug)
+                        Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::getMyProfile exception: " + e.toString());
                 }
             }
             @Override public void onError(VKError error)
             {
+                if (debug)
+                    Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::getMyProfile error: " + error.toString());
+
                 String[] empty = {};
                 threadDelegateOnMyProfile(userData, empty, empty);
             }
             @Override public void attemptFailed(VKRequest request, int attemptNumber, int totalAttempts)
             {
+                if (debug)
+                    Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::getMyProfile attempt failed " + request.toString() + " number " + attemptNumber + " total " + totalAttempts);
+
                 String[] empty = {};
                 threadDelegateOnMyProfile(userData, empty, empty);
             }

@@ -165,19 +165,28 @@ public class FacebookHelper
         });
     }
 
-    public static void requestReadPermissions(String[] permissions)
+    public static void requestReadPermissions(String[] permissions, boolean debug)
     {
         LoginManager.getInstance().logInWithReadPermissions(s_activity, Arrays.asList(permissions));
+
+        if (debug)
+            Log.d("avalon_FacebookSocialPlugin", "FacebookSocialPlugin::requestReadPermissions with permissions: " + Arrays.toString(permissions));
     }
 
-    public static void requestPublishPermissions(String[] permissions)
+    public static void requestPublishPermissions(String[] permissions, boolean debug)
     {
         LoginManager.getInstance().logInWithPublishPermissions(s_activity, Arrays.asList(permissions));
+
+        if (debug)
+            Log.d("avalon_FacebookSocialPlugin", "FacebookSocialPlugin::requestPublishPermissions with permissions: " + Arrays.toString(permissions));
     }
 
-    public static void logout()
+    public static void logout(boolean debug)
     {
         LoginManager.getInstance().logOut();
+
+        if (debug)
+            Log.d("avalon_FacebookSocialPlugin", "FacebookSocialPlugin::logout is success");
     }
 
     public static boolean isLoggedIn()
@@ -195,6 +204,13 @@ public class FacebookHelper
     public static String getAccessToken()
     {
         return AccessToken.getCurrentAccessToken().getToken();
+    }
+
+    public static String getAppId()
+    {
+        int appId = s_activity.getResources().getIdentifier("facebook_app_id", "string", s_activity.getPackageName());
+        String appIdStr = s_activity.getResources().getString(appId);
+        return appIdStr;
     }
 
     public static void setLoginBehavior(int loginType)
@@ -216,12 +232,18 @@ public class FacebookHelper
         LoginManager.getInstance().setLoginBehavior(type);
     }
 
-    public static void getMyProfile(String fields, final int preferedPictureSize, final long userData)
+    public static void getMyProfile(String fields, final int preferedPictureSize, final long userData, final boolean debug)
     {
+        if (debug)
+            Log.d("avalon_FacebookSocialPlugin", "FacebookSocialPlugin::getMyProfile request user fields: " + fields);
+
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback()
         {
             @Override public void onCompleted(JSONObject object, GraphResponse response)
             {
+                if (debug)
+                    Log.d("avalon_FacebookSocialPlugin", "FacebookSocialPlugin::getMyProfile is completed with response: " + object.toString());
+
                 ArrayList<String> keys = new ArrayList<String>();
                 ArrayList<String> values = new ArrayList<String>();
 
@@ -249,6 +271,9 @@ public class FacebookHelper
                     catch (Exception e)
                     {
                         e.printStackTrace();
+
+                        if (debug)
+                            Log.d("avalon_FacebookSocialPlugin", "FacebookSocialPlugin::getMyProfile exception: " + e.toString());
                     }
                 }
 
