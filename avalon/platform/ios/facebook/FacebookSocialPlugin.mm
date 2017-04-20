@@ -71,6 +71,11 @@ public:
         }
     }
     
+    virtual void setDebug(bool value) override
+    {
+        _debug = value;
+    }
+    
     virtual void setDelegate(SocialPluginDelegate *delegate) override
     {
         _delegate = delegate;
@@ -94,6 +99,9 @@ public:
             [permissionArray addObject:[NSString stringWithUTF8String:_facebookPermissionsHelper.toString(it).c_str()]];
         }
         
+        if(_debug)
+            NSLog(@"FacebookSocialPlugin::requestReadPermissions permissions: %@", permissionArray);
+        
         UIViewController *viewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         [_loginManager logInWithReadPermissions:permissionArray
                              fromViewController:viewController
@@ -110,6 +118,9 @@ public:
         {
             [permissionArray addObject:[NSString stringWithUTF8String:_facebookPermissionsHelper.toString(it).c_str()]];
         }
+        
+        if(_debug)
+            NSLog(@"FacebookSocialPlugin::requestPublishPermissions permissions: %@", permissionArray);
 
         UIViewController *viewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         [_loginManager logInWithPublishPermissions:permissionArray
@@ -122,10 +133,16 @@ public:
 
     virtual void logout() override
     {
+        if(_debug)
+            NSLog(@"FacebookSocialPlugin::logout logged state: %@", isLoggedIn()?@"true":@"false");
+            
         if (!isLoggedIn())
         {
             [_loginManager logOut];
             _loginManager = nil;
+            
+            if(_debug)
+                NSLog(@"FacebookSocialPlugin::logout succes");
             
             if (_delegate)
                 _delegate->onLogout({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""});
@@ -187,6 +204,9 @@ public:
                  if (!error)
                  {
                      SocialProfile profile;
+                     
+                     if(_debug)
+                        NSLog(@"FacebookSocialPlugin::getMyProfile result: %@", result);
                      
                      for (id key in result)
                      {
@@ -274,6 +294,9 @@ public:
                  }
                  else
                  {
+                     if(_debug)
+                         NSLog(@"FacebookSocialPlugin::getMyProfile error: %@", error);
+                     
                      if (_delegate)
                          _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::UNDEFINED, static_cast<int>(error.code), [error.description UTF8String]}, userData, _emptyProfile);
                  }
@@ -323,6 +346,25 @@ private:
 
         const std::string &token = result.token ? [result.token.tokenString UTF8String] : "";
         
+        if(_debug)
+        {
+            if(error)
+            {
+                NSLog(@"FacebookSocialPlugin::login error: %@", error);
+            }
+            else
+            {
+                if (result.isCancelled)
+                {
+                    NSLog(@"FacebookSocialPlugin::login canceled");
+                }
+                else
+                {
+                    NSLog(@"FacebookSocialPlugin::login succes granted permissions:%@ declined permissions:%@", result.grantedPermissions, result.declinedPermissions);
+                }
+            }
+        }
+        
         if(_delegate)
         {
             if (error)
@@ -356,6 +398,8 @@ private:
     
     SocialProfile _emptyProfile;
     GenderHelper<std::string> _genderHelper;
+    
+    bool _debug = false;
 
     SocialPermissionsHelper<FacebookPermission> _facebookPermissionsHelper;
 };

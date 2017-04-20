@@ -111,7 +111,7 @@ public:
     
     virtual void onLogin(Error error, const std::string& token, const std::vector<SocialPermission>& grantedPermissions, const std::vector<SocialPermission>& declinedPermissions) = 0;
     virtual void onLogout(Error error) = 0;
-    virtual void onGetMyProfile(Error error, void *userData, const SocialProfile &profiles) = 0;
+    virtual void onGetMyProfile(Error error, void *userData, const SocialProfile &profile) = 0;
     virtual void onGetProfiles(Error error, void *userData, const std::vector<SocialProfile> &profiles) = 0;
     virtual void onAppFriends(Error error, void *userData, const std::vector<SocialProfile> &friends) = 0;
     
@@ -128,6 +128,13 @@ public:
      * This method set delegates for all results
      */
     virtual void setDelegate(SocialPluginDelegate *delegate) = 0;
+    
+    /**
+     * @brief set debug mode
+     *
+     * This method set debug mode state
+     */
+    virtual void setDebug(bool value) = 0;
     
     /**
      * @brief log in

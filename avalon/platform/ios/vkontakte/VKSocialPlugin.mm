@@ -54,6 +54,11 @@ public:
         [VKSdk instance].uiDelegate = _nativeDelegate;
     }
     
+    virtual void setDebug(bool value) override
+    {
+        _debug = value;
+    }
+    
     virtual void setDelegate(SocialPluginDelegate *delegate) override
     {
         _delegate = delegate;
@@ -80,6 +85,9 @@ public:
                 [permissionArray addObject:[NSString stringWithUTF8String:permission.c_str()]];
         }
         _readPermissions = permissions;
+        
+        if(_debug)
+            NSLog(@"VKSocialPlugin::requestPublishPermissions permissions: %@", permissionArray);
         
         std::vector<SocialPermission> localPermissions = permissions;
         
@@ -119,6 +127,9 @@ public:
 
     virtual void logout() override
     {
+        if(_debug)
+            NSLog(@"VKSocialPlugin::logout logged state: %@", isLoggedIn()?@"true":@"false");
+        
         if (!isLoggedIn())
         {
             [VKSdk forceLogout];
@@ -186,7 +197,8 @@ public:
             VKRequest * profileReq = [[VKApi users] get:@{VK_API_USER_ID : [VKSdk accessToken].userId, @"fields": [NSString stringWithUTF8String:fields.c_str()]}];
             
             [profileReq executeWithResultBlock:^(VKResponse * response) {
-                NSLog(@"Json result: %@", response.json);
+                if(_debug)
+                    NSLog(@"VKSocialPlugin::getMyProfile result: %@", response.json);
                 
                 NSDictionary *result = (NSDictionary*)[response.json objectAtIndex:0];
                 
@@ -266,7 +278,8 @@ public:
                         }
                         else
                         {
-                            NSLog(@"Wrong type for object %@ by key %@", object, key);
+                            if(_debug)
+                                NSLog(@"VKSocialPlugin::getMyProfile Wrong type for object %@ by key %@", object, key);
                         }
                     }
                 }
@@ -305,10 +318,20 @@ public:
                 SocialPluginDelegate::Error socialError = {SocialPluginDelegate::Error::Type::UNDEFINED, 0, ""};
                 _delegate->onLogin(socialError, "", {}, permissions);
             }
+            if(result.error)
+                NSLog(@"VKSocialPlugin::login failed");
             return;
         }
         
         const std::string &token = result.token ? [result.token.accessToken UTF8String] : "";
+        
+        if(_debug)
+        {
+            if(result.error)
+                NSLog(@"VKSocialPlugin::login error: %@", result.error);
+            else
+                NSLog(@"VKSocialPlugin::login succes granted permissions");
+        }
         
         if (result.error)
         {
@@ -339,6 +362,8 @@ private:
     
     SocialProfile _emptyProfile;
     GenderHelper<int> _genderHelper;
+    
+    bool _debug = false;
 
     SocialPermissionsHelper<VKPermission> _permissionsHelper;
 };

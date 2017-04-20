@@ -218,6 +218,11 @@ namespace avalon {
             }
         }
 
+        virtual void setDebug(bool value) override
+        {
+            _debug = value;
+        }
+
         virtual void setDelegate(SocialPluginDelegate *delegate) override
         {
             _delegate = delegate;
@@ -390,6 +395,8 @@ namespace avalon {
 
         SocialProfile _emptyProfile;
         GenderHelper<std::string> _genderHelper;
+
+        bool _debug = false;
     };
 
     FacebookSocialPlugin &FacebookSocialPlugin::getInstance()
