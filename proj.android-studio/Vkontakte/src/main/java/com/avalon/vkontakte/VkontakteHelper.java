@@ -64,7 +64,7 @@ public class VkontakteHelper
     private static Cocos2dxActivity s_activity = (Cocos2dxActivity)Cocos2dxHelper.getActivity();
 
     public static native void delegateOnLogin(int errorType, String token, String errorText);
-    public static native void delegateOnMyProfile(String[] keys, String[] values);
+    public static native void delegateOnMyProfile(long userData, String[] keys, String[] values);
 
     private static void threadDelegateOnLogin(final int errorType, final String token, final String errorText)
     {
@@ -77,13 +77,13 @@ public class VkontakteHelper
         });
     }
 
-    private static void threadDelegateOnMyProfile(final String[] keys, final String[] values)
+    private static void threadDelegateOnMyProfile(final long userData, final String[] keys, final String[] values)
     {
         Cocos2dxHelper.runOnGLThread(new Runnable()
         {
             @Override public void run()
             {
-                VkontakteHelper.delegateOnMyProfile(keys, values);
+                VkontakteHelper.delegateOnMyProfile(userData, keys, values);
             }
         });
     }
@@ -157,7 +157,7 @@ public class VkontakteHelper
         return "";
     }
 
-    public static void getMyProfile(String fields)
+    public static void getMyProfile(String fields, final long userData)
     {
         VKRequest request = VKApi.users().get(VKParameters.from(VKApiConst.USER_ID, getUserID(), VKApiConst.FIELDS, fields));
         request.executeWithListener(new VKRequest.VKRequestListener()
@@ -184,7 +184,7 @@ public class VkontakteHelper
 
                     String[] stringKeys = keys.toArray(new String[0]);
                     String[] stringValues = values.toArray(new String[0]);
-                    threadDelegateOnMyProfile(stringKeys, stringValues);
+                    threadDelegateOnMyProfile(userData, stringKeys, stringValues);
                 }
                 catch (Exception e)
                 {
@@ -194,12 +194,12 @@ public class VkontakteHelper
             @Override public void onError(VKError error)
             {
                 String[] empty = {};
-                threadDelegateOnMyProfile(empty, empty);
+                threadDelegateOnMyProfile(userData, empty, empty);
             }
             @Override public void attemptFailed(VKRequest request, int attemptNumber, int totalAttempts)
             {
                 String[] empty = {};
-                threadDelegateOnMyProfile(empty, empty);
+                threadDelegateOnMyProfile(userData, empty, empty);
             }
         });
     }
