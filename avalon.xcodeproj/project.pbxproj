@@ -1372,8 +1372,7 @@
 		A50BC17018E962DD00F1F979 = {
 			isa = PBXGroup;
 			children = (
-				A5E989F21EA5FE48003EB302 /* Vkontakte */,
-				D87F76111EA4DE10005187B4 /* Facebook */,
+				D86C231B1EAE116A00800D69 /* SocialPlugin */,
 				A52BB1591C92CF9A00AC2799 /* SystemInfo */,
 				A5C1C5DD1A164B2B0092ABC7 /* AdGeneration */,
 				A5D3276E1900514300A65D25 /* AdMob */,
@@ -2588,13 +2587,22 @@
 			path = "avalon/platform/ios/googleAnalytics/googleAnalytics-ios";
 			sourceTree = "<group>";
 		};
+		D86C231B1EAE116A00800D69 /* SocialPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				A5E989F21EA5FE48003EB302 /* Vkontakte */,
+				D87F76111EA4DE10005187B4 /* Facebook */,
+				D87F76131EA4DE34005187B4 /* SocialPlugin.h */,
+				D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */,
+			);
+			name = SocialPlugin;
+			sourceTree = "<group>";
+		};
 		D87F76111EA4DE10005187B4 /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
 				D87F76181EA4DE42005187B4 /* Facebook-ios */,
 				D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */,
-				D87F76131EA4DE34005187B4 /* SocialPlugin.h */,
-				D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */,
 			);
 			name = Facebook;
 			sourceTree = "<group>";
