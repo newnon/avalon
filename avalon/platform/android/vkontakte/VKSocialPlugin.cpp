@@ -227,7 +227,7 @@ namespace avalon {
             if(_debug)
                 __android_log_print(ANDROID_LOG_DEBUG, "avalon_VKSocialPlugin", "VKSocialPlugin::logout logged state: %s", isLoggedIn()? "true" : "false");
 
-            if (!isLoggedIn())
+            if (isLoggedIn())
             {
                 cocos2d::JniMethodInfo methodInfo;
                 if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "logout", "(Z)V"));

@@ -136,10 +136,9 @@ public:
         if(_debug)
             NSLog(@"FacebookSocialPlugin::logout logged state: %@", isLoggedIn()?@"true":@"false");
             
-        if (!isLoggedIn())
+        if (isLoggedIn())
         {
             [_loginManager logOut];
-            _loginManager = nil;
             
             if(_debug)
                 NSLog(@"FacebookSocialPlugin::logout succes");
