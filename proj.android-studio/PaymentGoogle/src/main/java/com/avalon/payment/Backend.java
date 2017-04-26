@@ -17,7 +17,9 @@ public class Backend
 
     public static boolean isInitialized()
     {
-        return (mPurchaseObserver != null);
+        if (mPurchaseObserver != null)
+            return mPurchaseObserver.isInitialized();
+        return false;
     }
 
     public static void initialize(String data)
@@ -33,7 +35,10 @@ public class Backend
 
     public static void purchase(String productId)
     {
-        mPurchaseObserver.purchase(productId);
+        if (mPurchaseObserver.isInitialized())
+        {
+            mPurchaseObserver.purchase(productId);
+        }
     }
 
     public static boolean isPurchaseReady()
@@ -53,7 +58,10 @@ public class Backend
 
     public static void startItemDataRequest()
     {
-        mPurchaseObserver.startItemDataRequest(pendingItemData);
+        if (mPurchaseObserver.isInitialized())
+        {
+            mPurchaseObserver.startItemDataRequest(pendingItemData);
+        }
     }
 
     public static void delegateOnItemData(String productId, String name, String desc, String priceStr, String curencyCode, float price)

@@ -28,6 +28,7 @@ public class PurchasingObserver implements OnActivityResultListener
     private Map<String, Boolean> productIds;
     private Integer taskCount = 0;
     private boolean checkTaskCountOnConsumeFinished = false;
+    private static boolean isIabHelperInitialize = false;
     
     public static final int ERROR_UNKNOWN = 0;
     public static final int ERROR_PAYMENTCANCELLED = 3;
@@ -52,6 +53,13 @@ public class PurchasingObserver implements OnActivityResultListener
         mHelper.startSetup(mSetupFinishedListener);
         Cocos2dxHelper.addOnActivityResultListener(this);
         threadDelegateOnServiceStarted();
+    }
+
+    public boolean isInitialized()
+    {
+        if (mHelper != null)
+            return isIabHelperInitialize;
+        return false;
     }
 
     protected void finalize() throws Throwable {
@@ -94,10 +102,12 @@ public class PurchasingObserver implements OnActivityResultListener
         @Override
         public void onIabSetupFinished(IabResult result) {
             if (!result.isSuccess()) {
+                isIabHelperInitialize = false;
                 Log.e(TAG, "onIabSetupFinished failed: " + result);
                 return;
             }
 
+            isIabHelperInitialize = true;
             threadOnInitialized();
         }
     };
@@ -306,7 +316,13 @@ public class PurchasingObserver implements OnActivityResultListener
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mHelper.launchPurchaseFlow(activity, sku, RC_REQUEST, mPurchaseFinishedListener);
+                try {
+                    mHelper.launchPurchaseFlow(activity, sku, RC_REQUEST, mPurchaseFinishedListener);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -319,7 +335,13 @@ public class PurchasingObserver implements OnActivityResultListener
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mHelper.queryInventoryAsync(true, moreSkus, mGotInventoryListener);
+                try {
+                    mHelper.queryInventoryAsync(true, moreSkus, mGotInventoryListener);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
     }
