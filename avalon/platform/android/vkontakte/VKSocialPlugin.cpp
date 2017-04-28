@@ -105,6 +105,14 @@ namespace avalon {
         {
             if (_delegate)
             {
+                int photoCount = 0;
+                for (int i = 0; i < keys.size(); ++i)
+                {
+                    const std::string &key = keys.at(i);
+                    if (key == "photo_50" || key == "photo_100" || key == "photo_200")
+                        ++photoCount;
+                }
+
                 SocialProfile profile;
                 for (int i = 0; i < keys.size(); ++i)
                 {
@@ -145,7 +153,19 @@ namespace avalon {
                     }
                     else if (key == "photo_50" || key == "photo_100" || key == "photo_200")
                     {
-                        profile.pictureUrl = value;
+                        if (key == "photo_100")
+                        {
+                            profile.pictureId = value;
+
+                            if (photoCount < 2)
+                            {
+                                profile.pictureUrl = value;
+                            }
+                        }
+                        else if (photoCount == 2 && key != "photo_100")
+                        {
+                            profile.pictureUrl = value;
+                        }
                     }
                     else
                     {
@@ -329,11 +349,11 @@ namespace avalon {
                 }
 
                 if (preferedPictureSize < 75)
-                    fields += ",photo_50";
+                    fields += ",photo_50,photo_100";
                 else if (preferedPictureSize < 150)
                     fields += ",photo_100";
                 else
-                    fields += ",photo_200";
+                    fields += ",photo_200,photo_100";
 
                 if(_debug)
                     __android_log_print(ANDROID_LOG_DEBUG, "avalon_VKSocialPlugin", "VKSocialPlugin::getMyProfile start call method");

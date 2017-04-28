@@ -194,11 +194,11 @@ public:
             }
             
             if(preferedPictureSize<75)
-                fields += ",photo_50";
+                fields += ",photo_50,photo_100";
             else if(preferedPictureSize<150)
                 fields += ",photo_100";
             else
-                fields += ",photo_200";
+                fields += ",photo_200,photo_100";
             
             VKRequest * profileReq = [[VKApi users] get:@{VK_API_USER_ID : [VKSdk accessToken].userId, @"fields": [NSString stringWithUTF8String:fields.c_str()]}];
             
@@ -240,15 +240,20 @@ public:
                     }
                     else if ([key isEqualToString:@"photo_50"])
                     {
-                        profile.pictureUrl = [object UTF8String];
+                        if(preferedPictureSize<75)
+                            profile.pictureUrl = [object UTF8String];
                     }
                     else if ([key isEqualToString:@"photo_100"])
                     {
-                        profile.pictureUrl = [object UTF8String];
+                        profile.pictureId = [object UTF8String];
+                        
+                        if(preferedPictureSize > 75 && preferedPictureSize < 150)
+                            profile.pictureUrl = [object UTF8String];
                     }
                     else if ([key isEqualToString:@"photo_200"])
                     {
-                        profile.pictureUrl = [object UTF8String];
+                        if (preferedPictureSize > 150)
+                            profile.pictureUrl = [object UTF8String];
                     }
                     else if ([key isEqualToString:@"bdate"])
                     {

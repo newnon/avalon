@@ -246,6 +246,7 @@ public:
                              id data = [object objectForKey:@"data"];
                              id url = [data objectForKey:@"url"];
                              profile.pictureUrl = preferedPictureSize == 0 ? [url UTF8String] : "";
+                             profile.pictureId = [url UTF8String];
                          }
                          else if ([key isEqualToString:@"birthday"])
                          {

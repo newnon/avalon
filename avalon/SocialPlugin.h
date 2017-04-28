@@ -78,6 +78,7 @@ struct SocialProfile
     std::string nickName;
     std::string pictureUrl;
     std::string email;
+    std::string pictureId;
     BirthDate birthDate;
     Gender gender;
     std::vector<std::pair<std::string, std::string>> otherValue;

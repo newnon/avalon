@@ -160,6 +160,7 @@ namespace avalon {
                     else if (key == "picture")
                     {
                         profile.pictureUrl = preferedPictureSize == 0 ? value : "";
+                        profile.pictureId = value;
                     }
                     else if (key == "birthday")
                     {
