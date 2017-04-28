@@ -43,6 +43,7 @@ import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 import com.vk.sdk.api.model.VKScopes;
+import com.vk.sdk.util.VKUtil;
 
 import org.cocos2dx.lib.Cocos2dxHelper;
 import org.json.JSONArray;
@@ -133,7 +134,12 @@ public class VkontakteHelper
         VKSdk.login(s_activity, permissions);
 
         if (debug)
+        {
             Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::requestReadPermissions with permissions: " + Arrays.toString(permissions));
+
+            String[] fingerprints = VKUtil.getCertificateFingerprint(s_activity, s_activity.getPackageName());
+            Log.d("avalon_VKSocialPlugin", "VKSocialPlugin::requestReadPermissions sdk_fingerprint: " + Arrays.toString(fingerprints));
+        }
     }
 
     public static void logout(boolean debug)

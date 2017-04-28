@@ -130,7 +130,7 @@ public:
         if(_debug)
             NSLog(@"VKSocialPlugin::logout logged state: %@", isLoggedIn()?@"true":@"false");
         
-        if (!isLoggedIn())
+        if (isLoggedIn())
         {
             [VKSdk forceLogout];
             
