@@ -109,10 +109,6 @@ public:
     virtual std::string getCurrencyCode() const = 0;
     virtual void setCurrencyCode(const std::string &currencyCode) = 0;
 
-    /* AppsFlyer's SDK send the data to AppsFlyer's servers over HTTPS. You can set the isHTTPS property to NO in order to use regular HTTP. */
-    virtual bool getHTTPS() const = 0;
-    virtual void setHTTPS(bool value) = 0;
-
     /* 
      * AppsFLyer SDK collect Apple's advertisingIdentifier if the AdSupport framework included in the SDK.
      * You can disable this behavior by setting the following property to YES.
@@ -158,13 +154,6 @@ public:
     virtual void trackAppLaunch() = 0;
 
     /*
-     * Use this method to track events in your app like purchases or user actions.
-     * Example :
-     *      [[AppsFlyer sharedTracker] trackEvent:@"hotel-booked" withValue:"200"];
-     */
-    virtual void trackEvent(const std::string &eventName, const std::string &value) = 0;
-
-    /*
      * Use this method to track an events with mulitple values. See AppsFlyer's documentation for details. 
      *
      */
@@ -174,12 +163,10 @@ public:
      * To track in app purchases you can call this method from the completeTransaction: method on 
      * your SKPaymentTransactionObserver.
      */
-    virtual void validateAndTrackInAppPurchase(const std::string &eventNameIfSuucceed,
-                                               const std::string &failedEventName,
-                                               const std::string &value,
-                                               const std::string &productIdentifier,
-                                               double price,
+    virtual void validateAndTrackInAppPurchase(const std::string &productIdentifier,
+                                               const std::string &price,
                                                const std::string &currency,
+                                               const std::string &tranactionId,
                                                std::function<void(const utils::ValueMap &response)> &successCallback,
                                                std::function<void(int code, const std::string &message)> failedCallback) = 0;
 

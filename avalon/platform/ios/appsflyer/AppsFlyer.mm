@@ -127,16 +127,6 @@ public:
         [::AppsFlyerTracker sharedTracker].currencyCode = [NSString stringWithUTF8String:currencyCode.c_str()];
     }
     
-    virtual bool getHTTPS() const override
-    {
-        return [::AppsFlyerTracker sharedTracker].isHTTPS;
-    }
-
-    virtual void setHTTPS(bool value) override
-    {
-        [::AppsFlyerTracker sharedTracker].isHTTPS = value;
-    }
-    
     virtual bool getDisableAppleAdSupportTracking() const override
     {
         return [::AppsFlyerTracker sharedTracker].disableAppleAdSupportTracking;
@@ -210,11 +200,6 @@ public:
     {
         [[::AppsFlyerTracker sharedTracker] trackAppLaunch];
     }
-    
-    virtual void trackEvent(const std::string &eventName, const std::string &value) override
-    {
-        [[::AppsFlyerTracker sharedTracker] trackEvent:[NSString stringWithUTF8String:eventName.c_str()] withValue:[NSString stringWithUTF8String:value.c_str()]];
-    }
 
     virtual void trackEvent(const std::string &eventName, const utils::ValueMap &values) override
     {
@@ -226,27 +211,21 @@ public:
         [[::AppsFlyerTracker sharedTracker] trackEvent:[NSString stringWithUTF8String:eventName.c_str()] withValues:dictionary];
     }
 
-    virtual void validateAndTrackInAppPurchase(const std::string &eventNameIfSuucceed,
-                                               const std::string &failedEventName,
-                                               const std::string &value,
-                                               const std::string &productIdentifier,
-                                               double price,
+    virtual void validateAndTrackInAppPurchase(const std::string &productIdentifier,
+                                               const std::string &price,
                                                const std::string &currency,
+                                               const std::string &tranactionId,
                                                std::function<void(const utils::ValueMap &response)> &successCallback,
                                                std::function<void(int code, const std::string &message)> failedCallback) override
     {
-        [[::AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:[NSString stringWithUTF8String:eventNameIfSuucceed.c_str()]
-                                                        eventNameIfFailed:[NSString stringWithUTF8String:failedEventName.c_str()]
-                                                                withValue:[NSString stringWithUTF8String:value.c_str()]
-                                                              withProduct:[NSString stringWithUTF8String:productIdentifier.c_str()]
-                                                                    price:[[NSDecimalNumber alloc] initWithDouble:price]
+        [[::AppsFlyerTracker sharedTracker] validateAndTrackInAppPurchase:[NSString stringWithUTF8String:productIdentifier.c_str()]
+                                                                    price:[NSString stringWithUTF8String:price.c_str()]
                                                                  currency:[NSString stringWithUTF8String:currency.c_str()]
-                                                                  success:^(NSDictionary *response) {
-                                                                      //
-                                                                  }
-                                                                  failure:^(NSError *error, id reponse) {
-                                                                      //
-                                                                  }];
+                                                            transactionId:[NSString stringWithUTF8String:tranactionId.c_str()]
+                                                     additionalParameters:[NSDictionary dictionary]
+                                                                  success:^(NSDictionary *response) {}
+                                                                  failure:^(NSError *error, id reponse) {}
+         ];
     }
 
     
