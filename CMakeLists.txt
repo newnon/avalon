@@ -15,6 +15,7 @@ option(AVALON_ADS "ads" OFF)
 option(AVALON_SYSTEMINFO "systeminfo" OFF)
 option(AVALON_FACEBOOK "facebook" OFF)
 option(AVALON_VKONTAKTE "vkontakte" OFF)
+option(AVALON_APPSFLYER "appsflyer" OFF)
 
 if(NOT MSVC)# all gcc
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -34,7 +35,7 @@ elseif(EMSCRIPTEN)# Emscripten
   set(PLATFORM_FOLDER emcc)
 endif()
 
-set(AVALON_SRC avalon/empty.cpp)
+set(AVALON_SRC avalon/utils/dictionary.cpp)
 
 if(AVALON_PAYMENT)
 add_definitions(-DAVALON_CONFIG_PAYMENT_ENABLED)
@@ -154,6 +155,14 @@ add_definitions(-DAVALON_CONFIG_VKONTAKTE_ENABLED)
 set(AVALON_SRC
   ${AVALON_SRC}
   avalon/platform/${PLATFORM_FOLDER}/vkontakte/VKSocialPlugin.cpp
+)
+endif()
+
+if(AVALON_APPSFLYER)
+add_definitions(-DAVALON_CONFIG_APPSFLYER_ENABLED)
+set(AVALON_SRC
+  ${AVALON_SRC}
+  avalon/platform/${PLATFORM_FOLDER}/appsflyer/AppsFlyer.cpp
 )
 endif()
 
