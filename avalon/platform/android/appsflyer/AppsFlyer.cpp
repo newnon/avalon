@@ -123,29 +123,10 @@ static jobject jobjectFromVector(const std::vector<std::string> &vector)
     public:
         virtual std::string getCustomerUserID() const override
         {
-            return ""
-        }
-
-        virtual void setCustomerUserID(const std::string &customerUserID) override
-        {
-        }
-
-        virtual std::string getAppsFlyerDevKey() const override
-        {
-            return _devKey;
-        }
-
-        virtual void setAppsFlyerDevKey(const std::string &appsFlyerDevKey) override
-        {
-            _devKey = appsFlyerDevKey;
-        }
-
-        virtual std::string getAppleAppID() const override
-        {
             return "";
         }
 
-        virtual void setAppleAppID(const std::string &appleAppID) override
+        virtual void setCustomerUserID(const std::string &customerUserID) override
         {
         }
 
@@ -167,12 +148,12 @@ static jobject jobjectFromVector(const std::vector<std::string> &vector)
         {
         }
 
-        virtual bool getIsDebug() const override
+        virtual bool getDebug() const override
         {
             return false;
         }
 
-        virtual void setIsDebug(bool value) override
+        virtual void setDebug(bool value) override
         {
         }
 
@@ -209,18 +190,6 @@ static jobject jobjectFromVector(const std::vector<std::string> &vector)
 
         virtual void setUseReceiptValidationSandbox(bool value) override
         {
-        }
-
-        virtual void trackAppLaunch() override
-        {
-            cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "startTracking", "([Ljava/lang/String;)V"))
-            {
-                jstring jDevKey = methodInfo.env->NewStringUTF(_devKey.c_str());
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jDevKey);
-                methodInfo.env->DeleteLocalRef(methodInfo.classID);
-                methodInfo.env->DeleteLocalRef(jDevKey);
-            }
         }
 
         virtual void trackEvent(const std::string &eventName, const utils::ValueMap &values) override

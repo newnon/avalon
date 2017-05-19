@@ -93,14 +93,6 @@ public:
     virtual std::string getCustomerUserID() const = 0;
     virtual void setCustomerUserID(const std::string &customerUserID) = 0;
 
-    /* Use this property to set your AppsFlyer's dev key. */
-    virtual std::string getAppsFlyerDevKey() const = 0;
-    virtual void setAppsFlyerDevKey(const std::string &appsFlyerDevKey) = 0;
-
-    /* Use this property to set your app's Apple ID (taken from the app's page on iTunes Connect) */
-    virtual std::string getAppleAppID() const = 0;
-    virtual void setAppleAppID(const std::string &appleAppID) = 0;
-
     /*
      * In case of in app purchase events, you can set the currency code your user has purchased with.
      * The currency code is a 3 letter code according to ISO standards. Example: "USD"
@@ -119,8 +111,8 @@ public:
      * Prints our messages to the log. This property should only be used in DEBUG mode. The default value 
      * is NO.
      */
-    virtual bool getIsDebug() const = 0;
-    virtual void setIsDebug(bool value) = 0;
+    virtual bool getDebug() const = 0;
+    virtual void setDebug(bool value) = 0;
 
     /*
      * Opt-out tracking for specific user
@@ -148,9 +140,6 @@ public:
     virtual void setUseReceiptValidationSandbox(bool value) = 0;
 
     static AppsFlyerTracker* getInstance();
-
-    /* Track application launch*/
-    virtual void trackAppLaunch() = 0;
 
     /*
      * Use this method to track an events with mulitple values. See AppsFlyer's documentation for details. 

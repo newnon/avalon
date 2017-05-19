@@ -23,6 +23,7 @@
 package com.avalon.appsflyer;
 
 import android.app.Activity;
+import android.app.Application;
 
 import com.appsflyer.AppsFlyerLib;
 import org.cocos2dx.lib.Cocos2dxHelper;
@@ -31,7 +32,11 @@ public abstract class AppsFlyerHelper
 {
 	private static final Activity activity = Cocos2dxHelper.getActivity();
 
-	public static void startTracking(String devKey) {
-		AppsFlyerLib.getInstance().startTracking(activity.getApplication(),devKey);
+    public static void setDebug(boolean value){
+        AppsFlyerLib.getInstance().setDebugLog(value);
+    }
+
+    public static void startTracking(Application application, final String devKey) {
+        AppsFlyerLib.getInstance().startTracking(application, devKey);
 	}
 }

@@ -97,26 +97,6 @@ public:
         [::AppsFlyerTracker sharedTracker].customerUserID = [NSString stringWithUTF8String:customerUserID.c_str()];
     }
 
-    virtual std::string getAppsFlyerDevKey() const override
-    {
-        return [[::AppsFlyerTracker sharedTracker].appsFlyerDevKey UTF8String];
-    }
-
-    virtual void setAppsFlyerDevKey(const std::string &appsFlyerDevKey) override
-    {
-        [::AppsFlyerTracker sharedTracker].appsFlyerDevKey = [NSString stringWithUTF8String:appsFlyerDevKey.c_str()];
-    }
-
-    virtual std::string getAppleAppID() const override
-    {
-        return [[::AppsFlyerTracker sharedTracker].appleAppID UTF8String];
-    }
-
-    virtual void setAppleAppID(const std::string &appleAppID) override
-    {
-        [::AppsFlyerTracker sharedTracker].appleAppID = [NSString stringWithUTF8String:appleAppID.c_str()];
-    }
-
     virtual std::string getCurrencyCode() const override
     {
         return [[::AppsFlyerTracker sharedTracker].currencyCode UTF8String];
@@ -137,12 +117,12 @@ public:
         [::AppsFlyerTracker sharedTracker].disableAppleAdSupportTracking = value;
     }
 
-    virtual bool getIsDebug() const override
+    virtual bool getDebug() const override
     {
         return [::AppsFlyerTracker sharedTracker].isDebug;
     }
 
-    virtual void setIsDebug(bool value) override
+    virtual void setDebug(bool value) override
     {
         [::AppsFlyerTracker sharedTracker].isDebug = value;
     }
@@ -194,11 +174,6 @@ public:
     virtual void setUseReceiptValidationSandbox(bool value) override
     {
         [::AppsFlyerTracker sharedTracker].useReceiptValidationSandbox = value;
-    }
-
-    virtual void trackAppLaunch() override
-    {
-        [[::AppsFlyerTracker sharedTracker] trackAppLaunch];
     }
 
     virtual void trackEvent(const std::string &eventName, const utils::ValueMap &values) override
