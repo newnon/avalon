@@ -24,11 +24,6 @@
     return self;
 }
 
--(void)dealloc
-{
-    [super dealloc];
-}
-
 - (void)interstitialDidLoadAd:(MPInterstitialAdController *)interstitial
 {
     if(_delegate)
@@ -71,7 +66,6 @@ public:
     
     virtual void setDelegate(MPInterstitialAdControllerDelegate *delegate) override
     {
-        [_nativeDelegate release];
         _nativeDelegate = nullptr;
         if(delegate)
         {
@@ -93,7 +87,7 @@ public:
     
     virtual void setLocation(float latitude, float longitude, float accuracyInMeters) override
     {
-        [_adController setLocation:[[[CLLocation alloc] initWithLatitude:latitude longitude:longitude] autorelease]];
+        [_adController setLocation:[[CLLocation alloc] initWithLatitude:latitude longitude:longitude]];
     }
     
     virtual void setKeywords(const std::string& keywords) override
@@ -124,7 +118,6 @@ public:
     virtual ~IOSMPInterstitialAdController()
     {
         [_adController removeFromParentViewController];
-        [_nativeDelegate release];
         [::MPInterstitialAdController removeSharedInterstitialAdController:_adController];
     }
     

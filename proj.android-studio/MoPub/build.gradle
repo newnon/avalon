@@ -7,7 +7,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        minSdkVersion 10
+        minSdkVersion 16
         targetSdkVersion 23
     }
 
@@ -19,8 +19,14 @@ android {
     }
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     compile project(':libcocos2dx')
-    compile 'com.android.support:support-v4:19.1.0'
+    compile('com.mopub:mopub-sdk:4.14.0@aar') {
+        transitive = true
+    }
     compile 'com.google.android.gms:play-services-ads:10.0.1'
 }

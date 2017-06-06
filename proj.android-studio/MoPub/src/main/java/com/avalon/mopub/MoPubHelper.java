@@ -22,25 +22,14 @@
 
 package com.avalon.mopub;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
 import android.app.Activity;
-import android.location.Location;
-import android.os.Bundle;
-import android.os.Looper;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.mopub.mobileads.MoPubErrorCode;
 import com.mopub.mobileads.MoPubInterstitial;
 import com.mopub.mobileads.MoPubInterstitial.InterstitialAdListener;

@@ -3,10 +3,10 @@
 	url = https://github.com/playgameservices/android-samples.git
 [submodule "vendors/appirater-ios"]
 	path = vendors/appirater-ios
-url=https://github.com/newnon/appirater.git
+	url=https://github.com/newnon/appirater.git
 [submodule "vendors/mopub/androd"]
 	path = vendors/mopub/androd
-	url = https://github.com/newnon/mopub-android-sdk.git
+	url=https://github.com/mopub/mopub-android-sdk.git
 [submodule "vendors/mopub/ios"]
 	path = vendors/mopub/ios
 	url = https://github.com/mopub/mopub-ios-sdk.git
