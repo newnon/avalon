@@ -1,31 +1,15 @@
-# Installing the framework
 
-## Migrating from an old version
+For information on how to get started, Version Information and Release Notes, please refer to the official [README](https://github.com/Vungle/iOS-SDK/blob/master/README.md)
 
-1. Remove the `#import <vunglepub/vunglepub.h>` from your pre-compiled headers if you have it (or any other include referencing vungle).
-2. Remove any extra headers/library search paths referencing vungle.
-3. You might want to leave the `Other Linker Flags` (`-all_load` and `-ObjC`).
-4. Make sure that in your linking phase, you do not have any reference to libvungle.a
-5. Remove libvungle.a and any vungle-related resources from your project (there are 3 pngs that vungle uses).
-6. At this point, you should have removed vungle from your app. Follow the instructions to install vungle below.
+# Vungle's iOS SDK
 
-## Installing vungle from scratch
+## Getting Started
+To get up and running with Vungle, you'll need to [Create an Account With Vungle](https://v.vungle.com/dashboard) and [Add an Application to the Vungle Dashboard](https://support.vungle.com/hc/en-us/articles/210468678)
 
-1. Copy the `.embeddedframework` directory to some place accessible by your app (next to your Xcode project might be a good idea).
-2. Drag the recently copied directory to your Xcode project. This will add the resources and the static framework.
-3. Add `#import <vunglepub/vunglepub.h>` to the files that need to access vungle (probably your App Delegate and any view/game controller that will show the ads).
-4. You should be done.
+Once you've created an account you can follow our [Getting Started for iOS Guide](https://support.vungle.com/hc/en-us/articles/204430550-Get-Started-with-Vungle-iOS-SDK) to complete the integration. Remember to get the Vungle App ID from the Vungle dashboard.
 
-## Known Issues
+### Requirements
+* iOS 7.0 or later
 
-### Landscape-only apps
-
-Some of our ads will try to open the ProductView Sheet to show an in-app store. This increases the conversion, but it requires your app to be able to support portrait orientation.
-
-In order to fix this, allow the app to support Portrait and Landscape (in the `Info.plist`). You can then limit your view controllers to only support portrait by returning the proper value in the `supportedInterfaceOrientations` method.
-
-## API
-
-The full API documentation can be located at:
-
-https://v.vungle.com/dev/ios
+## License
+The Vungle iOS-SDK is available under a commercial license. See the LICENSE file for more info.

@@ -530,6 +530,7 @@
 		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; };
 		A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */; };
 		A5D327671900507400A65D25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5E8BC101EE6F5E500A3E0B7 /* VungleSDK in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E8BC0F1EE6F5E500A3E0B7 /* VungleSDK */; };
 		A5E989E91EA5FE0B003EB302 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5E989ED1EA5FE0B003EB302 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
 		A5E989F41EA5FEBB003EB302 /* VKSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E989F31EA5FEBB003EB302 /* VKSocialPlugin.h */; };
@@ -1489,6 +1490,7 @@
 		A5D3276D1900507400A65D25 /* libAdMob iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAdMob iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D3276F1900515B00A65D25 /* AdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdMob.h; path = avalon/AdMob.h; sourceTree = "<group>"; };
 		A5D327861900EEA700A65D25 /* AdMob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdMob.mm; path = ../AdMob.mm; sourceTree = "<group>"; };
+		A5E8BC0F1EE6F5E500A3E0B7 /* VungleSDK */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = VungleSDK; path = vendors/vungle/ios/VungleSDK.embeddedframework/VungleSDK.framework/Versions/A/VungleSDK; sourceTree = "<group>"; };
 		A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVkontakte iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E989F31EA5FEBB003EB302 /* VKSocialPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKSocialPlugin.h; path = avalon/VKSocialPlugin.h; sourceTree = "<group>"; };
 		A5E989F71EA5FEEB003EB302 /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VKSdkFramework.framework; sourceTree = "<group>"; };
@@ -1755,6 +1757,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E8BC101EE6F5E500A3E0B7 /* VungleSDK in Frameworks */,
 				A5A759BA19249DFE00C44FBF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1928,6 +1931,7 @@
 		A50BC17B18E962DE00F1F979 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5E8BC0F1EE6F5E500A3E0B7 /* VungleSDK */,
 				A5E989FC1EA60177003EB302 /* VKSdkFramework */,
 				D87F76451EA4E042005187B4 /* FBSDKShareKit */,
 				D87F76431EA4E033005187B4 /* FBSDKLoginKit */,
@@ -5974,13 +5978,13 @@
 				DSTROOT = /tmp/Avalon.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../proj.ios_mac/ios/frameworks",
+					"$(PROJECT_DIR)/vendors/vungle/ios/VungleSDK.embeddedframework",
 				);
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/vendors/vungle/ios/vunglepub.embeddedframework/vunglepub.framework/Versions/A",
+					"$(PROJECT_DIR)/vendors/vungle/ios/VungleSDK.embeddedframework/VungleSDK.framework",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MoPubVungleAdaptor iOS";
@@ -5993,13 +5997,13 @@
 				DSTROOT = /tmp/Avalon.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/../proj.ios_mac/ios/frameworks",
+					"$(PROJECT_DIR)/vendors/vungle/ios/VungleSDK.embeddedframework",
 				);
 				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/vendors/vungle/ios/vunglepub.embeddedframework/vunglepub.framework/Versions/A",
+					"$(PROJECT_DIR)/vendors/vungle/ios/VungleSDK.embeddedframework/VungleSDK.framework",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "MoPubVungleAdaptor iOS";

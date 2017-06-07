@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.1"
+
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 23
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile project(':libcocos2dx')
+    compile('com.mopub:mopub-sdk:4.14.0@aar') {
+        transitive = true
+    }
+    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile fileTree(dir: '../../../../vendors/vungle/android/libs', include: ['*.jar'])
+}
