@@ -5,6 +5,7 @@
 #include "avalon/dictionary.h"
 #include <float.h>
 #include <assert.h>
+#include <string.h>
 #include <sstream>
 #include <iomanip>
 
