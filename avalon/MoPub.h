@@ -508,6 +508,200 @@ public:
     virtual void willLeaveApplicationFromAd(MPAdView *view) = 0;
     
 };
+    
+class MPRewardedVideoDelegate;
+    
+struct MPRewardedVideoReward
+{
+    std::string currencyType;
+    int amount;
+};
+    
+class MPRewardedVideo
+{
+public:
+    
+    static MPRewardedVideo* getInstance();
+    
+    /**
+     * Initializes the rewarded video system.
+     *
+     * This method should only be called once. It should also be called prior to requesting any rewarded video ads.
+     * Once the global mediation settings and delegate are set, they cannot be changed.
+     *
+     * @param globalMediationSettings Global configurations for all rewarded video ad networks your app supports.
+     *
+     * @param delegate The delegate that will receive all events related to rewarded video.
+     */
+    virtual void initializeRewardedVideoWithGlobalMediationSettings(void */*(NSArray *)*/globalMediationSettings, MPRewardedVideoDelegate &delegate) = 0;
+
+    /**
+     * Loads a rewarded video ad for the given ad unit ID.
+     *
+     * The mediation settings array should contain ad network specific objects for networks that may be loaded for the given ad unit ID.
+     * You should set the properties on these objects to determine how the underlying ad network should behave. You only need to supply
+     * objects for the networks you wish to configure. If you do not want your network to behave differently from its default behavior, do
+     * not pass in an mediation settings object for that network.
+     *
+     * @param adUnitID The ad unit ID that ads should be loaded from.
+     * @param mediationSettings An array of mediation settings objects that map to networks that may show ads for the ad unit ID. This array
+     * should only contain objects for networks you wish to configure. This can be nil.
+     */
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, void*/*(NSArray *)*/mediationSettings) = 0;
+
+    /**
+     * Loads a rewarded video ad for the given ad unit ID.
+     *
+     * The mediation settings array should contain ad network specific objects for networks that may be loaded for the given ad unit ID.
+     * You should set the properties on these objects to determine how the underlying ad network should behave. You only need to supply
+     * objects for the networks you wish to configure. If you do not want your network to behave differently from its default behavior, do
+     * not pass in an mediation settings object for that network.
+     *
+     * @param adUnitID The ad unit ID that ads should be loaded from.
+     * @param keywords A string representing a set of keywords that should be passed to the MoPub ad server to receive
+     * more relevant advertising.
+     * @param location Latitude/Longitude that are passed to the MoPub ad server
+     * @param mediationSettings An array of mediation settings objects that map to networks that may show ads for the ad unit ID. This array
+     * should only contain objects for networks you wish to configure. This can be nil.
+     */
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void*/*(CLLocation *)*/ location, void*/*(NSArray *)*/mediationSettings) = 0;
+
+    /**
+     * Loads a rewarded video ad for the given ad unit ID.
+     *
+     * The mediation settings array should contain ad network specific objects for networks that may be loaded for the given ad unit ID.
+     * You should set the properties on these objects to determine how the underlying ad network should behave. You only need to supply
+     * objects for the networks you wish to configure. If you do not want your network to behave differently from its default behavior, do
+     * not pass in an mediation settings object for that network.
+     *
+     * @param adUnitID The ad unit ID that ads should be loaded from.
+     * @param keywords A string representing a set of keywords that should be passed to the MoPub ad server to receive
+     * more relevant advertising.
+     * @param location Latitude/Longitude that are passed to the MoPub ad server
+     * @param customerId This is the ID given to the user by the publisher to identify them in their app
+     * @param mediationSettings An array of mediation settings objects that map to networks that may show ads for the ad unit ID. This array
+     * should only contain objects for networks you wish to configure. This can be nil.
+     */
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void*/*(CLLocation *)*/ location, const std::string &customerId, void*/*(NSArray *)*/mediationSettings) = 0;
+
+    /**
+     * Returns whether or not an ad is available for the given ad unit ID.
+     *
+     * @param adUnitID The ad unit ID associated with the ad you want to retrieve the availability for.
+     */
+    virtual bool hasAdAvailableForAdUnitID(const std::string &adUnitID) = 0;
+
+    /**
+     * Returns an array of rewards that are available for the given ad unit ID.
+     */
+    virtual std::vector<MPRewardedVideoReward>/*(NSArray *)*/ availableRewardsForAdUnitID(const std::string &adUnitID) = 0;
+
+    /**
+     * The currently selected reward that will be awarded to the user upon completion of the ad. By default,
+     * this corresponds to the first reward in `availableRewardsForAdUnitID:`.
+     */
+    virtual MPRewardedVideoReward selectedRewardForAdUnitID(const std::string &adUnitID) = 0;
+
+    /**
+     * Plays a rewarded video ad.
+     *
+     * @param adUnitID The ad unit ID associated with the video ad you wish to play.
+     * @param viewController The view controller that will present the rewarded video ad.
+     * @param reward A reward selected from `availableRewardsForAdUnitID:` to award the user upon successful completion of the ad.
+     * This value should not be `nil`.
+     *
+     * @warning **Important**: You should not attempt to play the rewarded video unless `+hasAdAvailableForAdUnitID:` indicates that an
+     * ad is available for playing or you have received the `[-rewardedVideoAdDidLoadForAdUnitID:]([MPRewardedVideoDelegate rewardedVideoAdDidLoadForAdUnitID:])`
+     * message.
+     */
+    virtual void presentRewardedVideoAdForAdUnitID(const std::string &adUnitID, const MPRewardedVideoReward &reward) = 0;
+};
+    
+class MPRewardedVideoDelegate
+{
+public:
+    //@optional
+    
+    /**
+     * This method is called after an ad loads successfully.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdDidLoadForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called after an ad fails to load.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     * @param error An error indicating why the ad failed to load.
+     */
+    virtual void rewardedVideoAdDidFailToLoadForAdUnitID(const std::string &adUnitID, const std::string &error, int errorCode)  {}
+    
+    /**
+     * This method is called when a previously loaded rewarded video is no longer eligible for presentation.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdDidExpireForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called when an attempt to play a rewarded video fails.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     * @param error An error describing why the video couldn't play.
+     */
+    virtual void rewardedVideoAdDidFailToPlayForAdUnitID(const std::string &adUnitID, const std::string &error, int errorCode)  {}
+    
+    /**
+     * This method is called when a rewarded video ad is about to appear.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdWillAppearForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called when a rewarded video ad has appeared.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdDidAppearForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called when a rewarded video ad will be dismissed.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdWillDisappearForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called when a rewarded video ad has been dismissed.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdDidDisappearForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called when the user taps on the ad.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdDidReceiveTapEventForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called when a rewarded video ad will cause the user to leave the application.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     */
+    virtual void rewardedVideoAdWillLeaveApplicationForAdUnitID(const std::string &adUnitID) {}
+    
+    /**
+     * This method is called when the user should be rewarded for watching a rewarded video ad.
+     *
+     * @param adUnitID The ad unit ID of the ad associated with the event.
+     * @param reward The object that contains all the information regarding how much you should reward the user.
+     */
+    virtual void rewardedVideoAdShouldRewardForAdUnitID(const std::string &adUnitID, const MPRewardedVideoReward &reward) {}
+};
 
 } // namespace avalon
 
