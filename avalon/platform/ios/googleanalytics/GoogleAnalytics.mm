@@ -253,31 +253,32 @@ bool GoogleAnalytics::dispatchAndWait(int maxTimeSeconds)
     }
     return true;
 }
-
-void GoogleAnalytics::sendHitsInBackground() 
-{
-    __block BOOL taskExpired = NO;
     
-    __block UIBackgroundTaskIdentifier taskId =
-    [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+static BOOL taskExpired = NO;
+static UIBackgroundTaskIdentifier taskId = 0;
+    
+static void dispatchHandler(GAIDispatchResult result)
+{
+    if (result == kGAIDispatchGood && !taskExpired) {
+        [[GAI sharedInstance] dispatchWithCompletionHandler:^(GAIDispatchResult result) { dispatchHandler(result); }];
+    } else {
+        [[UIApplication sharedApplication] endBackgroundTask:taskId];
+    }
+}
+
+void GoogleAnalytics::sendHitsInBackground()
+{
+    taskExpired = NO;
+    
+    taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
         taskExpired = YES;
     }];
     
     if (taskId == UIBackgroundTaskInvalid) {
         return;
     }
-    __block void(^dispatchHandler)(GAIDispatchResult) = [^(GAIDispatchResult result) {
-        // Send hits until no hits are left, a dispatch error occurs, or
-        // the background task expires.
-        if (result == kGAIDispatchGood && !taskExpired) {
-            [[GAI sharedInstance] dispatchWithCompletionHandler:dispatchHandler];
-        } else {
-            [[UIApplication sharedApplication] endBackgroundTask:taskId];
-            [dispatchHandler release];
-        }
-    } copy];
     
-    [[GAI sharedInstance] dispatchWithCompletionHandler:dispatchHandler];
+    [[GAI sharedInstance] dispatchWithCompletionHandler:^(GAIDispatchResult result) { dispatchHandler(result); }];
 }
     
 void GoogleAnalytics::setLogLevel(GoogleAnalyticsLogLevel logLevel)
