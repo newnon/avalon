@@ -17,10 +17,10 @@
 #}
 
 -keep public class com.mopub.mobileads.VungleInterstitial
--keepclassmembers public class com.mopub.mobileads.VungleInterstitial {
-    public *;
-}
+-keepclassmembers public class com.mopub.mobileads.VungleInterstitial { public *; }
 -keep public class com.mopub.mobileads.VungleRewardedVideo
--keepclassmembers public class com.mopub.mobileads.VungleRewardedVideo {
-    public *;
-}
+-keepclassmembers public class com.mopub.mobileads.VungleRewardedVideo { public *; }
+
+-dontwarn com.vungle.**
+-keep class com.vungle.** { *; }
+-keep class javax.inject.*

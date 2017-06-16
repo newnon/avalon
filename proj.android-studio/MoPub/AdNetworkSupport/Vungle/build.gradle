@@ -1,14 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion "25.0.1"
 
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 25
     }
 
     buildTypes {
@@ -25,9 +25,20 @@ repositories {
 
 dependencies {
     compile project(':libcocos2dx')
-    compile('com.mopub:mopub-sdk:4.14.0@aar') {
+    compile('com.mopub:mopub-sdk-banner:4.14.0@aar') {
         transitive = true
     }
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
+
+    // For interstitials
+    compile('com.mopub:mopub-sdk-interstitial:4.14.0@aar') {
+        transitive = true
+    }
+
+    // For rewarded videos. This will automatically also include interstitials
+    compile('com.mopub:mopub-sdk-rewardedvideo:4.14.0@aar') {
+        transitive = true
+    }
+    compile 'com.google.android.gms:play-services-ads:11.0.1'
+    compile 'com.google.android.gms:play-services-location:11.0.1'
     compile fileTree(dir: '../../../../vendors/vungle/android/libs', include: ['*.jar'])
 }
