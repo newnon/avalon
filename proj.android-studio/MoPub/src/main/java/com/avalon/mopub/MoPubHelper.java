@@ -24,15 +24,22 @@ package com.avalon.mopub;
 
 import java.util.HashMap;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
+import java.util.Set;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.widget.AbsoluteLayout;
 import android.widget.LinearLayout;
 
 import com.mopub.mobileads.MoPubErrorCode;
 import com.mopub.mobileads.MoPubInterstitial;
 import com.mopub.mobileads.MoPubInterstitial.InterstitialAdListener;
+import com.mopub.mobileads.MoPubRewardedVideoListener;
+import com.mopub.mobileads.MoPubRewardedVideoManager;
+import com.mopub.mobileads.MoPubRewardedVideos;
+import com.mopub.common.MoPubReward;
 
 import org.cocos2dx.lib.Cocos2dxHelper;
 
@@ -43,12 +50,22 @@ public abstract class MoPubHelper
 	private static AbsoluteLayout m_BannerView = null;
 	private static final Activity activity = Cocos2dxHelper.getActivity();
 	private static HashMap<MoPubInterstitial,Long> _interstitials = new HashMap<MoPubInterstitial,Long>();
+    private static MoPubRewardedVideoListener rewardedVideoListener = null;
 	
 	public static native void delegateInterstitialLoaded(long object);
 	public static native void delegateInterstitialFailed(long object, int error);
 	public static native void delegateInterstitialShown(long object);
 	public static native void delegateInterstitialClicked(long object);
 	public static native void delegateInterstitialDismissed(long object);
+
+    public static native void delegateRewardedVideoLoadSuccess(String adUnitId);
+    public static native void delegateRewardedVideoLoadFailure(String adUnitId, String error, int errorCode);
+    public static native void delegateRewardedVideoStarted(String adUnitId);
+    public static native void delegateRewardedVideoPlaybackError(String adUnitId, String error, int errorCode);
+    public static native void delegateRewardedVideoClicked(String adUnitId);
+    public static native void delegateRewardedVideoClosed(String adUnitId);
+    public static native void delegateRewardedVideoCompleted(String adUnitId, String currencyType, int amount);
+
 	
     public static void onInterstitialLoaded(MoPubInterstitial interstitial)
     {
@@ -246,5 +263,156 @@ public abstract class MoPubHelper
 			}
 		});
 	}
-	
+
+	static public void initializeRewardedVideo() {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                MoPubRewardedVideos.initializeRewardedVideo(activity);
+
+                rewardedVideoListener = new MoPubRewardedVideoListener() {
+                    @Override
+                    public void onRewardedVideoLoadSuccess(final String adUnitId) {
+                        Cocos2dxHelper.runOnGLThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MoPubHelper.delegateRewardedVideoLoadSuccess(adUnitId);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRewardedVideoLoadFailure(final String adUnitId, final MoPubErrorCode errorCode) {
+                        Cocos2dxHelper.runOnGLThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MoPubHelper.delegateRewardedVideoLoadFailure(adUnitId, errorCode.toString(), errorCode.ordinal());
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRewardedVideoStarted(final String adUnitId) {
+                        Cocos2dxHelper.runOnGLThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MoPubHelper.delegateRewardedVideoStarted(adUnitId);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRewardedVideoPlaybackError(final String adUnitId, final MoPubErrorCode errorCode) {
+                        Cocos2dxHelper.runOnGLThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MoPubHelper.delegateRewardedVideoPlaybackError(adUnitId, errorCode.toString(), errorCode.ordinal());
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRewardedVideoClicked(@NonNull final String adUnitId) {
+                        Cocos2dxHelper.runOnGLThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MoPubHelper.delegateRewardedVideoClicked(adUnitId);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRewardedVideoClosed(final String adUnitId) {
+                        Cocos2dxHelper.runOnGLThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MoPubHelper.delegateRewardedVideoClosed(adUnitId);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onRewardedVideoCompleted(final Set<String> adUnitIds, final MoPubReward reward) {
+                        Cocos2dxHelper.runOnGLThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (String adUnitId : adUnitIds) {
+                                    MoPubHelper.delegateRewardedVideoCompleted(adUnitId, reward.getLabel(), reward.getAmount());
+                                }
+                            }
+                        });
+                    }
+                };
+
+                MoPubRewardedVideos.setRewardedVideoListener(rewardedVideoListener);
+            }
+        });
+	}
+
+	static public void loadRewardedVideo(final String adUnitId) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                MoPubRewardedVideos.loadRewardedVideo(adUnitId);
+            }
+        });
+	}
+
+    static public void loadRewardedVideo(final String adUnitId, final String keywords, final String customerId) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                MoPubRewardedVideos.loadRewardedVideo(adUnitId, new MoPubRewardedVideoManager.RequestParameters(keywords, null, customerId));
+            }
+        });
+    }
+
+    public static boolean hasRewardedVideo(final String adUnitId) {
+        FutureTask<Boolean> futureResult = new FutureTask<Boolean>(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                return MoPubRewardedVideos.hasRewardedVideo(adUnitId);
+            }
+        });
+        activity.runOnUiThread(futureResult);
+        // this block until the result is calculated!
+        try {
+            return futureResult.get();
+        } catch (InterruptedException e) {
+            return false;
+        } catch (ExecutionException e) {
+            return false;
+        }
+    }
+
+    public static void showRewardedVideo(final String adUnitId, final String currencyType, final int amount) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //MoPubRewardedVideos.selectReward(adUnitId, @NonNull MoPubReward selectedReward);
+                MoPubRewardedVideos.showRewardedVideo(adUnitId);
+            }
+        });
+    }
+
+    public static MoPubReward[] getAvailableRewards(final String adUnitId) {
+        FutureTask<MoPubReward[]> futureResult = new FutureTask<MoPubReward[]>(new Callable<MoPubReward[]>() {
+            @Override
+            public MoPubReward[] call() throws Exception {
+                Set<MoPubReward> result = MoPubRewardedVideos.getAvailableRewards(adUnitId);
+                return result.toArray(new MoPubReward[result.size()]);
+            }
+        });
+        activity.runOnUiThread(futureResult);
+        // this block until the result is calculated!
+        try {
+            return futureResult.get();
+        } catch (InterruptedException e) {
+            return new MoPubReward[]{};
+        } catch (ExecutionException e) {
+            return new MoPubReward[]{};
+        }
+
+
+    }
 }

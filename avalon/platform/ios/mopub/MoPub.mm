@@ -255,7 +255,10 @@ public:
     virtual MPRewardedVideoReward selectedRewardForAdUnitID(const std::string &adUnitID) override
     {
         ::MPRewardedVideoReward *reward = [::MPRewardedVideo selectedRewardForAdUnitID:[NSString stringWithUTF8String:adUnitID.c_str()]];
-        return MPRewardedVideoReward{[reward.currencyType UTF8String], [reward.amount intValue]};
+        if(reward)
+            return MPRewardedVideoReward{[reward.currencyType UTF8String], [reward.amount intValue]};
+        else
+            return MPRewardedVideoReward{"", 0};
     }
 
     virtual void presentRewardedVideoAdForAdUnitID(const std::string &adUnitID, const MPRewardedVideoReward &reward) override

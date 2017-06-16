@@ -138,6 +138,114 @@ MPInterstitialAdController *MPInterstitialAdController::interstitialAdController
     
 std::map<std::string, MPInterstitialAdController*> MPInterstitialAdController::_sharedInterstitialAdControllers;
 
+class AndroidMPRewardedVideo: public MPRewardedVideo
+{
+public:
+    virtual void initializeRewardedVideoWithGlobalMediationSettings(void */*(NSArray *)*/globalMediationSettings, MPRewardedVideoDelegate &delegate) override
+    {
+        _delegate = &delegate;
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "initializeRewardedVideo", "()V"))
+        {
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        }
+    }
+
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, void*/*(NSArray *)*/mediationSettings) override
+    {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "loadRewardedVideo", "(Ljava/lang/String;)V"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+        }
+    }
+
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void*/*(CLLocation *)*/ location, void*/*(NSArray *)*/mediationSettings) override
+    {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "loadRewardedVideo", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
+            jstring jKeywords = methodInfo.env->NewStringUTF(keywords.c_str());
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, jKeywords, nullptr);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+            methodInfo.env->DeleteLocalRef(jKeywords);
+        }
+    }
+
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void*/*(CLLocation *)*/ location, const std::string &customerId, void*/*(NSArray *)*/mediationSettings) override
+    {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "loadRewardedVideo", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
+            jstring jKeywords = methodInfo.env->NewStringUTF(keywords.c_str());
+            jstring jCustomerId = methodInfo.env->NewStringUTF(customerId.c_str());
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, jKeywords, jCustomerId);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+            methodInfo.env->DeleteLocalRef(jKeywords);
+            methodInfo.env->DeleteLocalRef(jCustomerId);
+        }
+    }
+
+    virtual bool hasAdAvailableForAdUnitID(const std::string &adUnitID) override
+    {
+        cocos2d::JniMethodInfo methodInfo;
+        bool ret = false;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "hasRewardedVideo", "(Ljava/lang/String;)Z"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
+            ret = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+        }
+        return ret;
+    }
+
+    virtual std::vector<MPRewardedVideoReward> availableRewardsForAdUnitID(const std::string &adUnitID) override
+    {
+        std::vector<MPRewardedVideoReward> ret;
+        ret.push_back(MPRewardedVideoReward{"fun", 100});
+        return ret;
+    }
+
+    virtual MPRewardedVideoReward selectedRewardForAdUnitID(const std::string &adUnitID) override
+    {
+        return MPRewardedVideoReward{"fun", 100};
+    }
+
+    virtual void presentRewardedVideoAdForAdUnitID(const std::string &adUnitID, const MPRewardedVideoReward &reward) override
+    {
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "showRewardedVideo", "(Ljava/lang/String;Ljava/lang/String;I)V"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
+            jstring jCurrencyType = methodInfo.env->NewStringUTF(reward.currencyType.c_str());
+            methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID, jCurrencyType, (jint)reward.amount);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+            methodInfo.env->DeleteLocalRef(jCurrencyType);
+        }
+    }
+
+    MPRewardedVideoDelegate* getDelegate() const { return _delegate; }
+
+private:
+    MPRewardedVideoDelegate *_delegate = nullptr;
+};
+
+MPRewardedVideo* MPRewardedVideo::getInstance()
+{
+    static AndroidMPRewardedVideo instance;
+    return &instance;
+}
+
 }
 
 extern "C" {
@@ -166,6 +274,56 @@ JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateInterstitialDis
 {
     avalon::AndroidMPInterstitialAdController* controller = (avalon::AndroidMPInterstitialAdController*)object;
     controller->getDelegate()->interstitialDidDisappear(controller);
+}
+
+
+JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateRewardedVideoLoadSuccess(JNIEnv* env, jclass clazz, jstring adUnitId)
+{
+    avalon::MPRewardedVideoDelegate *delegate = static_cast<avalon::AndroidMPRewardedVideo*> (avalon::MPRewardedVideo::getInstance())->getDelegate();
+    if(delegate)
+        delegate->rewardedVideoAdDidLoadForAdUnitID(cocos2d::JniHelper::jstring2string(adUnitId));
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateRewardedVideoLoadFailure(JNIEnv* env, jclass clazz, jstring adUnitId, jstring error, jint errorCode)
+{
+    avalon::MPRewardedVideoDelegate *delegate = static_cast<avalon::AndroidMPRewardedVideo*> (avalon::MPRewardedVideo::getInstance())->getDelegate();
+    if(delegate)
+        delegate->rewardedVideoAdDidFailToLoadForAdUnitID(cocos2d::JniHelper::jstring2string(adUnitId), cocos2d::JniHelper::jstring2string(error), (int)errorCode);
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateRewardedVideoStarted(JNIEnv* env, jclass clazz, jstring adUnitId)
+{
+    avalon::MPRewardedVideoDelegate *delegate = static_cast<avalon::AndroidMPRewardedVideo*> (avalon::MPRewardedVideo::getInstance())->getDelegate();
+    if(delegate)
+        delegate->rewardedVideoAdDidAppearForAdUnitID(cocos2d::JniHelper::jstring2string(adUnitId));
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateRewardedVideoPlaybackError(JNIEnv* env, jclass clazz, jstring adUnitId, jstring error, jint errorCode)
+{
+    avalon::MPRewardedVideoDelegate *delegate = static_cast<avalon::AndroidMPRewardedVideo*> (avalon::MPRewardedVideo::getInstance())->getDelegate();
+    if(delegate)
+        delegate->rewardedVideoAdDidFailToPlayForAdUnitID(cocos2d::JniHelper::jstring2string(adUnitId), cocos2d::JniHelper::jstring2string(error), (int)errorCode);
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateRewardedVideoClicked(JNIEnv* env, jclass clazz, jstring adUnitId)
+{
+    avalon::MPRewardedVideoDelegate *delegate = static_cast<avalon::AndroidMPRewardedVideo*> (avalon::MPRewardedVideo::getInstance())->getDelegate();
+    if(delegate)
+        delegate->rewardedVideoAdWillLeaveApplicationForAdUnitID(cocos2d::JniHelper::jstring2string(adUnitId));
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateRewardedVideoClosed(JNIEnv* env, jclass clazz, jstring adUnitId)
+{
+    avalon::MPRewardedVideoDelegate *delegate = static_cast<avalon::AndroidMPRewardedVideo*> (avalon::MPRewardedVideo::getInstance())->getDelegate();
+    if(delegate)
+        delegate->rewardedVideoAdDidDisappearForAdUnitID(cocos2d::JniHelper::jstring2string(adUnitId));
+}
+
+JNIEXPORT void JNICALL Java_com_avalon_mopub_MoPubHelper_delegateRewardedVideoCompleted(JNIEnv* env, jclass clazz, jstring adUnitId, jstring currencyType, int amount)
+{
+    avalon::MPRewardedVideoDelegate *delegate = static_cast<avalon::AndroidMPRewardedVideo*> (avalon::MPRewardedVideo::getInstance())->getDelegate();
+    if(delegate)
+        delegate->rewardedVideoAdShouldRewardForAdUnitID(cocos2d::JniHelper::jstring2string(adUnitId), avalon::MPRewardedVideoReward{cocos2d::JniHelper::jstring2string(currencyType), amount});
 }
 
 }
