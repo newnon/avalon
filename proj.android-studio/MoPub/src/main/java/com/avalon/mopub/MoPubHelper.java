@@ -264,10 +264,10 @@ public abstract class MoPubHelper
 		});
 	}
 
-	static public void initializeRewardedVideo() {
-        activity.runOnUiThread(new Runnable() {
+	static public void initializeRewardedVideo() throws InterruptedException {
+        FutureTask<Void> futureResult = new FutureTask<Void>(new Callable<Void>() {
             @Override
-            public void run() {
+            public Void call() throws Exception {
                 MoPubRewardedVideos.initializeRewardedVideo(activity);
 
                 rewardedVideoListener = new MoPubRewardedVideoListener() {
@@ -345,9 +345,17 @@ public abstract class MoPubHelper
                 };
 
                 MoPubRewardedVideos.setRewardedVideoListener(rewardedVideoListener);
+                return null;
             }
         });
-	}
+        activity.runOnUiThread(futureResult);
+
+        try {
+            futureResult.get();
+        } catch (ExecutionException e) {
+            //no need to process
+        }
+    }
 
 	static public void loadRewardedVideo(final String adUnitId) {
         activity.runOnUiThread(new Runnable() {
