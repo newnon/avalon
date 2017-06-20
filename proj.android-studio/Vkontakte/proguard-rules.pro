@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 -keep public class com.avalon.facebook.FacebookHelper
 -keepclassmembers public class com.avalon.facebook.FacebookHelper {
     public *;

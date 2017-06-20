@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 -keep public class com.avalon.gamecenter.GameHelper
 -keepclassmembers public class com.avalon.gamecenter.GameHelper {
     public *;

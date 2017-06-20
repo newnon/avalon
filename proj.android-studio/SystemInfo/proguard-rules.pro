@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 -keep public class com.avalon.systeminfo.SystemInfoHelper
 -keepclassmembers public class com.avalon.systeminfo.SystemInfoHelper {
     public *;

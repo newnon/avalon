@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 -keep public class com.mopub.mobileads.VungleInterstitial
 -keepclassmembers public class com.mopub.mobileads.VungleInterstitial { public *; }
 -keep public class com.mopub.mobileads.VungleRewardedVideo

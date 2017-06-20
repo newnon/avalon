@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 -keep public class com.avalon.googleanalytics.GoogleAnalyticsHelper
 -keepclassmembers public class com.avalon.googleanalytics.GoogleAnalyticsHelper {
     public *;

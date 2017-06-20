@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 -keep public class com.avalon.appsflyer.AppsFlyerHelper
 -keepclassmembers public class com.avalon.appsflyer.AppsFlyerHelper {
     public *;
