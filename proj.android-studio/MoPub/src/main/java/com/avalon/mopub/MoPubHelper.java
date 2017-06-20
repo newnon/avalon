@@ -22,6 +22,8 @@
 
 package com.avalon.mopub;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -397,7 +399,15 @@ public abstract class MoPubHelper
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //MoPubRewardedVideos.selectReward(adUnitId, @NonNull MoPubReward selectedReward);
+                Set<MoPubReward> availableRewards = MoPubRewardedVideos.getAvailableRewards(adUnitId);
+                for (MoPubReward entry : availableRewards)
+                {
+                    if(entry.getAmount() == amount && entry.getLabel().equals(currencyType))
+                    {
+                        MoPubRewardedVideos.selectReward(adUnitId, entry);
+                        break;
+                    }
+                }
                 MoPubRewardedVideos.showRewardedVideo(adUnitId);
             }
         });
@@ -408,7 +418,23 @@ public abstract class MoPubHelper
             @Override
             public MoPubReward[] call() throws Exception {
                 Set<MoPubReward> result = MoPubRewardedVideos.getAvailableRewards(adUnitId);
-                return result.toArray(new MoPubReward[result.size()]);
+                if(result.size() > 0)
+                    return result.toArray(new MoPubReward[result.size()]);
+                else {
+                    Field moPubRewardedVideoManagerField = MoPubRewardedVideoManager.class.getDeclaredField("sInstance");
+                    moPubRewardedVideoManagerField.setAccessible(true);
+                    MoPubRewardedVideoManager moPubRewardedVideoManager = (MoPubRewardedVideoManager)moPubRewardedVideoManagerField.get(null);
+
+                    Field mRewardedAdDataField = MoPubRewardedVideoManager.class.getDeclaredField("mRewardedAdData");
+                    mRewardedAdDataField.setAccessible(true);
+                    Object mRewardedAdData = mRewardedAdDataField.get(moPubRewardedVideoManager);
+
+                    Method method = mRewardedAdData.getClass().getDeclaredMethod("getMoPubReward", new Class[]{String.class});
+                    method.setAccessible(true);
+                    MoPubReward value = (MoPubReward)method.invoke(mRewardedAdData, adUnitId);
+
+                    return new MoPubReward[]{value};
+                }
             }
         });
         activity.runOnUiThread(futureResult);
@@ -420,7 +446,5 @@ public abstract class MoPubHelper
         } catch (ExecutionException e) {
             return new MoPubReward[]{};
         }
-
-
     }
 }

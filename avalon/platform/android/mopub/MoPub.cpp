@@ -211,13 +211,50 @@ public:
     virtual std::vector<MPRewardedVideoReward> availableRewardsForAdUnitID(const std::string &adUnitID) override
     {
         std::vector<MPRewardedVideoReward> ret;
-        ret.push_back(MPRewardedVideoReward{"fun", 100});
+
+        cocos2d::JniMethodInfo methodInfo;
+        if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAvailableRewards", "(Ljava/lang/String;)[Lcom/mopub/common/MoPubReward;"))
+        {
+            jstring jAdUnitID = methodInfo.env->NewStringUTF(adUnitID.c_str());
+            jobjectArray jResult = (jobjectArray)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, jAdUnitID);
+            methodInfo.env->DeleteLocalRef(methodInfo.classID);
+            methodInfo.env->DeleteLocalRef(jAdUnitID);
+
+            cocos2d::JniMethodInfo getLabelMethodInfo;
+            cocos2d::JniMethodInfo getAmountMethodInfo;
+
+            bool hasGetLabelMethod = cocos2d::JniHelper::getMethodInfo(getLabelMethodInfo, "com/mopub/common/MoPubReward", "getLabel", "()Ljava/lang/String;");
+            bool getAmountMethod = cocos2d::JniHelper::getMethodInfo(getAmountMethodInfo, "com/mopub/common/MoPubReward", "getAmount", "()I");
+
+            jsize keysSize = methodInfo.env->GetArrayLength(jResult);
+
+            for (int i = 0; i < keysSize; ++i) {
+                jobject element = methodInfo.env->GetObjectArrayElement(jResult, i);
+
+                std::string curency;
+                int amount = 0;
+
+                if(hasGetLabelMethod)
+                    curency = cocos2d::JniHelper::jstring2string((jstring)getLabelMethodInfo.env->CallObjectMethod(element, getLabelMethodInfo.methodID));
+
+                if(getAmountMethod)
+                    amount = getLabelMethodInfo.env->CallIntMethod(element, getAmountMethodInfo.methodID);
+
+                ret.push_back(MPRewardedVideoReward{curency, amount});
+
+                methodInfo.env->DeleteLocalRef(element);
+            }
+        }
         return ret;
     }
 
     virtual MPRewardedVideoReward selectedRewardForAdUnitID(const std::string &adUnitID) override
     {
-        return MPRewardedVideoReward{"fun", 100};
+        std::vector<MPRewardedVideoReward>  result = availableRewardsForAdUnitID(adUnitID);
+        if(result.empty())
+            return MPRewardedVideoReward{"", 0};
+        else
+            return result.front();
     }
 
     virtual void presentRewardedVideoAdForAdUnitID(const std::string &adUnitID, const MPRewardedVideoReward &reward) override
