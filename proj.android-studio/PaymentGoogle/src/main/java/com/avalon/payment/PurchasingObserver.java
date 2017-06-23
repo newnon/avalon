@@ -16,6 +16,9 @@ import com.example.android.trivialdrivesample.util.Purchase;
 import com.example.android.trivialdrivesample.util.SkuDetails;
 
 import org.cocos2dx.lib.Cocos2dxHelper;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.avalon.payment.Backend;
 
 public class PurchasingObserver implements OnActivityResultListener
@@ -35,6 +38,22 @@ public class PurchasingObserver implements OnActivityResultListener
     public static final int ERROR_PAYMENTINVALID = 4;
     public static final int ERROR_PAYMENTNOTALLOWED = 5;
     public static final int ERROR_STOREPRODUCTNOTAVAILABLE = 6;
+
+    static private String generateToken(Purchase purchase)
+    {
+        JSONObject object = new JSONObject();
+        try
+        {
+            object.put("data", new JSONObject(purchase.getOriginalJson()));
+            object.put("sign", purchase.getSignature());
+            return object.toString();
+        }
+        catch (JSONException exp)
+        {
+        }
+
+        return "";
+    }
 
     public PurchasingObserver(String data)
     {
@@ -135,7 +154,8 @@ public class PurchasingObserver implements OnActivityResultListener
                 if (isConsumable(sku)) {
                     threadConsumeAsync(inventory.getPurchase(sku));
                 } else {
-                    threadDelegateOnPurchaseSucceed(sku, inventory.getPurchase(sku).getOrderId(), inventory.getPurchase(sku).getToken(), true);
+                    Purchase purchase = inventory.getPurchase(sku);
+                    threadDelegateOnPurchaseSucceed(sku, purchase.getOrderId(), generateToken(purchase), true);
                 }
             }
 
@@ -172,7 +192,7 @@ public class PurchasingObserver implements OnActivityResultListener
             } else if (isConsumable(purchase.getSku())) {
                 threadConsumeAsync(purchase);
             } else {
-                threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), purchase.getToken(), false);
+                threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), generateToken(purchase), false);
             }
 
             threadDecrementTaskCounter();
@@ -188,7 +208,7 @@ public class PurchasingObserver implements OnActivityResultListener
                 return;
             }
 
-            threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), purchase.getToken(), false);
+            threadDelegateOnPurchaseSucceed(purchase.getSku(), purchase.getOrderId(), generateToken(purchase), false);
             if (checkTaskCountOnConsumeFinished) {
                 threadDecrementTaskCounter();
             }
