@@ -44,7 +44,7 @@ public class PurchasingObserver implements OnActivityResultListener
         JSONObject object = new JSONObject();
         try
         {
-            object.put("data", new JSONObject(purchase.getOriginalJson()));
+            object.put("data", purchase.getOriginalJson());
             object.put("sign", purchase.getSignature());
             return object.toString();
         }
