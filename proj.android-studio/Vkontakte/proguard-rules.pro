@@ -18,7 +18,7 @@
 
 -dontobfuscate
 
--keep public class com.avalon.facebook.FacebookHelper
--keepclassmembers public class com.avalon.facebook.FacebookHelper {
+-keep public class com.avalon.vkontakte.VkontakteHelper
+-keepclassmembers public class com.avalon.vkontakte.VkontakteHelper {
     public *;
 }
