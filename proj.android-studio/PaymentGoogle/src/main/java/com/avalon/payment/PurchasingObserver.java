@@ -32,6 +32,8 @@ public class PurchasingObserver implements OnActivityResultListener
     private Integer taskCount = 0;
     private boolean checkTaskCountOnConsumeFinished = false;
     private static boolean isIabHelperInitialize = false;
+
+    String lastPurchase = null;
     
     public static final int ERROR_UNKNOWN = 0;
     public static final int ERROR_PAYMENTCANCELLED = 3;
@@ -170,24 +172,32 @@ public class PurchasingObserver implements OnActivityResultListener
             if (result.isFailure()) {
                 {
                     Log.e(TAG, "onIabPurchaseFinished failed: " + result);
-                    int retCode = 0;
+                    int retCode = ERROR_UNKNOWN;
                     switch (result.getResponse()) {
-                    	case IabHelper.BILLING_RESPONSE_RESULT_USER_CANCELED: retCode = ERROR_PAYMENTCANCELLED;
-                             break;
-                    	case IabHelper.BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE: retCode = ERROR_PAYMENTNOTALLOWED;
+                        case IabHelper.BILLING_RESPONSE_RESULT_USER_CANCELED:
+                    	case IabHelper.IABHELPER_USER_CANCELLED:
+                    	    retCode = ERROR_PAYMENTCANCELLED;
+                            break;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_BILLING_UNAVAILABLE:
+                    	    retCode = ERROR_PAYMENTNOTALLOWED;
                         	break;
-                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_UNAVAILABLE: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_UNAVAILABLE:
+                    	    retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
                         	break;
-                    	case IabHelper.BILLING_RESPONSE_RESULT_DEVELOPER_ERROR: retCode = ERROR_UNKNOWN;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_DEVELOPER_ERROR:
+                    	    retCode = ERROR_UNKNOWN;
                     		break;
-                    	case IabHelper.BILLING_RESPONSE_RESULT_ERROR: retCode = ERROR_PAYMENTINVALID;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ERROR:
+                    	    retCode = ERROR_PAYMENTINVALID;
                     		break;
-                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_ALREADY_OWNED:
+                    	    retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
                     		break;
-                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED: retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
+                    	case IabHelper.BILLING_RESPONSE_RESULT_ITEM_NOT_OWNED:
+                    	    retCode = ERROR_STOREPRODUCTNOTAVAILABLE;
                 			break;
                     }
-                    threadDelegateOnPurchaseFail(purchase!=null?purchase.getSku():"", retCode);
+                    threadDelegateOnPurchaseFail(purchase!=null?purchase.getSku():lastPurchase, retCode);
                 }
             } else if (isConsumable(purchase.getSku())) {
                 threadConsumeAsync(purchase);
@@ -331,6 +341,7 @@ public class PurchasingObserver implements OnActivityResultListener
 
     public void purchase(final String sku)
     {
+        lastPurchase = sku;
         threadIncrementTaskCounter();
 
         activity.runOnUiThread(new Runnable() {
