@@ -12,7 +12,10 @@ void extLoadProductsData(void* arg, void* ptr, int len);
 class EmscriptenManager:public Manager
 {
 public:
-    EmscriptenManager():_delegate(nullptr),_currency(emscripten_run_script_string("LoaderObject.getCurrency()"))
+    EmscriptenManager()
+        :_delegate(nullptr)
+        ,_currency(emscripten_run_script_string("LoaderObject.getCurrency()"))
+        ,_currencyRate((float)EM_ASM_DOUBLE_V({if(typeof LoaderObject.getCurrencyRate === "undefined") return 1.0; else return LoaderObject.getCurrencyRate(); }))
     {
     }
     ~EmscriptenManager()
@@ -172,6 +175,7 @@ public:
     
     std::string getLocalizedPrice(float price, const std::vector<std::string> &strings)
     {
+    	price *= _currencyRate;
     	if(strings.empty())
 		{
 			char temp[256] = {0};
@@ -297,6 +301,7 @@ private:
     bool _started;
     std::string _currentLocale;
     std::string _currency;
+    float _currencyRate;
 };
 
 Manager *Manager::getInstance()
