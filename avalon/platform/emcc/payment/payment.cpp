@@ -179,7 +179,7 @@ public:
     	if(strings.empty())
 		{
 			char temp[256] = {0};
-			sprintf(temp, "%.2g", price);
+			sprintf(temp, "%.2f", price);
 			std::string priceStr = temp;
 			return priceStr + " " + _currency;
 		}
