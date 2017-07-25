@@ -6,7 +6,6 @@
 #include <string>
 #include <map>
 
-const char* const CLASS_NAME = "com/google/android/gms/analytics/Tracker";
 const char* const HELPER_CLASS_NAME = "com/avalon/googleanalytics/GoogleAnalyticsHelper";
 
 namespace avalon {
@@ -153,7 +152,7 @@ public:
         }
     }
 
-    virtual void setNewSession()
+    virtual void setNewSession() override
     {
         if(_tracker)
         {
