@@ -470,6 +470,8 @@
 		A56C4831199E1E1B00BF30BA /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = A56C482E199E1E1B00BF30BA /* GameCenter.mm */; };
 		A56C4832199E1E1B00BF30BA /* GameCenterMac.m in Sources */ = {isa = PBXBuildFile; fileRef = A56C4830199E1E1B00BF30BA /* GameCenterMac.m */; };
 		A56C483A199E1F2600BF30BA /* GameCenter.h in Headers */ = {isa = PBXBuildFile; fileRef = A50BC1B518E9638C00F1F979 /* GameCenter.h */; };
+		A570DA0C1F28A8DA00358C9E /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A570DA0B1F28A8DA00358C9E /* libssl.a */; };
+		A570DA0E1F28A91600358C9E /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A570DA0D1F28A91600358C9E /* libcrypto.a */; };
 		A57695461A0E1831002FDCB5 /* AppiraterLocalizable.strings in CopyFiles */ = {isa = PBXBuildFile; fileRef = A50BC1DF18E96E0000F1F979 /* AppiraterLocalizable.strings */; };
 		A576954B1A0E6DD6002FDCB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A57695871A0E6E97002FDCB5 /* iAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = A57695861A0E6E97002FDCB5 /* iAd.mm */; };
@@ -1400,6 +1402,8 @@
 		A56C482E199E1E1B00BF30BA /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GameCenter.mm; path = avalon/platform/mac/gamecenter/GameCenter.mm; sourceTree = "<group>"; };
 		A56C482F199E1E1B00BF30BA /* GameCenterMac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameCenterMac.h; path = avalon/platform/mac/gamecenter/GameCenterMac.h; sourceTree = "<group>"; };
 		A56C4830199E1E1B00BF30BA /* GameCenterMac.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameCenterMac.m; path = avalon/platform/mac/gamecenter/GameCenterMac.m; sourceTree = "<group>"; };
+		A570DA0B1F28A8DA00358C9E /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "openssl-1.0.1e/lib/libssl.a"; sourceTree = "<group>"; };
+		A570DA0D1F28A91600358C9E /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "openssl-1.0.1e/lib/libcrypto.a"; sourceTree = "<group>"; };
 		A576956E1A0E6DD6002FDCB5 /* libiAd iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libiAd iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57695841A0E6E6C002FDCB5 /* iAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iAd.h; path = avalon/iAd.h; sourceTree = "<group>"; };
 		A57695861A0E6E97002FDCB5 /* iAd.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = iAd.mm; path = avalon/platform/ios/iad/iAd.mm; sourceTree = "<group>"; };
@@ -1551,7 +1555,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A570DA0C1F28A8DA00358C9E /* libssl.a in Frameworks */,
 				A50BC1AE18E9635400F1F979 /* Foundation.framework in Frameworks */,
+				A570DA0E1F28A91600358C9E /* libcrypto.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1844,6 +1850,8 @@
 		A5081E5D1A0BFE460082FBB2 /* Optional */ = {
 			isa = PBXGroup;
 			children = (
+				A570DA0D1F28A91600358C9E /* libcrypto.a */,
+				A570DA0B1F28A8DA00358C9E /* libssl.a */,
 				A5081E5E1A0BFE460082FBB2 /* AppleIncRootCertificate.cer */,
 				A5081E5F1A0BFE460082FBB2 /* RMAppReceipt.h */,
 				A5081E601A0BFE460082FBB2 /* RMAppReceipt.m */,
