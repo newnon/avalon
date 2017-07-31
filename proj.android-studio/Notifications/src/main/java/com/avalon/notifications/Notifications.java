@@ -150,7 +150,7 @@ public class Notifications{
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 		builder.setContentTitle(context.getString(context.getResources().getIdentifier("app_name", "string", context.getPackageName())));
 		builder.setContentText(message);
-		builder.setSmallIcon(context.getResources().getIdentifier("icon", "drawable", context.getPackageName()));
+		builder.setSmallIcon(context.getResources().getIdentifier("icon_small", "drawable", context.getPackageName()));
 		builder.setLargeIcon(largeIcon);
 		builder.setTicker(message);
 		builder.setAutoCancel(true);
