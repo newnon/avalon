@@ -24,6 +24,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.NotificationCompat;
@@ -144,9 +145,12 @@ public class Notifications{
         
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
-		
-		Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(),
-				context.getResources().getIdentifier("icon", "drawable", context.getPackageName()));
+
+		Bitmap largeIcon = null;
+        try {
+            largeIcon = ((BitmapDrawable)context.getPackageManager().getApplicationIcon(context.getPackageName())).getBitmap();
+        } catch (NameNotFoundException e) {
+        }
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
 		builder.setContentTitle(context.getString(context.getResources().getIdentifier("app_name", "string", context.getPackageName())));
 		builder.setContentText(message);
