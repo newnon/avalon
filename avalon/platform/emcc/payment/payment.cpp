@@ -14,7 +14,7 @@ class EmscriptenManager:public Manager
 public:
     EmscriptenManager()
         :_delegate(nullptr)
-        ,_currency(emscripten_run_script_string("LoaderObject.getCurrency()"))
+        ,_currency(emscripten_run_script_string("LoaderObject.getCurrency();"))
         ,_currencyRate((float)EM_ASM_DOUBLE_V({if(typeof LoaderObject.getCurrencyRate === "undefined") return 1.0; else return LoaderObject.getCurrencyRate(); }))
     {
     }
@@ -94,6 +94,7 @@ public:
         
         for (auto &product : _products)
         {
+            product.price *= _currencyRate;
             product.localizedPrice = getLocalizedPrice(product.price, keys);
             product.currencyCode = _currency;
         }
@@ -175,7 +176,6 @@ public:
     
     std::string getLocalizedPrice(float price, const std::vector<std::string> &strings)
     {
-    	price *= _currencyRate;
     	if(strings.empty())
 		{
 			char temp[256] = {0};
