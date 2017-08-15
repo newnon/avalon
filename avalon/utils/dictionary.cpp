@@ -24,6 +24,17 @@ Value::Value(int v)
 {
     _field.intVal = v;
 }
+    
+Value::Value(long v)
+    : _type(Type::INTEGER)
+{
+    _field.intVal = v;
+}
+Value::Value(long long v)
+    : _type(Type::INTEGER)
+{
+    _field.intVal = v;
+}
 
 Value::Value(float v)
 : _type(Type::FLOAT)
@@ -197,6 +208,20 @@ Value& Value::operator= (int v)
     _field.intVal = v;
     return *this;
 }
+    
+Value& Value::operator= (long v)
+{
+    reset(Type::INTEGER);
+    _field.intVal = v;
+    return *this;
+}
+
+Value& Value::operator= (long long v)
+{
+    reset(Type::INTEGER);
+    _field.intVal = v;
+    return *this;
+}
 
 Value& Value::operator= (float v)
 {
@@ -327,7 +352,7 @@ int Value::asInt() const
     assert(_type != Type::VECTOR && _type != Type::MAP && "Only base type (bool, string, float, double, int) could be converted");
     if (_type == Type::INTEGER)
     {
-        return _field.intVal;
+        return static_cast<int>(_field.intVal);
     }
     
     if (_type == Type::STRING)
@@ -343,6 +368,68 @@ int Value::asInt() const
     if (_type == Type::DOUBLE)
     {
         return static_cast<int>(_field.doubleVal);
+    }
+    
+    if (_type == Type::BOOLEAN)
+    {
+        return _field.boolVal ? 1 : 0;
+    }
+    
+    return 0;
+}
+    
+long Value::asLong() const
+{
+    assert(_type != Type::VECTOR && _type != Type::MAP && "Only base type (bool, string, float, double, int) could be converted");
+    if (_type == Type::INTEGER)
+    {
+        return static_cast<long>(_field.intVal);
+    }
+    
+    if (_type == Type::STRING)
+    {
+        return atol(_field.strVal->c_str());
+    }
+    
+    if (_type == Type::FLOAT)
+    {
+        return static_cast<long>(_field.floatVal);
+    }
+    
+    if (_type == Type::DOUBLE)
+    {
+        return static_cast<int>(_field.doubleVal);
+    }
+    
+    if (_type == Type::BOOLEAN)
+    {
+        return _field.boolVal ? 1 : 0;
+    }
+    
+    return 0;
+}
+    
+long long Value::asLongLong() const
+{
+    assert(_type != Type::VECTOR && _type != Type::MAP && "Only base type (bool, string, float, double, int) could be converted");
+    if (_type == Type::INTEGER)
+    {
+        return static_cast<long long>(_field.intVal);
+    }
+    
+    if (_type == Type::STRING)
+    {
+        return atoll(_field.strVal->c_str());
+    }
+    
+    if (_type == Type::FLOAT)
+    {
+        return static_cast<long long>(_field.floatVal);
+    }
+    
+    if (_type == Type::DOUBLE)
+    {
+        return static_cast<long long>(_field.doubleVal);
     }
     
     if (_type == Type::BOOLEAN)

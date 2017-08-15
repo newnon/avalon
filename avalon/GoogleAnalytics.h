@@ -26,13 +26,13 @@ public:
     virtual void setCustomMetric(int index, double value) = 0;
     virtual void setNewSession() = 0;
     
-    virtual void sendAppView() = 0;
-    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value) = 0;
-    virtual void sendException(const std::string &description, bool fatal) = 0;
-    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode) = 0;
-    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target) = 0;
-    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label) = 0;
-    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode) = 0;
+    virtual void sendAppView(const std::map<std::string, std::string> &params = {}) = 0;
+    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value, const std::map<std::string, std::string> &params = {}) = 0;
+    virtual void sendException(const std::string &description, bool fatal, const std::map<std::string, std::string> &params = {}) = 0;
+    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode, const std::map<std::string, std::string> &params = {}) = 0;
+    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target, const std::map<std::string, std::string> &params = {}) = 0;
+    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label, const std::map<std::string, std::string> &params = {}) = 0;
+    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode, const std::map<std::string, std::string> &params = {}) = 0;
     
 protected:
     virtual ~GoogleAnalyticsTracker() {}
@@ -85,6 +85,15 @@ public:
     
     void startSession();
     void endSession();
+    
+    static std::string customDimension(int index)
+    {
+        return "dimension" + std::to_string(index);
+    }
+    static std::string customMetric(int index)
+    {
+        return "metric" + std::to_string(index);
+    }
     
 protected:
     GoogleAnalytics();

@@ -1,5 +1,6 @@
 #include "avalon/GoogleAnalytics.h"
 #include <emscripten/emscripten.h>
+#include <vector>
 
 namespace avalon {
 
@@ -80,48 +81,105 @@ public:
     {
     }
     
-    virtual void sendAppView() override
+    static void mapToArrays(const std::map<std::string, std::string> &params, std::vector<const char*> &keys, std::vector<const char*> &values)
     {
+        keys.reserve(params.size());
+        keys.reserve(params.size());
+        
+        int i=0;
+        for(const auto &pair:params)
+        {
+            keys[i] = pair.first.c_str();
+            values[i] = pair.second.c_str();
+            ++i;
+        }
+    }
+    
+    virtual void sendAppView(const std::map<std::string, std::string> &params) override
+    {
+        std::vector<const char*> keys;
+        std::vector<const char*> values;
+        mapToArrays(params, keys, values);
+        
         EM_ASM_({
             var trackId = 'tracker_index_' + $0;
-            ga(trackId + '.send', 'screenview');
-        }, _trackerIndex);
+            
+            var hit = {};
+            hit.hitType = 'screenview';
+            
+            for(var i=0; i<$3; ++i)
+            {
+                var key = Pointer_stringify(getValue($1 + i*4, 'i8*'));
+                var value = Pointer_stringify(getValue($2 + i*4, 'i8*'));
+                hit[key] = value; 
+            }
+            
+            ga(trackId + '.send', hit);
+        }, _trackerIndex, keys.data(), values.data(), params.size());
     }
-
-    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value) override
+    
+    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value, const std::map<std::string, std::string> &params) override
     {
+        std::vector<const char*> keys;
+        std::vector<const char*> values;
+        mapToArrays(params, keys, values);
+        
         EM_ASM_({
             var trackId = 'tracker_index_' + $0;
             var category = Pointer_stringify($1);
             var action = Pointer_stringify($2);
-            var label = Pointer_stringify($3);;
+            var label = Pointer_stringify($3);
             
-            ga(trackId + '.send', {
-                hitType: 'event',
-                eventCategory: category,
-                eventAction: action,
-                eventLabel: label,
-                eventValue: $4
-            });
-        }, _trackerIndex, category.c_str(), action.c_str(), label.c_str(), value);
+            var hit = {};
+            hit.hitType = 'event';
+            hit.eventCategory = category;
+            hit.eventAction = action;
+            hit.eventLabel = label;
+            hit.eventValue = $4;
+            
+            for(var i=0; i<$7; ++i)
+            {
+                var key = Pointer_stringify(getValue($5 + i*4, 'i8*'));
+                var value = Pointer_stringify(getValue($6 + i*4, 'i8*'));
+                hit[key] = value; 
+            }
+            
+            ga(trackId + '.send', hit);
+        }, _trackerIndex, category.c_str(), action.c_str(), label.c_str(), value, keys.data(), values.data(), params.size());
     }
-
-    virtual void sendException(const std::string &description, bool fatal) override
+    
+    virtual void sendException(const std::string &description, bool fatal, const std::map<std::string, std::string> &params) override
     {
+        std::vector<const char*> keys;
+        std::vector<const char*> values;
+        mapToArrays(params, keys, values);
+        
         EM_ASM_({
             var trackId = 'tracker_index_' + $0;
             var description = Pointer_stringify($1);
             
-            ga(trackId + '.send', {
-                hitType: 'exception',
-                exDescription: description,
-                exFatal: $2
-            });
-        }, _trackerIndex, description.c_str(), fatal);
+            var hit = {};
+            hit.hitType = 'exception';
+            hit.exDescription = description;
+            hit.exFatal = $2;
+            
+            for(var i=0; i<$5; ++i)
+            {
+                var key = Pointer_stringify(getValue($3 + i*4, 'i8*'));
+                var value = Pointer_stringify(getValue($4 + i*4, 'i8*'));
+                hit[key] = value; 
+            }
+            
+            ga(trackId + '.send', hit);
+        }, _trackerIndex, description.c_str(), fatal, keys.data(), values.data(), params.size());
     }
 
-    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode) override
+    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode, const std::map<std::string, std::string> &params) override
     {
+        std::vector<const char*> keys;
+        std::vector<const char*> values;
+        mapToArrays(params, keys, values);
+        
         EM_ASM_({
             var trackId = 'tracker_index_' + $0;
             var transactionId = Pointer_stringify($1);
@@ -129,66 +187,110 @@ public:
             var sku = Pointer_stringify($3);
             var category = Pointer_stringify($4);
             
-            ga(trackId + '.ec:addProduct', {
-                'id': transactionId,
-                'name': name,
-                'category': category,
-                'price': $5,
-                'quantity': $6
-            });
-        }, _trackerIndex, transactionId.c_str(), name.c_str(), sku.c_str(), category.c_str(), price, quantity);
+            var hit = {};
+            hit.id = transactionId;
+            hit.name = name;
+            hit.category = category;
+            hit.price = $5;
+            hit.quantity = $6;
+            
+            for(var i=0; i<$9; ++i)
+            {
+                var key = Pointer_stringify(getValue($7 + i*4, 'i8*'));
+                var value = Pointer_stringify(getValue($8 + i*4, 'i8*'));
+                hit[key] = value; 
+            }
+            
+            ga(trackId + '.ec:addProduct', hit);
+        }, _trackerIndex, transactionId.c_str(), name.c_str(), sku.c_str(), category.c_str(), price, quantity, keys.data(), values.data(), params.size());
     }
 
-    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target) override
+    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target, const std::map<std::string, std::string> &params) override
     {
+        std::vector<const char*> keys;
+        std::vector<const char*> values;
+        mapToArrays(params, keys, values);
+        
         EM_ASM_({
             var trackId = 'tracker_index_' + $0;
             var network = Pointer_stringify($1);
             var action = Pointer_stringify($2);
             var target = Pointer_stringify($3);
+            
+            var hit = {};
+            hit.hitType = 'social';
+            hit.socialNetwork = network;
+            hit.socialAction = action;
+            hit.socialTarget = target;
+            
+            for(var i=0; i<$6; ++i)
+            {
+                var key = Pointer_stringify(getValue($4 + i*4, 'i8*'));
+                var value = Pointer_stringify(getValue($5 + i*4, 'i8*'));
+                hit[key] = value; 
+            }
 
-            ga(trackId + '.send', {
-                hitType: 'social',
-                socialNetwork: network,
-                socialAction: action,
-                socialTarget: target
-            });
-        }, _trackerIndex, network.c_str(), action.c_str(), target.c_str());
+            ga(trackId + '.send', hit);
+        }, _trackerIndex, network.c_str(), action.c_str(), target.c_str(), keys.data(), values.data(), params.size());
     }
 
-    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label) override
+    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label, const std::map<std::string, std::string> &params) override
     {
+        std::vector<const char*> keys;
+        std::vector<const char*> values;
+        mapToArrays(params, keys, values);
+        
         EM_ASM_({
             var trackId = 'tracker_index_' + $0;
             var category = Pointer_stringify($1);
             var name = Pointer_stringify($3);
             var label = Pointer_stringify($4);
             
-            ga(trackId + '.send', {
-                hitType: 'timing',
-                timingCategory: category,
-                timingValue: $2,
-                timingVar: name,
-                timingLabel: label
-            });
-        }, _trackerIndex, category.c_str(), intervalMillis, name.c_str(), label.c_str());
+            var hit = {};
+            hit.hitType = 'timing';
+            hit.timingCategory = category;
+            hit.timingValue = $2;
+            hit.timingVar = name;
+            hit.timingLabel = label;
+            
+            for(var i=0; i<$7; ++i)
+            {
+                var key = Pointer_stringify(getValue($5 + i*4, 'i8*'));
+                var value = Pointer_stringify(getValue($6 + i*4, 'i8*'));
+                hit[key] = value; 
+            }
+            
+            ga(trackId + '.send', hit);
+        }, _trackerIndex, category.c_str(), intervalMillis, name.c_str(), label.c_str(), keys.data(), values.data(), params.size());
     }
 
-    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode) override
+    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode, const std::map<std::string, std::string> &params) override
     {
+        std::vector<const char*> keys;
+        std::vector<const char*> values;
+        mapToArrays(params, keys, values);
+        
         EM_ASM_({
             var trackId = 'tracker_index_' + $0;
             var transactionId = Pointer_stringify($1);
             var affiliation = Pointer_stringify($2);
             
-            ga(trackId + '.ec:setAction', 'purchase', {
-                'id': transactionId,
-                'affiliation': affiliation,
-                'revenue': $3,
-                'tax': $4,
-                'shipping': $5
-            });
-        }, _trackerIndex, transactionId.c_str(), affiliation.c_str(), revenue, tax, shipping);
+            var hit = {};
+            hit.id = transactionId;
+            hit.affiliation = affiliation;
+            hit.revenue = $3;
+            hit.tax = $4;
+            hit.shipping = $5;
+            
+            for(var i=0; i<$8; ++i)
+            {
+                var key = Pointer_stringify(getValue($6 + i*4, 'i8*'));
+                var value = Pointer_stringify(getValue($7 + i*4, 'i8*'));
+                hit[key] = value; 
+            }
+            
+            ga(trackId + '.ec:setAction', 'purchase', hit);
+        }, _trackerIndex, transactionId.c_str(), affiliation.c_str(), revenue, tax, shipping, keys.data(), values.data(), params.size());
     }
 
     WinGAITracker(const std::string &trackerId, int trackerIndex):_trackerId(trackerId), _trackerIndex(trackerIndex)

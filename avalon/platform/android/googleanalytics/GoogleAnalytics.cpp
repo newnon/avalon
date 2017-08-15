@@ -10,6 +10,37 @@ const char* const HELPER_CLASS_NAME = "com/avalon/googleanalytics/GoogleAnalytic
 
 namespace avalon {
 
+static jobject jobjectFromDictionary(const std::map<std::string,std::string> &dictionary)
+{
+    JNIEnv* env = cocos2d::JniHelper::getEnv();
+    jclass mapClass = env->FindClass("java/util/HashMap");
+    if(mapClass == NULL)
+    {
+        return NULL;
+    }
+
+    jsize map_len = 1;
+
+    jmethodID init = env->GetMethodID(mapClass, "<init>", "(I)V");
+    jobject hashMap = env->NewObject(mapClass, init, map_len);
+
+    jmethodID put = env->GetMethodID(mapClass, "put", "(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;");
+
+    for(auto &it : dictionary)
+    {
+        jstring key = env->NewStringUTF(it.first.c_str());
+        jstring value = env->NewStringUTF(it.second.c_str());
+
+        env->CallObjectMethod(hashMap, put, key, value);
+
+        env->DeleteLocalRef(key);
+        env->DeleteLocalRef(value);
+    }
+
+    env->DeleteLocalRef(mapClass);
+    return hashMap;
+}
+
 class AndroidGAITracker: public GoogleAnalyticsTracker
 {
 public:
@@ -165,128 +196,142 @@ public:
         }
     }
 
-    virtual void sendAppView() override
+    virtual void sendAppView(const std::map<std::string, std::string> &params) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendAppView", "(Lcom/google/android/gms/analytics/Tracker;)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendAppView", "(Lcom/google/android/gms/analytics/Tracker;Ljava/util/Map;)V"))
             {
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker);
+                jobject jParams = jobjectFromDictionary(params);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jParams);
+                methodInfo.env->DeleteLocalRef(jParams);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }
     }
 
-    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value) override
+    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value, const std::map<std::string, std::string> &params) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendEvent", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendEvent", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JLjava/util/Map;)V"))
             {
                 jstring jCategory = methodInfo.env->NewStringUTF(category.c_str());
                 jstring jAction = methodInfo.env->NewStringUTF(action.c_str());
                 jstring jLabel = methodInfo.env->NewStringUTF(label.c_str());
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jCategory, jAction, jLabel, (jlong)value);
+                jobject jParams = jobjectFromDictionary(params);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jCategory, jAction, jLabel, (jlong)value, jParams);
                 methodInfo.env->DeleteLocalRef(jCategory);
                 methodInfo.env->DeleteLocalRef(jAction);
                 methodInfo.env->DeleteLocalRef(jLabel);
+                methodInfo.env->DeleteLocalRef(jParams);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }
     }
 
-    virtual void sendException(const std::string &description, bool fatal) override
+    virtual void sendException(const std::string &description, bool fatal, const std::map<std::string, std::string> &params) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendException", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Z)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendException", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;ZLjava/util/Map;)V"))
             {
                 jstring jDescription = methodInfo.env->NewStringUTF(description.c_str());
+                jobject jParams = jobjectFromDictionary(params);
                 methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jDescription, (jboolean)fatal);
                 methodInfo.env->DeleteLocalRef(jDescription);
+                methodInfo.env->DeleteLocalRef(jParams);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }
     }
 
-    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode) override
+    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode, const std::map<std::string, std::string> &params) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendItem", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DJLjava/lang/String;)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendItem", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;DJLjava/lang/String;Ljava/util/Map;)V"))
             {
                 jstring jTransactionId = methodInfo.env->NewStringUTF(transactionId.c_str());
                 jstring jName = methodInfo.env->NewStringUTF(transactionId.c_str());
                 jstring jSku = methodInfo.env->NewStringUTF(sku.c_str());
                 jstring jCategory = methodInfo.env->NewStringUTF(category.c_str());
                 jstring jCurrencyCode = methodInfo.env->NewStringUTF(currencyCode.c_str());
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jTransactionId, jName, jSku, jCategory, (jdouble)price ,(jlong)quantity, jCurrencyCode);
+                jobject jParams = jobjectFromDictionary(params);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jTransactionId, jName, jSku, jCategory, (jdouble)price ,(jlong)quantity, jCurrencyCode, jParams);
                 methodInfo.env->DeleteLocalRef(jTransactionId);
                 methodInfo.env->DeleteLocalRef(jName);
                 methodInfo.env->DeleteLocalRef(jSku);
                 methodInfo.env->DeleteLocalRef(jCategory);
                 methodInfo.env->DeleteLocalRef(jCurrencyCode);
+                methodInfo.env->DeleteLocalRef(jParams);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }
     }
 
-    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target) override
+    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target, const std::map<std::string, std::string> &params) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendSocial", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendSocial", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map;)V"))
             {
                 jstring jNetwork = methodInfo.env->NewStringUTF(network.c_str());
                 jstring jAction = methodInfo.env->NewStringUTF(action.c_str());
                 jstring jTarget = methodInfo.env->NewStringUTF(target.c_str());
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jNetwork, jAction, jTarget);
+                jobject jParams = jobjectFromDictionary(params);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jNetwork, jAction, jTarget, jParams);
                 methodInfo.env->DeleteLocalRef(jNetwork);
                 methodInfo.env->DeleteLocalRef(jAction);
                 methodInfo.env->DeleteLocalRef(jTarget);
+                methodInfo.env->DeleteLocalRef(jParams);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }
     }
 
-    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label) override
+    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label, const std::map<std::string, std::string> &params) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendTiming", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendTiming", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;JLjava/lang/String;Ljava/lang/String;Ljava/util/Map;)V"))
             {
                 jstring jCategory = methodInfo.env->NewStringUTF(category.c_str());
                 jstring jName = methodInfo.env->NewStringUTF(name.c_str());
                 jstring jLabel = methodInfo.env->NewStringUTF(label.c_str());
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jCategory, (jlong)intervalMillis, jName, jLabel);
+                jobject jParams = jobjectFromDictionary(params);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jCategory, (jlong)intervalMillis, jName, jLabel, jParams);
                 methodInfo.env->DeleteLocalRef(jCategory);
                 methodInfo.env->DeleteLocalRef(jName);
                 methodInfo.env->DeleteLocalRef(jLabel);
+                methodInfo.env->DeleteLocalRef(jParams);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }
     }
 
-    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode) override
+    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode, const std::map<std::string, std::string> &params) override
     {
         if(_tracker)
         {
             cocos2d::JniMethodInfo methodInfo;
-            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendTransaction", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;DDDLjava/lang/String;)V"))
+            if(cocos2d::JniHelper::getStaticMethodInfo(methodInfo ,HELPER_CLASS_NAME, "sendTransaction", "(Lcom/google/android/gms/analytics/Tracker;Ljava/lang/String;Ljava/lang/String;DDDLjava/lang/String;Ljava/util/Map;)V"))
             {
                 jstring jTransactionId = methodInfo.env->NewStringUTF(transactionId.c_str());
                 jstring jAffiliation = methodInfo.env->NewStringUTF(affiliation.c_str());
                 jstring jCurrencyCode = methodInfo.env->NewStringUTF(currencyCode.c_str());
-                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jTransactionId, jAffiliation, (jdouble)revenue, (jdouble)tax, (jdouble)shipping, jCurrencyCode);
+                jobject jParams = jobjectFromDictionary(params);
+                methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, _tracker, jTransactionId, jAffiliation, (jdouble)revenue, (jdouble)tax, (jdouble)shipping, jCurrencyCode, jParams);
                 methodInfo.env->DeleteLocalRef(jTransactionId);
                 methodInfo.env->DeleteLocalRef(jAffiliation);
                 methodInfo.env->DeleteLocalRef(jCurrencyCode);
+                methodInfo.env->DeleteLocalRef(jParams);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
             }
         }

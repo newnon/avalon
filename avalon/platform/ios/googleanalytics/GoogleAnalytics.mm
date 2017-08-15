@@ -1,4 +1,5 @@
 #include "avalon/GoogleAnalytics.h"
+#include "avalon/platform/ios/utils/utils.h"
 #import "GAI.h"
 #import "GAITracker.h"
 #import "GAIFields.h"
@@ -73,65 +74,90 @@ public:
         [_tracker set:kGAISessionControl  value:@"start"];
     }
     
-    virtual void sendAppView() override
+    virtual void sendAppView(const std::map<std::string, std::string> &params) override
     {
-        [_tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+        GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createScreenView];
+        
+        for(const auto &it:params)
+            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        
+        [_tracker send:[builder build]];
     }
 
-    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value) override
+    virtual void sendEvent(const std::string &category, const std::string &action, const std::string &label, long value, const std::map<std::string, std::string> &params) override
     {
-        [_tracker send:[[GAIDictionaryBuilder
-                         createEventWithCategory:[NSString stringWithCString:category.c_str() encoding:NSUTF8StringEncoding]
-                         action:[NSString stringWithCString:action.c_str() encoding:NSUTF8StringEncoding]
-                         label:[NSString stringWithCString:label.c_str() encoding:NSUTF8StringEncoding]
-                         value:[NSNumber numberWithLong:value]] build]];
+        GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createEventWithCategory:[NSString stringWithCString:category.c_str() encoding:NSUTF8StringEncoding]
+                                                                               action:[NSString stringWithCString:action.c_str() encoding:NSUTF8StringEncoding]
+                                                                                label:[NSString stringWithCString:label.c_str() encoding:NSUTF8StringEncoding]
+                                                                                value:[NSNumber numberWithLong:value]];
+        
+        for(const auto &it:params)
+            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        
+        [_tracker send:[builder build]];
     }
 
-    virtual void sendException(const std::string &description, bool fatal) override
+    virtual void sendException(const std::string &description, bool fatal, const std::map<std::string, std::string> &params) override
     {
-        [_tracker send:[[GAIDictionaryBuilder
-                         createExceptionWithDescription:[NSString stringWithCString:description.c_str() encoding:NSUTF8StringEncoding]
-                         withFatal:[NSNumber numberWithBool:fatal]] build]];
+        GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createExceptionWithDescription:[NSString stringWithCString:description.c_str() encoding:NSUTF8StringEncoding]
+                                                                                   withFatal:[NSNumber numberWithBool:fatal]];
+        
+        for(const auto &it:params)
+            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        
+        [_tracker send:[builder build]];
     }
 
-    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode) override
+    virtual void sendItem(const std::string &transactionId, const std::string &name, const std::string &sku,const std::string &category, double price, long quantity, const std::string &currencyCode, const std::map<std::string, std::string> &params) override
     {
-        [_tracker send:[[GAIDictionaryBuilder
-                         createItemWithTransactionId:[NSString stringWithCString:transactionId.c_str() encoding:NSUTF8StringEncoding]
-                         name:[NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding]
-                         sku:[NSString stringWithCString:sku.c_str() encoding:NSUTF8StringEncoding]
-                         category:[NSString stringWithCString:category.c_str() encoding:NSUTF8StringEncoding]
-                         price:[NSNumber numberWithDouble:price]
-                         quantity:[NSNumber numberWithLong:quantity]
-                         currencyCode:[NSString stringWithCString:currencyCode.c_str() encoding:NSUTF8StringEncoding]] build]];
+        GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createItemWithTransactionId:[NSString stringWithCString:transactionId.c_str() encoding:NSUTF8StringEncoding]
+                                                                                     name:[NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding]
+                                                                                      sku:[NSString stringWithCString:sku.c_str() encoding:NSUTF8StringEncoding]
+                                                                                 category:[NSString stringWithCString:category.c_str() encoding:NSUTF8StringEncoding]
+                                                                                    price:[NSNumber numberWithDouble:price]
+                                                                                 quantity:[NSNumber numberWithLong:quantity]
+                                                                             currencyCode:[NSString stringWithCString:currencyCode.c_str() encoding:NSUTF8StringEncoding]];
+        for(const auto &it:params)
+            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        
+        [_tracker send:[builder build]];
     }
 
-    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target) override
+    virtual void sendSocial(const std::string &network, const std::string &action, const std::string &target, const std::map<std::string, std::string> &params) override
     {
-        [_tracker send:[[GAIDictionaryBuilder
-                         createSocialWithNetwork:[NSString stringWithCString:network.c_str() encoding:NSUTF8StringEncoding]
-                         action:[NSString stringWithCString:action.c_str() encoding:NSUTF8StringEncoding]
-                         target:[NSString stringWithCString:target.c_str() encoding:NSUTF8StringEncoding]] build]];
+        GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createSocialWithNetwork:[NSString stringWithCString:network.c_str() encoding:NSUTF8StringEncoding]
+                                                                               action:[NSString stringWithCString:action.c_str() encoding:NSUTF8StringEncoding]
+                                                                               target:[NSString stringWithCString:target.c_str() encoding:NSUTF8StringEncoding]];
+        for(const auto &it:params)
+            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        
+        [_tracker send:[builder build]];
     }
 
-    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label) override
+    virtual void sendTiming(const std::string &category, long intervalMillis, const std::string &name, const std::string &label, const std::map<std::string, std::string> &params) override
     {
-        [_tracker send:[[GAIDictionaryBuilder
-                         createTimingWithCategory:[NSString stringWithCString:category.c_str() encoding:NSUTF8StringEncoding]
-                         interval:[NSNumber numberWithLong:intervalMillis]
-                         name:[NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding]
-                         label:[NSString stringWithCString:label.c_str() encoding:NSUTF8StringEncoding]] build]];
+        GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createTimingWithCategory:[NSString stringWithCString:category.c_str() encoding:NSUTF8StringEncoding]
+                                                                              interval:[NSNumber numberWithLong:intervalMillis]
+                                                                                  name:[NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding]
+                                                                                 label:[NSString stringWithCString:label.c_str() encoding:NSUTF8StringEncoding]];
+        for(const auto &it:params)
+            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        
+        [_tracker send:[builder build]];
     }
 
-    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode) override
+    virtual void sendTransaction(const std::string &transactionId, const std::string &affiliation, double revenue, double tax, double shipping, const std::string &currencyCode, const std::map<std::string, std::string> &params) override
     {
-        [_tracker send:[[GAIDictionaryBuilder
-                         createTransactionWithId:[NSString stringWithCString:transactionId.c_str() encoding:NSUTF8StringEncoding]
-                         affiliation:[NSString stringWithCString:affiliation.c_str() encoding:NSUTF8StringEncoding]
-                         revenue:[NSNumber numberWithDouble:revenue]
-                         tax:[NSNumber numberWithDouble:tax]
-                         shipping:[NSNumber numberWithDouble:shipping]
-                         currencyCode:[NSString stringWithCString:currencyCode.c_str() encoding:NSUTF8StringEncoding]] build]];
+        GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createTransactionWithId:[NSString stringWithCString:transactionId.c_str() encoding:NSUTF8StringEncoding]
+                                                                          affiliation:[NSString stringWithCString:affiliation.c_str() encoding:NSUTF8StringEncoding]
+                                                                              revenue:[NSNumber numberWithDouble:revenue]
+                                                                                  tax:[NSNumber numberWithDouble:tax]
+                                                                             shipping:[NSNumber numberWithDouble:shipping]
+                                                                         currencyCode:[NSString stringWithCString:currencyCode.c_str() encoding:NSUTF8StringEncoding]];
+        for(const auto &it:params)
+            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+        
+        [_tracker send:[builder build]];
     }
 
     IOSGAITracker(const std::string &trackerId, id<GAITracker> tracker):_tracker(tracker),_trackerId(trackerId)

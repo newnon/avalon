@@ -20,6 +20,8 @@ public:
     
     Value();
     explicit Value(int v);
+    explicit Value(long v);
+    explicit Value(long long v);
     explicit Value(float v);
     explicit Value(double v);
     explicit Value(bool v);
@@ -41,6 +43,8 @@ public:
     Value& operator= (Value&& other);
     
     Value& operator= (int v);
+    Value& operator= (long v);
+    Value& operator= (long long v);
     Value& operator= (float v);
     Value& operator= (double v);
     Value& operator= (bool v);
@@ -60,6 +64,8 @@ public:
     bool operator== (const Value& v) const;
     
     int asInt() const;
+    long asLong() const;
+    long long asLongLong() const;
     float asFloat() const;
     double asDouble() const;
     bool asBool() const;
@@ -95,7 +101,7 @@ private:
     
     union
     {
-        int intVal;
+        long long intVal;
         float floatVal;
         double doubleVal;
         bool boolVal;

@@ -7,7 +7,7 @@ id valueToId(const Value &value)
 {
     switch (value.getType()) {
         case Value::Type::INTEGER:
-            return [NSNumber numberWithInt:value.asInt()];
+            return [NSNumber numberWithLongLong:value.asLongLong()];
             break;
             
         case Value::Type::FLOAT:

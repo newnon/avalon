@@ -549,6 +549,10 @@
 		A5F0C94F19226130006B8457 /* Notifications.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D08BB718F6F67800B4EBA1 /* Notifications.h */; };
 		A5F0C9511922614A006B8457 /* AdMob.h in Headers */ = {isa = PBXBuildFile; fileRef = A5D3276F1900515B00A65D25 /* AdMob.h */; };
 		A5F0C9531922615B006B8457 /* GoogleAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = A5ACF04C1918B2E300A010A5 /* GoogleAnalytics.h */; };
+		A5F411981F432CD400A51225 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5F4119F1F432CF400A51225 /* utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = A588830F1ADC5A0700B32AC7 /* utils.mm */; };
+		A5F411A01F432CFC00A51225 /* dictionary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A588830B1ADC59C100B32AC7 /* dictionary.cpp */; };
+		A5F411BD1F43502700A51225 /* dictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = A588830C1ADC59C100B32AC7 /* dictionary.h */; };
 		D87F76151EA4DE34005187B4 /* FacebookSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */; };
 		D87F76161EA4DE34005187B4 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
 		D87F76171EA4DE34005187B4 /* SocialPluginHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */; };
@@ -1519,6 +1523,7 @@
 		A5F0C92D1922356B006B8457 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
 		A5F0C92E1922356B006B8457 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		A5F0C92F1922356B006B8457 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		A5F4119E1F432CD400A51225 /* libUtils Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUtils Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookSocialPlugin.h; path = avalon/FacebookSocialPlugin.h; sourceTree = "<group>"; };
 		D87F76131EA4DE34005187B4 /* SocialPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialPlugin.h; path = avalon/SocialPlugin.h; sourceTree = "<group>"; };
 		D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialPluginHelpers.h; path = avalon/SocialPluginHelpers.h; sourceTree = "<group>"; };
@@ -1817,6 +1822,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5F411971F432CD400A51225 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5F411981F432CD400A51225 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D87F761E1EA4DE6D005187B4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1932,6 +1945,7 @@
 				A52BB1661C92CFDC00AC2799 /* libSystemInfo Mac.a */,
 				D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */,
 				A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */,
+				A5F4119E1F432CD400A51225 /* libUtils Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3761,6 +3775,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5F411991F432CD400A51225 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5F411BD1F43502700A51225 /* dictionary.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D87F76221EA4DE6D005187B4 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -4332,6 +4354,23 @@
 			productReference = A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5F411931F432CD400A51225 /* Utils Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5F4119B1F432CD400A51225 /* Build configuration list for PBXNativeTarget "Utils Mac" */;
+			buildPhases = (
+				A5F411941F432CD400A51225 /* Sources */,
+				A5F411971F432CD400A51225 /* Frameworks */,
+				A5F411991F432CD400A51225 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Utils Mac";
+			productName = Avalon;
+			productReference = A5F4119E1F432CD400A51225 /* libUtils Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		D87F76191EA4DE6D005187B4 /* Facebook iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D87F76241EA4DE6D005187B4 /* Build configuration list for PBXNativeTarget "Facebook iOS" */;
@@ -4431,6 +4470,7 @@
 				A55885EE19A4C87D00914838 /* UI iOS */,
 				A55885FC19A4C89000914838 /* UI Mac */,
 				A58882F11ADC597300B32AC7 /* Utils iOS */,
+				A5F411931F432CD400A51225 /* Utils Mac */,
 				D87F76191EA4DE6D005187B4 /* Facebook iOS */,
 				A50BC24618E99DA500F1F979 /* Build all libs iOS */,
 				A50FFF0F1A1B5C9900952186 /* Build all libs Mac */,
@@ -4897,6 +4937,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5E989FB1EA5FEEB003EB302 /* VKSocialPlugin.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5F411941F432CD400A51225 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5F411A01F432CFC00A51225 /* dictionary.cpp in Sources */,
+				A5F4119F1F432CF400A51225 /* utils.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6184,6 +6233,29 @@
 			};
 			name = Release;
 		};
+		A5F4119C1F432CD400A51225 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A5F4119D1F432CD400A51225 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		D87F76251EA4DE6D005187B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6536,6 +6608,15 @@
 			buildConfigurations = (
 				A5E989EF1EA5FE0B003EB302 /* Debug */,
 				A5E989F01EA5FE0B003EB302 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5F4119B1F432CD400A51225 /* Build configuration list for PBXNativeTarget "Utils Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5F4119C1F432CD400A51225 /* Debug */,
+				A5F4119D1F432CD400A51225 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

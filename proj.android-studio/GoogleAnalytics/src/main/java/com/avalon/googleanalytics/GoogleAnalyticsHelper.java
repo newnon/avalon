@@ -3,6 +3,7 @@ package com.avalon.googleanalytics;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import org.cocos2dx.lib.Cocos2dxHelper;
 
@@ -25,8 +26,6 @@ public abstract class GoogleAnalyticsHelper
 	private static boolean _allowIDFACollection = false;
 	private static UncaughtExceptionHandler _uncaughtExceptionHandler = null;
 	private static UncaughtExceptionHandler _defaultExceptionHandler = null;
-	private static HashMap<Tracker,SparseArray<String>> _customDimensions = new HashMap<Tracker,SparseArray<String>>();
-	private static HashMap<Tracker,SparseArray<Float>> _customMetrics = new HashMap<Tracker,SparseArray<Float>>();
 	private static HashSet<Tracker> _newSessions = new HashSet<Tracker>();
 	
 	final private static int kGAILogLevelNone = 0;
@@ -74,24 +73,12 @@ public abstract class GoogleAnalyticsHelper
     }
     
     public static void setCustomDimension(Tracker tracker, int index, String value)
-    { 
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions == null)
-    	{
-    		dimensions = new SparseArray<String>();
-    		_customDimensions.put(tracker, dimensions);
-    	}
-    	dimensions.put(index, value);
+    {
+		tracker.set(String.format("dimension%d", index), value);
     }
     public static void setCustomMetric(Tracker tracker, int index, double value)
     {
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics == null)
-    	{
-    		metrics = new SparseArray<Float>();
-    		_customMetrics.put(tracker, metrics);
-    	}
-    	metrics.put(index, (float)value);
+		tracker.set(String.format("metric%d", index), String.valueOf(value));
     }
     
     public static void setNewSession(Tracker tracker)
@@ -99,49 +86,24 @@ public abstract class GoogleAnalyticsHelper
     	_newSessions.add(tracker);
     }
     
-    public static void sendAppView(Tracker tracker)
+    public static void sendAppView(Tracker tracker, Map<String,String> params)
     {
     	HitBuilders.AppViewBuilder builder = new HitBuilders.AppViewBuilder();
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions != null)
-    	{
-    		for(int i = 0; i < dimensions.size(); i++) 
-    			builder.setCustomDimension(dimensions.keyAt(i), dimensions.valueAt(i));
-    		_customDimensions.remove(tracker);
-    	}
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics != null)
-    	{
-    		for(int i = 0; i < metrics.size(); i++) 
-    			builder.setCustomMetric(metrics.keyAt(i), metrics.valueAt(i));
-    		_customMetrics.remove(tracker);
-    	}
     	if(_newSessions.contains(tracker))
     	{
     		builder.setNewSession();
     		_newSessions.remove(tracker);
     	}
-    		
     	tracker.send(builder.build());
     }
 
-    public static void sendEvent(Tracker tracker, String category, String action, String label, long value)
+    public static void sendEvent(Tracker tracker, String category, String action, String label, long value, Map<String,String> params)
     {
     	HitBuilders.EventBuilder builder = new HitBuilders.EventBuilder();
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions != null)
-    	{
-    		for(int i = 0; i < dimensions.size(); i++) 
-    			builder.setCustomDimension(dimensions.keyAt(i), dimensions.valueAt(i));
-    		_customDimensions.remove(tracker);
-    	}
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics != null)
-    	{
-    		for(int i = 0; i < metrics.size(); i++) 
-    			builder.setCustomMetric(metrics.keyAt(i), metrics.valueAt(i));
-    		_customMetrics.remove(tracker);
-    	}
+
+        for (Map.Entry<String, String> entry : params.entrySet())
+            builder.set(entry.getKey(),entry.getValue());
+
     	if(_newSessions.contains(tracker))
     	{
     		builder.setNewSession();
@@ -154,23 +116,13 @@ public abstract class GoogleAnalyticsHelper
         .build());
     }
 
-    public static void sendException(Tracker tracker, String description, boolean fatal)
+    public static void sendException(Tracker tracker, String description, boolean fatal, Map<String,String> params)
     {
     	HitBuilders.ExceptionBuilder builder = new HitBuilders.ExceptionBuilder();
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions != null)
-    	{
-    		for(int i = 0; i < dimensions.size(); i++) 
-    			builder.setCustomDimension(dimensions.keyAt(i), dimensions.valueAt(i));
-    		_customDimensions.remove(tracker);
-    	}
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics != null)
-    	{
-    		for(int i = 0; i < metrics.size(); i++) 
-    			builder.setCustomMetric(metrics.keyAt(i), metrics.valueAt(i));
-    		_customMetrics.remove(tracker);
-    	}
+
+        for (Map.Entry<String, String> entry : params.entrySet())
+            builder.set(entry.getKey(),entry.getValue());
+
     	if(_newSessions.contains(tracker))
     	{
     		builder.setNewSession();
@@ -181,24 +133,14 @@ public abstract class GoogleAnalyticsHelper
     	.build());
     }
 
-    public static void sendItem(Tracker tracker, String transactionId, String name, String sku, String category, double price, long quantity, String currencyCode)
+    public static void sendItem(Tracker tracker, String transactionId, String name, String sku, String category, double price, long quantity, String currencyCode, Map<String,String> params)
     {
     	HitBuilders.ItemBuilder builder = new HitBuilders.ItemBuilder();
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions != null)
-    	{
-    		for(int i = 0; i < dimensions.size(); i++) 
-    			builder.setCustomDimension(dimensions.keyAt(i), dimensions.valueAt(i));
-    		_customDimensions.remove(tracker);
-    	}
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics != null)
-    	{
-    		for(int i = 0; i < metrics.size(); i++) 
-    			builder.setCustomMetric(metrics.keyAt(i), metrics.valueAt(i));
-    		_customMetrics.remove(tracker);
-    	}
-    	if(_newSessions.contains(tracker))
+
+        for (Map.Entry<String, String> entry : params.entrySet())
+            builder.set(entry.getKey(),entry.getValue());
+
+        if(_newSessions.contains(tracker))
     	{
     		builder.setNewSession();
     		_newSessions.remove(tracker);
@@ -213,24 +155,14 @@ public abstract class GoogleAnalyticsHelper
     	.build());
     }
 
-    public static void sendSocial(Tracker tracker, String network, String action, String target)
+    public static void sendSocial(Tracker tracker, String network, String action, String target, Map<String,String> params)
     {
     	HitBuilders.SocialBuilder builder = new HitBuilders.SocialBuilder();
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions != null)
-    	{
-    		for(int i = 0; i < dimensions.size(); i++) 
-    			builder.setCustomDimension(dimensions.keyAt(i), dimensions.valueAt(i));
-    		_customDimensions.remove(tracker);
-    	}
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics != null)
-    	{
-    		for(int i = 0; i < metrics.size(); i++) 
-    			builder.setCustomMetric(metrics.keyAt(i), metrics.valueAt(i));
-    		_customMetrics.remove(tracker);
-    	}
-    	if(_newSessions.contains(tracker))
+
+        for (Map.Entry<String, String> entry : params.entrySet())
+            builder.set(entry.getKey(),entry.getValue());
+
+        if(_newSessions.contains(tracker))
     	{
     		builder.setNewSession();
     		_newSessions.remove(tracker);
@@ -241,24 +173,14 @@ public abstract class GoogleAnalyticsHelper
     	.build());
     }
 
-    public static void sendTiming(Tracker tracker, String category, long intervalMillis, String name, String label)
+    public static void sendTiming(Tracker tracker, String category, long intervalMillis, String name, String label, Map<String,String> params)
     {
     	HitBuilders.TimingBuilder builder = new HitBuilders.TimingBuilder();
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions != null)
-    	{
-    		for(int i = 0; i < dimensions.size(); i++) 
-    			builder.setCustomDimension(dimensions.keyAt(i), dimensions.valueAt(i));
-    		_customDimensions.remove(tracker);
-    	}
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics != null)
-    	{
-    		for(int i = 0; i < metrics.size(); i++) 
-    			builder.setCustomMetric(metrics.keyAt(i), metrics.valueAt(i));
-    		_customMetrics.remove(tracker);
-    	}
-    	if(_newSessions.contains(tracker))
+
+        for (Map.Entry<String, String> entry : params.entrySet())
+            builder.set(entry.getKey(),entry.getValue());
+
+        if(_newSessions.contains(tracker))
     	{
     		builder.setNewSession();
     		_newSessions.remove(tracker);
@@ -270,24 +192,14 @@ public abstract class GoogleAnalyticsHelper
     	.build());
     }
 
-    public static void sendTransaction(Tracker tracker, String transactionId, String affiliation, double revenue, double tax, double shipping, String currencyCode)
+    public static void sendTransaction(Tracker tracker, String transactionId, String affiliation, double revenue, double tax, double shipping, String currencyCode, Map<String,String> params)
     {
     	HitBuilders.TransactionBuilder builder = new HitBuilders.TransactionBuilder();
-    	SparseArray<String> dimensions = _customDimensions.get(tracker);
-    	if(dimensions != null)
-    	{
-    		for(int i = 0; i < dimensions.size(); i++) 
-    			builder.setCustomDimension(dimensions.keyAt(i), dimensions.valueAt(i));
-    		_customDimensions.remove(tracker);
-    	}
-    	SparseArray<Float> metrics = _customMetrics.get(tracker);
-    	if(metrics != null)
-    	{
-    		for(int i = 0; i < metrics.size(); i++) 
-    			builder.setCustomMetric(metrics.keyAt(i), metrics.valueAt(i));
-    		_customMetrics.remove(tracker);
-    	}
-    	if(_newSessions.contains(tracker))
+
+        for (Map.Entry<String, String> entry : params.entrySet())
+            builder.set(entry.getKey(),entry.getValue());
+
+        if(_newSessions.contains(tracker))
     	{
     		builder.setNewSession();
     		_newSessions.remove(tracker);
@@ -355,8 +267,6 @@ public abstract class GoogleAnalyticsHelper
 		Tracker tracker = _trackers.get(trackingId);
 		if(tracker != null)
 		{
-			_customDimensions.remove(tracker);
-			_customMetrics.remove(tracker);
 			_newSessions.remove(tracker);
 			_trackers.remove(trackingId);
 		}
