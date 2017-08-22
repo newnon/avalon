@@ -79,7 +79,7 @@ public:
         GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createScreenView];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -92,7 +92,7 @@ public:
                                                                                 value:[NSNumber numberWithLong:value]];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -103,7 +103,7 @@ public:
                                                                                    withFatal:[NSNumber numberWithBool:fatal]];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -118,7 +118,7 @@ public:
                                                                                  quantity:[NSNumber numberWithLong:quantity]
                                                                              currencyCode:[NSString stringWithCString:currencyCode.c_str() encoding:NSUTF8StringEncoding]];
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -129,7 +129,7 @@ public:
                                                                                action:[NSString stringWithCString:action.c_str() encoding:NSUTF8StringEncoding]
                                                                                target:[NSString stringWithCString:target.c_str() encoding:NSUTF8StringEncoding]];
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -141,7 +141,7 @@ public:
                                                                                   name:[NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding]
                                                                                  label:[NSString stringWithCString:label.c_str() encoding:NSUTF8StringEncoding]];
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -155,7 +155,7 @@ public:
                                                                              shipping:[NSNumber numberWithDouble:shipping]
                                                                          currencyCode:[NSString stringWithCString:currencyCode.c_str() encoding:NSUTF8StringEncoding]];
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }

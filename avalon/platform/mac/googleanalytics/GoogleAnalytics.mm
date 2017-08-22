@@ -72,7 +72,7 @@ public:
         GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createScreenView];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -84,7 +84,7 @@ public:
                                                                                   label:NSStringFromString(label)
                                                                                   value:[NSNumber numberWithLong:value]];
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -94,7 +94,7 @@ public:
         GAIDictionaryBuilder *builder = [GAIDictionaryBuilder createExceptionWithDescription:NSStringFromString(description) withFatal:[NSNumber numberWithBool:fatal]];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -110,7 +110,7 @@ public:
                                                             currencyCode:NSStringFromString(currencyCode)];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -122,7 +122,7 @@ public:
                                                                                target:NSStringFromString(target)];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -135,7 +135,7 @@ public:
                                                                                  label:NSStringFromString(label)];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
@@ -150,7 +150,7 @@ public:
                                                                    currencyCode:NSStringFromString(currencyCode)];
         
         for(const auto &it:params)
-            [builder setValue:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
+            [builder set:[NSString stringWithUTF8String:it.second.c_str()] forKey:[NSString stringWithUTF8String:it.first.c_str()]];
         
         [_tracker send:[builder build]];
     }
