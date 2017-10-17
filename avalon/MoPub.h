@@ -533,7 +533,7 @@ public:
      *
      * @param delegate The delegate that will receive all events related to rewarded video.
      */
-    virtual void initializeRewardedVideoWithGlobalMediationSettings(void */*(NSArray *)*/globalMediationSettings, MPRewardedVideoDelegate &delegate) = 0;
+    virtual void initializeRewardedVideoWithGlobalMediationSettings(void* /*(NSArray)*/ globalMediationSettings, MPRewardedVideoDelegate &delegate) = 0;
 
     /**
      * Loads a rewarded video ad for the given ad unit ID.
@@ -547,7 +547,7 @@ public:
      * @param mediationSettings An array of mediation settings objects that map to networks that may show ads for the ad unit ID. This array
      * should only contain objects for networks you wish to configure. This can be nil.
      */
-    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, void*/*(NSArray *)*/mediationSettings) = 0;
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, void* /*(NSArray)*/ mediationSettings) = 0;
 
     /**
      * Loads a rewarded video ad for the given ad unit ID.
@@ -564,7 +564,7 @@ public:
      * @param mediationSettings An array of mediation settings objects that map to networks that may show ads for the ad unit ID. This array
      * should only contain objects for networks you wish to configure. This can be nil.
      */
-    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void*/*(CLLocation *)*/ location, void*/*(NSArray *)*/mediationSettings) = 0;
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void* /*(CLLocation)*/ location, void* /*(NSArray)*/ mediationSettings) = 0;
 
     /**
      * Loads a rewarded video ad for the given ad unit ID.
@@ -582,7 +582,7 @@ public:
      * @param mediationSettings An array of mediation settings objects that map to networks that may show ads for the ad unit ID. This array
      * should only contain objects for networks you wish to configure. This can be nil.
      */
-    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void*/*(CLLocation *)*/ location, const std::string &customerId, void*/*(NSArray *)*/mediationSettings) = 0;
+    virtual void loadRewardedVideoAdWithAdUnitID(const std::string &adUnitID, const std::string &keywords, void* /*(CLLocation)*/ location, const std::string &customerId, void* /*(NSArray)*/ mediationSettings) = 0;
 
     /**
      * Returns whether or not an ad is available for the given ad unit ID.
