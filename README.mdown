@@ -245,7 +245,22 @@ and automate annoying tasks.
             </receiver>
             
         where `{package}` is you package name example `com.google.example`
-
+        
+1. Add following code to main Activity  `AppActivity` 
+        void onCreate(final Bundle savedInstanceState) {
+            ...
+        
+            Notifications.setContext(this);
+            Notifications.processIntent(getIntent());
+            
+        void onPause() {
+            ...
+        
+            Notifications.onPause();
+            
+        void onNewIntent(Intent intent) {
+            Notifications.processIntent(intent);
+            ...
 
 
 # Documentations
