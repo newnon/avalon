@@ -159,6 +159,7 @@ public class Notifications{
                     Object value = bundle.get(key);
                     notificationParams.put(key, value!=null ? value.toString() : "");
                 }
+                extras.remove("notification");
             }
         }
     }
