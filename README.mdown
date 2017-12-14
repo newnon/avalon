@@ -231,6 +231,7 @@ and automate annoying tasks.
     where `{package}` is you package name example `com.google.example`
     
 1. Ensure the `application` `receivers` in your `AndroidManifest.xml`
+
         <application>
             ...
         
@@ -247,6 +248,7 @@ and automate annoying tasks.
         where `{package}` is you package name example `com.google.example`
         
 1. Add following code to main Activity  `AppActivity` 
+
         void onCreate(final Bundle savedInstanceState) {
             ...
         
