@@ -8,10 +8,18 @@
 namespace avalon {
     
     
+struct Notification {
+    int id; //-1 for remote
+    std::string message;
+    std::string sound;
+    unsigned badgeNumber;
+    std::unordered_map<std::string,std::string> userDict;
+};
+    
 class LocalNotificationsDelegate
 {
 public:
-    virtual void onLocalNotification(bool active, const std::string &message, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict) = 0;
+    virtual void onLocalNotification(bool active, int notificationId, const std::string &message, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict) = 0;
     virtual ~LocalNotificationsDelegate() {}
 };
     
@@ -30,7 +38,7 @@ public:
     static void cancel(int id);
     static void cancelAll();
     static bool isScheduled(int id);
-    static std::vector<std::string> getScheduledIds();
+    static std::vector<int> getScheduledIds();
     
     static void setBadgeNumber(unsigned value);
     static unsigned getBadgeNumber();
@@ -40,6 +48,8 @@ public:
     
     static void registerForRemoteNotification();
     static void unregisterForRemoteNotifications();
+    
+    static const Notification* getLaunchedNotification();
 
     
     /*– scheduleLocalNotification:

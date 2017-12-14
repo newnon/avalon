@@ -4,7 +4,6 @@
 @interface NotificationChecker : NSObject
 @end
 
-static BOOL _launchedWithNotification = NO;
 static NSDictionary *_notificationDictionary = nil;
 
 static avalon::LocalNotificationsDelegate *_localNotificationsDelegate = nullptr;
@@ -27,7 +26,11 @@ void Notifications::schedule(const std::string &message, long long time, int id,
         notification.soundName = [NSString stringWithCString:sound.c_str() encoding:NSUTF8StringEncoding];
     
     NSNumber* key = [NSNumber numberWithInt:id];
-    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:key forKey:@"_id"];
+    NSMutableDictionary *infoDict = [NSMutableDictionary dictionaryWithObject:key forKey:@"_id"];
+    for(const auto &pair: userDict)
+    {
+        [infoDict setObject:[NSString stringWithUTF8String:pair.second.c_str()] forKey: [NSString stringWithUTF8String:pair.first.c_str()]];
+    }
     notification.userInfo = infoDict;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
@@ -59,11 +62,11 @@ bool Notifications::isScheduled(int id)
     return false;
 }
     
-std::vector<std::string> Notifications::getScheduledIds()
+std::vector<int> Notifications::getScheduledIds()
 {
-    std::vector<std::string> ret;
+    std::vector<int> ret;
     for(UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-        ret.push_back([[notification.userInfo objectForKey:@"_id"] cStringUsingEncoding:NSUTF8StringEncoding]);
+        ret.push_back([[notification.userInfo objectForKey:@"_id"] intValue]);
     }
     return ret;
 }
@@ -105,7 +108,57 @@ void Notifications::unregisterForRemoteNotifications()
     [[UIApplication sharedApplication] unregisterForRemoteNotifications];
 }
     
+const Notification* Notifications::getLaunchedNotification()
+{
+    if(!_notificationDictionary)
+        return nullptr;
     
+    static Notification notification;
+    notification.id = -1;
+    notification.badgeNumber = 0;
+    notification.message.clear();
+    notification.sound.clear();
+    
+    std::unordered_map<std::string,std::string> params;
+    
+    for(id keyObject in _notificationDictionary)
+    {
+        id valueObject = [_notificationDictionary objectForKey:keyObject];
+        std::string key = [keyObject cStringUsingEncoding:NSUTF8StringEncoding];
+        if (key == "_id")
+        {
+            notification.id = [valueObject intValue];
+        }
+        else if (key == "aps")
+        {
+            id alertObject = [valueObject objectForKey:@"alert"];
+            if(alertObject)
+                notification.message = [alertObject cStringUsingEncoding:NSUTF8StringEncoding];
+            id soundObject = [valueObject objectForKey:@"sound"];
+            if(soundObject)
+                notification.sound = [soundObject cStringUsingEncoding:NSUTF8StringEncoding];
+            id badgeObject = [valueObject objectForKey:@"badge"];
+            if(badgeObject)
+                notification.badgeNumber = [badgeObject intValue];
+        }
+        else if (key == "_remote")
+        {
+            if([valueObject boolValue])
+                notification.id = -1;
+        }
+        else
+        {
+            if([valueObject respondsToSelector:@selector(cStringUsingEncoding:)])
+                params[key] = [valueObject cStringUsingEncoding:NSUTF8StringEncoding];
+            else if ([valueObject respondsToSelector:@selector(stringValue)])
+                params[key] = [[valueObject stringValue] cStringUsingEncoding:NSUTF8StringEncoding];
+        }
+    }
+        
+    notification.userDict = params;
+    
+    return &notification;
+}
     
 }
 
@@ -129,7 +182,7 @@ void Notifications::unregisterForRemoteNotifications()
 
 + (void)willEnterForeground:(NSNotification *)notification
 {
-    _launchedWithNotification = NO;
+    _notificationDictionary = nil;
 }
 
 + (void)didRegisterForRemoteNotifications:(NSNotification *)notification
@@ -156,8 +209,18 @@ void Notifications::unregisterForRemoteNotifications()
 + (void)didReceiveLocalNotification:(NSNotification *)notification
 {
     bool active = [UIApplication sharedApplication].applicationState  == UIApplicationStateActive;
-    if(!_launchedWithNotification && !active)
-        _launchedWithNotification = YES;
+    if(!active)
+    {
+        UILocalNotification *localNotification = [notification.userInfo objectForKey:@"notification"];
+        if (localNotification)
+        {
+            NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:localNotification.userInfo];
+            [dict setObject:[NSNumber numberWithBool:NO] forKey:@"_remote"];
+            [dict setObject:[NSDictionary dictionaryWithObjectsAndKeys:localNotification.alertBody, @"alert", [NSNumber numberWithInteger:localNotification.applicationIconBadgeNumber], @"badge", localNotification.soundName, @"sound", nil] forKey:@"aps"];
+            _notificationDictionary = dict;
+            return;
+        }
+    }
     
     if(_localNotificationsDelegate)
     {
@@ -178,23 +241,26 @@ void Notifications::unregisterForRemoteNotifications()
         id key;
         while ((key = [enumerator nextObject])) {
             id value = [notification.userInfo objectForKey:key];
-            if ([value respondsToSelector:@selector(cStringUsingEncoding:)])
+            if (![key isEqualToString:@"_id"] && [value respondsToSelector:@selector(cStringUsingEncoding:)])
             {
                 const char *temp =[value cStringUsingEncoding:NSUTF8StringEncoding];
                 if(temp)
                     userParams.insert(std::make_pair([key cStringUsingEncoding:NSUTF8StringEncoding], temp));
             }
         }
-        _localNotificationsDelegate->onLocalNotification(active, message, sound, badge, userParams);
+        _localNotificationsDelegate->onLocalNotification(active, [[notification.userInfo objectForKey:@"_id"] intValue], message, sound, badge, userParams);
     }
 }
 
 + (void)didReceiveRemoteNotification:(NSNotification *)notification
 {
-    bool active = [UIApplication sharedApplication].applicationState  == UIApplicationStateActive;
-    if(!_launchedWithNotification && !active)
-        _launchedWithNotification = YES;
-    
+    bool active = [UIApplication sharedApplication].applicationState == UIApplicationStateActive;
+    if(!active)
+    {
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:notification.userInfo];
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"_remote"];
+        _notificationDictionary = dict;
+    }
     if(_remoteNotificationsDelegate)
     {
         NSDictionary *userInfo = notification.userInfo;
@@ -246,10 +312,8 @@ void Notifications::unregisterForRemoteNotifications()
     UILocalNotification *localNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotification)
     {
-        _launchedWithNotification = YES;
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:notification.userInfo];
-        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"active"];
-        [dict setObject:[NSNumber numberWithBool:NO] forKey:@"remote"];
+        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:localNotification.userInfo];
+        [dict setObject:[NSNumber numberWithBool:NO] forKey:@"_remote"];
         [dict setObject:[NSDictionary dictionaryWithObjectsAndKeys:localNotification.alertBody, @"alert", [NSNumber numberWithInteger:localNotification.applicationIconBadgeNumber], @"badge", localNotification.soundName, @"sound", nil] forKey:@"aps"];
         _notificationDictionary = dict;
         return;
@@ -257,10 +321,8 @@ void Notifications::unregisterForRemoteNotifications()
     NSDictionary *userInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo)
     {
-        _launchedWithNotification = YES;
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userInfo];
-        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"remote"];
-        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"active"];
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:@"_remote"];
         _notificationDictionary = dict;
         return;
     }

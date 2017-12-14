@@ -1,7 +1,9 @@
 package com.avalon.notifications;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.cocos2dx.lib.Cocos2dxHelper;
@@ -23,15 +25,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.NotificationCompat;
+import android.os.Bundle;
 import android.util.Log;
 
 public class Notifications{
-	
+
 	private static Context activity = Cocos2dxHelper.getActivity();
 	private static final String TAG = "avalon_Notifications";
 	private final static String LOCAL_NOTIFICAION_STORE = "LocalNotifications";
@@ -39,26 +40,34 @@ public class Notifications{
 	private static final String PROPERTY_REG_ID = "registration_id";
     private static final String PROPERTY_APP_VERSION = "appVersion";
 	private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static HashMap<String, String> notificationParams = null;
 	//private static String SENDER_ID = "Your-Sender-ID";
 	private static GoogleCloudMessaging gcm;
 	private static String regid;
 	
-	private static native void delegateOnLocalNotification(boolean active, String message, String sound, int badgeNumber);
+	private static native void delegateOnLocalNotification(boolean active, int id, String message, String sound, int badgeNumber);
 	private static native void delegateOnRemoteNotification(boolean active, String message, String sound, int badgeNumber);
 	private static native void delegateOnRegisterForRemoteNotifications(String data, String error);
+
+    public static void setContext (Context context) {
+        if (Notifications.activity == null) {
+            Notifications.activity = context;
+        }
+    }
 	
-	public static void onLocalNotification(String message, String sound, int badgeNumber)
+	public static void onLocalNotification(int id, String message, String sound, int badgeNumber)
 	{
 		if(Cocos2dxHelper.getActivity() != null)
 		{
 			final String lMessage = message;
 			final String lSound = sound;
 			final int lNadgeNumber = badgeNumber;
+            final int lId = id;
 			final boolean lActive = getApplicationActive();
 			Cocos2dxHelper.runOnGLThread(new Runnable() {
 				@Override
 				public void run() {
-					Notifications.delegateOnLocalNotification(lActive,lMessage,lSound,lNadgeNumber);
+					Notifications.delegateOnLocalNotification(lActive, lId, lMessage, lSound, lNadgeNumber);
 				}
 			});
 		}
@@ -96,15 +105,17 @@ public class Notifications{
 		}
 	}
 	
-	public static void showLocalNotification(String message, String sound, long time, int id, int badgeNumber) {
+	public static void showLocalNotification(String message, String sound, long time, int id, int badgeNumber, HashMap<String, String> params) {
 		Log.v(TAG, "showLocalNotification");
-		add(message, sound, time, id, badgeNumber);
+		add(message, sound, time, id, badgeNumber, params);
 		JSONObject obj = new JSONObject();
 		try {
 			obj.put("message", message);
 			obj.put("sound", sound);
 			obj.put("time", time);
 			obj.put("badge", badgeNumber);
+            if(params != null)
+                obj.put("params", params);
 		} catch (JSONException e) {
 		}
 		persist(id,obj);
@@ -136,12 +147,41 @@ public class Notifications{
 		cancelAll();
 		unpersistAll();
 	}
+
+    public static void processIntent(Intent intent)
+    {
+        Bundle extras = intent.getExtras();
+        if(extras != null) {
+            Bundle bundle = extras.getBundle("notification");
+            if (bundle != null) {
+                notificationParams = new HashMap<String, String>();
+                for (String key : bundle.keySet()) {
+                    Object value = bundle.get(key);
+                    notificationParams.put(key, value!=null ? value.toString() : "");
+                }
+            }
+        }
+    }
+
+    public static void onPause()
+    {
+        notificationParams = null;
+    }
+
+    public static HashMap<String, String> getLaunchedNotification()
+    {
+        return notificationParams;
+    }
 	
-	static void showNotification (Context context, int notificationId, String message, String sound, int badge) {
+	static void showNotification (Context context, int notificationId, String message, String sound, int badge, Bundle bundle) {
 		String packageName  = context.getPackageName();
         Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
 
         launchIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        Bundle localBundle = new Bundle(bundle);
+        localBundle.putInt("id", notificationId);
+        launchIntent.putExtra("notification", localBundle);
         
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, launchIntent,
 				PendingIntent.FLAG_UPDATE_CURRENT);
@@ -151,7 +191,7 @@ public class Notifications{
             largeIcon = ((BitmapDrawable)context.getPackageManager().getApplicationIcon(context.getPackageName())).getBitmap();
         } catch (NameNotFoundException e) {
         }
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        Notification.Builder builder = new Notification.Builder(context);
 		builder.setContentTitle(context.getString(context.getResources().getIdentifier("app_name", "string", context.getPackageName())));
 		builder.setContentText(message);
 		builder.setSmallIcon(context.getResources().getIdentifier("icon_small", "drawable", context.getPackageName()));
@@ -160,7 +200,7 @@ public class Notifications{
 		builder.setAutoCancel(true);
 		builder.setNumber(badge);
 		builder.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
-		if(!sound.isEmpty())
+		if(sound != null && !sound.isEmpty())
 			builder.setSound(Uri.parse(sound));
 		builder.setContentIntent(pendingIntent);
 
@@ -184,7 +224,7 @@ public class Notifications{
     public static boolean isScheduled (int id) {
         SharedPreferences settings = getLocalSharedPreferences();
         Map<String, ?> alarms      = settings.getAll();
-        return alarms.containsKey(id);
+        return alarms.containsKey(Integer.toString(id));
     }
 
     /**
@@ -204,13 +244,21 @@ public class Notifications{
         return ret;
     }
 	
-	static void add(String message, String sound, long time, int notificationId, int badgeNumber) {
+	static void add(String message, String sound, long time, int notificationId, int badgeNumber, HashMap<String, String> params) {
+        Bundle bundle = new Bundle();
+        bundle.putString("message", message);
+        bundle.putInt("badge", badgeNumber);
+        bundle.putString("sound", sound);
+
+        if(params != null) {
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                bundle.putString(entry.getKey(), entry.getValue());
+            }
+        }
 
         Intent intent = new Intent(activity.getApplicationContext(), LocalNotificationsReceiver.class)
             .setAction("" + notificationId)
-            .putExtra("message", message)
-            .putExtra("badge", badgeNumber)
-            .putExtra("sound", sound);
+            .putExtra("notification", bundle);
 
         AlarmManager am  = getAlarmManager();
         PendingIntent sender = PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -460,12 +508,6 @@ public class Notifications{
 
         editor.clear();
         editor.apply();
-    }
-    
-    static void setContext (Context context) {
-        if (Notifications.activity == null) {
-            Notifications.activity = context;
-        }
     }
 	
 	static boolean getApplicationActive () {

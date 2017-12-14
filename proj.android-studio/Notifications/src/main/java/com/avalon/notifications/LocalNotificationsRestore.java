@@ -1,7 +1,10 @@
 package com.avalon.notifications;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.BroadcastReceiver;
@@ -38,10 +41,23 @@ public class LocalNotificationsRestore extends BroadcastReceiver {
             	int time = args.getInt("time");
             	int badgeNumber = args.getInt("badge");
 
+                HashMap<String, String> params = new HashMap<String, String>();
+
+                try {
+                    JSONObject jsonParams = args.getJSONObject("params");
+                    Iterator<?> keys = jsonParams.keys();
+
+                    while (keys.hasNext()) {
+                        String key = (String) keys.next();
+                        String value = args.getString(key);
+                        params.put(key, value);
+                    }
+                } catch (JSONException e) {}
+
                 /*
                  * If the trigger date was in the past, the notification will be displayed immediately.
                  */
-                Notifications.add(message, sound, time, Integer.parseInt(alarmId), badgeNumber);
+                Notifications.add(message, sound, time, Integer.parseInt(alarmId), badgeNumber, params);
 
             } catch (Exception e) {}
         }

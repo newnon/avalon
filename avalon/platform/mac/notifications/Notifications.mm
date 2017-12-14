@@ -7,8 +7,6 @@
 -(id)initWithDelegate:(avalon::LocalNotificationsDelegate*) delegate;
 @end
 
-static BOOL _launchedWithNotification = NO;
-static NSDictionary *_notificationDictionary = nil;
 static MacNotificationDelegate *macDelegate = nil;
 
 static avalon::LocalNotificationsDelegate *_localNotificationsDelegate = nullptr;
@@ -76,12 +74,12 @@ bool Notifications::isScheduled(int id)
     return false;
 }
     
-std::vector<std::string> Notifications::getScheduledIds()
+std::vector<int> Notifications::getScheduledIds()
 {
     NSUserNotificationCenter *center = [NSUserNotificationCenter defaultUserNotificationCenter];
-    std::vector<std::string> ret;
+    std::vector<int> ret;
     for(NSUserNotification *notification in [center scheduledNotifications]) {
-        ret.push_back([[notification.userInfo objectForKey:@"_id"] cStringUsingEncoding:NSUTF8StringEncoding]);
+        ret.push_back([[notification.userInfo objectForKey:@"_id"] intValue]);
     }
     return ret;
 }
@@ -120,6 +118,11 @@ void Notifications::registerForRemoteNotification()
     
 void Notifications::unregisterForRemoteNotifications()
 {
+}
+    
+const Notification* Notifications::getLaunchedNotification()
+{
+    return nullptr;
 }
     
 }
@@ -172,7 +175,7 @@ void Notifications::unregisterForRemoteNotifications()
             }
         }
 
-        _delegate->onLocalNotification(true, message, sound, 0, userParams);
+        _delegate->onLocalNotification(true, [[notification.userInfo objectForKey:@"_id"] intValue], message, sound, 0, userParams);
     }
     
 }

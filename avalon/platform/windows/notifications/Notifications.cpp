@@ -19,9 +19,9 @@ bool Notifications::isScheduled(int id)
     return false;
 }
     
-std::vector<std::string> Notifications::getScheduledIds()
+std::vector<int> Notifications::getScheduledIds()
 {
-    std::vector<std::string> ret;
+    std::vector<int> ret;
     return ret;
 
 }
@@ -48,6 +48,11 @@ void Notifications::registerForRemoteNotification()
     
 void Notifications::unregisterForRemoteNotifications()
 {
+}
+
+const Notification* Notifications::getLaunchedNotification()
+{
+    return nullptr;
 }
 }
 

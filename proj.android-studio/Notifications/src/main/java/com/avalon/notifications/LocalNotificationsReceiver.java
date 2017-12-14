@@ -3,6 +3,7 @@ package com.avalon.notifications;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 public class LocalNotificationsReceiver extends BroadcastReceiver {
 	
@@ -12,13 +13,15 @@ public class LocalNotificationsReceiver extends BroadcastReceiver {
     	Notifications.setContext(context);
 		
 		int notificationId = Integer.parseInt(intent.getAction());
-		String message = intent.getStringExtra("message");
-		String sound = intent.getStringExtra("sound");
-		int badge = intent.getIntExtra("badge",0); 
+		Bundle bundle = intent.getBundleExtra("notification");
+
+		String message = bundle.getString("message");
+		String sound = bundle.getString("sound");
+		int badge = bundle.getInt("badge",0);
 		
-		Notifications.showNotification(context, notificationId, message, sound, badge);
+		Notifications.showNotification(context, notificationId, message, sound, badge, bundle);
 		
 		Notifications.unpersist(notificationId);
-		Notifications.onLocalNotification(message,sound,badge);
+		Notifications.onLocalNotification(notificationId, message,sound,badge);
 	}
 }

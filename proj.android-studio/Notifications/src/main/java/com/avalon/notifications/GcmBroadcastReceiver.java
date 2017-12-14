@@ -29,7 +29,7 @@ import android.util.Log;
 public class GcmBroadcastReceiver extends BroadcastReceiver {
 
 	public static final String TAG = "GcmBroadcastReceiver";
-	public static final int NOTIFICATION_ID = 1;
+	public static final int NOTIFICATION_ID = -1;
 	
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -70,7 +70,7 @@ public class GcmBroadcastReceiver extends BroadcastReceiver {
     	String sound = bundle.getString("sound");
     	int badgeNumber = bundle.getInt("badgeNumber");
     	
-        Notifications.showNotification(context, NOTIFICATION_ID, message, sound, badgeNumber);
+        Notifications.showNotification(context, NOTIFICATION_ID, message, sound, badgeNumber, bundle);
         Notifications.onRemoteNotification(message, sound, badgeNumber);
     }
 }
