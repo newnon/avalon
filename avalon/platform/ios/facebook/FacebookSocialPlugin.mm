@@ -151,7 +151,13 @@ public:
     virtual bool isLoggedIn() const override
     {
         if ([FBSDKAccessToken currentAccessToken])
-            return true;
+        {
+            if([[[NSBundle mainBundle].infoDictionary objectForKey:@"FacebookAppID"] isEqualToString:[[FBSDKAccessToken currentAccessToken] appID]])
+                return true;
+            else
+                return false;
+            
+        }
         return false;
     }
     
