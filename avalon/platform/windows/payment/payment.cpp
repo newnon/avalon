@@ -110,7 +110,7 @@ public:
         }
     }
     
-    virtual void startService(const std::string &data)
+    virtual void startService()
     {
         if(!_started)
         {

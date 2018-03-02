@@ -169,9 +169,9 @@ public:
     {
     }
 
-    virtual void startService(const std::string &data) override
+    virtual void startService() override
     {
-    	backend::helper::callStaticVoidMethodWithString("initialize",data.c_str());
+    	backend::helper::callStaticVoidMethod("initialize");
     }
 
     virtual void stopService() override

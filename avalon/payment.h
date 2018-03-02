@@ -83,7 +83,7 @@ public:
     virtual bool isPurchaseReady() const = 0;
     virtual void restorePurchases() const = 0;
     
-    virtual void startService(const std::string &data) = 0;
+    virtual void startService() = 0;
     virtual void stopService() = 0;
     virtual bool isStarted() const = 0;
     

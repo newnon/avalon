@@ -1,5 +1,7 @@
 package com.avalon.payment;
 
+import org.cocos2dx.lib.Cocos2dxHelper;
+
 import java.util.Map;
 import java.util.HashMap;
 
@@ -22,10 +24,12 @@ public class Backend
         return false;
     }
 
-    public static void initialize(String data)
+    public static void initialize()
     {
         if (!isInitialized()) {
-            mPurchaseObserver = new PurchasingObserver(data);
+            int rsakeyId = Cocos2dxHelper.getActivity().getResources().getIdentifier("googleplay_rsa_key", "string", Cocos2dxHelper.getActivity().getPackageName());
+            String rsakey = Cocos2dxHelper.getActivity().getResources().getString(rsakeyId);
+            mPurchaseObserver = new PurchasingObserver(rsakey);
         }
     }
 
