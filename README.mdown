@@ -89,6 +89,7 @@ and automate annoying tasks.
 
 ##### Android
 1. Add `payment` to `AVALON_FEATURES` in your `jni/Android.mk` 
+2. Add android rsa key to resources `googleplay_rsa_key`
 
 ###### Amazon
 
