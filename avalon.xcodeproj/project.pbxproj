@@ -568,6 +568,17 @@
 		D87F76461EA4E042005187B4 /* FBSDKShareKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76451EA4E042005187B4 /* FBSDKShareKit */; };
 		D87F764A1EA4E6F0005187B4 /* FacebookSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */; };
 		D87F764B1EA4E6F0005187B4 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
+		E76F73F2206D2D66007FE734 /* GoogleToolboxForMac in Frameworks */ = {isa = PBXBuildFile; fileRef = E76F73F1206D2D66007FE734 /* GoogleToolboxForMac */; };
+		E7899F4E206CFC8E002D8704 /* libfirebase_analytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F4C206CFC8E002D8704 /* libfirebase_analytics.a */; };
+		E7899F4F206CFC8E002D8704 /* libfirebase_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F4D206CFC8E002D8704 /* libfirebase_app.a */; };
+		E7899F55206CFCDF002D8704 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F54206CFCDF002D8704 /* FirebaseAnalytics */; };
+		E7899F57206CFD10002D8704 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F56206CFD10002D8704 /* FirebaseCore */; };
+		E7899F59206CFD13002D8704 /* FirebaseCoreDiagnostics in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F58206CFD13002D8704 /* FirebaseCoreDiagnostics */; };
+		E7899F5B206CFD18002D8704 /* FirebaseInstanceID in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F5A206CFD18002D8704 /* FirebaseInstanceID */; };
+		E7899F5D206CFD1D002D8704 /* FirebaseNanoPB in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F5C206CFD1D002D8704 /* FirebaseNanoPB */; };
+		E7899F5F206CFD53002D8704 /* nanopb in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F5E206CFD53002D8704 /* nanopb */; };
+		E789A026206D0443002D8704 /* Firebase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E789A024206D0443002D8704 /* Firebase.cpp */; };
+		E789A029206D0466002D8704 /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = E789A028206D0466002D8704 /* Firebase.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -808,6 +819,15 @@
 			dstSubfolderSpec = 16;
 			files = (
 				A5E98A201EA61BCD003EB302 /* VKSdkResources.bundle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7899E96206CF15F002D8704 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1537,6 +1557,35 @@
 		D87F76411EA4E024005187B4 /* Bolts */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Bolts; path = "avalon/platform/ios/facebook/facebook-ios-sdk/Bolts.framework/Bolts"; sourceTree = "<group>"; };
 		D87F76431EA4E033005187B4 /* FBSDKLoginKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBSDKLoginKit; path = "avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKLoginKit.framework/FBSDKLoginKit"; sourceTree = "<group>"; };
 		D87F76451EA4E042005187B4 /* FBSDKShareKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBSDKShareKit; path = "avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKShareKit.framework/FBSDKShareKit"; sourceTree = "<group>"; };
+		E76F73F1206D2D66007FE734 /* GoogleToolboxForMac */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleToolboxForMac; path = avalon/platform/ios/firebase/GoogleToolboxForMac.framework/GoogleToolboxForMac; sourceTree = "<group>"; };
+		E7899E98206CF15F002D8704 /* libFirebase iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFirebase iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7899EA1206CF1AA002D8704 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = avalon/platform/ios/firebase/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		E7899EA2206CF1AA002D8704 /* firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = firebase.framework; path = avalon/platform/ios/firebase/firebase.framework; sourceTree = "<group>"; };
+		E7899EA3206CF1AA002D8704 /* firebase_analytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = firebase_analytics.framework; path = avalon/platform/ios/firebase/firebase_analytics.framework; sourceTree = "<group>"; };
+		E7899EA4206CF1AA002D8704 /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nanopb.framework; path = avalon/platform/ios/firebase/nanopb.framework; sourceTree = "<group>"; };
+		E7899EA5206CF1AA002D8704 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = avalon/platform/ios/firebase/GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		E7899EA6206CF1AB002D8704 /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCore.framework; path = avalon/platform/ios/firebase/FirebaseCore.framework; sourceTree = "<group>"; };
+		E7899EA7206CF1AB002D8704 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseInstanceID.framework; path = avalon/platform/ios/firebase/FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		E7899EA8206CF1AB002D8704 /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseNanoPB.framework; path = avalon/platform/ios/firebase/FirebaseNanoPB.framework; sourceTree = "<group>"; };
+		E7899EA9206CF1AB002D8704 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = avalon/platform/ios/firebase/FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		E7899ECE206CF538002D8704 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		E7899ED0206CF53D002D8704 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		E7899ED2206CF54E002D8704 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		E7899ED4206CF569002D8704 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E7899F4C206CFC8E002D8704 /* libfirebase_analytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfirebase_analytics.a; path = avalon/platform/ios/firebase/libfirebase_analytics.a; sourceTree = "<group>"; };
+		E7899F4D206CFC8E002D8704 /* libfirebase_app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfirebase_app.a; path = avalon/platform/ios/firebase/libfirebase_app.a; sourceTree = "<group>"; };
+		E7899F50206CFCA7002D8704 /* firebase_analytics */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = firebase_analytics; path = avalon/platform/ios/firebase/firebase_analytics.framework/firebase_analytics; sourceTree = "<group>"; };
+		E7899F52206CFCC1002D8704 /* firebase */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = firebase; path = avalon/platform/ios/firebase/firebase.framework/firebase; sourceTree = "<group>"; };
+		E7899F54206CFCDF002D8704 /* FirebaseAnalytics */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FirebaseAnalytics; path = avalon/platform/ios/firebase/FirebaseAnalytics.framework/FirebaseAnalytics; sourceTree = "<group>"; };
+		E7899F56206CFD10002D8704 /* FirebaseCore */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FirebaseCore; path = avalon/platform/ios/firebase/FirebaseCore.framework/FirebaseCore; sourceTree = "<group>"; };
+		E7899F58206CFD13002D8704 /* FirebaseCoreDiagnostics */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FirebaseCoreDiagnostics; path = avalon/platform/ios/firebase/FirebaseCoreDiagnostics.framework/FirebaseCoreDiagnostics; sourceTree = "<group>"; };
+		E7899F5A206CFD18002D8704 /* FirebaseInstanceID */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FirebaseInstanceID; path = avalon/platform/ios/firebase/FirebaseInstanceID.framework/FirebaseInstanceID; sourceTree = "<group>"; };
+		E7899F5C206CFD1D002D8704 /* FirebaseNanoPB */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FirebaseNanoPB; path = avalon/platform/ios/firebase/FirebaseNanoPB.framework/FirebaseNanoPB; sourceTree = "<group>"; };
+		E7899F5E206CFD53002D8704 /* nanopb */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = nanopb; path = avalon/platform/ios/firebase/nanopb.framework/nanopb; sourceTree = "<group>"; };
+		E789A024206D0443002D8704 /* Firebase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Firebase.cpp; path = avalon/firebase/Firebase.cpp; sourceTree = SOURCE_ROOT; };
+		E789A028206D0466002D8704 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = avalon/Firebase.h; sourceTree = SOURCE_ROOT; };
+		E7EFA6A6206D19ED00AA45BE /* libfirebase_analytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfirebase_analytics.a; path = avalon/platform/mac/firebase/libfirebase_analytics.a; sourceTree = "<group>"; };
+		E7EFA6A7206D19EE00AA45BE /* libfirebase_app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfirebase_app.a; path = avalon/platform/mac/firebase/libfirebase_app.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1846,6 +1895,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7899E95206CF15F002D8704 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E76F73F2206D2D66007FE734 /* GoogleToolboxForMac in Frameworks */,
+				E7899F55206CFCDF002D8704 /* FirebaseAnalytics in Frameworks */,
+				E7899F57206CFD10002D8704 /* FirebaseCore in Frameworks */,
+				E7899F59206CFD13002D8704 /* FirebaseCoreDiagnostics in Frameworks */,
+				E7899F5B206CFD18002D8704 /* FirebaseInstanceID in Frameworks */,
+				E7899F5D206CFD1D002D8704 /* FirebaseNanoPB in Frameworks */,
+				E7899F5F206CFD53002D8704 /* nanopb in Frameworks */,
+				E7899F4E206CFC8E002D8704 /* libfirebase_analytics.a in Frameworks */,
+				E7899F4F206CFC8E002D8704 /* libfirebase_app.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1892,6 +1957,7 @@
 				A597D30A1ADBDB03001C8E9C /* DeltaDna */,
 				A5674CDE1BF1E506002300F2 /* Epom */,
 				A56002A31A2748D000235B77 /* FacebookAds */,
+				E7899F61206D0036002D8704 /* Firebase */,
 				A50BC28518E9B2B400F1F979 /* Flurry */,
 				A50BC26D18E9A1C100F1F979 /* FlurryAds */,
 				A50BC17B18E962DE00F1F979 /* Frameworks */,
@@ -1946,6 +2012,7 @@
 				D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */,
 				A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */,
 				A5F4119E1F432CD400A51225 /* libUtils Mac.a */,
+				E7899E98206CF15F002D8704 /* libFirebase iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1953,6 +2020,32 @@
 		A50BC17B18E962DE00F1F979 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E76F73F1206D2D66007FE734 /* GoogleToolboxForMac */,
+				E7EFA6A6206D19ED00AA45BE /* libfirebase_analytics.a */,
+				E7EFA6A7206D19EE00AA45BE /* libfirebase_app.a */,
+				E7899F5E206CFD53002D8704 /* nanopb */,
+				E7899F5C206CFD1D002D8704 /* FirebaseNanoPB */,
+				E7899F5A206CFD18002D8704 /* FirebaseInstanceID */,
+				E7899F58206CFD13002D8704 /* FirebaseCoreDiagnostics */,
+				E7899F56206CFD10002D8704 /* FirebaseCore */,
+				E7899F54206CFCDF002D8704 /* FirebaseAnalytics */,
+				E7899F52206CFCC1002D8704 /* firebase */,
+				E7899F50206CFCA7002D8704 /* firebase_analytics */,
+				E7899F4C206CFC8E002D8704 /* libfirebase_analytics.a */,
+				E7899F4D206CFC8E002D8704 /* libfirebase_app.a */,
+				E7899ED4206CF569002D8704 /* SystemConfiguration.framework */,
+				E7899ED2206CF54E002D8704 /* StoreKit.framework */,
+				E7899ED0206CF53D002D8704 /* libsqlite3.tbd */,
+				E7899ECE206CF538002D8704 /* libz.tbd */,
+				E7899EA3206CF1AA002D8704 /* firebase_analytics.framework */,
+				E7899EA2206CF1AA002D8704 /* firebase.framework */,
+				E7899EA9206CF1AB002D8704 /* FirebaseAnalytics.framework */,
+				E7899EA6206CF1AB002D8704 /* FirebaseCore.framework */,
+				E7899EA1206CF1AA002D8704 /* FirebaseCoreDiagnostics.framework */,
+				E7899EA7206CF1AB002D8704 /* FirebaseInstanceID.framework */,
+				E7899EA8206CF1AB002D8704 /* FirebaseNanoPB.framework */,
+				E7899EA5206CF1AA002D8704 /* GoogleToolboxForMac.framework */,
+				E7899EA4206CF1AA002D8704 /* nanopb.framework */,
 				A5E8BC0F1EE6F5E500A3E0B7 /* VungleSDK */,
 				A5E989FC1EA60177003EB302 /* VKSdkFramework */,
 				D87F76451EA4E042005187B4 /* FBSDKShareKit */,
@@ -3330,6 +3423,16 @@
 			path = "avalon/platform/ios/facebook/facebook-ios-sdk";
 			sourceTree = "<group>";
 		};
+		E7899F61206D0036002D8704 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				E789A028206D0466002D8704 /* Firebase.h */,
+				E789A024206D0443002D8704 /* Firebase.cpp */,
+			);
+			name = Firebase;
+			path = avalon/Firebase;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3789,6 +3892,14 @@
 			files = (
 				D87F764A1EA4E6F0005187B4 /* FacebookSocialPlugin.h in Headers */,
 				D87F764B1EA4E6F0005187B4 /* SocialPlugin.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7899F60206D0008002D8704 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E789A029206D0466002D8704 /* Firebase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4389,6 +4500,24 @@
 			productReference = D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		E7899E97206CF15F002D8704 /* Firebase iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7899EA0206CF15F002D8704 /* Build configuration list for PBXNativeTarget "Firebase iOS" */;
+			buildPhases = (
+				E7899E94206CF15F002D8704 /* Sources */,
+				E7899E95206CF15F002D8704 /* Frameworks */,
+				E7899E96206CF15F002D8704 /* CopyFiles */,
+				E7899F60206D0008002D8704 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Firebase iOS";
+			productName = Firebase;
+			productReference = E7899E98206CF15F002D8704 /* libFirebase iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -4399,6 +4528,9 @@
 				TargetAttributes = {
 					A50FFF0F1A1B5C9900952186 = {
 						CreatedOnToolsVersion = 6.1;
+					};
+					E7899E97206CF15F002D8704 = {
+						CreatedOnToolsVersion = 9.2;
 					};
 				};
 			};
@@ -4475,6 +4607,7 @@
 				A50BC24618E99DA500F1F979 /* Build all libs iOS */,
 				A50FFF0F1A1B5C9900952186 /* Build all libs Mac */,
 				A5E989DB1EA5FE0B003EB302 /* Vkontakte iOS */,
+				E7899E97206CF15F002D8704 /* Firebase iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -4954,6 +5087,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87F76321EA4DE90005187B4 /* FacebookSocialPlugin.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7899E94206CF15F002D8704 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E789A026206D0443002D8704 /* Firebase.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6294,6 +6435,62 @@
 			};
 			name = Release;
 		};
+		E7899E9E206CF15F002D8704 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/avalon/Firebase",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseAnalytics.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseCore.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseCoreDiagnostics.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseInstanceID.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseNanoPB.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/nanopb.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/GoogleToolboxForMac.framework",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E7899E9F206CF15F002D8704 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/avalon/Firebase",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseAnalytics.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseCore.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseCoreDiagnostics.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseInstanceID.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/FirebaseNanoPB.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/nanopb.framework",
+					"$(PROJECT_DIR)/avalon/platform/ios/firebase/GoogleToolboxForMac.framework",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6626,6 +6823,15 @@
 			buildConfigurations = (
 				D87F76251EA4DE6D005187B4 /* Debug */,
 				D87F76261EA4DE6D005187B4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7899EA0206CF15F002D8704 /* Build configuration list for PBXNativeTarget "Firebase iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7899E9E206CF15F002D8704 /* Debug */,
+				E7899E9F206CF15F002D8704 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

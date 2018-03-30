@@ -30,9 +30,9 @@ and automate annoying tasks.
 #### Game Center
 
 ##### Ios
-1. Add  GameCenter to `Build Phases` `Target Dependencies`
-1. Add  libGameCenter.a to `Build Phases` `Link Binary With Libraries`
-1. Add  GameKit.framework to `Build Phases` `Link Binary With Libraries`
+1. Add GameCenter to `Build Phases` `Target Dependencies`
+1. Add libGameCenter.a to `Build Phases` `Link Binary With Libraries`
+1. Add GameKit.framework to `Build Phases` `Link Binary With Libraries`
 
 
 ##### Android
@@ -265,6 +265,43 @@ and automate annoying tasks.
             Notifications.processIntent(intent);
             ...
 
+###### Firebase Analytics
+
+##### Ios
+1. Add Firebase iOS to `Build Phases` `Target Dependencies`
+2. Add Firebasei iOS.a, libz.a, libsqlite3.a, StoreKit.framework, SystemConfiguration.framework to `Build Phases` `Link Binary With Libraries`
+3. Add GoogleService-Info.plist to `Build Phases` `Copy Bundle Resources`
+4. Use functions from Firebase.h
+
+##### Android
+1. Add to CmakeList.txt
+    set(AVALON_FIREBASE ON CACHE BOOL "firebase")
+2. Add to build.gradle
+    buildscript {
+        dependencies {
+            classpath 'com.google.gms:google-services:3.1.1' // google-services plugin
+            ...
+        }
+        ...
+    }
+    ...
+    repositories {
+        maven {
+            url "https://maven.google.com" // Google's Maven repository
+            ...
+        }
+        ...
+    }
+3. Add to settings.gradle
+    include ':Firebase'
+    project(':Firebase').projectDir = new File(settingsDir, '../avalon/proj.android-studio/Firebase')
+4. Add app/build.gradle
+    dependencies {
+        compile project(':Firebase')
+        ...
+    }
+5. Add google-services.json
+6. Use functions from Firebase.h
 
 # Documentations
 

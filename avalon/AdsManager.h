@@ -5,7 +5,6 @@
 #include <vector>
 #include <memory>
 #include <chrono>
-#include <string>
 #include "Ads.h"
 
 namespace avalon {
@@ -64,7 +63,7 @@ private:
     virtual void interstitialDidStartLoadAd(Interstitial *interstitial) override;
     virtual void interstitialWillShow(Interstitial *interstitial) override;
     virtual void interstitialDidHide(Interstitial *interstitial) override;
-    virtual void interstitialReward(Interstitial *interstitial, const std::string &token, const AdsReward &reward) override;
+    virtual void interstitialReward(Interstitial *interstitial, const std::string &token, const std::string &curency, int amount) override;
     std::vector<std::pair<Interstitial*,float>> _interstitials;
     InterstitialDelegate *_delegate;
     std::chrono::steady_clock::time_point _prevShowTime;

@@ -86,12 +86,6 @@ public:
 
 class Interstitial;
 
-struct AdsReward
-{
-    long long amount;
-    std::string currency;
-};
-
 class InterstitialDelegate
 {
 public:
@@ -115,7 +109,7 @@ public:
     virtual void interstitialUserInteraction(Interstitial *interstitial, bool willLeaveApplication) {}
     
     // Notification: User was rewarded
-    virtual void interstitialReward(Interstitial *interstitial, const std::string &token, const AdsReward &reward) {}
+    virtual void interstitialReward(Interstitial *interstitial, const std::string &token, const std::string &curency, int amount) {}
 
     virtual ~InterstitialDelegate() {}
 };
@@ -136,7 +130,7 @@ public:
     
     virtual State getState() const = 0;
     virtual const std::string &getType() const = 0;
-    virtual const AdsReward* getReward() const { return nullptr; };
+    virtual int getReward() const { return 0; };
     virtual bool hide() = 0;
     virtual bool show() = 0;
     virtual ~Interstitial() {}

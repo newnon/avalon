@@ -258,10 +258,10 @@ void InterstitialManager::interstitialDidHide(Interstitial *interstitial)
         _delegate->interstitialDidHide(interstitial);
 }
 
-void InterstitialManager::interstitialReward(Interstitial *interstitial, const std::string &token, const AdsReward &reward)
+void InterstitialManager::interstitialReward(Interstitial *interstitial, const std::string &token, const std::string &curency, int amount)
 {
     if(_delegate)
-        _delegate->interstitialReward(interstitial, token, reward);
+        _delegate->interstitialReward(interstitial, token, curency, amount);
 }
 
 }

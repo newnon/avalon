@@ -9,6 +9,7 @@ option(AVALON_FLURRYADS "flurryads" OFF)
 option(AVALON_NOTIFICATIONS "notifications" OFF)
 option(AVALON_ADMOB "admob" OFF)
 option(AVALON_GOOGLEANALYTICS "googleanalytics" OFF)
+option(AVALON_FIREBASE "firebase" OFF)
 option(AVALON_MOPUB "mopub" OFF)
 option(AVALON_UI "ui" OFF)
 option(AVALON_ADS "ads" OFF)
@@ -36,6 +37,7 @@ elseif(EMSCRIPTEN)# Emscripten
 endif()
 
 set(AVALON_SRC avalon/utils/dictionary.cpp)
+set(AVALON_LIBS "")
 
 if(AVALON_PAYMENT)
 add_definitions(-DAVALON_CONFIG_PAYMENT_ENABLED)
@@ -118,6 +120,19 @@ set(AVALON_SRC
 )
 endif()
 
+if(AVALON_FIREBASE)
+add_definitions(-DAVALON_CONFIG_FIREBASE_ENABLED)
+set(AVALON_SRC
+  ${AVALON_SRC}
+  avalon/firebase/Firebase.cpp
+)
+set(AVALON_LIBS
+  ${AVALON_LIBS}
+  ${CMAKE_CURRENT_SOURCE_DIR}/avalon/platform/${PLATFORM_FOLDER}/firebase/${ANDROID_ABI}/libapp.a
+  ${CMAKE_CURRENT_SOURCE_DIR}/avalon/platform/${PLATFORM_FOLDER}/firebase/${ANDROID_ABI}/libanalytics.a
+)
+endif()
+
 if(AVALON_MOPUB)
 add_definitions(-DAVALON_CONFIG_MOPUB_ENABLED)
 set(AVALON_SRC
@@ -170,9 +185,15 @@ add_library(avalon STATIC
   ${AVALON_SRC}
 )
 
+target_link_libraries(
+  avalon
+  ${AVALON_LIBS}
+)
+
 include_directories(
   .
   ../cocos2d/cocos
+  ./avalon/firebase
 )
 
 set_target_properties(avalon
