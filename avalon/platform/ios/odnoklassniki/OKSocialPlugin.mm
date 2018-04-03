@@ -291,6 +291,10 @@ void OKSocialPluginIOS::getMyProfile(int preferedPictureSize, void *userData, co
             }
         }
 
+        // Placeholder image case
+        if (profile.pictureId.empty())
+            profile.pictureUrl.clear();
+
         if (_delegate)
             _delegate->onGetMyProfile({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""}, userData, profile);
     };
