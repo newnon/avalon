@@ -568,7 +568,11 @@
 		D87F76461EA4E042005187B4 /* FBSDKShareKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76451EA4E042005187B4 /* FBSDKShareKit */; };
 		D87F764A1EA4E6F0005187B4 /* FacebookSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */; };
 		D87F764B1EA4E6F0005187B4 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
+		E74C84702072550600DC9E8D /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = E74C846E2072550600DC9E8D /* OKSDK.m */; };
+		E7555B9B207245EB0055F20F /* OKSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = E7555B98207245620055F20F /* OKSocialPlugin.h */; };
+		E7555B9C207246090055F20F /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
 		E76F73F2206D2D66007FE734 /* GoogleToolboxForMac in Frameworks */ = {isa = PBXBuildFile; fileRef = E76F73F1206D2D66007FE734 /* GoogleToolboxForMac */; };
+		E77CC09E2073BC67008CE755 /* OKSocialPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = E77CC09D2073BC67008CE755 /* OKSocialPlugin.mm */; };
 		E7899F4E206CFC8E002D8704 /* libfirebase_analytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F4C206CFC8E002D8704 /* libfirebase_analytics.a */; };
 		E7899F4F206CFC8E002D8704 /* libfirebase_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F4D206CFC8E002D8704 /* libfirebase_app.a */; };
 		E7899F55206CFCDF002D8704 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; fileRef = E7899F54206CFCDF002D8704 /* FirebaseAnalytics */; };
@@ -771,6 +775,13 @@
 			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
 			remoteInfo = "Ads iOS";
 		};
+		E7555B9D2072467F0055F20F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A50BC17118E962DD00F1F979 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A576958D1A0E8C70002FDCB5;
+			remoteInfo = "Ads iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -823,6 +834,15 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E7899E96206CF15F002D8704 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7CD722C206EB03600598068 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
@@ -1557,7 +1577,13 @@
 		D87F76411EA4E024005187B4 /* Bolts */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = Bolts; path = "avalon/platform/ios/facebook/facebook-ios-sdk/Bolts.framework/Bolts"; sourceTree = "<group>"; };
 		D87F76431EA4E033005187B4 /* FBSDKLoginKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBSDKLoginKit; path = "avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKLoginKit.framework/FBSDKLoginKit"; sourceTree = "<group>"; };
 		D87F76451EA4E042005187B4 /* FBSDKShareKit */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = FBSDKShareKit; path = "avalon/platform/ios/facebook/facebook-ios-sdk/FBSDKShareKit.framework/FBSDKShareKit"; sourceTree = "<group>"; };
+		E74C84692072550600DC9E8D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		E74C846B2072550600DC9E8D /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKSDK.h; sourceTree = "<group>"; };
+		E74C846C2072550600DC9E8D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E74C846E2072550600DC9E8D /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKSDK.m; sourceTree = "<group>"; };
+		E7555B98207245620055F20F /* OKSocialPlugin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OKSocialPlugin.h; path = avalon/OKSocialPlugin.h; sourceTree = "<group>"; };
 		E76F73F1206D2D66007FE734 /* GoogleToolboxForMac */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = GoogleToolboxForMac; path = avalon/platform/ios/firebase/GoogleToolboxForMac.framework/GoogleToolboxForMac; sourceTree = "<group>"; };
+		E77CC09D2073BC67008CE755 /* OKSocialPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OKSocialPlugin.mm; path = avalon/platform/ios/odnoklassniki/OKSocialPlugin.mm; sourceTree = SOURCE_ROOT; };
 		E7899E98206CF15F002D8704 /* libFirebase iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFirebase iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7899EA1206CF1AA002D8704 /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseCoreDiagnostics.framework; path = avalon/platform/ios/firebase/FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		E7899EA2206CF1AA002D8704 /* firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = firebase.framework; path = avalon/platform/ios/firebase/firebase.framework; sourceTree = "<group>"; };
@@ -1584,6 +1610,7 @@
 		E7899F5E206CFD53002D8704 /* nanopb */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = nanopb; path = avalon/platform/ios/firebase/nanopb.framework/nanopb; sourceTree = "<group>"; };
 		E789A024206D0443002D8704 /* Firebase.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Firebase.cpp; path = avalon/firebase/Firebase.cpp; sourceTree = SOURCE_ROOT; };
 		E789A028206D0466002D8704 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Firebase.h; path = avalon/Firebase.h; sourceTree = SOURCE_ROOT; };
+		E7CD722E206EB03600598068 /* libOdnoklassniki iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libOdnoklassniki iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7EFA6A6206D19ED00AA45BE /* libfirebase_analytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfirebase_analytics.a; path = avalon/platform/mac/firebase/libfirebase_analytics.a; sourceTree = "<group>"; };
 		E7EFA6A7206D19EE00AA45BE /* libfirebase_app.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfirebase_app.a; path = avalon/platform/mac/firebase/libfirebase_app.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1911,6 +1938,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7CD722B206EB03600598068 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -2013,6 +2047,7 @@
 				A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */,
 				A5F4119E1F432CD400A51225 /* libUtils Mac.a */,
 				E7899E98206CF15F002D8704 /* libFirebase iOS.a */,
+				E7CD722E206EB03600598068 /* libOdnoklassniki iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3387,6 +3422,7 @@
 			children = (
 				A5E989F21EA5FE48003EB302 /* Vkontakte */,
 				D87F76111EA4DE10005187B4 /* Facebook */,
+				E7555B8C207242D70055F20F /* Odnoklassniki */,
 				D87F76131EA4DE34005187B4 /* SocialPlugin.h */,
 				D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */,
 			);
@@ -3421,6 +3457,36 @@
 			);
 			name = "facebook-ios-sdk";
 			path = "avalon/platform/ios/facebook/facebook-ios-sdk";
+			sourceTree = "<group>";
+		};
+		E74C84682072550600DC9E8D /* ok-ios-sdk */ = {
+			isa = PBXGroup;
+			children = (
+				E74C84692072550600DC9E8D /* LICENSE */,
+				E74C846B2072550600DC9E8D /* OKSDK.h */,
+				E74C846C2072550600DC9E8D /* README.md */,
+				E74C846E2072550600DC9E8D /* OKSDK.m */,
+			);
+			name = "ok-ios-sdk";
+			path = "vendors/odnoklassniki/ok-ios-sdk";
+			sourceTree = SOURCE_ROOT;
+		};
+		E7555B8C207242D70055F20F /* Odnoklassniki */ = {
+			isa = PBXGroup;
+			children = (
+				E7555B99207245880055F20F /* Odnoklassniki-ios */,
+				E7555B98207245620055F20F /* OKSocialPlugin.h */,
+			);
+			name = Odnoklassniki;
+			sourceTree = "<group>";
+		};
+		E7555B99207245880055F20F /* Odnoklassniki-ios */ = {
+			isa = PBXGroup;
+			children = (
+				E77CC09D2073BC67008CE755 /* OKSocialPlugin.mm */,
+				E74C84682072550600DC9E8D /* ok-ios-sdk */,
+			);
+			path = "Odnoklassniki-ios";
 			sourceTree = "<group>";
 		};
 		E7899F61206D0036002D8704 /* Firebase */ = {
@@ -3892,6 +3958,15 @@
 			files = (
 				D87F764A1EA4E6F0005187B4 /* FacebookSocialPlugin.h in Headers */,
 				D87F764B1EA4E6F0005187B4 /* SocialPlugin.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7555B9A207245E70055F20F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7555B9B207245EB0055F20F /* OKSocialPlugin.h in Headers */,
+				E7555B9C207246090055F20F /* SocialPlugin.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4518,6 +4593,25 @@
 			productReference = E7899E98206CF15F002D8704 /* libFirebase iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		E7CD722D206EB03600598068 /* Odnoklassniki iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7CD7236206EB03600598068 /* Build configuration list for PBXNativeTarget "Odnoklassniki iOS" */;
+			buildPhases = (
+				E7CD722A206EB03600598068 /* Sources */,
+				E7CD722B206EB03600598068 /* Frameworks */,
+				E7CD722C206EB03600598068 /* CopyFiles */,
+				E7555B9A207245E70055F20F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7555B9E2072467F0055F20F /* PBXTargetDependency */,
+			);
+			name = "Odnoklassniki iOS";
+			productName = "Odnoklassniki iOS";
+			productReference = E7CD722E206EB03600598068 /* libOdnoklassniki iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -4530,6 +4624,9 @@
 						CreatedOnToolsVersion = 6.1;
 					};
 					E7899E97206CF15F002D8704 = {
+						CreatedOnToolsVersion = 9.2;
+					};
+					E7CD722D206EB03600598068 = {
 						CreatedOnToolsVersion = 9.2;
 					};
 				};
@@ -4608,6 +4705,7 @@
 				A50FFF0F1A1B5C9900952186 /* Build all libs Mac */,
 				A5E989DB1EA5FE0B003EB302 /* Vkontakte iOS */,
 				E7899E97206CF15F002D8704 /* Firebase iOS */,
+				E7CD722D206EB03600598068 /* Odnoklassniki iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -5098,6 +5196,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E7CD722A206EB03600598068 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E74C84702072550600DC9E8D /* OKSDK.m in Sources */,
+				E77CC09E2073BC67008CE755 /* OKSocialPlugin.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -5235,6 +5342,11 @@
 			isa = PBXTargetDependency;
 			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
 			targetProxy = D87F761B1EA4DE6D005187B4 /* PBXContainerItemProxy */;
+		};
+		E7555B9E2072467F0055F20F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A576958D1A0E8C70002FDCB5 /* Ads iOS */;
+			targetProxy = E7555B9D2072467F0055F20F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -6491,6 +6603,26 @@
 			};
 			name = Release;
 		};
+		E7CD7234206EB03600598068 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_COMMA = YES;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E7CD7235206EB03600598068 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_COMMA = YES;
+				GCC_PREFIX_HEADER = avalon/platform/ios/Prefix.pch;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -6832,6 +6964,15 @@
 			buildConfigurations = (
 				E7899E9E206CF15F002D8704 /* Debug */,
 				E7899E9F206CF15F002D8704 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7CD7236206EB03600598068 /* Build configuration list for PBXNativeTarget "Odnoklassniki iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7CD7234206EB03600598068 /* Debug */,
+				E7CD7235206EB03600598068 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
