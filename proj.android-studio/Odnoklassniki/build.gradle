@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 25
+    }
+}
+
+repositories {
+  mavenCentral() 
+}
+
+dependencies {
+    compile project(':libcocos2dx')
+    compile 'ru.ok:odnoklassniki-android-sdk:2.1.5'
+}

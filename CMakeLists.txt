@@ -16,6 +16,7 @@ option(AVALON_ADS "ads" OFF)
 option(AVALON_SYSTEMINFO "systeminfo" OFF)
 option(AVALON_FACEBOOK "facebook" OFF)
 option(AVALON_VKONTAKTE "vkontakte" OFF)
+option(AVALON_ODNOKLASSNIKI "odnoklassniki" OFF)
 option(AVALON_APPSFLYER "appsflyer" OFF)
 
 if(NOT MSVC)# all gcc
@@ -170,6 +171,14 @@ add_definitions(-DAVALON_CONFIG_VKONTAKTE_ENABLED)
 set(AVALON_SRC
   ${AVALON_SRC}
   avalon/platform/${PLATFORM_FOLDER}/vkontakte/VKSocialPlugin.cpp
+)
+endif()
+
+if(AVALON_ODNOKLASSNIKI)
+add_definitions(-DAVALON_CONFIG_ODNOKLASSNIKI_ENABLED)
+set(AVALON_SRC
+  ${AVALON_SRC}
+  avalon/platform/${PLATFORM_FOLDER}/odnoklassniki/OKSocialPlugin.cpp
 )
 endif()
 
