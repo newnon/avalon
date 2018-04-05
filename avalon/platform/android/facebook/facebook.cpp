@@ -299,7 +299,7 @@ namespace avalon {
             if (isLoggedIn())
             {
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "logout", "(Z)V"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "logout", "(Z)V"))
                 {
                     methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, (jboolean)_debug);
                     methodInfo.env->DeleteLocalRef(methodInfo.classID);
@@ -313,7 +313,7 @@ namespace avalon {
         virtual bool isLoggedIn() const override
         {
             cocos2d::JniMethodInfo methodInfo;
-            if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "isLoggedIn", "()Z"));
+            if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "isLoggedIn", "()Z"))
             {
                 jboolean result = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID);
                 methodInfo.env->DeleteLocalRef(methodInfo.classID);
@@ -328,7 +328,7 @@ namespace avalon {
             if (isLoggedIn())
             {
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getUserID", "()Ljava/lang/String;"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getUserID", "()Ljava/lang/String;"))
                 {
                     jstring jValue = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
                     std::string userId = cocos2d::JniHelper::jstring2string(jValue);
@@ -347,7 +347,7 @@ namespace avalon {
             if (isLoggedIn())
             {
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAccessToken", "()Ljava/lang/String;"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAccessToken", "()Ljava/lang/String;"))
                 {
                     jstring jValue = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
                     std::string userId = cocos2d::JniHelper::jstring2string(jValue);
@@ -363,7 +363,7 @@ namespace avalon {
         virtual std::string getAppId() const override
         {
             cocos2d::JniMethodInfo methodInfo;
-            if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAppId", "()Ljava/lang/String;"));
+            if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getAppId", "()Ljava/lang/String;"))
             {
                 jstring jValue = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
                 std::string appId = cocos2d::JniHelper::jstring2string(jValue);
@@ -403,7 +403,7 @@ namespace avalon {
                     __android_log_print(ANDROID_LOG_DEBUG, "avalon_FacebookSocialPlugin", "FacebookSocialPlugin::getMyProfile start call method");
 
                 cocos2d::JniMethodInfo methodInfo;
-                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getMyProfile", "(Ljava/lang/String;IJZ)V"));
+                if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, HELPER_CLASS_NAME, "getMyProfile", "(Ljava/lang/String;IJZ)V"))
                 {
                     jstring jFields = methodInfo.env->NewStringUTF(fields.c_str());
                     methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jFields, preferedPictureSize, (jlong)userData, (jboolean)_debug);
