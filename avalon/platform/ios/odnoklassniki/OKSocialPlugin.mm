@@ -165,6 +165,9 @@ void OKSocialPluginIOS::logout()
     [userDefaults removeObjectForKey:AVALON_OK_USER_ID];
     [userDefaults synchronize];
     [OKSDK clearAuth];
+
+    if (_delegate)
+        _delegate->onLogout({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""});
 }
 
 bool OKSocialPluginIOS::isLoggedIn() const
