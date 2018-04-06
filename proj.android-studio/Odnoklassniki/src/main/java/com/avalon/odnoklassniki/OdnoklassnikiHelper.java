@@ -96,7 +96,7 @@ public class OdnoklassnikiHelper
                             {
                                 String userId = userIdJson.getString("result");
                                 Cocos2dxHelper.setStringForKey(AVALON_OK_ACCESS_TOKEN, accessToken);
-                                threadDelegateOnLogin(ErrorType.SUCCESS, accessToken, userId, "");
+                                threadDelegateOnLogin(ErrorType.SUCCESS, accessToken, userId.substring(1, userId.length()-1) , "");
                             }
                             catch (JSONException e)
                             {
