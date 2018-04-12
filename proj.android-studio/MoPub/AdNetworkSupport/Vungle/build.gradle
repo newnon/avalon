@@ -4,8 +4,6 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
 
-    useLibrary 'org.apache.http.legacy'
-
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 25
@@ -25,21 +23,16 @@ repositories {
 
 dependencies {
     compile project(':libcocos2dx')
-    compile('com.mopub:mopub-sdk-banner:4.14.0@aar') {
-        transitive = true
-        exclude module: 'libAvid-mopub' // To exclude AVID
-        exclude module: 'moat-mobile-app-kit' // To exclude Moat
-    }
 
     // For interstitials
-    compile('com.mopub:mopub-sdk-interstitial:4.14.0@aar') {
+    compile('com.mopub:mopub-sdk-interstitial:4.20.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
 
     // For rewarded videos. This will automatically also include interstitials
-    compile('com.mopub:mopub-sdk-rewardedvideo:4.14.0@aar') {
+    compile('com.mopub:mopub-sdk-rewardedvideo:4.20.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
