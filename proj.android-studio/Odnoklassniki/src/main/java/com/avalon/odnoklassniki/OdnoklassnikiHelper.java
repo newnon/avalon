@@ -32,7 +32,6 @@ public class OdnoklassnikiHelper
     private enum ErrorType {SUCCESS, USER_CANCEL, ERROR}
     private static final String TAG = "C2DXOdnoklassniki";
     private static Cocos2dxActivity s_activity = (Cocos2dxActivity) Cocos2dxHelper.getActivity();
-    private static final String AVALON_OK_ACCESS_TOKEN = "avalon_ok_access_token";
 
     public static native void delegateOnLogin(int errorType, String token, String userId, String errorText);
 
@@ -64,16 +63,35 @@ public class OdnoklassnikiHelper
 
     public static void init()
     {
-        Cocos2dxHelper.addOnActivityResultListener(new PreferenceManager.OnActivityResultListener()
+        FutureTask<Void> task = new FutureTask<Void>(new Callable<Void>()
         {
             @Override
-            public boolean onActivityResult(int requestCode, int resultCode, Intent data)
+            public Void call()
             {
-                if (Odnoklassniki.getInstance().isActivityRequestOAuth(requestCode))
-                    Odnoklassniki.getInstance().onAuthActivityResult(requestCode, resultCode, data, getAuthListener());
-                return true;
+                Cocos2dxHelper.addOnActivityResultListener(new PreferenceManager.OnActivityResultListener()
+                {
+                    @Override
+                    public boolean onActivityResult(int requestCode, int resultCode, Intent data)
+                    {
+                        if (Odnoklassniki.getInstance().isActivityRequestOAuth(requestCode))
+                            Odnoklassniki.getInstance().onAuthActivityResult(requestCode, resultCode, data, getAuthListener());
+                        return true;
+                    }
+                });
+                return null;
             }
         });
+
+        s_activity.runOnUiThread(task);
+
+        try
+        {
+            task.get();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @NonNull
@@ -95,8 +113,7 @@ public class OdnoklassnikiHelper
                             try
                             {
                                 String userId = userIdJson.getString("result");
-                                Cocos2dxHelper.setStringForKey(AVALON_OK_ACCESS_TOKEN, accessToken);
-                                threadDelegateOnLogin(ErrorType.SUCCESS, accessToken, userId, "");
+                                threadDelegateOnLogin(ErrorType.SUCCESS, accessToken, userId.substring(1, userId.length()-1) , "");
                             }
                             catch (JSONException e)
                             {
@@ -133,15 +150,49 @@ public class OdnoklassnikiHelper
 
     public static void requestReadPermissions(final String[] permissions, boolean debug)
     {
+        s_activity.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                String appId = getAppId();
+                final String redirectUri = "okauth://ok" + appId;
+                Odnoklassniki.createInstance(s_activity, appId, getAppKey());
+                Odnoklassniki.getInstance().checkValidTokens(new OkListener()
+                {
+                    @Override
+                    public void onSuccess(JSONObject json)
+                    {
+                        try
+                        {
+                            String accessToken = json.getString("access_token");
+                            String userId = json.getString("logged_in_user");
+                            threadDelegateOnLogin(ErrorType.SUCCESS, accessToken, userId.substring(1, userId.length()-1) , "");
+                        }
+                        catch (Exception e)
+                        {
+                            Odnoklassniki.getInstance().requestAuthorization(s_activity, redirectUri, OkAuthType.ANY, permissions);
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error)
+                    {
+                        Odnoklassniki.getInstance().requestAuthorization(s_activity, redirectUri, OkAuthType.ANY, permissions);
+                    }
+                });
+            }
+        });
+    }
+
+    public static void logout(boolean debug)
+    {
         FutureTask<Void> task = new FutureTask<Void>(new Callable<Void>()
         {
             @Override
             public Void call()
             {
-                String appId = getAppId();
-                String redirectUri = "okauth://ok" + appId;
-                Odnoklassniki.createInstance(s_activity, appId, getAppKey());
-                Odnoklassniki.getInstance().requestAuthorization(s_activity, redirectUri, OkAuthType.ANY, permissions);
+                Odnoklassniki.getInstance().clearTokens();
                 return null;
             }
         });
@@ -156,13 +207,6 @@ public class OdnoklassnikiHelper
         {
             e.printStackTrace();
         }
-        // TODO debug
-    }
-
-    public static void logout(boolean debug)
-    {
-        Cocos2dxHelper.deleteValueForKey(AVALON_OK_ACCESS_TOKEN);
-        Odnoklassniki.getInstance().clearTokens();
     }
 
     public static String getAppId()

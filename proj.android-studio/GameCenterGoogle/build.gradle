@@ -20,5 +20,4 @@ android {
 dependencies {
     compile project(':libcocos2dx')
     compile 'com.google.android.gms:play-services-games:11.0.1'
-    compile 'com.google.android.gms:play-services-plus:11.0.1'
 }

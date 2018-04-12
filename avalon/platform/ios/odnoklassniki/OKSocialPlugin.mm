@@ -13,8 +13,6 @@
 #include "SocialPluginHelpers.h"
 #include "OKSocialPlugin.h"
 
-NSString *const AVALON_OK_USER_ID = @"avalon_ok_user_id";
-
 namespace avalon {
 
 static std::vector<std::string> split(const char *str, char c)
@@ -57,6 +55,7 @@ public:
     void getProfiles(const std::vector<std::string> &userIds, void *userData, int preferedPictureSize, const std::vector<std::string> &additionalFields) override;
     void getAppFriends(int preferedPictureSize, void *userData, const std::vector<std::string> &additionalFields) override;
 private:
+    void doLogout();
     SocialPermissionsHelper<OKPermission> _permissionsHelper;
     GenderHelper<std::string> _genderHelper;
     std::map<int, std::string> _picturesMap;
@@ -65,6 +64,7 @@ private:
     SocialPluginDelegate *_delegate = nullptr;
     bool _debug = false;
     std::string _userID;
+    bool _isLoggedIn = false;
     std::vector<SocialPermission> _readPermissions;
     std::vector<SocialPermission> _publishPermissions;
 };
@@ -82,9 +82,6 @@ OKSocialPluginIOS::OKSocialPluginIOS()
     {768, "pic_full"}}
 , _pictureIDKey("photo_id")
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (NSString *userIDString = [userDefaults objectForKey:AVALON_OK_USER_ID])
-        _userID = userIDString.UTF8String;
     OKSDKInitSettings *settings = [OKSDKInitSettings new];
     settings.appKey = [NSBundle.mainBundle.infoDictionary objectForKey:@"OKAppKey"];
     settings.appId = [NSBundle.mainBundle.infoDictionary objectForKey:@"OKAppId"];
@@ -136,20 +133,18 @@ void OKSocialPluginIOS::requestReadPermissions(const std::vector<SocialPermissio
             _delegate->onLogin({SocialPluginDelegate::Error::Type::UNDEFINED, 0, error.description.UTF8String}, "", {}, {});
     };
     [OKSDK authorizeWithPermissions:permissionArray success:^(id data){
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        if (NSString *userIDString = [userDefaults objectForKey:AVALON_OK_USER_ID])
-            _userID = userIDString.UTF8String;
-        else
-            [OKSDK invokeMethod:@"users.getLoggedInUser" arguments:@{} success:^(id data)
-            {
-                NSString *userIdString = data;
-                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                [userDefaults setObject:userIdString forKey:AVALON_OK_USER_ID];
-                [userDefaults synchronize];
-                _userID = userIdString.UTF8String;
-                if (_delegate)
-                    _delegate->onLogin({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""}, [OKSDK currentAccessToken].UTF8String, localPermissions, {});
-            } error:errorBlock];
+        [OKSDK invokeMethod:@"users.getLoggedInUser" arguments:@{} success:^(id data)
+        {
+            NSString *userIdString = data;
+            _userID = userIdString.UTF8String;
+            _isLoggedIn = true;
+            if (_delegate)
+                _delegate->onLogin({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""}, [OKSDK currentAccessToken].UTF8String, localPermissions, {});
+        } error:^(NSError *error)
+        {
+            doLogout();
+            requestReadPermissions(localPermissions);
+        }];
     } error:errorBlock];
 }
 
@@ -158,13 +153,16 @@ void OKSocialPluginIOS::requestPublishPermissions(const std::vector<SocialPermis
     // TODO
 }
 
-void OKSocialPluginIOS::logout()
+void OKSocialPluginIOS::doLogout()
 {
     _userID.clear();
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults removeObjectForKey:AVALON_OK_USER_ID];
-    [userDefaults synchronize];
+    _isLoggedIn = false;
     [OKSDK clearAuth];
+}
+
+void OKSocialPluginIOS::logout()
+{
+    doLogout();
 
     if (_delegate)
         _delegate->onLogout({SocialPluginDelegate::Error::Type::SUCCESS, 0, ""});
@@ -172,11 +170,7 @@ void OKSocialPluginIOS::logout()
 
 bool OKSocialPluginIOS::isLoggedIn() const
 {
-    if ([OKSDK currentAccessToken])
-    {
-        return true;
-    }
-    return false;
+    return _isLoggedIn;
 }
 
 std::string OKSocialPluginIOS::getUserID() const
