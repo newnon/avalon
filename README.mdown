@@ -274,34 +274,42 @@ and automate annoying tasks.
 4. Use functions from Firebase.h
 
 ##### Android
-1. Add to CmakeList.txt
-    set(AVALON_FIREBASE ON CACHE BOOL "firebase")
+1. Add to `CmakeList.txt`
+
+        set(AVALON_FIREBASE ON CACHE BOOL "firebase")
+        
 2. Add to build.gradle
-    buildscript {
+   
+        buildscript {
+            dependencies {
+               classpath 'com.google.gms:google-services:3.1.1' // google-services plugin
+               ...
+            }
+            ...
+         }
+         ...
+         repositories {
+            maven {
+               url "https://maven.google.com" // Google's Maven repository
+               ...
+            }
+            ...
+         }
+         
+3. Add to `settings.gradle`
+
+        include ':Firebase'
+        project(':Firebase').projectDir = new File(settingsDir, '../avalon/proj.android-studio/Firebase')
+        
+4. Add `app/build.gradle`
+
         dependencies {
-            classpath 'com.google.gms:google-services:3.1.1' // google-services plugin
+            compile project(':Firebase')
             ...
         }
-        ...
-    }
-    ...
-    repositories {
-        maven {
-            url "https://maven.google.com" // Google's Maven repository
-            ...
-        }
-        ...
-    }
-3. Add to settings.gradle
-    include ':Firebase'
-    project(':Firebase').projectDir = new File(settingsDir, '../avalon/proj.android-studio/Firebase')
-4. Add app/build.gradle
-    dependencies {
-        compile project(':Firebase')
-        ...
-    }
-5. Add google-services.json
-6. Use functions from Firebase.h
+        
+5. Add `google-services.json`
+6. Use functions from `Firebase.h` *(TBD: please clarify what functions will we use?)*
 
 # Documentations
 
