@@ -209,12 +209,6 @@ public class VungleRewardedVideo extends CustomEventRewardedVideo {
             MoPubLog.d(String.format("Vungle rewarded video ad is %s.",
                     playable ? "playable" : "not playable"));
         }
-
-        @Override
-        public void onVideoView(final boolean isCompletedView, final int watchedMillis, final int videoMillis) {
-            MoPubLog.d(String.format(Locale.US, "%.1f%% of Vungle video watched.",
-                    (double) watchedMillis / videoMillis * 100));
-        }
     }
 
     public static class VungleMediationSettings implements MediationSettings {

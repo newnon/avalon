@@ -89,12 +89,6 @@ public class VungleInterstitial extends CustomEventInterstitial implements Event
      */
 
     @Override
-    public void onVideoView(final boolean isCompletedView, final int watchedMillis, final int videoDurationMillis) {
-        final double watchedPercent = (double) watchedMillis / videoDurationMillis * 100;
-        Log.d("MoPub", String.format("%.1f%% of Vungle video watched.", watchedPercent));
-    }
-
-    @Override
     public void onAdStart() {
         mHandler.post(new Runnable() {
             @Override
