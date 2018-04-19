@@ -1,9 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.avalon.mopub"
+    package="com.avalon.mopub.vungle"
     android:versionCode="1"
     android:versionName="1.0" >
-
-    <uses-library android:name="com.google.android.gms" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18"/>
