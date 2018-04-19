@@ -83,6 +83,8 @@ public class VungleRewardedVideo extends CustomEventRewardedVideo {
         synchronized (VungleRewardedVideo.class) {
             if (!sInitialized) {
                 sVunglePub = VunglePub.getInstance();
+                String appId = serverExtras.containsKey(APP_ID_KEY) ? serverExtras.get(APP_ID_KEY) : DEFAULT_VUNGLE_APP_ID;
+                sVunglePub.init(launcherActivity, appId);
                 sInitialized = true;
                 return true;
             }
@@ -206,6 +208,12 @@ public class VungleRewardedVideo extends CustomEventRewardedVideo {
         public void onAdPlayableChanged(final boolean playable) {
             MoPubLog.d(String.format("Vungle rewarded video ad is %s.",
                     playable ? "playable" : "not playable"));
+        }
+
+        @Override
+        public void onVideoView(final boolean isCompletedView, final int watchedMillis, final int videoMillis) {
+            MoPubLog.d(String.format(Locale.US, "%.1f%% of Vungle video watched.",
+                    (double) watchedMillis / videoMillis * 100));
         }
     }
 

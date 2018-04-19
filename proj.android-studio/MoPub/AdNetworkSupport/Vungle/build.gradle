@@ -25,14 +25,14 @@ dependencies {
     compile project(':libcocos2dx')
 
     // For interstitials
-    compile('com.mopub:mopub-sdk-interstitial:4.20.0@aar') {
+    compile('com.mopub:mopub-sdk-interstitial:4.17.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
 
     // For rewarded videos. This will automatically also include interstitials
-    compile('com.mopub:mopub-sdk-rewardedvideo:4.20.0@aar') {
+    compile('com.mopub:mopub-sdk-rewardedvideo:4.17.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
