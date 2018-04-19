@@ -18,10 +18,10 @@
 
 -dontobfuscate
 
-// From firebase_cpp_sdk/libs/android/analytics.pro
+# From firebase_cpp_sdk/libs/android/analytics.pro
 -keep,includedescriptorclasses public class com.google.firebase.analytics.FirebaseAnalytics{ *; }
 
-// From firebase_cpp_sdk/libs/android/app.pro
+# From firebase_cpp_sdk/libs/android/app.pro
 -keep,includedescriptorclasses public class com.google.android.gms.common.GoogleApiAvailability{ *; }
 -keep,includedescriptorclasses public class com.google.android.gms.crash.internal.api.CrashApiImpl { *; }
 -keep,includedescriptorclasses public class com.google.android.gms.tasks.OnFailureListener { *; }
