@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontobfuscate
-
 # From firebase_cpp_sdk/libs/android/analytics.pro
 -keep,includedescriptorclasses public class com.google.firebase.analytics.FirebaseAnalytics{ *; }
 

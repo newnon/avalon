@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontobfuscate
-
 -keep public class com.sbstrm.appirater.Appirater
 -keepclassmembers public class com.sbstrm.appirater.Appirater {
     public *;

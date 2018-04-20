@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontobfuscate
-
 -keep public class com.avalon.notifications.Notifications
 -keepclassmembers public class com.avalon.notifications.Notifications {
     public *;

@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontobfuscate
-
 -keep public class com.avalon.mopub.MoPubHelper
 -keepclassmembers public class com.avalon.mopub.MoPubHelper { public *; }
 

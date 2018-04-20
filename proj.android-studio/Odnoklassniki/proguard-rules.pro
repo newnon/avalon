@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontobfuscate
-
 -keep public class com.avalon.odnoklassniki.OdnoklassnikiHelper
 -keepclassmembers public class com.avalon.odnoklassniki.OdnoklassnikiHelper {
     public *;

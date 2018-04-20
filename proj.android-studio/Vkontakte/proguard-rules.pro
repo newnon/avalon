@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontobfuscate
-
 -keep public class com.avalon.vkontakte.VkontakteHelper
 -keepclassmembers public class com.avalon.vkontakte.VkontakteHelper {
     public *;

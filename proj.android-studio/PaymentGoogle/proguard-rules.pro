@@ -16,8 +16,6 @@
 #   public *;
 #}
 
--dontobfuscate
-
 -keep public class com.avalon.payment.Backend
 -keepclassmembers public class com.avalon.payment.Backend {
     public *;
