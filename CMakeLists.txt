@@ -11,6 +11,7 @@ option(AVALON_ADMOB "admob" OFF)
 option(AVALON_GOOGLEANALYTICS "googleanalytics" OFF)
 option(AVALON_FIREBASE "firebase" OFF)
 option(AVALON_MOPUB "mopub" OFF)
+option(AVALON_AMPLITUDE "amplitude" OFF)
 option(AVALON_UI "ui" OFF)
 option(AVALON_ADS "ads" OFF)
 option(AVALON_SYSTEMINFO "systeminfo" OFF)
@@ -139,6 +140,14 @@ add_definitions(-DAVALON_CONFIG_MOPUB_ENABLED)
 set(AVALON_SRC
   ${AVALON_SRC}
   avalon/platform/${PLATFORM_FOLDER}/mopub/MoPub.cpp
+)
+endif()
+
+if(AVALON_AMPLITUDE)
+add_definitions(-DAVALON_CONFIG_AMPLITUDE_ENABLED)
+set(AVALON_SRC
+  ${AVALON_SRC}
+  avalon/platform/${PLATFORM_FOLDER}/amplitude/Amplitude.cpp
 )
 endif()
 
