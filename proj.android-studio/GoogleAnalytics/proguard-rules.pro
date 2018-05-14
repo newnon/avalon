@@ -20,3 +20,5 @@
 -keepclassmembers public class com.avalon.googleanalytics.GoogleAnalyticsHelper {
     public *;
 }
+
+-keep public class com.google.android.gms.analytics.Tracker
