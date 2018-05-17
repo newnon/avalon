@@ -20,3 +20,7 @@
 -keepclassmembers public class com.avalon.vkontakte.VkontakteHelper {
     public *;
 }
+
+-keep public class com.vk.sdk.VKSdk {
+    private static *;
+}

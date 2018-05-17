@@ -92,21 +92,29 @@ public class VkontakteHelper
     public static void init()
     {
         Method method = null;
+
+        //first try to call public method if it throw exception try to run private
         try
         {
-            method = VKSdk.class.getDeclaredMethod("initialize", new Class[]{Context.class, int.class, String.class});
-
-            if (method != null)
-            {
-                int appId = s_activity.getResources().getIdentifier(VKSdk.SDK_APP_ID, "integer", s_activity.getPackageName());
-
-                method.setAccessible(true);
-                method.invoke(VKSdk.class, s_activity, s_activity.getResources().getInteger(appId), "");
-            }
+            VKSdk.initialize(s_activity);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+        catch (Exception dummy) {
+            try
+            {
+                method = VKSdk.class.getDeclaredMethod("initialize", new Class[]{Context.class, int.class, String.class});
+
+                if (method != null)
+                {
+                    int appId = s_activity.getResources().getIdentifier(VKSdk.SDK_APP_ID, "integer", s_activity.getPackageName());
+
+                    method.setAccessible(true);
+                    method.invoke(VKSdk.class, s_activity, s_activity.getResources().getInteger(appId), "");
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
 
         Cocos2dxHelper.addOnActivityResultListener(new PreferenceManager.OnActivityResultListener()
