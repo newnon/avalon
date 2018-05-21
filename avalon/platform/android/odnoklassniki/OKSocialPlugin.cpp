@@ -109,11 +109,9 @@ OKSocialPluginAndroid::OKSocialPluginAndroid()
     {SocialPermission::Type::EMAIL, "GET_EMAIL"}})
 , _genderHelper("male", "female", "")
 , _picturesMap{
-    {50, "pic_1"},
-    {128, "pic_2"},
-    {190, "pic_3"},
-    {228, "pic_4"},
-    {768, "pic_full"}}
+    {50, "pic50x50"},
+    {128, "pic128x128"},
+    {190, "pic190x190"}}
 , _pictureIDKey("photo_id")
 {
     cocos2d::JniMethodInfo methodInfo;
