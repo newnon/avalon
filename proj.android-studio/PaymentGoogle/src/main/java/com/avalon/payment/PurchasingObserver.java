@@ -73,7 +73,6 @@ public class PurchasingObserver implements OnActivityResultListener
         mHelper.enableDebugLogging(true);
         mHelper.startSetup(mSetupFinishedListener);
         Cocos2dxHelper.addOnActivityResultListener(this);
-        threadDelegateOnServiceStarted();
     }
 
     public boolean isInitialized()
