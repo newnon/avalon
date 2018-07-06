@@ -134,7 +134,7 @@ void OKSocialPluginAndroid::setDebug(bool value)
 
 void OKSocialPluginAndroid::login()
 {
-    login({SocialPermission::Type::PUBLIC_PROFILE, SocialPermission::Type::FRIENDS, SocialPermission::Type::EMAIL});
+    login({SocialPermission::Type::PUBLIC_PROFILE});
 }
 
 void OKSocialPluginAndroid::login(const std::vector<SocialPermission> &permissions)

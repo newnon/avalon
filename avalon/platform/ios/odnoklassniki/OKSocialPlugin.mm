@@ -101,7 +101,7 @@ void OKSocialPluginIOS::setDebug(bool value)
 
 void OKSocialPluginIOS::login()
 {
-    login({SocialPermission::Type::PUBLIC_PROFILE, SocialPermission::Type::FRIENDS, SocialPermission::Type::EMAIL});
+    login({SocialPermission::Type::PUBLIC_PROFILE});
 }
 
 void OKSocialPluginIOS::login(const std::vector<SocialPermission> &permissions)

@@ -83,7 +83,7 @@ public:
     
     virtual void login() override
     {
-        requestReadPermissions({SocialPermission::Type::PUBLIC_PROFILE, SocialPermission::Type::FRIENDS, SocialPermission::Type::EMAIL});
+        requestReadPermissions({SocialPermission::Type::PUBLIC_PROFILE});
     }
     
     virtual void login(const std::vector<SocialPermission>& permissions) override
