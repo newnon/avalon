@@ -186,6 +186,11 @@
 		A5D08BBC18F7A44D00B4EBA1 /* Notifications.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BBB18F7A44D00B4EBA1 /* Notifications.mm */; };
 		A5D08BCE18F7D0F000B4EBA1 /* NotificationsAppController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5D08BCC18F7D0F000B4EBA1 /* NotificationsAppController.m */; };
 		A5D327671900507400A65D25 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5E2CC24211D05000056D97C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
+		A5E2CC2B211D054A0056D97C /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = E789A028206D0466002D8704 /* Firebase.h */; };
+		A5E2CC2C211D055A0056D97C /* Firebase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E789A024206D0443002D8704 /* Firebase.cpp */; };
+		A5E2CC2D211D05900056D97C /* libfirebase_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EFA6A7206D19EE00AA45BE /* libfirebase_app.a */; };
+		A5E2CC2E211D05900056D97C /* libfirebase_analytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7EFA6A6206D19ED00AA45BE /* libfirebase_analytics.a */; };
 		A5E989E91EA5FE0B003EB302 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		A5E989ED1EA5FE0B003EB302 /* SocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76131EA4DE34005187B4 /* SocialPlugin.h */; };
 		A5E989F41EA5FEBB003EB302 /* VKSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E989F31EA5FEBB003EB302 /* VKSocialPlugin.h */; };
@@ -1131,6 +1136,7 @@
 		A5D3276D1900507400A65D25 /* libAdMob iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAdMob iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5D3276F1900515B00A65D25 /* AdMob.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AdMob.h; path = avalon/AdMob.h; sourceTree = "<group>"; };
 		A5D327861900EEA700A65D25 /* AdMob.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AdMob.mm; path = ../AdMob.mm; sourceTree = "<group>"; };
+		A5E2CC2A211D05000056D97C /* libFirebase Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFirebase Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E989F11EA5FE0B003EB302 /* libVkontakte iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libVkontakte iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5E989F31EA5FEBB003EB302 /* VKSocialPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKSocialPlugin.h; path = avalon/VKSocialPlugin.h; sourceTree = "<group>"; };
 		A5E989F71EA5FEEB003EB302 /* VKSdkFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VKSdkFramework.framework; sourceTree = "<group>"; };
@@ -1889,6 +1895,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E2CC23211D05000056D97C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E2CC2D211D05900056D97C /* libfirebase_app.a in Frameworks */,
+				A5E2CC2E211D05900056D97C /* libfirebase_analytics.a in Frameworks */,
+				A5E2CC24211D05000056D97C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5E989E11EA5FE0B003EB302 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2049,6 +2065,7 @@
 				A5F4119E1F432CD400A51225 /* libUtils Mac.a */,
 				E7899E98206CF15F002D8704 /* libFirebase iOS.a */,
 				E7CD722E206EB03600598068 /* libOdnoklassniki iOS.a */,
+				A5E2CC2A211D05000056D97C /* libFirebase Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3877,6 +3894,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5E2CC25211D05000056D97C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E2CC2B211D054A0056D97C /* Firebase.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5E989EB1EA5FE0B003EB302 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -4463,6 +4488,23 @@
 			productReference = A5D3276D1900507400A65D25 /* libAdMob iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		A5E2CC1F211D05000056D97C /* Firebase Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5E2CC27211D05000056D97C /* Build configuration list for PBXNativeTarget "Firebase Mac" */;
+			buildPhases = (
+				A5E2CC20211D05000056D97C /* Sources */,
+				A5E2CC23211D05000056D97C /* Frameworks */,
+				A5E2CC25211D05000056D97C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Firebase Mac";
+			productName = Avalon;
+			productReference = A5E2CC2A211D05000056D97C /* libFirebase Mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		A5E989DB1EA5FE0B003EB302 /* Vkontakte iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5E989EE1EA5FE0B003EB302 /* Build configuration list for PBXNativeTarget "Vkontakte iOS" */;
@@ -4647,6 +4689,7 @@
 				A50FFF0F1A1B5C9900952186 /* Build all libs Mac */,
 				A5E989DB1EA5FE0B003EB302 /* Vkontakte iOS */,
 				E7899E97206CF15F002D8704 /* Firebase iOS */,
+				A5E2CC1F211D05000056D97C /* Firebase Mac */,
 				E7CD722D206EB03600598068 /* Odnoklassniki iOS */,
 			);
 		};
@@ -5112,6 +5155,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5ACF04A1918B25C00A010A5 /* AdMob.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5E2CC20211D05000056D97C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E2CC2C211D055A0056D97C /* Firebase.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6392,6 +6443,47 @@
 			};
 			name = Release;
 		};
+		A5E2CC28211D05000056D97C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/avalon/Firebase",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/mac/firebase",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A5E2CC29211D05000056D97C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/Avalon.dst;
+				GCC_PREFIX_HEADER = avalon/platform/mac/Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/avalon/Firebase",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/avalon/platform/mac/firebase",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		A5E989EF1EA5FE0B003EB302 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6874,6 +6966,15 @@
 			buildConfigurations = (
 				A5D3276B1900507400A65D25 /* Debug */,
 				A5D3276C1900507400A65D25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5E2CC27211D05000056D97C /* Build configuration list for PBXNativeTarget "Firebase Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5E2CC28211D05000056D97C /* Debug */,
+				A5E2CC29211D05000056D97C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
