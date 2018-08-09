@@ -215,7 +215,7 @@ public:
             if (_delegate) {
                 Transaction managerTransaction;
                 managerTransaction.transactionState = TransactionState::Failed;
-                if(transaction)
+                if(transaction && transaction.transactionIdentifier)
                     managerTransaction.transactionIdentifier = [transaction.transactionIdentifier cStringUsingEncoding:NSASCIIStringEncoding];
                 managerTransaction.productId = id;
                 _delegate->onPurchaseFail(managerTransaction, convertErrorToCode(error));
