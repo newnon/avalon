@@ -29,4 +29,5 @@
 -keep,includedescriptorclasses public class com.google.firebase.FirebaseOptions{ *; }
 -keep,includedescriptorclasses public class com.google.firebase.FirebaseOptions$Builder{ *; }
 -keep,includedescriptorclasses public class com.google.firebase.iid.FirebaseInstanceId{ *; }
+-keep,includedescriptorclasses public class com.google.firebase.provider.FirebaseInitProvider{ *; }
 -keep,includedescriptorclasses public class dalvik.system.DexClassLoader{ *; }
