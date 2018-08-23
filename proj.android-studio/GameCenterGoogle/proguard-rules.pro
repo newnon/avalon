@@ -16,7 +16,7 @@
 #   public *;
 #}
 
--keep public class com.avalon.gamecenter.GameHelper
--keepclassmembers public class com.avalon.gamecenter.GameHelper {
+-keep public class com.avalon.gamecenter.GameCenter
+-keepclassmembers public class com.avalon.gamecenter.GameCenter {
     public *;
 }
