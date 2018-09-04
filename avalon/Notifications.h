@@ -19,14 +19,14 @@ struct Notification {
 class LocalNotificationsDelegate
 {
 public:
-    virtual void onLocalNotification(bool active, int notificationId, const std::string &message, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict) = 0;
+    virtual void onLocalNotification(bool active, int notificationId, const std::string &message, const std::string &title, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict) = 0;
     virtual ~LocalNotificationsDelegate() {}
 };
     
 class RemoteNotificationsDelegate
 {
 public:
-    virtual void onRemoteNotification(bool active, const std::string &message, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict) = 0;
+    virtual void onRemoteNotification(bool active, const std::string &message, const std::string &title, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict) = 0;
     virtual void onRegisterForRemoteNotifications(const std::vector<unsigned char> &data, const std::string &error) = 0;
     virtual ~RemoteNotificationsDelegate() {}
 };
@@ -34,7 +34,7 @@ public:
 class Notifications
 {
 public:
-    static void schedule(const std::string &message, long long time, int id, const std::string &sound = "", unsigned badgeNumber = 0, const std::unordered_map<std::string,std::string> &userDict = std::unordered_map<std::string,std::string>());
+    static void schedule(const std::string &message, const std::string &title, long long time, int id, const std::string &sound = "", unsigned badgeNumber = 0, const std::unordered_map<std::string,std::string> &userDict = std::unordered_map<std::string,std::string>());
     static void cancel(int id);
     static void cancelAll();
     static bool isScheduled(int id);

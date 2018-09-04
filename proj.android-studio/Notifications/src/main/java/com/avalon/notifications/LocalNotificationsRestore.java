@@ -38,6 +38,7 @@ public class LocalNotificationsRestore extends BroadcastReceiver {
             	
             	String message = args.getString("message");
             	String sound = args.getString("sound");
+                String title = args.getString("title");
             	int time = args.getInt("time");
             	int badgeNumber = args.getInt("badge");
 
@@ -57,7 +58,7 @@ public class LocalNotificationsRestore extends BroadcastReceiver {
                 /*
                  * If the trigger date was in the past, the notification will be displayed immediately.
                  */
-                Notifications.add(message, sound, time, Integer.parseInt(alarmId), badgeNumber, params);
+                Notifications.add(message, title, sound, time, Integer.parseInt(alarmId), badgeNumber, params);
 
             } catch (Exception e) {}
         }

@@ -14,12 +14,15 @@ static avalon::RemoteNotificationsDelegate *_remoteNotificationsDelegate = nullp
 
 namespace avalon {
     
-void Notifications::schedule(const std::string &message, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
+void Notifications::schedule(const std::string &message, const std::string &title, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
 {
     //Initalize new notification
     NSUserNotification *notification = [[NSUserNotification alloc] init];
     //Set the title of the notification
-    [notification setTitle:[[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:@"CFBundleDisplayName"]];
+    if(!title.empty())
+        [notification setTitle:[NSString stringWithUTF8String:title.c_str()]];
+    else
+        [notification setTitle:[[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:@"CFBundleDisplayName"]];
     //Set the text of the notification
     [notification setInformativeText:[NSString stringWithCString:message.c_str() encoding:NSUTF8StringEncoding]];
     //Set the time and date on which the nofication will be deliverd (for example 20 secons later than the current date and time)
@@ -156,8 +159,11 @@ const Notification* Notifications::getLaunchedNotification()
     {
         std::string message;
         std::string sound;
+        std::string title;
         std::unordered_map<std::string,std::string> userParams;
         
+        if(notification.title)
+            title = [notification.title cStringUsingEncoding:NSUTF8StringEncoding];
         if(notification.informativeText)
             message = [notification.informativeText cStringUsingEncoding:NSUTF8StringEncoding];
         if(notification.soundName)
@@ -175,7 +181,7 @@ const Notification* Notifications::getLaunchedNotification()
             }
         }
 
-        _delegate->onLocalNotification(true, [[notification.userInfo objectForKey:@"_id"] intValue], message, sound, 0, userParams);
+        _delegate->onLocalNotification(true, [[notification.userInfo objectForKey:@"_id"] intValue], message, title, sound, 0, userParams);
     }
     
 }

@@ -2,7 +2,7 @@
 
 namespace avalon {
     
-void Notifications::schedule(const std::string &message, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
+void Notifications::schedule(const std::string &message, const std::string &title, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
 {
 }
 

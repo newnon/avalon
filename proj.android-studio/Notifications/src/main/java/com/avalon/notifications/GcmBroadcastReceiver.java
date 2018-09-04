@@ -67,10 +67,11 @@ public class GcmBroadcastReceiver extends BroadcastReceiver {
     private void sendNotification(Context context, Bundle bundle) {
     	
     	String message = bundle.getString("message");
+        String title = bundle.getString("title");
     	String sound = bundle.getString("sound");
     	int badgeNumber = bundle.getInt("badgeNumber");
     	
-        Notifications.showNotification(context, NOTIFICATION_ID, message, sound, badgeNumber, bundle);
-        Notifications.onRemoteNotification(message, sound, badgeNumber);
+        Notifications.showNotification(context, NOTIFICATION_ID, message, title, sound, badgeNumber, bundle);
+        Notifications.onRemoteNotification(message, title, sound, badgeNumber);
     }
 }

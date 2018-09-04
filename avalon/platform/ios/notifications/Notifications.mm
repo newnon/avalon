@@ -11,7 +11,7 @@ static avalon::RemoteNotificationsDelegate *_remoteNotificationsDelegate = nullp
 
 namespace avalon {
     
-void Notifications::schedule(const std::string &message, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
+void Notifications::schedule(const std::string &message, const std::string &title, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
 {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     
@@ -19,6 +19,8 @@ void Notifications::schedule(const std::string &message, long long time, int id,
     notification.timeZone = nil;
     notification.alertBody = [NSString stringWithCString:message.c_str() encoding:NSUTF8StringEncoding];
     notification.alertAction = @"Open";
+    if(!title.empty())
+        notification.alertTitle = [NSString stringWithUTF8String:title.c_str()];
     notification.applicationIconBadgeNumber = badgeNumber;
     if(sound.empty())
         notification.soundName = UILocalNotificationDefaultSoundName;
@@ -226,11 +228,14 @@ const Notification* Notifications::getLaunchedNotification()
     {
         std::string message;
         std::string sound;
+        std::string title;
         unsigned badge = 0;
         std::unordered_map<std::string,std::string> userParams;
     
         UILocalNotification *localNotification = [notification.userInfo objectForKey:@"notification"];
         
+        if(localNotification.alertTitle)
+            title = [localNotification.alertTitle cStringUsingEncoding:NSUTF8StringEncoding];
         if(localNotification.alertBody)
             message = [localNotification.alertBody cStringUsingEncoding:NSUTF8StringEncoding];
         if(localNotification.soundName)
@@ -248,7 +253,7 @@ const Notification* Notifications::getLaunchedNotification()
                     userParams.insert(std::make_pair([key cStringUsingEncoding:NSUTF8StringEncoding], temp));
             }
         }
-        _localNotificationsDelegate->onLocalNotification(active, [[notification.userInfo objectForKey:@"_id"] intValue], message, sound, badge, userParams);
+        _localNotificationsDelegate->onLocalNotification(active, [[notification.userInfo objectForKey:@"_id"] intValue], message, title, sound, badge, userParams);
     }
 }
 
@@ -266,6 +271,7 @@ const Notification* Notifications::getLaunchedNotification()
         NSDictionary *userInfo = notification.userInfo;
         std::string message;
         std::string sound;
+        std::string title;
         unsigned badge = 0;
         std::unordered_map<std::string,std::string> userParams;
         
@@ -276,9 +282,17 @@ const Notification* Notifications::getLaunchedNotification()
             {
                 NSDictionary *apsInfo = [userInfo objectForKey:key];
                 
-                const char *pMessage = [[apsInfo objectForKey:@"alert"] cStringUsingEncoding:NSUTF8StringEncoding];
-                if (pMessage)
-                    message = pMessage;
+                NSDictionary *alert = [apsInfo objectForKey:@"alert"];
+                if(alert)
+                {
+                    const char *pMessage = [[alert objectForKey:@"body"] cStringUsingEncoding:NSUTF8StringEncoding];
+                    if (pMessage)
+                        message = pMessage;
+                    
+                    const char *pTitle = [[alert objectForKey:@"title"] cStringUsingEncoding:NSUTF8StringEncoding];
+                    if (pTitle)
+                        title = pTitle;
+                }
                 
                 const char *pSound = [[apsInfo objectForKey:@"sound"] cStringUsingEncoding:NSUTF8StringEncoding];
                 if (pSound)
@@ -297,7 +311,7 @@ const Notification* Notifications::getLaunchedNotification()
                 }
             }
         }
-        _remoteNotificationsDelegate->onRemoteNotification(active, message, sound, badge, userParams);
+        _remoteNotificationsDelegate->onRemoteNotification(active, message, title, sound, badge, userParams);
     }
 }
 

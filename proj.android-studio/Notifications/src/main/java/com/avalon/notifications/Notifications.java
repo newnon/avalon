@@ -45,8 +45,8 @@ public class Notifications{
 	private static GoogleCloudMessaging gcm;
 	private static String regid;
 	
-	private static native void delegateOnLocalNotification(boolean active, int id, String message, String sound, int badgeNumber);
-	private static native void delegateOnRemoteNotification(boolean active, String message, String sound, int badgeNumber);
+	private static native void delegateOnLocalNotification(boolean active, int id, String message, String title, String sound, int badgeNumber);
+	private static native void delegateOnRemoteNotification(boolean active, String message, String title, String sound, int badgeNumber);
 	private static native void delegateOnRegisterForRemoteNotifications(String data, String error);
 
     public static void setContext (Context context) {
@@ -55,11 +55,12 @@ public class Notifications{
         }
     }
 	
-	public static void onLocalNotification(int id, String message, String sound, int badgeNumber)
+	public static void onLocalNotification(int id, String message, String title, String sound, int badgeNumber)
 	{
 		if(Cocos2dxHelper.getActivity() != null)
 		{
 			final String lMessage = message;
+            final String lTitle = title;
 			final String lSound = sound;
 			final int lNadgeNumber = badgeNumber;
             final int lId = id;
@@ -67,24 +68,25 @@ public class Notifications{
 			Cocos2dxHelper.runOnGLThread(new Runnable() {
 				@Override
 				public void run() {
-					Notifications.delegateOnLocalNotification(lActive, lId, lMessage, lSound, lNadgeNumber);
+					Notifications.delegateOnLocalNotification(lActive, lId, lMessage, lTitle, lSound, lNadgeNumber);
 				}
 			});
 		}
 	}
 	
-	public static void onRemoteNotification(String message, String sound, int badgeNumber)
+	public static void onRemoteNotification(String message, String title, String sound, int badgeNumber)
 	{
 		if(Cocos2dxHelper.getActivity() != null)
 		{
 			final String lMessage = message;
+            final String lTitle = title;
 			final String lSound = sound;
 			final int lNadgeNumber = badgeNumber;
 			final boolean lActive = getApplicationActive();
 			Cocos2dxHelper.runOnGLThread(new Runnable() {
 				@Override
 				public void run() {
-					Notifications.delegateOnRemoteNotification(lActive,lMessage,lSound,lNadgeNumber);
+					Notifications.delegateOnRemoteNotification(lActive, lMessage, lTitle, lSound, lNadgeNumber);
 				}
 			});
 		}
@@ -105,12 +107,13 @@ public class Notifications{
 		}
 	}
 	
-	public static void showLocalNotification(String message, String sound, long time, int id, int badgeNumber, HashMap<String, String> params) {
+	public static void showLocalNotification(String message, String title, String sound, long time, int id, int badgeNumber, HashMap<String, String> params) {
 		Log.v(TAG, "showLocalNotification");
-		add(message, sound, time, id, badgeNumber, params);
+		add(message, title, sound, time, id, badgeNumber, params);
 		JSONObject obj = new JSONObject();
 		try {
 			obj.put("message", message);
+            obj.put("title", title);
 			obj.put("sound", sound);
 			obj.put("time", time);
 			obj.put("badge", badgeNumber);
@@ -174,7 +177,7 @@ public class Notifications{
         return notificationParams;
     }
 	
-	static void showNotification (Context context, int notificationId, String message, String sound, int badge, Bundle bundle) {
+	static void showNotification (Context context, int notificationId, String message, String title, String sound, int badge, Bundle bundle) {
 		String packageName  = context.getPackageName();
         Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
 
@@ -193,7 +196,10 @@ public class Notifications{
         } catch (NameNotFoundException e) {
         }
         Notification.Builder builder = new Notification.Builder(context);
-		builder.setContentTitle(context.getString(context.getResources().getIdentifier("app_name", "string", context.getPackageName())));
+        if(title != null && !title.isEmpty())
+            builder.setContentTitle(title);
+        else
+		    builder.setContentTitle(context.getString(context.getResources().getIdentifier("app_name", "string", context.getPackageName())));
 		builder.setContentText(message);
 		builder.setSmallIcon(context.getResources().getIdentifier("icon_small", "drawable", context.getPackageName()));
 		builder.setLargeIcon(largeIcon);
@@ -245,9 +251,10 @@ public class Notifications{
         return ret;
     }
 	
-	static void add(String message, String sound, long time, int notificationId, int badgeNumber, HashMap<String, String> params) {
+	static void add(String message, String title, String sound, long time, int notificationId, int badgeNumber, HashMap<String, String> params) {
         Bundle bundle = new Bundle();
         bundle.putString("message", message);
+        bundle.putString("title", title);
         bundle.putInt("badge", badgeNumber);
         bundle.putString("sound", sound);
 

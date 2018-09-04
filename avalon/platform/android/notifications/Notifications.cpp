@@ -181,17 +181,20 @@ const Notification* Notifications::getLaunchedNotification()
     return nullptr;
 }
 
-void Notifications::schedule(const std::string &message, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
+void Notifications::schedule(const std::string &message, const std::string &title, long long time, int id, const std::string &sound, unsigned badgeNumber, const std::unordered_map<std::string,std::string> &userDict)
 {
     cocos2d::JniMethodInfo methodInfo;
 
-    if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, CLASS_NAME, "showLocalNotification", "(Ljava/lang/String;Ljava/lang/String;JIILjava/util/HashMap;)V"))
+    if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, CLASS_NAME, "showLocalNotification", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JIILjava/util/HashMap;)V"))
     {
         jstring jmessage = methodInfo.env->NewStringUTF(message.c_str());
+        jstring jtitle = methodInfo.env->NewStringUTF(title.c_str());
         jstring jsound = methodInfo.env->NewStringUTF(sound.c_str());
         jobject jParams = jobjectFromDictionary(userDict);
-        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jmessage, jsound, time, id, badgeNumber, jParams);
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, jmessage, jtitle, jsound, time, id, badgeNumber, jParams);
         methodInfo.env->DeleteLocalRef(jParams);
+        methodInfo.env->DeleteLocalRef(jsound);
+        methodInfo.env->DeleteLocalRef(jtitle);
         methodInfo.env->DeleteLocalRef(jmessage);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
@@ -291,23 +294,25 @@ void Notifications::unregisterForRemoteNotifications()
 
 extern "C" {
 
-JNIEXPORT void JNICALL Java_com_avalon_notifications_Notifications_delegateOnLocalNotification(JNIEnv* env, jclass clazz, jboolean jActive, jint jId, jstring jMessage, jstring jSound, jint jBadgeNumber)
+JNIEXPORT void JNICALL Java_com_avalon_notifications_Notifications_delegateOnLocalNotification(JNIEnv* env, jclass clazz, jboolean jActive, jint jId, jstring jMessage, jstring jTitle, jstring jSound, jint jBadgeNumber)
 {
     if(avalon::_localNotificationsDelegate)
     {
         std::string message = cocos2d::JniHelper::jstring2string(jMessage);
+        std::string title = cocos2d::JniHelper::jstring2string(jTitle);
         std::string sound = cocos2d::JniHelper::jstring2string(jSound);
-        avalon::_localNotificationsDelegate->onLocalNotification(jActive, jId, message, sound, jBadgeNumber, std::unordered_map<std::string,std::string>());
+        avalon::_localNotificationsDelegate->onLocalNotification(jActive, jId, message, title, sound, jBadgeNumber, std::unordered_map<std::string,std::string>());
     }
 }
 
-JNIEXPORT void JNICALL Java_com_avalon_notifications_Notifications_delegateOnRemoteNotification(JNIEnv* env, jclass clazz, jboolean jActive, jstring jMessage, jstring jSound, jint jBadgeNumber)
+JNIEXPORT void JNICALL Java_com_avalon_notifications_Notifications_delegateOnRemoteNotification(JNIEnv* env, jclass clazz, jboolean jActive, jstring jMessage, jstring jTitle, jstring jSound, jint jBadgeNumber)
 {
     if(avalon::_remoteNotificationsDelegate)
     {
         std::string message = cocos2d::JniHelper::jstring2string(jMessage);
+        std::string title = cocos2d::JniHelper::jstring2string(jTitle);
         std::string sound = cocos2d::JniHelper::jstring2string(jSound);
-        avalon::_remoteNotificationsDelegate->onRemoteNotification(jActive, message, sound, jBadgeNumber, std::unordered_map<std::string,std::string>());
+        avalon::_remoteNotificationsDelegate->onRemoteNotification(jActive, message, title, sound, jBadgeNumber, std::unordered_map<std::string,std::string>());
     }
 }
 

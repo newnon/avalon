@@ -16,12 +16,13 @@ public class LocalNotificationsReceiver extends BroadcastReceiver {
 		Bundle bundle = intent.getBundleExtra("notification");
 
 		String message = bundle.getString("message");
+		String title = bundle.getString("title");
 		String sound = bundle.getString("sound");
 		int badge = bundle.getInt("badge",0);
 		
-		Notifications.showNotification(context, notificationId, message, sound, badge, bundle);
+		Notifications.showNotification(context, notificationId, message, title, sound, badge, bundle);
 		
 		Notifications.unpersist(notificationId);
-		Notifications.onLocalNotification(notificationId, message,sound,badge);
+		Notifications.onLocalNotification(notificationId, message, title, sound, badge);
 	}
 }
