@@ -22,3 +22,4 @@ proj.win32/Debug.win32
 proj.win32/Release.win32
 proj.android-studio/**/build
 *.iml
+proj.win32/libAvalon.vcxproj.user

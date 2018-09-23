@@ -65,6 +65,9 @@
     <ClInclude Include="..\avalon\WebView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\avalon\Firebase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\avalon\platform\windows\appirater\Appirater.cpp">
@@ -89,6 +92,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\avalon\platform\windows\systeminfo\SystemInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\avalon\firebase\Firebase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
