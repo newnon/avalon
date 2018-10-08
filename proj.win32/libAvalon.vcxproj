@@ -96,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;../vendors/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_LIB;COCOS2DXWIN32_EXPORTS;GL_GLEXT_PROTOTYPES;COCOS2D_DEBUG=1;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;AVALON_CONFIG_ADS_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
@@ -107,8 +107,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>firebase_app.lib;firebase_analytics.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\avalon\platform\windows\firebase\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>firebase_app.lib;firebase_analytics.lib;steam_api.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\avalon\platform\windows\firebase\Debug;..\vendors\steam\lib\win32</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -119,7 +119,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>
       </SDLCheck>
-      <AdditionalIncludeDirectories>..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;../vendors/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_LIB;COCOS2DXWIN32_EXPORTS;GL_GLEXT_PROTOTYPES;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;AVALON_CONFIG_ADS_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -128,8 +128,8 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>firebase_app.lib;firebase_analytics.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\avalon\platform\windows\firebase\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>firebase_app.lib;firebase_analytics.lib;steam_api.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\avalon\platform\windows\firebase\Release;..\vendors\steam\lib\win32</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
