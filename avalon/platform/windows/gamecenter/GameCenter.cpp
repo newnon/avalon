@@ -81,9 +81,11 @@ public:
 
 	bool showAchievements()
 	{
-		wchar_t buffer[256];
-		swprintf(buffer, L"https://steamcommunity.com/stats/%d/achievements/", _appID);
-		return (int)ShellExecute(0, 0, buffer, 0, 0, SW_SHOW) > 32;
+		SteamFriends()->ActivateGameOverlay("achievements");
+		return true;
+		//wchar_t buffer[256];
+		//swprintf(buffer, L"https://steamcommunity.com/stats/%d/achievements/", _appID);
+		//return (int)ShellExecute(0, 0, buffer, 0, 0, SW_SHOW) > 32;
 	}
 
 	void postAchievement(const std::string &idName, int percentComplete, bool showBanner)
@@ -118,9 +120,12 @@ public:
 
 	bool showScores()
 	{
-		wchar_t buffer[256];
-		swprintf(buffer, L"https://steamcommunity.com/stats/%d/leaderboards/", _appID);
-		return (int)ShellExecute(0, 0, buffer, 0, 0, SW_SHOW) > 32;
+		SteamFriends()->ActivateGameOverlay("stats");
+		return true;
+		//wchar_t buffer[256];
+		//swprintf(buffer, L"https://steamcommunity.com/stats/%d/leaderboards/", _appID);
+		//SteamFriends()->ActivateGameOverlayToWebPage(buffer);
+		//return (int)ShellExecute(0, 0, buffer, 0, 0, SW_SHOW) > 32;
 	}
 
 	void postScore(const std::string &idName, int score)
