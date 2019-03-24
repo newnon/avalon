@@ -235,7 +235,7 @@ JNIEXPORT void JNICALL Java_com_avalon_payment_Backend_delegateOnPurchaseSucceed
     		managerTransaction.productId = product->id;
             managerTransaction.transactionIdentifier = orderId;
             managerTransaction.receipt = std::vector<unsigned char>(token.begin(), token.end());
-            managerTransaction.transactionState = jRestored?TransactionState::Purchased:TransactionState::Restored;
+            managerTransaction.transactionState = jRestored?TransactionState::Restored:TransactionState::Purchased;
     		globalManager->getDelegate()->onPurchaseSucceed(managerTransaction);
     	}
     	else
