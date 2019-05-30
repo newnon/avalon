@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
-    buildToolsVersion PROP_BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion PROP_MIN_SDK_VERSION
@@ -16,6 +15,6 @@ repositories {
 }
 
 dependencies {
-    compile project(':libcocos2dx')
-    compile 'ru.ok:odnoklassniki-android-sdk:2.1.5'
+    implementation project(':libcocos2dx')
+    implementation 'ru.ok:odnoklassniki-android-sdk:2.1.5'
 }
