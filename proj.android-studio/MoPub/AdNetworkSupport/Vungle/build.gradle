@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion PROP_COMPILE_SDK_VERSION.toInteger()
-    buildToolsVersion PROP_BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion PROP_MIN_SDK_VERSION
@@ -16,29 +15,29 @@ repositories {
 }
 
 dependencies {
-    compile project(':libcocos2dx')
+    implementation project(':libcocos2dx')
 
     // For base
-    compile('com.mopub:mopub-sdk-base:4.17.0@aar') {
+    implementation('com.mopub:mopub-sdk-base:4.17.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
 
     // For interstitials
-    compile('com.mopub:mopub-sdk-interstitial:4.17.0@aar') {
+    implementation('com.mopub:mopub-sdk-interstitial:4.17.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
 
     // For rewarded videos. This will automatically also include interstitials
-    compile('com.mopub:mopub-sdk-rewardedvideo:4.17.0@aar') {
+    implementation('com.mopub:mopub-sdk-rewardedvideo:4.17.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
-    compile 'com.google.android.gms:play-services-ads:11.0.1'
-    compile 'com.google.android.gms:play-services-location:11.0.1'
-    compile fileTree(dir: '../../../../vendors/vungle/android/libs', include: ['*.jar'])
+    implementation 'com.google.android.gms:play-services-ads:11.0.1'
+    implementation 'com.google.android.gms:play-services-location:11.0.1'
+    implementation fileTree(dir: '../../../../vendors/vungle/android/libs', include: ['*.jar'])
 }
