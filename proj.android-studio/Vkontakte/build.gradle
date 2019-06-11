@@ -16,5 +16,5 @@ repositories {
 
 dependencies {
     implementation project(':libcocos2dx')
-    implementation 'com.vk:androidsdk:1.6.7'
+    implementation 'com.vk:androidsdk:1.6.9'
 }

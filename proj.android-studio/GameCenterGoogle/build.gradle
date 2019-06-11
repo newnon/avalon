@@ -12,5 +12,5 @@ android {
 
 dependencies {
     implementation project(':libcocos2dx')
-    implementation 'com.google.android.gms:play-services-games:11.0.1'
+    implementation 'com.google.android.gms:play-services-games:17.0.0'
 }

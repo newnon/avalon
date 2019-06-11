@@ -18,26 +18,26 @@ dependencies {
     implementation project(':libcocos2dx')
 
     // For base
-    implementation('com.mopub:mopub-sdk-base:4.17.0@aar') {
+    implementation('com.mopub:mopub-sdk-base:4.20.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
 
     // For interstitials
-    implementation('com.mopub:mopub-sdk-interstitial:4.17.0@aar') {
+    implementation('com.mopub:mopub-sdk-interstitial:4.20.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
 
     // For rewarded videos. This will automatically also include interstitials
-    implementation('com.mopub:mopub-sdk-rewardedvideo:4.17.0@aar') {
+    implementation('com.mopub:mopub-sdk-rewardedvideo:4.20.0@aar') {
         transitive = true
         exclude module: 'libAvid-mopub' // To exclude AVID
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
-    implementation 'com.google.android.gms:play-services-ads:11.0.1'
-    implementation 'com.google.android.gms:play-services-location:11.0.1'
+    implementation 'com.google.android.gms:play-services-ads:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation fileTree(dir: '../../../../vendors/vungle/android/libs', include: ['*.jar'])
 }

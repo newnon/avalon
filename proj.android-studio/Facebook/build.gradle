@@ -16,5 +16,5 @@ repositories {
 
 dependencies {
     implementation project(':libcocos2dx')
-    implementation 'com.facebook.android:facebook-android-sdk:4.23.0'
+    implementation 'com.facebook.android:facebook-android-sdk:5.0.3'
 }

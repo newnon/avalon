@@ -19,5 +19,5 @@ android {
 
 dependencies {
     compile project(':libcocos2dx')
-    compile 'com.google.android.gms:play-services-ads:10.0.1'
+    compile 'com.google.android.gms:play-services-ads:16.0.0'
 }

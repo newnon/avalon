@@ -16,5 +16,5 @@ repositories {
 
 dependencies {
     implementation project(':libcocos2dx')
-    implementation 'ru.ok:odnoklassniki-android-sdk:2.1.5'
+    implementation 'ru.ok:odnoklassniki-android-sdk:2.1.8'
 }

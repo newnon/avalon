@@ -12,5 +12,5 @@ android {
 
 dependencies {
     implementation project(':libcocos2dx')
-    implementation 'com.amplitude:android-sdk:2.18.0'
+    implementation 'com.amplitude:android-sdk:2.23.0'
 }

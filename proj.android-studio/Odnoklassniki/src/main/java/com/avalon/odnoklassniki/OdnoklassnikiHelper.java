@@ -3,7 +3,6 @@ package com.avalon.odnoklassniki;
 import android.content.Intent;
 import android.preference.PreferenceManager;
 
-import android.support.annotation.NonNull;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxHelper;
 
@@ -63,7 +62,7 @@ public class OdnoklassnikiHelper
 
     public static void init()
     {
-        FutureTask<Void> task = new FutureTask<Void>(new Callable<Void>()
+        FutureTask<Void> task = new FutureTask<>(new Callable<Void>()
         {
             @Override
             public Void call()
@@ -94,7 +93,6 @@ public class OdnoklassnikiHelper
         }
     }
 
-    @NonNull
     private static OkAuthListener getAuthListener()
     {
         return new OkAuthListener()
@@ -105,7 +103,7 @@ public class OdnoklassnikiHelper
                 try
                 {
                     final String accessToken = authJson.getString("access_token");
-                    Odnoklassniki.getInstance().requestAsync("users.getLoggedInUser", null, null, new OkListener()
+                    Odnoklassniki.getInstance().requestAsync("users.getLoggedInUser", null, OkRequestMode.getDEFAULT(), new OkListener()
                     {
                         @Override
                         public void onSuccess(JSONObject userIdJson)
@@ -187,7 +185,7 @@ public class OdnoklassnikiHelper
 
     public static void logout(boolean debug)
     {
-        FutureTask<Void> task = new FutureTask<Void>(new Callable<Void>()
+        FutureTask<Void> task = new FutureTask<>(new Callable<Void>()
         {
             @Override
             public Void call()
@@ -212,15 +210,13 @@ public class OdnoklassnikiHelper
     public static String getAppId()
     {
         int appId = s_activity.getResources().getIdentifier("odnoklassniki_app_id", "string", s_activity.getPackageName());
-        String appIdStr = s_activity.getResources().getString(appId);
-        return appIdStr;
+        return s_activity.getResources().getString(appId);
     }
 
     public static String getAppKey()
     {
         int appKey = s_activity.getResources().getIdentifier("odnoklassniki_app_key", "string", s_activity.getPackageName());
-        String appKeyStr = s_activity.getResources().getString(appKey);
-        return  appKeyStr;
+        return s_activity.getResources().getString(appKey);
     }
 
     public static void getMyProfile(String fields, final long userData, String pictureField, final boolean debug)
@@ -270,7 +266,7 @@ public class OdnoklassnikiHelper
             @Override
             public void run()
             {
-                Odnoklassniki.getInstance().requestAsync("users.getCurrentUser", fieldsMap, null, okListener);
+                Odnoklassniki.getInstance().requestAsync("users.getCurrentUser", fieldsMap, OkRequestMode.getDEFAULT(), okListener);
             }
         });
     }
