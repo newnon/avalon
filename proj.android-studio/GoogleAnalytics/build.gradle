@@ -12,5 +12,5 @@ android {
 
 dependencies {
     implementation project(':libcocos2dx')
-    implementation 'com.google.android.gms:play-services-analytics:16.0.8'
+    implementation 'com.google.android.gms:play-services-analytics:17.0.0'
 }

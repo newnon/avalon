@@ -38,6 +38,6 @@ dependencies {
         exclude module: 'moat-mobile-app-kit' // To exclude Moat
     }
     implementation 'com.google.android.gms:play-services-ads:16.0.0'
-    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation fileTree(dir: '../../../../vendors/vungle/android/libs', include: ['*.jar'])
 }
