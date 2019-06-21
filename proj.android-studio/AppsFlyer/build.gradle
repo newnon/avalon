@@ -18,5 +18,5 @@ dependencies {
     implementation project(':libcocos2dx')
     implementation 'com.google.android.gms:play-services-ads:16.0.0'
     implementation 'com.appsflyer:af-android-sdk:4.9.0@aar'
-    compile group: 'com.android.installreferrer', name: 'installreferrer', version: '1.0'
+    implementation group: 'com.android.installreferrer', name: 'installreferrer', version: '1.0'
 }
