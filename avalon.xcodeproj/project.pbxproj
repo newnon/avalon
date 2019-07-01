@@ -211,12 +211,10 @@
 		D87F76171EA4DE34005187B4 /* SocialPluginHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */; };
 		D87F76201EA4DE6D005187B4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50BC17C18E962DE00F1F979 /* Foundation.framework */; };
 		D87F76321EA4DE90005187B4 /* FacebookSocialPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = D87F762D1EA4DE8F005187B4 /* FacebookSocialPlugin.mm */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		D87F763B1EA4DF2A005187B4 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76371EA4DF2A005187B4 /* Bolts.framework */; };
 		D87F763C1EA4DF2A005187B4 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76381EA4DF2A005187B4 /* FBSDKCoreKit.framework */; };
 		D87F763D1EA4DF2A005187B4 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76391EA4DF2A005187B4 /* FBSDKLoginKit.framework */; };
 		D87F763E1EA4DF2A005187B4 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F763A1EA4DF2A005187B4 /* FBSDKShareKit.framework */; };
 		D87F76401EA4DFFC005187B4 /* FBSDKCoreKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F763F1EA4DFFC005187B4 /* FBSDKCoreKit */; };
-		D87F76421EA4E024005187B4 /* Bolts in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76411EA4E024005187B4 /* Bolts */; };
 		D87F76441EA4E033005187B4 /* FBSDKLoginKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76431EA4E033005187B4 /* FBSDKLoginKit */; };
 		D87F76461EA4E042005187B4 /* FBSDKShareKit in Frameworks */ = {isa = PBXBuildFile; fileRef = D87F76451EA4E042005187B4 /* FBSDKShareKit */; };
 		D87F764A1EA4E6F0005187B4 /* FacebookSocialPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = D87F76121EA4DE34005187B4 /* FacebookSocialPlugin.h */; };
@@ -1161,7 +1159,6 @@
 		D87F76141EA4DE34005187B4 /* SocialPluginHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialPluginHelpers.h; path = avalon/SocialPluginHelpers.h; sourceTree = "<group>"; };
 		D87F76271EA4DE6D005187B4 /* libFacebook iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFacebook iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D87F762D1EA4DE8F005187B4 /* FacebookSocialPlugin.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = FacebookSocialPlugin.mm; path = avalon/platform/ios/facebook/FacebookSocialPlugin.mm; sourceTree = "<group>"; };
-		D87F76371EA4DF2A005187B4 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		D87F76381EA4DF2A005187B4 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		D87F76391EA4DF2A005187B4 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		D87F763A1EA4DF2A005187B4 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -1913,13 +1910,11 @@
 			files = (
 				D87F76461EA4E042005187B4 /* FBSDKShareKit in Frameworks */,
 				D87F76441EA4E033005187B4 /* FBSDKLoginKit in Frameworks */,
-				D87F76421EA4E024005187B4 /* Bolts in Frameworks */,
 				D87F76401EA4DFFC005187B4 /* FBSDKCoreKit in Frameworks */,
 				D87F763C1EA4DF2A005187B4 /* FBSDKCoreKit.framework in Frameworks */,
 				D87F763D1EA4DF2A005187B4 /* FBSDKLoginKit.framework in Frameworks */,
 				D87F763E1EA4DF2A005187B4 /* FBSDKShareKit.framework in Frameworks */,
 				D87F76201EA4DE6D005187B4 /* Foundation.framework in Frameworks */,
-				D87F763B1EA4DF2A005187B4 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2763,7 +2758,6 @@
 		D87F76361EA4DF2A005187B4 /* facebook-ios-sdk */ = {
 			isa = PBXGroup;
 			children = (
-				D87F76371EA4DF2A005187B4 /* Bolts.framework */,
 				D87F76381EA4DF2A005187B4 /* FBSDKCoreKit.framework */,
 				D87F76391EA4DF2A005187B4 /* FBSDKLoginKit.framework */,
 				D87F763A1EA4DF2A005187B4 /* FBSDKShareKit.framework */,

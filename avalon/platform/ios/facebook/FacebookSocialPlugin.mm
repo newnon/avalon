@@ -53,21 +53,7 @@ public:
     {
         if (_loginManager)
         {
-            switch (type)
-            {
-                case LoginBehavior::Native:
-                    [_loginManager setLoginBehavior:FBSDKLoginBehaviorNative];
-                    break;
-                case LoginBehavior::Browser:
-                    [_loginManager setLoginBehavior:FBSDKLoginBehaviorBrowser];
-                    break;
-                case LoginBehavior::SystemAccount:
-                    [_loginManager setLoginBehavior:FBSDKLoginBehaviorSystemAccount];
-                    break;
-                case LoginBehavior::Web:
-                    [_loginManager setLoginBehavior:FBSDKLoginBehaviorWeb];
-                    break;
-            };
+            [_loginManager setLoginBehavior:FBSDKLoginBehaviorBrowser];
         }
     }
     
@@ -103,8 +89,8 @@ public:
             NSLog(@"FacebookSocialPlugin::requestReadPermissions permissions: %@", permissionArray);
         
         UIViewController *viewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-        [_loginManager logInWithReadPermissions:permissionArray
-                             fromViewController:viewController
+        [_loginManager logInWithPermissions:permissionArray
+                         fromViewController:viewController
                                         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
          {
              proccessLogin(result, error, false);
@@ -123,12 +109,14 @@ public:
             NSLog(@"FacebookSocialPlugin::requestPublishPermissions permissions: %@", permissionArray);
 
         UIViewController *viewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+#if 0 // TODO
         [_loginManager logInWithPublishPermissions:permissionArray
                              fromViewController:viewController
                                         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
          {
              proccessLogin(result, error, true);
          }];
+#endif
     }
 
     virtual void logout() override
